@@ -13,6 +13,9 @@
       init = {
         defaultBranch = "base";
       };
+      push = {
+        autoSetupRemote = true;
+      };
     };
   };
 }

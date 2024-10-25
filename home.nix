@@ -12,9 +12,9 @@
           # PICK AND CONFIGURE ANOTHER TERMINAL EMULATOR
           # PICK AND CONFIGURE ANOTHER SHELL
           ./home/neovim.nix
+          ./home/firefox.nix
           ./home/swaync.nix
           ./home/fuzzel.nix
-          ./home/firefox.nix
           ./home/mangohud.nix
         ];
         programs.home-manager.enable = true;
