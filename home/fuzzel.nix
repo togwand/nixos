@@ -5,13 +5,13 @@
     settings = {
       border.width = 0;
       main = {
-        use-bold = true;
+        # use-bold = true;
         icon-theme = "hicolor";
         icons-enabled = true;
-        hide-before-typing = false;
-        match-mode = "exact";
-        sort-result = false;
-        match-counter = false;
+        # hide-before-typing = false;
+        # match-mode = "exact";
+        # sort-result = false;
+        # match-counter = false;
         filter-desktop = true;
         show-actions = false;
         list-executables-in-path = false;
@@ -29,14 +29,14 @@
       colors = {
         background = "202020B4";
         text = "E6E6E6FF";
-        prompt = "00000000";
-        placeholder = "00000000";
-        input = "FFFFFFFF";
+        # prompt = "00000000";
+        # placeholder = "00000000";
+        # input = "FFFFFFFF";
         match = "FFFFFFFF";
         selection = "00000000";
         selection-text = "FFFFFFFF";
         selection-match = "FFFFFFFF";
-        counter = "FFFFFFFF";
+        # counter = "FFFFFFFF";
         border = "FFFFFFFF";
       };
     };
