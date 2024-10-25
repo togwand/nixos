@@ -28,7 +28,7 @@
       };
       colors = {
         background = "202020B4";
-        text = "E6E6E6FF";
+        text = "B4B4B4FF";
         # prompt = "00000000";
         # placeholder = "00000000";
         # input = "FFFFFFFF";
