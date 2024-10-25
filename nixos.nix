@@ -44,6 +44,10 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
+    variables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
   };
 
   services = {
