@@ -7,21 +7,26 @@
       ${user-name} = {
         imports = [
           ./home/git.nix
+          ./home/neovim.nix
           ./home/hyprland.nix
-          ./home/kitty.nix
           # PICK AND CONFIGURE ANOTHER TERMINAL EMULATOR
           # PICK AND CONFIGURE ANOTHER SHELL
-          ./home/neovim.nix
           ./home/swaync.nix
           ./home/fuzzel.nix
           ./home/mangohud.nix
         ];
-        programs.home-manager.enable = true;
+        programs = {
+          home-manager.enable = true;
+          kitty.enable = true; # Config pending
+          firefox.enable = true; # Config pending
+
+        };
         home = {
           packages = with pkgs; [
+            rclone
             pavucontrol
             discord
-            rclone
+            xdg-utils
           ];
           file = { };
           username = user-name;

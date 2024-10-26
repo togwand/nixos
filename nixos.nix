@@ -31,30 +31,28 @@
       ];
       auto-optimise-store = true;
     };
+
   };
 
   programs = {
     hyprland.enable = true;
-    firefox.enable = true;
     steam.enable = true;
     gamemode.enable = true;
   };
 
   environment = {
-    systemPackages = with pkgs; [ ];
-    sessionVariables = {
-      NIXOS_OZONE_WL = "1";
-    };
     variables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
+    };
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
     };
   };
 
   services = {
     blueman.enable = true;
     xserver = {
-      enable = false;
       xkb.layout = "latam";
       videoDrivers = [ "nvidia" ];
     };
