@@ -34,10 +34,8 @@
   };
 
   programs = {
-    hyprland = {
-      enable = true;
-      systemd.setPath.enable = true;
-    };
+    hyprland.enable = true;
+    firefox.enable = true;
     steam.enable = true;
     gamemode.enable = true;
   };
