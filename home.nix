@@ -19,7 +19,6 @@
           home-manager.enable = true;
           kitty.enable = true; # Config pending
           firefox.enable = true; # Config pending
-
         };
         home = {
           packages = with pkgs; [
