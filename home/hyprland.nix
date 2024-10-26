@@ -77,6 +77,7 @@
         focus_preferred_method = "1";
         movefocus_cycles_fullscreen = true;
         disable_keybind_grabbing = true;
+        window_direction_monitor_fallback = false;
       };
 
       xwayland = {
@@ -122,7 +123,7 @@
 
       # Bind modes
       "$workspace" = "SHIFT";
-      "$workspace-move" = "$workspace+CAPS";
+      "$workspace-move" = "$workspace+CTRL";
       "$window" = "ALT";
       "$window-move" = "$window+CTRL";
       "$window-resize" = "$window+SHIFT";
@@ -153,7 +154,10 @@
 
         "$workspace, Left, workspace, r-1"
         "$workspace, Right, workspace, r+1"
-        "$workspace, Delete, exit"
+
+        "$workspace-move, Left, movetoworkspace, m-1"
+        "$workspace-move, Right, movetoworkspace, m+1"
+        "$workspace-move, Delete, exit"
 
         "$window, w, exec, $web-browser"
         "$window, e, exec, $terminal-emulator"
