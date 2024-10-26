@@ -34,15 +34,10 @@
   };
 
   programs = {
-<<<<<<< HEAD
-    hyprland.enable = true;
-    firefox.enable = true;
-=======
     hyprland = {
       enable = true;
       systemd.setPath.enable = true;
     };
->>>>>>> fb8c608 (Went back to firefox on home manager and autoSetupRemote = true in the git config)
     steam.enable = true;
     gamemode.enable = true;
   };
