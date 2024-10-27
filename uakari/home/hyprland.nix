@@ -59,7 +59,7 @@
         vrr = "0";
         layers_hog_keyboard_focus = false;
         enable_swallow = false;
-        focus_on_activate = true;
+        focus_on_activate = false;
         background_color = "rgb(282828)";
         new_window_takes_over_fullscreen = "1";
         initial_workspace_tracking = "0";
