@@ -4,9 +4,9 @@
     enable = true;
     settings = {
       fps_limit = "0, 60, 90, 120, 144";
-      fps_limit_method = "late"; # "early" or "late"
-      vsync = "1"; # 0 adaptive, 1 off, 2 mailbox, 3 on
-      gl_vsync = "0"; # 0 off, anything over 0: refresh rate/(number)
+      fps_limit_method = "early"; # "early" or "late"
+      vsync = "-1"; # 0 adaptive, 1 off, 2 mailbox, 3 on
+      gl_vsync = "-2"; # 0 off, anything over 0: refresh rate/(number)
       # picmip = -16; # [-16 to 16]. Negative sharp, positve blurry
       # af = 16; # [0 to 16]
       # bicubic = true;
