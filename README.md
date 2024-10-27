@@ -14,9 +14,12 @@ Imperative steps to install the flake config from a generic NixOS installation m
 
 4. $ sudo nixos-generate-config --root (ROOT PARTITION MOUNT)
 5. Pick one version to install:
+    
     $ sudo nixos-install --flake github:togwand/nixos-config#unstable
+    
     $ sudo nixos-install --flake github:togwand/nixos-config#uakari
-    -> Enter a password for root
+    
+    -> After it's done, enter a password for root
 
 6. $ sudo nixos-enter --root (ROOT PARTITION MOUNT) -c 'passwd togwand' -> Enter a password for togwand
 
