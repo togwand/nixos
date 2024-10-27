@@ -86,9 +86,9 @@
       background_color = "020202";
       wine_color = "EB5B5B";
 
-      toggle_hud = "Control_R+Shift_R+F12";
-      toggle_fps_limit = "Control_R+Shift_R+F11";
-      reload_cfg = "Control_R+Shift_R+F10";
+      toggle_hud = "Control_R+Shift_R+KP_Divide";
+      toggle_fps_limit = "Control_R+Shift_R+KP_Multiply";
+      reload_cfg = "Control_R+Shift_R+F10+KP_Subtract";
       toggle_logging = "";
       upload_log = "";
       toggle_hud_position = "";
