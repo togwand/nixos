@@ -1,6 +1,6 @@
 # nixos-config
 
-TODO: Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the specifics)
+TODO: Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)
 
 My simple NixOS configurations flake, using home-manager as a NixOS module. Only uakari and unstable versions for now.
 
