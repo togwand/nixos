@@ -3,7 +3,7 @@
     enableSessionWide = false;
     enable = true;
     settings = {
-      fps_limit = "60, 90, 120, 144, 0";
+      fps_limit = "0, 60, 90, 120, 144";
       fps_limit_method = "early"; # "early" or "late"
       vsync = "1"; # 0 adaptive, 1 off, 2 mailbox, 3 on
       gl_vsync = "0"; # 0 off, anything over 0: refresh rate/(number)
