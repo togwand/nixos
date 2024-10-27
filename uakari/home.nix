@@ -1,10 +1,13 @@
-{ user-name, pkgs, ... }:
 {
+  user,
+  pkgs,
+  ...
+}: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     users = {
-      ${user-name} = {
+      ${user} = {
         imports = [
           ./home/git.nix
           ./home/neovim.nix
@@ -28,9 +31,9 @@
             discord
             heroic
           ];
-          file = { };
-          username = user-name;
-          homeDirectory = "/home/${user-name}";
+          file = {};
+          username = user;
+          homeDirectory = "/home/${user}";
           stateVersion = "24.05";
         };
       };

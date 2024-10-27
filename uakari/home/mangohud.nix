@@ -1,10 +1,8 @@
-{ ... }:
-{
+{...}: {
   programs.mangohud = {
     enableSessionWide = false;
     enable = true;
     settings = {
-
       fps_limit = "0, 60, 30";
       fps_limit_method = "early"; # "early" or "late"
       vsync = "1"; # 0 adaptive, 1 off, 2 mailbox, 3 on

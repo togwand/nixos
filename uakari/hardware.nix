@@ -3,13 +3,12 @@
   lib,
   config,
   ...
-}:
-{
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
-  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = ["kvm-intel"];
+  boot.extraModulePackages = [];
+  boot.initrd.kernelModules = [];
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -18,7 +17,7 @@
     "sd_mod"
   ];
 
-  swapDevices = [ ];
+  swapDevices = [];
   fileSystems."/" = {
     device = "/dev/disk/by-label/NIXROOT";
     fsType = "ext4";

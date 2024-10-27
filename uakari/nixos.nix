@@ -1,11 +1,10 @@
 {
   pkgs,
   home,
-  host-name,
-  user-name,
+  host,
+  user,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware.nix
     ./home.nix
@@ -31,7 +30,6 @@
       ];
       auto-optimise-store = true;
     };
-
   };
 
   programs = {
@@ -41,7 +39,7 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [ ];
+    systemPackages = with pkgs; [];
     variables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
@@ -55,7 +53,7 @@
     blueman.enable = true;
     xserver = {
       xkb.layout = "latam";
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = ["nvidia"];
     };
     pipewire = {
       enable = true;
@@ -85,7 +83,7 @@
   };
 
   networking = {
-    hostName = host-name;
+    hostName = host;
     networkmanager.enable = true;
     firewall.enable = false;
   };
@@ -97,7 +95,7 @@
   fonts = {
     packages = with pkgs; [
       gyre-fonts
-      (nerdfonts.override { fonts = [ "0xProto" ]; })
+      (nerdfonts.override {fonts = ["0xProto"];})
     ];
     fontconfig = {
       enable = true;
@@ -107,17 +105,17 @@
         style = "full";
       };
       defaultFonts = {
-        serif = [ "TeXGyrePagella" ];
-        sansSerif = [ "TeXGyreAdventor" ];
-        monospace = [ "0xProto Nerd Font Mono" ];
-        emoji = [ "Noto Color Emoji" ];
+        serif = ["TeXGyrePagella"];
+        sansSerif = ["TeXGyreAdventor"];
+        monospace = ["0xProto Nerd Font Mono"];
+        emoji = ["Noto Color Emoji"];
       };
     };
   };
 
   users.users = {
     # Remember to set a "#passwd" for all users
-    ${user-name} = {
+    ${user} = {
       isNormalUser = true;
       extraGroups = [
         "wheel"

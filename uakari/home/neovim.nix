@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   programs.neovim = {
     enable = true;
     extraLuaConfig = ''

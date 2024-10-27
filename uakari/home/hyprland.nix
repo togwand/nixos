@@ -1,9 +1,7 @@
-{ ... }:
-{
+{...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-
       # Generic programs
       "$app-launcher" = "fuzzel";
       "$terminal-emulator" = "kitty";
@@ -38,9 +36,9 @@
         first_launch_animation = true;
       };
 
-      bezier = [ "custom, 0, 0.7, 0.7, 1" ];
+      bezier = ["custom, 0, 0.7, 0.7, 1"];
 
-      animation = [ "global, 1, 3, custom" ];
+      animation = ["global, 1, 3, custom"];
 
       input = {
         kb_layout = "latam";
@@ -49,9 +47,7 @@
         repeat_delay = 160;
         force_no_accel = true;
         follow_mouse = "0";
-        # focus_on_close = "0";
         float_switch_override_focus = "0";
-        # emulate_discrete_scroll = "0";
       };
 
       misc = {
@@ -66,10 +62,8 @@
         focus_on_activate = true;
         background_color = "rgb(282828)";
         new_window_takes_over_fullscreen = "1";
-        # exit_window_retains_fullscreen = true;
         initial_workspace_tracking = "0";
         middle_click_paste = false;
-        # render_unfocused_fps = 1;
       };
 
       binds = {
@@ -81,24 +75,16 @@
       };
 
       xwayland = {
-        # enabled = true;
         use_nearest_neighbor = false;
         force_zero_scaling = false;
       };
 
       opengl = {
-        nvidia_anti_flicker = true; # IF EXPLICIT SYNC IS ALLOWED AND ENABLED SET TO FALSE BECAUSE IT DOESN'T DO ANYTHING THEN
+        nvidia_anti_flicker = true;
         force_introspection = "1";
       };
 
-      render = {
-        # explicit_sync = "1";
-        # explicit_sync_kms = "1";
-        # direct_scanout = false;
-      };
-
       cursor = {
-        # sync_gsettings_theme = true;
         no_hardware_cursors = true;
         no_break_fs_vrr = true;
         min_refresh_rate = 60;
