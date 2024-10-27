@@ -41,6 +41,7 @@
   };
 
   environment = {
+    systemPackages = with pkgs; [ ];
     variables = {
       EDITOR = "nvim";
       VISUAL = "nvim";

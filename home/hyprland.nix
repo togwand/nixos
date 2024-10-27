@@ -12,7 +12,7 @@
       general = {
         border_size = 0;
         gaps_in = 0;
-        gaps_out = 16;
+        gaps_out = 0;
         gaps_workspaces = 0;
         layout = "master";
         no_focus_fallback = true;
@@ -87,7 +87,7 @@
       };
 
       opengl = {
-        nvidia_anti_flicker = false;
+        nvidia_anti_flicker = true; # IF EXPLICIT SYNC IS ALLOWED AND ENABLED SET TO FALSE BECAUSE IT DOESN'T DO ANYTHING THEN
         force_introspection = "1";
       };
 
@@ -104,15 +104,15 @@
         min_refresh_rate = 60;
         hotspot_padding = 0;
         inactive_timeout = 3;
-        no_warps = false;
-        persistent_warps = false;
+        no_warps = true;
+        persistent_warps = true;
         warp_on_change_workspace = true;
         enable_hyprcursor = true;
         hide_on_key_press = false;
       };
 
       # Keywords
-      exec-once = "$terminal-emulator & discord & steam";
+      exec-once = "$terminal-emulator";
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,12"
@@ -179,7 +179,7 @@
 
       master = {
         allow_small_split = false;
-        mfact = 0.3;
+        mfact = 0.1;
         new_status = "slave";
         new_on_top = false;
         orientation = "bottom";
