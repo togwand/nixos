@@ -70,6 +70,7 @@
     nvidia = {
       open = true;
       modesetting.enable = true;
+      nvidiaSettings = false;
     };
     bluetooth = {
       enable = true;
