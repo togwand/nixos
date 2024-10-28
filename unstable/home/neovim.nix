@@ -20,10 +20,10 @@
         plugin = lualine-nvim;
         config = lua-read ./neovim/plugins/lualine.lua;
       }
-	  {
-	  	plugin = comment-nvim;
-		config = lua "require(\"Comment\").setup()";
-	  }
+      {
+        plugin = comment-nvim;
+        config = lua "require(\"Comment\").setup()";
+      }
     ];
   };
 }

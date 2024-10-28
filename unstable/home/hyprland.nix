@@ -183,7 +183,7 @@
         new_on_top = false;
         orientation = "center";
         inherit_fullscreen = true;
-		always_center_master = true;
+        always_center_master = true;
       };
     };
   };
