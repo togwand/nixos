@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    /nixos/hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
     ./home.nix
     home.nixosModules.home-manager
   ];
