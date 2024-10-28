@@ -17,7 +17,7 @@
           ./home/swaync.nix
           ./home/fuzzel.nix
           ./home/mangohud.nix
-	  ./home/gtk.nix
+          ./home/gtk.nix
         ];
         programs = {
           home-manager.enable = true;
