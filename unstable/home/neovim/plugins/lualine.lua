@@ -14,7 +14,7 @@ require("lualine").setup({
 				path = 4,
 				symbols = {
 					modified = '[!]',
-					readonly = '[...]',
+					readonly = '[X]',
 					unnamed = '[?]',
 				}
 			}

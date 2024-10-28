@@ -156,6 +156,7 @@
         "$workspace-move, Left, movetoworkspace, m-1"
         "$workspace-move, Right, movetoworkspace, m+1"
         "$workspace-move, Delete, exit"
+        "$workspace-move, Tab, layoutmsg, orientationcycle bottom center"
 
         "$window, w, exec, $web-browser"
         "$window, e, exec, $terminal-emulator"
@@ -177,11 +178,12 @@
 
       master = {
         allow_small_split = false;
-        mfact = 0.1;
+        mfact = 0.33;
         new_status = "slave";
         new_on_top = false;
-        orientation = "bottom";
+        orientation = "center";
         inherit_fullscreen = true;
+		always_center_master = true;
       };
     };
   };
