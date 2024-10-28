@@ -20,8 +20,8 @@ Imperative steps to install the flake config from a generic NixOS installation m
 6. $ sudo nixos-enter --root (ROOT PARTITION MOUNT) -c 'passwd togwand' -> Enter a password for togwand
 
 7. $ reboot
-8. Done, remember to use --impure to rebuild or install if it throws an error.
+8. Done, remember to use --impure to rebuild or install if it throws an error. 
 
-After any hardware changes run: $ sudo nixos-generate-config
+For a generic NixOS installation media install to work you need to copy the hardware-configuration.nix file into the media /etc/nixos directory.
 
-
+After any hardware changes it is recommended to run: $ sudo nixos-generate-config
