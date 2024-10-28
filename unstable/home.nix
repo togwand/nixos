@@ -27,9 +27,7 @@
           packages = with pkgs; [
             rclone
             pavucontrol
-            xdg-utils
             discord
-            heroic
           ];
           file = {};
           username = user;
