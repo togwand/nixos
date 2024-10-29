@@ -4,16 +4,11 @@
     enable = true;
     settings = {
       fps_limit = "0, 60, 90, 120, 144";
-      fps_limit_method = "early"; # "early" or "late"
-      vsync = "-1"; # 0 adaptive, 1 off, 2 mailbox, 3 on
-      gl_vsync = "-2"; # 0 off, anything over 0: refresh rate/(number)
-      # picmip = -16; # [-16 to 16]. Negative sharp, positve blurry
-      # af = 16; # [0 to 16]
-      # bicubic = true;
-      # trilinear = true;
-      # retro = true;
+      fps_limit_method = "early"; # early or late
+      vsync = "-1";
+      gl_vsync = "-2";
 
-      preset = -1; # -1 default, 0 nothing, 1 fps only, 2 horizontal, 3 extended, 4 full
+      preset = -1;
       position = "top-right";
       round_corners = 12;
       hud_no_margin = false;
@@ -25,8 +20,6 @@
       background_alpha = 0.3;
       alpha = 1.0;
       text_outline = false;
-      # text_outline_color = "000000";
-      # text_outline_thickness = 1.5;
       font_size = 24;
       no_small_font = false;
       gamemode = true;
@@ -42,8 +35,6 @@
       fps = true;
       fps_sampling_period = 250;
       fps_color_change = false;
-      # fps_value = "30,60";
-      # fps_color = "B22222,FDFD09,39F900";
       frametime = false;
       frame_count = false;
       fps_metrics = "avg, 0.01";
@@ -62,17 +53,12 @@
       gpu_junction_temp = true;
       # gpu_power = true;
       gpu_load_change = false;
-      # gpu_load_value= "60, 90";
-      # gpu_load_color= "39F900,FDFD09,B22222";
-      # gpu_fan = true;
 
       cpu_stats = true;
       cpu_temp = true;
       # cpu_power = true;
       # cpu_mhz = true;
       cpu_load_change = false;
-      # cpu_load_value = "60,90";
-      # cpu_load_color = "39F900,FDFD09,B22222";
       core_load = false;
       core_load_change = false;
 
@@ -86,13 +72,13 @@
       background_color = "020202";
       wine_color = "EB5B5B";
 
-      toggle_hud = "Control_R+Shift_R+KP_Divide";
-      toggle_fps_limit = "Control_R+Shift_R+KP_Multiply";
-      reload_cfg = "Control_R+Shift_R+F10+KP_Subtract";
-      toggle_logging = "";
+      toggle_fps_limit = "Control_L+Shift_L+KP_Divide";
+      toggle_hud = "Control_L+Shift_L+KP_Multiply";
+      toggle_logging = "Control_L+Shift_L+KP_Subtract";
+      reload_cfg = "";
+      toggle_preset = "";
       upload_log = "";
       toggle_hud_position = "";
-      toggle_preset = "";
     };
   };
 }

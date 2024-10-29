@@ -2,7 +2,6 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      # Generic programs
       "$app-launcher" = "fuzzel";
       "$terminal-emulator" = "kitty";
       "$web-browser" = "firefox";
@@ -109,24 +108,20 @@
         hide_on_key_press = false;
       };
 
-      # Keywords
       exec-once = "$web-browser";
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,12"
       ];
 
-      # Monitors
       monitor = ",1920x1080@60.00,auto,1";
 
-      # Bind modes
       "$workspace" = "SUPER";
       "$window" = "ALT";
       "$window-focus" = "$window+CTRL";
       "$window-resize" = "$window+SHIFT";
       "$window-move" = "$window+CTRL+SHIFT";
 
-      # One-shot keybinds
       bind = [
         "$workspace, Delete, exit"
         "$workspace, Left, workspace, r-1"
@@ -161,7 +156,6 @@
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
 
-      # Spam keybinds
       binde = [
         "$window, Tab, cyclenext"
 

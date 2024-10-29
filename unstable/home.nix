@@ -1,7 +1,7 @@
 {
-  user,
   pkgs,
-  nixvim,
+  user,
+  nxvim,
   ...
 }: {
   home-manager = {
@@ -17,9 +17,9 @@
           ./home/firefox.nix
           ./home/swaync.nix
           ./home/fuzzel.nix
-          ./home/mangohud.nix
           ./home/gtk.nix
-          nixvim.homeManagerModules.nixvim
+          ./home/mangohud.nix
+          nxvim.homeManagerModules.nixvim
         ];
         programs.home-manager.enable = true;
         home = {

@@ -1,14 +1,14 @@
 {
   pkgs,
-  home,
-  host,
   user,
+  host,
+  hm,
   ...
 }: {
   imports = [
     /etc/nixos/hardware-configuration.nix
     ./home.nix
-    home.nixosModules.home-manager
+    hm.nixosModules.home-manager
   ];
 
   nixpkgs = {
@@ -132,7 +132,6 @@
   };
 
   users.users = {
-    # Remember to set a "#passwd" for all users
     ${user} = {
       isNormalUser = true;
       extraGroups = [

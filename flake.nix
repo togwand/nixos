@@ -1,34 +1,30 @@
 {
   inputs = {
-    nixpkgs-nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager-master = {
+    npkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    hm = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs-nixos-unstable";
+      inputs.nixpkgs.follows = "npkgs";
     };
-    nixvim-main = {
+    nxvim = {
       url = "github:nix-community/nixvim/main";
-      inputs.nixpkgs.follows = "nixpkgs-nixos-unstable";
+      inputs.nixpkgs.follows = "npkgs";
+      inputs.home-manager.follows = "hm";
     };
   };
-
-  outputs = {self, ...}: let
-    nixpkgs-unstable = self.inputs.nixpkgs-nixos-unstable;
-    home-unstable = self.inputs.home-manager-master;
-    host-unstable = "nixos-unstable";
+  outputs = {
+    npkgs,
+    hm,
+    nxvim,
+    ...
+  }: let
     user = "togwand";
-    nixvim-unstable = self.inputs.nixvim-main;
+    host = "stale";
+    sys = "x86_64-linux";
   in {
-    formatter.x86_64-linux = nixpkgs-unstable.legacyPackages.x86_64-linux.alejandra;
-    nixosConfigurations = {
-      "unstable" = nixpkgs-unstable.lib.nixosSystem {
-        specialArgs = {
-          home = home-unstable;
-          host = host-unstable;
-          inherit user;
-          nixvim = nixvim-unstable;
-        };
-        modules = [./unstable/nixos.nix];
-      };
+    formatter.${sys} = npkgs.legacyPackages.${sys}.alejandra;
+    nixosConfigurations.${host} = npkgs.lib.nixosSystem {
+      specialArgs = {inherit user host hm nxvim;};
+      modules = [./unstable/nixos.nix];
     };
   };
 }
