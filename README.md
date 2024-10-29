@@ -1,12 +1,5 @@
 # nixos-config
 
-TODO:
-    1. Update layout type and rules to improve nav 
-    2. Pick and configure terminal (kitty or wezterm)
-    3. Pick and configure shell (zsh or fish)
-    4. Check vimjoyer videos to keep adding to the system
-    5. Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)
-
 My simple NixOS configurations flake, using home-manager as a NixOS module. Only unstable as output for now since uakari is worse for all my use cases.
 
 This flake uses /etc/nixos/hardware-configuration.nix, keep it in sync with your current hardware and do not delete it.
@@ -30,3 +23,12 @@ Imperative steps to install the flake config from a generic NixOS installation m
 For a generic NixOS installation media install to work you need to copy the hardware-configuration.nix file into the media /etc/nixos directory.
 
 After any hardware changes it is recommended to run: $ sudo nixos-generate-config
+
+
+TODO:
+
+1. Update layout type and rules to improve nav
+2. Pick and configure terminal (kitty or wezterm)
+3. Pick and configure shell (zsh or fish)
+4. Check vimjoyer videos to keep adding to the system
+5. Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)
