@@ -49,15 +49,23 @@
   };
 
   services = {
-    blueman.enable = true;
     xserver = {
       xkb.layout = "latam";
       videoDrivers = ["nvidia"];
+    };
+    displayManager = {
+      enable = true;
+      defaultSession = "hyprland";
+      autoLogin = {
+        enable = true;
+        user = "togwand";
+      };
     };
     pipewire = {
       enable = true;
       pulse.enable = true;
     };
+    blueman.enable = true;
   };
 
   hardware = {
