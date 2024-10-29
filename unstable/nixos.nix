@@ -53,12 +53,17 @@
       xkb.layout = "latam";
       videoDrivers = ["nvidia"];
     };
-    displayManager = {
+    greetd = {
       enable = true;
-      defaultSession = "hyprland";
-      autoLogin = {
-        enable = true;
-        user = "togwand";
+      settings = {
+        default_session = {
+          command = "$Hyprland";
+          user = "${user}";
+        };
+        initial_session = {
+          command = "Hyprland";
+          user = "${user}";
+        };
       };
     };
     pipewire = {
