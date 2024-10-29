@@ -55,23 +55,29 @@
     };
     greetd = {
       enable = true;
-      settings = {
-        default_session = {
-          command = "$Hyprland";
-          user = "${user}";
-        };
+      restart = false;
+      settings = rec {
         initial_session = {
-          command = "Hyprland";
+          command = "${pkgs.hyprland}/bin/Hyprland";
           user = "${user}";
         };
+        default_session = initial_session;
       };
     };
+    blueman.enable = true;
     pipewire = {
       enable = true;
+      audio.enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      jack.enable = true;
       pulse.enable = true;
     };
-    blueman.enable = true;
   };
+
+  security.rtkit.enable = true;
 
   hardware = {
     graphics = {

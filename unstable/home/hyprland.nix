@@ -12,7 +12,7 @@
         gaps_in = 0;
         gaps_out = 0;
         gaps_workspaces = 0;
-        layout = "master";
+        layout = "dwindle";
         no_focus_fallback = true;
         resize_on_border = false;
         allow_tearing = true;
@@ -48,6 +48,7 @@
         follow_mouse = "0";
         focus_on_close = "0";
         float_switch_override_focus = "0";
+        off_window_axis_events = "3";
         emulate_discrete_scroll = "0";
       };
 
@@ -70,7 +71,7 @@
       };
 
       binds = {
-        workspace_center_on = "1";
+        workspace_center_on = "0";
         focus_preferred_method = "1";
         movefocus_cycles_fullscreen = true;
         disable_keybind_grabbing = true;
@@ -102,8 +103,8 @@
         hotspot_padding = 0;
         inactive_timeout = 3;
         no_warps = true;
-        persistent_warps = true;
-        warp_on_change_workspace = true;
+        persistent_warps = false;
+        warp_on_change_workspace = false;
         enable_hyprcursor = true;
         hide_on_key_press = false;
       };
@@ -119,51 +120,36 @@
       monitor = ",1920x1080@60.00,auto,1";
 
       # Bind modes
-      "$workspace" = "SHIFT";
-      "$workspace-move" = "$workspace+CTRL";
+      "$workspace" = "SUPER";
       "$window" = "ALT";
-      "$window-move" = "$window+CTRL";
+      "$window-focus" = "$window+CTRL";
       "$window-resize" = "$window+SHIFT";
-
-      # Spam keybinds
-      binde = [
-        "$window, Left, movefocus, l"
-        "$window, Right, movefocus, r"
-        "$window, Up, movefocus, u"
-        "$window, Down, movefocus, d"
-
-        "$window-move, Left, moveactive, -15 0"
-        "$window-move, Right, moveactive, 15 0"
-        "$window-move, Up, moveactive, 0 -15"
-        "$window-move, Down, moveactive, 0 15"
-
-        "$window-resize, Left, resizeactive, -10 0"
-        "$window-resize, Right, resizeactive, 10 0"
-        "$window-resize, Up, resizeactive, 0 -10"
-        "$window-resize, Down, resizeactive, 0 10"
-      ];
+      "$window-move" = "$window+CTRL+SHIFT";
 
       # One-shot keybinds
       bind = [
-        ", Super_L, exec, pkill $app-launcher || $app-launcher"
-        ", Super_R, exec, pkill $app-launcher || $app-launcher"
-        ", Menu, exec, pkill $app-launcher || $app-launcher"
-
+        "$workspace, Delete, exit"
         "$workspace, Left, workspace, r-1"
         "$workspace, Right, workspace, r+1"
-
-        "$workspace-move, Left, movetoworkspace, m-1"
-        "$workspace-move, Right, movetoworkspace, m+1"
-        "$workspace-move, Delete, exit"
-        "$workspace-move, Tab, layoutmsg, orientationcycle bottom center"
+        "$workspace, Up, movetoworkspace, r+1"
+        "$workspace, Down, movetoworkspace, r-1"
 
         "$window, w, exec, $web-browser"
         "$window, e, exec, $terminal-emulator"
+        "$window, r, exec, pkill $app-launcher || $app-launcher"
         "$window, q, killactive"
         "$window, f, fullscreen, 0"
-        "$window, 1, togglefloating"
-        "$window, 2, centerwindow"
-        "$window, 3, pin"
+        "$window, t, togglefloating"
+        "$window, c, centerwindow"
+        "$window, p, pin"
+        "$window, 1, layoutmsg, swapsplit"
+        "$window, 2, layoutmsg, togglesplit"
+        "$window, 3, pseudo"
+
+        "$window, Left, layoutmsg, preselect l"
+        "$window, Right, layoutmsg, preselect r"
+        "$window, Up, layoutmsg, preselect u"
+        "$window, Down, layoutmsg, preselect d"
 
         "$window-move, Left, swapwindow, l"
         "$window-move, Right, swapwindow, r"
@@ -175,14 +161,33 @@
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
 
-      master = {
-        allow_small_split = false;
-        mfact = 0.25;
-        new_status = "slave";
-        new_on_top = false;
-        orientation = "center";
-        inherit_fullscreen = true;
-        always_center_master = false;
+      # Spam keybinds
+      binde = [
+        "$window, Tab, cyclenext"
+
+        "$window-resize, Left, resizeactive, -10 0"
+        "$window-resize, Right, resizeactive, 10 0"
+        "$window-resize, Up, resizeactive, 0 -10"
+        "$window-resize, Down, resizeactive, 0 10"
+
+        "$window-focus, Left, movefocus, l"
+        "$window-focus, Right, movefocus, r"
+        "$window-focus, Up, movefocus, u"
+        "$window-focus, Down, movefocus, d"
+
+        "$window-move, Left, moveactive, -15 0"
+        "$window-move, Right, moveactive, 15 0"
+        "$window-move, Up, moveactive, 0 -15"
+        "$window-move, Down, moveactive, 0 15"
+      ];
+
+      dwindle = {
+        force_split = "2";
+        preserve_split = true;
+        smart_split = false;
+        smart_resizing = false;
+        permanent_direction_override = true;
+        use_active_for_splits = true;
       };
     };
   };
