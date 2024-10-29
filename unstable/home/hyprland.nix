@@ -177,7 +177,7 @@
 
       master = {
         allow_small_split = false;
-        mfact = 0.2;
+        mfact = 0.25;
         new_status = "slave";
         new_on_top = false;
         orientation = "center";
