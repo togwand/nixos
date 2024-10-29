@@ -37,7 +37,6 @@
       };
 
       bezier = ["custom, 0, 0.7, 0.7, 1"];
-
       animation = ["global, 1, 3, custom"];
 
       input = {
@@ -110,7 +109,7 @@
       };
 
       # Keywords
-      exec-once = "$terminal-emulator";
+      exec-once = "$web-browser";
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,12"
@@ -178,12 +177,12 @@
 
       master = {
         allow_small_split = false;
-        mfact = 0.33;
+        mfact = 0.2;
         new_status = "slave";
         new_on_top = false;
         orientation = "center";
         inherit_fullscreen = true;
-        always_center_master = true;
+        always_center_master = false;
       };
     };
   };

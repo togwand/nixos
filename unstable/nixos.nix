@@ -14,7 +14,6 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      warnUndeclaredOptions = true;
     };
   };
 
@@ -22,13 +21,14 @@
     gc = {
       automatic = true;
       dates = "daily";
+      options = "-d";
     };
     settings = {
       experimental-features = [
         "flakes"
         "nix-command"
       ];
-      auto-optimise-store = true;
+      auto-optimise-store = false;
     };
   };
 
@@ -39,7 +39,6 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [];
     variables = {
       EDITOR = "nvim";
       VISUAL = "nvim";

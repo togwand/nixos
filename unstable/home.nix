@@ -1,6 +1,7 @@
 {
   user,
   pkgs,
+  nixvim,
   ...
 }: {
   home-manager = {
@@ -10,20 +11,17 @@
       ${user} = {
         imports = [
           ./home/git.nix
-          ./home/neovim.nix
+          ./home/nixvim.nix
           ./home/hyprland.nix
-          # PICK AND CONFIGURE ANOTHER TERMINAL EMULATOR
-          # PICK AND CONFIGURE ANOTHER SHELL
+          ./home/kitty.nix
+          ./home/firefox.nix
           ./home/swaync.nix
           ./home/fuzzel.nix
           ./home/mangohud.nix
           ./home/gtk.nix
+          nixvim.homeManagerModules.nixvim
         ];
-        programs = {
-          home-manager.enable = true;
-          kitty.enable = true; # Config pending
-          firefox.enable = true; # Config pending
-        };
+        programs.home-manager.enable = true;
         home = {
           packages = with pkgs; [
             rclone

@@ -1,6 +1,11 @@
 # nixos-config
 
-TODO: Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)
+TODO:
+    1. Update layout type and rules to improve nav 
+    2. Pick and configure terminal (kitty or wezterm)
+    3. Pick and configure shell (zsh or fish)
+    4. Check vimjoyer videos to keep adding to the system
+    5. Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)
 
 My simple NixOS configurations flake, using home-manager as a NixOS module. Only unstable as output for now since uakari is worse for all my use cases.
 
