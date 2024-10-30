@@ -28,20 +28,20 @@
   };
 
   boot = {
-  	tmp.cleanOnBoot = true;
-  	loader = {
-		systemd-boot.enable = true;
-		timeout = 0;
-	};
+    tmp.cleanOnBoot = true;
+    loader = {
+      systemd-boot.enable = true;
+      timeout = 0;
+    };
     plymouth = {
       enable = true;
-	  theme = "breeze";
+      theme = "breeze";
     };
     consoleLogLevel = 0;
     initrd = {
-		systemd.enable = true;
-		verbose = false;
-	};
+      systemd.enable = true;
+      verbose = false;
+    };
     kernelParams = [
       "quiet"
       "splash"
@@ -80,7 +80,7 @@
       auto-optimise-store = false;
     };
   };
-  
+
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -140,8 +140,8 @@
     packages = with pkgs; [
       (nerdfonts.override {fonts = ["0xProto"];})
     ];
-	enableDefaultPackages = true;
-	enableGhostscriptFonts = false;
+    enableDefaultPackages = true;
+    enableGhostscriptFonts = false;
     fontDir = {
       enable = false;
       decompressFonts = false;
@@ -164,10 +164,10 @@
       includeUserConf = true;
       useEmbeddedBitmaps = false;
       defaultFonts = {
-	  	serif = ["0xProto Nerd Font Propo"];
-		sansSerif = ["DejaVu Sans"];
-		monospace = ["0xProto Nerd Font Mono"];
-		emoji = ["0xProto Nerd Font Propo"];
+        serif = ["0xProto Nerd Font Propo"];
+        sansSerif = ["DejaVu Sans"];
+        monospace = ["0xProto Nerd Font Mono"];
+        emoji = ["0xProto Nerd Font Propo"];
       };
     };
   };
