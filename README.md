@@ -4,8 +4,6 @@ My simple NixOS configurations flake, using home-manager as a NixOS module. Only
 
 This flake uses /etc/nixos/hardware-configuration.nix, keep it in sync with your current hardware and do not delete it.
 
-
-
 Imperative steps to install the flake config from a generic NixOS installation media:
 
 1. Partitioning the disk (I like using cgdisk for this task, and for steps 2-3.5 I use the installation guide of the NixOS wiki)
@@ -17,16 +15,12 @@ Imperative steps to install the flake config from a generic NixOS installation m
 7. $ reboot
 8. Done, remember to use --impure to rebuild or install if it throws an error. 
 
-
 For a generic NixOS installation media install to work you need to copy the hardware-configuration.nix file into the media /etc/nixos directory.
 
 After any hardware changes it is recommended to run: $ sudo nixos-generate-config
 
-
-
 TODO:
-
-1. Pick and configure terminal (kitty or wezterm)
+1. Choose the best of each font type (serif, sans, mono)
 2. Pick and configure shell (zsh or fish)
 3. Check vimjoyer videos to keep adding to the system
 4. Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)

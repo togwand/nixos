@@ -24,7 +24,7 @@
     formatter.${sys} = npkgs.legacyPackages.${sys}.alejandra;
     nixosConfigurations.${host} = npkgs.lib.nixosSystem {
       specialArgs = {inherit user host hm nxvim;};
-      modules = [./unstable/nixos.nix];
+      modules = [./stale/nixos.nix];
     };
   };
 }

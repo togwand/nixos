@@ -1,9 +1,9 @@
 {...}: {
   programs.nixvim = {
     imports = [
-      ./nixvim/lualine.nix
-      ./nixvim/comment.nix
-      ./nixvim/lsp.nix
+      ./plugins/lualine.nix
+      ./plugins/comment.nix
+      ./plugins/lsp.nix
     ];
     enable = true;
     viAlias = true;

@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       "$app-launcher" = "fuzzel";
-      "$terminal-emulator" = "kitty";
+      "$terminal-emulator" = "alacritty";
       "$web-browser" = "firefox";
 
       general = {
@@ -108,7 +108,7 @@
         hide_on_key_press = false;
       };
 
-      exec-once = "$web-browser";
+      exec-once = "$web-browser & $terminal-emulator";
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,12"
