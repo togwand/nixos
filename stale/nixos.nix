@@ -35,7 +35,6 @@
     };
     plymouth = {
       enable = true;
-      theme = "breeze";
     };
     consoleLogLevel = 0;
     initrd = {
