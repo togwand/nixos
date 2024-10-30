@@ -100,7 +100,7 @@
         no_break_fs_vrr = true;
         min_refresh_rate = 60;
         hotspot_padding = 0;
-        inactive_timeout = 3;
+        inactive_timeout = 0;
         no_warps = true;
         persistent_warps = false;
         warp_on_change_workspace = false;

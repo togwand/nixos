@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   user,
   host,
   hm,
@@ -17,9 +18,11 @@
       enable32Bit = true;
     };
     nvidia = {
-      open = true;
       modesetting.enable = true;
+      open = false;
       nvidiaSettings = false;
+      # forceFullCompositionPipeline = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
     bluetooth = {
       enable = true;
@@ -32,23 +35,29 @@
     loader = {
       systemd-boot.enable = true;
       timeout = 0;
+      efi.canTouchEfiVariables = true;
     };
     plymouth = {
       enable = true;
+      theme = "breeze";
     };
-    consoleLogLevel = 0;
     initrd = {
-      systemd.enable = true;
-      verbose = false;
+      kernelModules = [
+        "nvidia"
+        "nvidia_modeset"
+        "nvidia_drm"
+        "i915"
+        "nvidia_uvm"
+      ];
+      verbose = true;
     };
+    consoleLogLevel = 7;
     kernelParams = [
-      "quiet"
+      # "quiet"
+      # "loglevel=0"
+      # "udev.log_level=0"
       "splash"
-      "boot.shell_on_fail"
-      "loglevel=3"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=3"
-      "udev.log_priority=3"
+      "nvidia-drm.fbdev=1"
     ];
   };
 

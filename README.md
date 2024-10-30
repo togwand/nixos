@@ -20,7 +20,9 @@ For a generic NixOS installation media install to work you need to copy the hard
 After any hardware changes it is recommended to run: $ sudo nixos-generate-config
 
 TODO:
-1. Choose the best of each font type (serif, sans, mono)
-2. Pick and configure shell (zsh or fish)
-3. Check vimjoyer videos to keep adding to the system
-4. Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)
+
+1. Test open vs. close nvidia open driver kernel module
+2. Choose the best of each font type (serif, sans, mono)
+3. Pick and configure shell (zsh or fish)
+4. Check vimjoyer videos to keep adding to the system
+5. Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)
