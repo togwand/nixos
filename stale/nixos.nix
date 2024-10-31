@@ -104,10 +104,11 @@
   services = {
     displayManager = {
       enable = true;
-      # defaultSession = "hyprland";
-      # autoLogin = {
-      # enable = false;
-      # user = user;
+      defaultSession = "hyprland";
+      autoLogin = {
+        enable = true;
+        user = user;
+      };
       # };
       # sddm = {
       # 	enable = true;
