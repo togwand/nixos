@@ -21,7 +21,6 @@
       modesetting.enable = true;
       open = false;
       nvidiaSettings = false;
-      forceFullCompositionPipeline = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
     bluetooth = {
@@ -46,7 +45,7 @@
         "nvidia"
         "nvidia_modeset"
         "nvidia_drm"
-        "i915"
+        # "i915"
         "nvidia_uvm"
       ];
       verbose = false;
