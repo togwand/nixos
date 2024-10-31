@@ -53,6 +53,12 @@
     kernelParams = [
       "quiet"
       "udev.log_level=0"
+      "splash"
+      "boot.shell_on_fail"
+      "i915.fastboot=1"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=0"
+      "udev.log_priority=0"
     ];
   };
 

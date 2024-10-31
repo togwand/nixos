@@ -21,7 +21,7 @@ After any hardware changes it is recommended to run: $ sudo nixos-generate-confi
 
 TODO:
 
-1. Pick plymouth theme, configure a display (session) manager and choose font options that remove blurriness on certain spots.
+1. Configure a display (session) manager.
 2. Choose a better mono font than 0xProto, install more special characters and emoji fonts
 3. Pick and configure shell (zsh or fish)
 4. Check vimjoyer videos to keep adding to the system
