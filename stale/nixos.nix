@@ -106,7 +106,7 @@
       enable = true;
       defaultSession = "hyprland";
       autoLogin = {
-        enable = false;
+        enable = true;
         user = user;
       };
       sddm = {
