@@ -159,7 +159,7 @@
       hinting = {
         style = "none";
         enable = false;
-        autohint = false;
+        autohint = true;
       };
       includeUserConf = true;
       useEmbeddedBitmaps = false;
