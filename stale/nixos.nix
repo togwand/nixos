@@ -50,7 +50,7 @@
       ];
     };
     initrd = {
-      systemd.enable = true; # Test if this changes anything about boot flickering
+      # systemd.enable = true; # Test if this changes anything about boot flickering
       kernelModules = [
         "nvidia_drm"
       ];
