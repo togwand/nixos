@@ -115,9 +115,10 @@
       # };
     };
     xserver = {
-      enable = false;
+      enable = true;
       displayManager = {
         gdm.enable = true;
+        gdm.wayland = true;
       };
       xkb.layout = "latam";
       videoDrivers = ["nvidia"];
