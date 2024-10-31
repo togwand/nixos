@@ -38,7 +38,7 @@
     };
     plymouth = {
       enable = true;
-      theme = "cuts-alt";
+      theme = "cuts_alt";
       themePackages = with pkgs; [
         (adi1090x-plymouth-themes.override {selected_themes = ["cuts_alt"];})
       ];
