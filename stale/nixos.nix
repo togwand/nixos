@@ -54,7 +54,7 @@
     consoleLogLevel = 0;
     kernelParams = [
       "quiet"
-      # "udev.log_level=0"
+      "udev.log_level=0"
       "splash"
       "nvidia-drm.fbdev=1"
     ];
