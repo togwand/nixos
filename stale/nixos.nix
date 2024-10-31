@@ -51,7 +51,7 @@
       ];
       verbose = true;
     };
-    consoleLogLevel = 7;
+    consoleLogLevel = 4;
     kernelParams = [
       # "quiet"
       # "loglevel=0"
