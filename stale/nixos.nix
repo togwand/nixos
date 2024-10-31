@@ -112,9 +112,9 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-        package = pkgs.kdePackages.sddm;
-        extraPackages = [pkgs.sddm-astronaut];
-        theme = "sddm-astronaut-theme";
+        # package = pkgs.kdePackages.sddm;
+        extraPackages = [pkgs.sddm-sugar-dark];
+        theme = "sugar-dark";
       };
     };
     xserver = {
