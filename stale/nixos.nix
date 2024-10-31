@@ -154,7 +154,7 @@
       allowBitmaps = false;
       subpixel = {
         rgba = "none";
-        lcdfilter = "none";
+        lcdfilter = "default";
       };
       hinting = {
         style = "none";
@@ -164,10 +164,10 @@
       includeUserConf = true;
       useEmbeddedBitmaps = false;
       defaultFonts = {
-        serif = ["0xProto Nerd Font Propo"];
-        sansSerif = ["DejaVu Sans"];
+        serif = ["DejaVu Serif"];
+        sansSerif = ["TeX Gyre Adventor"];
         monospace = ["0xProto Nerd Font Mono"];
-        emoji = ["0xProto Nerd Font Propo"];
+        emoji = ["Noto Color Emoji"];
       };
     };
   };
