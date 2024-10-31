@@ -45,7 +45,7 @@
     };
     initrd = {
       kernelModules = [
-        # "nvidia_drm"
+        "nvidia_drm"
       ];
       verbose = false;
     };
