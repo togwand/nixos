@@ -112,7 +112,7 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-        theme = "${import ./sddm-theme.nix {inherit pkgs;}}";
+        theme = "sddm-astronaut-theme";
       };
     };
     xserver = {
@@ -141,6 +141,9 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
+	systemPackages = with pkgs ; [
+		sddm-astronaut
+	];
   };
 
   programs = {
