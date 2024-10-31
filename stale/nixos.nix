@@ -32,7 +32,7 @@
   boot = {
     tmp.cleanOnBoot = true;
     loader = {
-      efi.canTouchEfiVariables = true;
+      efi.canTouchEfiVariables = false;
       systemd-boot.enable = true;
       timeout = 0;
     };
@@ -45,9 +45,6 @@
     };
     initrd = {
       kernelModules = [
-        "nvidia"
-        "nvidia_modeset"
-        "nvidia_uvm"
         "nvidia_drm"
       ];
       verbose = false;
