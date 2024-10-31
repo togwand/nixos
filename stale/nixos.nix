@@ -106,7 +106,7 @@
       enable = true;
       defaultSession = "hyprland";
       autoLogin = {
-        enable = true;
+        enable = false;
         user = user;
       };
       sddm = {
@@ -116,12 +116,6 @@
     };
     xserver = {
       enable = false;
-      # displayManager = {
-      #   gdm = {
-      #     enable = true;
-      #     wayland = true;
-      #   };
-      # };
       xkb.layout = "latam";
       videoDrivers = ["nvidia"];
     };
