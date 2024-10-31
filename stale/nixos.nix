@@ -112,8 +112,6 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-        # package = pkgs.kdePackages.sddm;
-        extraPackages = [pkgs.sddm-sugar-dark];
         theme = "sugar-dark";
       };
     };
@@ -143,9 +141,11 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
+    systemPackages = with pkgs; [
+      sddm-sugar-dark
+      libsForQt5.qt5.qtgraphicaleffects
+    ];
   };
-
-  qt.enable = true;
 
   programs = {
     hyprland.enable = true;
