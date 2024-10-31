@@ -44,7 +44,7 @@
       kernelModules = [
         # "nvidia"
         # "nvidia_modeset"
-        "nvidia_drm"
+        # "nvidia_drm"
         # "i915"
         #"nvidia_uvm"
       ];
