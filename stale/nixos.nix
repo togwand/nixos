@@ -21,7 +21,7 @@
       modesetting.enable = true;
       open = false;
       nvidiaSettings = false;
-      # forceFullCompositionPipeline = true;
+      forceFullCompositionPipeline = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
     bluetooth = {
@@ -55,7 +55,6 @@
     kernelParams = [
       "quiet"
       "udev.log_level=0"
-      # "splash"
     ];
   };
 
