@@ -112,6 +112,8 @@
       sddm = {
         enable = true;
         wayland.enable = true;
+        package = pkgs.kdePackages.sddm;
+        extraPackages = [pkgs.sddm-astronaut];
         theme = "sddm-astronaut-theme";
       };
     };
@@ -141,9 +143,6 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
-	systemPackages = with pkgs ; [
-		sddm-astronaut
-	];
   };
 
   qt.enable = true;
