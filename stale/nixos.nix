@@ -103,12 +103,12 @@
 
   services = {
     displayManager = {
-      enable = true;
-      defaultSession = "hyprland";
-      autoLogin = {
-        enable = true;
-        user = user;
-      };
+      # enable = true;
+      # defaultSession = "hyprland";
+      # autoLogin = {
+      #   enable = true;
+      #   user = user;
+      # };
       # };
       # sddm = {
       # 	enable = true;
@@ -116,9 +116,9 @@
     };
     xserver = {
       enable = false;
-      # displayManager = {
-      # 	gdm.enable = true;
-      # };
+      displayManager = {
+        gdm.enable = true;
+      };
       xkb.layout = "latam";
       videoDrivers = ["nvidia"];
     };
