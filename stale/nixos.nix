@@ -36,8 +36,9 @@
       systemd-boot.enable = false;
       grub = {
         enable = true;
+        efiSupport = true;
         device = "nodev";
-        timeoutStyle = "hidden"; # Test this setting for no-flickering boot
+        timeoutStyle = "menu"; # Test this setting for no-flickering boot
       };
       timeout = 0;
     };
