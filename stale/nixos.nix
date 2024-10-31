@@ -42,7 +42,7 @@
     };
     initrd = {
       kernelModules = [
-        "nvidia"
+        # "nvidia"
         "nvidia_modeset"
         "nvidia_drm"
         # "i915"
