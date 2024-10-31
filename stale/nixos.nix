@@ -98,20 +98,20 @@
     greetd = {
       enable = true;
       restart = false;
-      settings =
-        /*
-        rec
-        */
-        {
-          default_session = {
-            # command = "${pkgs.hyprland}/bin/Hyprland";
-            command = "Hyprland";
-            user = "${user}";
-          };
-          /*
-          initial_session = default_session;
-          */
-        };
+      # settings =
+      /*
+      rec
+      */
+      # {
+      # default_session = {
+      # command = "${pkgs.hyprland}/bin/Hyprland";
+      # command = "Hyprland";
+      # user = "${user}";
+      # };
+      /*
+      initial_session = default_session;
+      */
+      # };
     };
     # displayManager = {
     # 	enable = true;
@@ -154,7 +154,7 @@
   };
 
   programs = {
-    regreet.enable = true; # Testing greetd with regreet
+    # regreet.enable = true; # Testing greetd with regreet
     hyprland.enable = true;
     steam.enable = true;
     gamemode.enable = true;
