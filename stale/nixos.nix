@@ -33,13 +33,12 @@
     tmp.cleanOnBoot = true;
     loader = {
       efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
-      # grub = {
-      #   enable = true;
-      #   device = "nodev";
-      #   default = "saved";
-      #   timeoutStyle = "hidden"; # Test this setting for no-flickering boot
-      # };
+      systemd-boot.enable = false;
+      grub = {
+        enable = true;
+        device = "nodev";
+        timeoutStyle = "hidden"; # Test this setting for no-flickering boot
+      };
       timeout = 0;
     };
     plymouth = {
@@ -50,7 +49,6 @@
       ];
     };
     initrd = {
-      # systemd.enable = true; # Test if this changes anything about boot flickering
       kernelModules = [
         "nvidia_drm"
       ];
