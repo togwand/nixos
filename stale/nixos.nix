@@ -38,7 +38,10 @@
     };
     plymouth = {
       enable = true;
-      theme = "solar";
+      theme = "cuts";
+	  themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {selected_themes = [ "cuts" ];})
+      ];
     };
     initrd = {
       kernelModules = [
@@ -154,7 +157,7 @@
       allowBitmaps = false;
       subpixel = {
         rgba = "none";
-        lcdfilter = "light";
+        lcdfilter = "none";
       };
       hinting = {
         style = "medium";
