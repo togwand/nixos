@@ -43,7 +43,7 @@
     initrd = {
       kernelModules = [
         # "nvidia"
-        "nvidia_modeset"
+        # "nvidia_modeset"
         "nvidia_drm"
         # "i915"
         #"nvidia_uvm"
