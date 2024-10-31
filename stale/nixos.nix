@@ -98,16 +98,35 @@
     greetd = {
       enable = true;
       restart = false;
-      settings = rec {
-        initial_session = {
-          command = "${pkgs.hyprland}/bin/Hyprland";
-          user = "${user}";
+      settings =
+        /*
+        rec
+        */
+        {
+          default_session = {
+            # command = "${pkgs.hyprland}/bin/Hyprland";
+            command = "Hyprland";
+            user = "${user}";
+          };
+          /*
+          initial_session = default_session;
+          */
         };
-        default_session = initial_session;
-      };
     };
+    # displayManager = {
+    # 	enable = true;
+    # 	defaultSession = "hyprland";
+    # 	autoLogin.enable = true;
+    # autoLogin.user = ${user};
+    # sddm = {
+    # 	enable = true;
+    # };
+    # };
     xserver = {
-      enable = true; # test if plymouth work without nvidia kernel modules when true
+      enable = false;
+      # displayManager = {
+      # 	gdm.enable = true;
+      # };
       xkb.layout = "latam";
       videoDrivers = ["nvidia"];
     };
@@ -135,6 +154,7 @@
   };
 
   programs = {
+    regreet.enable = true; # Testing greetd with regreet
     hyprland.enable = true;
     steam.enable = true;
     gamemode.enable = true;

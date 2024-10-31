@@ -20,9 +20,9 @@ For a generic NixOS installation media install to work you need to copy the hard
 After any hardware changes it is recommended to run: $ sudo nixos-generate-config
 
 TODO:
-
-1. Configure a display (session) manager.
-2. Choose a better mono font than 0xProto, install more special characters and emoji fonts
-3. Pick and configure shell (zsh or fish)
-4. Check vimjoyer videos to keep adding to the system
-5. Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)
+1. Configure a display (session) manager. Compatible with hyprland: SDDM, GDM, greetd
+2. Test if grub can remove the flickering at boot and if not test the timings, if that doesn't work then give up with the flickering during boot
+3. Choose a better mono font than 0xProto, install more special characters and emoji fonts
+4. Pick and configure shell (zsh or fish)
+5. Check vimjoyer videos to keep adding to the system
+6. Declarative installation method instead of imperative/interactive (I know it's 100% doable but I haven't researched the details)
