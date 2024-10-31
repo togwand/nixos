@@ -32,9 +32,9 @@
   boot = {
     tmp.cleanOnBoot = true;
     loader = {
+      efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
       timeout = 0;
-      efi.canTouchEfiVariables = true;
     };
     plymouth = {
       enable = true;
@@ -46,7 +46,7 @@
         "nvidia_modeset"
         "nvidia_drm"
         # "i915"
-        "nvidia_uvm"
+        #"nvidia_uvm"
       ];
       verbose = false;
     };
