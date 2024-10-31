@@ -38,9 +38,9 @@
     };
     plymouth = {
       enable = true;
-      theme = "cuts";
-	  themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {selected_themes = [ "cuts" ];})
+      theme = "cuts-alt";
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {selected_themes = ["cuts_alt"];})
       ];
     };
     initrd = {
@@ -157,7 +157,7 @@
       allowBitmaps = false;
       subpixel = {
         rgba = "none";
-        lcdfilter = "none";
+        lcdfilter = "legacy";
       };
       hinting = {
         style = "medium";
