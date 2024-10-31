@@ -157,9 +157,9 @@
         lcdfilter = "none";
       };
       hinting = {
-        style = "medium";
+        style = "none";
         enable = true;
-        autohint = false;
+        autohint = true;
       };
       includeUserConf = true;
       useEmbeddedBitmaps = false;
