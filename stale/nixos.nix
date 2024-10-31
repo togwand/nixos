@@ -112,7 +112,7 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-        theme = "${import ./misc/sddm-theme.nix {inherit pkgs;}}";
+        theme = "${import ./sddm-theme.nix {inherit pkgs;}}";
       };
     };
     xserver = {
