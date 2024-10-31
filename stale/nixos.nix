@@ -42,11 +42,7 @@
     };
     initrd = {
       kernelModules = [
-        # "nvidia"
-        # "nvidia_modeset"
-        # "nvidia_drm"
-        # "i915"
-        #"nvidia_uvm"
+        "nvidia_drm"
       ];
       verbose = false;
     };
@@ -147,7 +143,7 @@
     enableDefaultPackages = true;
     enableGhostscriptFonts = false;
     fontDir = {
-      enable = false;
+      enable = true;
       decompressFonts = false;
     };
     fontconfig = {
