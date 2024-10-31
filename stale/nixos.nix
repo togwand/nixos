@@ -38,9 +38,9 @@
     };
     plymouth = {
       enable = true;
-      theme = "abstract_ring_alt";
+      theme = "abstract_ring";
       themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {selected_themes = ["abstract_ring_alt"];})
+        (adi1090x-plymouth-themes.override {selected_themes = ["abstract_ring"];})
       ];
     };
     initrd = {
