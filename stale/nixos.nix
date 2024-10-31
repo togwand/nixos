@@ -49,12 +49,13 @@
         "i915"
         "nvidia_uvm"
       ];
+	  systemd.enable = true;
       verbose = true;
     };
-    consoleLogLevel = 0;
+    # consoleLogLevel = 0;
     kernelParams = [
       # "quiet"
-      # "loglevel=0"
+      "loglevel=0"
       # "udev.log_level=0"
       "splash"
       "nvidia-drm.fbdev=1"
