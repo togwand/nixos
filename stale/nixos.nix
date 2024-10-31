@@ -30,7 +30,7 @@
   };
 
   boot = {
-    tmp.cleanOnBoot = true;
+    tmp.cleanOnBoot = false;
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
@@ -45,6 +45,9 @@
     };
     initrd = {
       kernelModules = [
+        # "nvidia"
+        # "nvidia_modeset"
+        # "nvidia_uvm"
         "nvidia_drm"
       ];
       verbose = false;
@@ -53,12 +56,6 @@
     kernelParams = [
       "quiet"
       "udev.log_level=0"
-      "splash"
-      "boot.shell_on_fail"
-      "i915.fastboot=1"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=0"
-      "udev.log_priority=0"
     ];
   };
 
