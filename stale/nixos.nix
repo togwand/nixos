@@ -157,7 +157,7 @@
         lcdfilter = "none";
       };
       hinting = {
-        style = "full";
+        style = "slight";
         enable = true;
         autohint = false;
       };
