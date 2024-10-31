@@ -47,6 +47,7 @@
       kernelModules = [
         "nvidia"
         "nvidia_modeset"
+        "nvidia_uvm" # devs don't want this
         "nvidia_drm"
       ];
       verbose = false;
@@ -56,6 +57,7 @@
       "quiet"
       "udev.log_level=0"
       "nvidia-drm.fbdev=1"
+      "nvidia-drm.modeset=1"
     ];
   };
 
@@ -110,6 +112,7 @@
       };
     };
     xserver = {
+      enable = false; # test if plymouth work without nvidia kernel modules when true
       xkb.layout = "latam";
       videoDrivers = ["nvidia"];
     };
