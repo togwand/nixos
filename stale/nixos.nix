@@ -34,6 +34,12 @@
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
+      #  grub = {
+      #  	enable = true;
+      # device = "nodev";
+      # default = "saved";
+      # timeoutStyle = "hidden"; # Test this setting for no-flickering boot
+      #  };
       timeout = 0;
     };
     plymouth = {
@@ -44,6 +50,7 @@
       ];
     };
     initrd = {
+      # systemd.enable = true; # Test if this changes anything about boot flickering
       kernelModules = [
         "nvidia_drm"
       ];
@@ -95,33 +102,17 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
-    greetd = {
+    displayManager = {
       enable = true;
-      restart = false;
-      # settings =
-      /*
-      rec
-      */
-      # {
-      # default_session = {
-      # command = "${pkgs.hyprland}/bin/Hyprland";
-      # command = "Hyprland";
-      # user = "${user}";
+      # defaultSession = "hyprland";
+      # autoLogin = {
+      # enable = false;
+      # user = user;
       # };
-      /*
-      initial_session = default_session;
-      */
+      # sddm = {
+      # 	enable = true;
       # };
     };
-    # displayManager = {
-    # 	enable = true;
-    # 	defaultSession = "hyprland";
-    # 	autoLogin.enable = true;
-    # autoLogin.user = ${user};
-    # sddm = {
-    # 	enable = true;
-    # };
-    # };
     xserver = {
       enable = false;
       # displayManager = {
@@ -154,7 +145,6 @@
   };
 
   programs = {
-    # regreet.enable = true; # Testing greetd with regreet
     hyprland.enable = true;
     steam.enable = true;
     gamemode.enable = true;
