@@ -38,7 +38,7 @@
     };
     plymouth = {
       enable = true;
-      theme = "details";
+      theme = "fade-in";
     };
     initrd = {
       kernelModules = [
@@ -154,7 +154,7 @@
       allowBitmaps = false;
       subpixel = {
         rgba = "none";
-        lcdfilter = "light";
+        lcdfilter = "none";
       };
       hinting = {
         style = "medium";
