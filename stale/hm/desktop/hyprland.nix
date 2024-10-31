@@ -108,7 +108,7 @@
         hide_on_key_press = false;
       };
 
-      exec-once = "$web-browser & $terminal-emulator";
+      exec-once = "$terminal-emulator & $web-browser";
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,12"
@@ -176,7 +176,7 @@
       ];
 
       dwindle = {
-        force_split = "2";
+        force_split = "1";
         preserve_split = true;
         smart_split = false;
         smart_resizing = false;
