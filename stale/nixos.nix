@@ -153,7 +153,7 @@
       allowType1 = false;
       allowBitmaps = false;
       subpixel = {
-        rgba = "rgba";
+        rgba = "rgb";
         lcdfilter = "default";
       };
       hinting = {
