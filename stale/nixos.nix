@@ -109,19 +109,19 @@
         enable = true;
         user = user;
       };
-      # sddm = {
-      # enable = true;
-      # wayland.enable = true;
-      # };
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
     };
     xserver = {
       enable = false;
-      displayManager = {
-        gdm = {
-          enable = true;
-          wayland = true;
-        };
-      };
+      # displayManager = {
+      #   gdm = {
+      #     enable = true;
+      #     wayland = true;
+      #   };
+      # };
       xkb.layout = "latam";
       videoDrivers = ["nvidia"];
     };
