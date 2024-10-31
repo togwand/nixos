@@ -49,6 +49,7 @@
         "i915"
         "nvidia_uvm"
       ];
+	  systemd.enable = true;
       verbose = true;
     };
     consoleLogLevel = 4;
