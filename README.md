@@ -4,8 +4,8 @@ My simple NixOS configurations flake, using home-manager as a NixOS module. Only
 
 Imperative flake config installation (from installation media):
 
-1. Create partition table and format disk (cgdisk+NixOS wiki installation guide)
-2. Mount partitions and enable a swap partition or file
+1. Create partition table and format disk (cgdisk)
+2. Mount partitions (NixOS wiki install guide, no swap needed: 2GB file already declared)
 4. $ sudo nixos-generate-config
 5. $ sudo cp /mnt/etc/nixos/hardware-configuration.nix /etc/nixos
 5. $ sudo nixos-install --impure --flake github:togwand/nixos-config/base#stale

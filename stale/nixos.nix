@@ -29,6 +29,13 @@
     };
   };
 
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 2 * 1024;
+    }
+  ];
+
   boot = {
     loader = {
       timeout = 1;
@@ -41,8 +48,8 @@
     tmp.cleanOnBoot = true;
     initrd = {
       verbose = false;
-      availableKernelModules = ["nvidia_drm"];
-      # kernelModules = ["nvidia_drm"];
+      # availableKernelModules = ["nvidia_drm"];
+      kernelModules = ["nvidia_drm"];
     };
     consoleLogLevel = 2;
     kernelParams = [
