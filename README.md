@@ -14,8 +14,9 @@ Imperative flake config installation (from installation media):
 After any hardware change: $ sudo nixos-generate-config
 
 TODO:
-1. Choose a better mono font than 0xProto, install more special characters and emoji fonts
-2. Move stuff around (my secrets wink wink)
-3. Pick and configure shell (zsh or fish)
-4. Check vimjoyer videos to keep adding to the system
-5. Declarative installation method instead of imperative (need to research details)
+1. Check hyprland settings about cursor after driver fix, check environment variables and fonts (move to home manager if possible).
+2. Choose a better mono font than 0xProto, install more special characters and emoji fonts
+3. Move stuff around (my secrets wink wink)
+4. Pick and configure shell (zsh or fish)
+5. Check vimjoyer videos to keep adding to the system
+6. Declarative installation method instead of imperative (need to research details)

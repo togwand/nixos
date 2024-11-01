@@ -37,22 +37,37 @@
   ];
 
   boot = {
-    loader = {
-      timeout = 0;
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
-    };
-    plymouth.enable = false;
     tmp.cleanOnBoot = true;
-    initrd = {
-      verbose = false;
-      availableKernelModules = ["nvidia_drm"];
-    };
     consoleLogLevel = 3;
     kernelParams = [
       "quiet"
       "udev.log_level=3"
     ];
+    initrd = {
+      verbose = false;
+      availableKernelModules = ["nvidia_drm"];
+    };
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+      timeout = 0;
+    };
+  };
+
+  networking = {
+    hostName = host;
+    networkmanager.enable = true;
+    firewall.enable = false;
+  };
+
+  users.users = {
+    ${user} = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+      ];
+    };
   };
 
   security = {
@@ -62,43 +77,11 @@
     '';
   };
 
-  networking = {
-    hostName = host;
-    networkmanager.enable = true;
-    firewall.enable = false;
-  };
-
-  nix = {
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "-d";
-    };
-    settings = {
-      experimental-features = [
-        "flakes"
-        "nix-command"
-      ];
-      auto-optimise-store = false;
-    };
-  };
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
-
-  documentation = {
-    enable = true;
-    nixos.enable = false;
-    man.enable = true;
-    doc.enable = false;
-    info.enable = false;
-  };
+  time.timeZone = "Chile/Continental";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   console = {
-    keyMap = "la-latin1";
+    useXkbConfig = true;
     earlySetup = false;
   };
 
@@ -110,24 +93,22 @@
     xserver = {
       enable = false;
       videoDrivers = ["nvidia"];
-      xkb.options = "caps:swapescape";
+      xkb = {
+        layout = "latam";
+        options = "caps:swapescape";
+      };
     };
-    displayManager.enable = false;
     blueman.enable = true;
     pipewire = {
       enable = true;
-      audio.enable = true;
       pulse.enable = true;
+      jack.enable = true;
       alsa = {
         enable = true;
         support32Bit = true;
       };
-      jack.enable = true;
     };
   };
-
-  time.timeZone = "Chile/Continental";
-  i18n.defaultLocale = "en_US.UTF-8";
 
   environment = {
     variables = {
@@ -150,27 +131,22 @@
       (nerdfonts.override {fonts = ["0xProto"];})
     ];
     enableDefaultPackages = true;
-    enableGhostscriptFonts = false;
-    fontDir = {
-      enable = true;
-      decompressFonts = false;
-    };
     fontconfig = {
       enable = true;
       antialias = true;
-      cache32Bit = false;
-      allowType1 = false;
-      allowBitmaps = false;
-      subpixel = {
-        rgba = "none";
-        lcdfilter = "light";
-      };
       hinting = {
         style = "medium";
         enable = true;
         autohint = false;
       };
+      subpixel = {
+        rgba = "none";
+        lcdfilter = "light";
+      };
       includeUserConf = true;
+      cache32Bit = false;
+      allowType1 = false;
+      allowBitmaps = false;
       useEmbeddedBitmaps = false;
       defaultFonts = {
         serif = ["DejaVu Serif"];
@@ -181,14 +157,34 @@
     };
   };
 
-  users.users = {
-    ${user} = {
-      isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-      ];
+  documentation = {
+    enable = true;
+    man.enable = true;
+    info.enable = false;
+    doc.enable = false;
+    nixos.enable = false;
+  };
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
     };
   };
+
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "-d";
+    };
+    settings = {
+      experimental-features = [
+        "flakes"
+        "nix-command"
+      ];
+      auto-optimise-store = false;
+    };
+  };
+
   system.stateVersion = "24.05";
 }
