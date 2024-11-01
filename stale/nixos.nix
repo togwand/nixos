@@ -110,8 +110,12 @@
     displayManager.enable = false;
     xserver = {
       enable = false;
-      xkb.layout = "latam";
       videoDrivers = ["nvidia"];
+      xkb = {
+        layout = "latam";
+        # options = "terminate:ctrl_alt_bksp" # is the default
+        options = "caps:none";
+      };
     };
     blueman.enable = true;
     pipewire = {
