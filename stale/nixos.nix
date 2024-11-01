@@ -49,7 +49,7 @@
       "quiet"
       "udev.log_level=2"
     ];
-    # kernelModules = ["nvidia_drm"];
+    kernelModules = ["nvidia_drm"];
   };
 
   security = {
