@@ -37,7 +37,7 @@
       systemd-boot.enable = true;
     };
     plymouth = {
-      enable = true;
+      enable = false;
       theme = "abstract_ring";
       themePackages = with pkgs; [
         (adi1090x-plymouth-themes.override {selected_themes = ["abstract_ring"];})
