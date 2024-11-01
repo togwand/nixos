@@ -110,7 +110,7 @@
       enable = true;
       autologinUser = user;
       useXkbConfig = true;
-      hwRender = false; # Test true
+      hwRender = true;
       # fonts options
       # extraConfig
       # extraOptions
