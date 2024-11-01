@@ -37,15 +37,11 @@
     };
     plymouth.enable = false;
     tmp.cleanOnBoot = true;
-    initrd.verbose = false;
-    consoleLogLevel = 0;
+    initrd.verbose = true;
+    consoleLogLevel = 7;
     kernelParams = [
-      "quiet"
-      "udev.log_level=0"
-      "boot.shell_on_fail"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=0"
-      "udev.log_priority=0"
+      # "quiet"
+      "udev.log_level=7"
     ];
   };
 
