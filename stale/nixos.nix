@@ -89,6 +89,14 @@
     };
   };
 
+  documentation = {
+    enable = true;
+    nixos.enable = false;
+    man.enable = true;
+    doc.enable = false;
+    info.enable = false;
+  };
+
   console = {
     earlySetup = false; # Test true
     useXkbConfig = true;
