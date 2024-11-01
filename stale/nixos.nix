@@ -34,19 +34,7 @@
     loader = {
       efi.canTouchEfiVariables = true;
       timeout = 0;
-      systemd-boot.enable = false;
-      grub = {
-        enable = true;
-        efiSupport = true;
-        device = "nodev";
-        timeoutStyle = "menu";
-		useOSProber = false;
-		configurationLimit = 10;
-		gfxmodeEfi = "1920x1080";
-		splashImage = null;
-		splashMode = "normal";
-		backgroundColor = "#000000";
-      };
+      systemd-boot.enable = true;
     };
     plymouth = {
       enable = true;
@@ -57,8 +45,12 @@
     };
     initrd = {
       kernelModules = [
+        "nvidia"
+        "nvidia_modeset"
+        "nvidia_uvm"
         "nvidia_drm"
       ];
+      systemd.enable = true;
       verbose = false;
     };
     consoleLogLevel = 0;
