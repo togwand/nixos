@@ -36,8 +36,7 @@
       systemd-boot.enable = true;
     };
     plymouth = {
-      enable = true;
-      theme = "breeze";
+      enable = false;
     };
     tmp.cleanOnBoot = true;
     initrd.verbose = false;
