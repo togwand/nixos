@@ -30,7 +30,7 @@
   };
 
   boot = {
-    tmp.cleanOnBoot = false;
+    tmp.cleanOnBoot = true;
     loader = {
       efi.canTouchEfiVariables = true;
       timeout = 1;
