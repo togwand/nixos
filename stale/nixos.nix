@@ -35,13 +35,13 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-    plymouth.enable = false;
+    plymouth.enable = true;
     tmp.cleanOnBoot = true;
     initrd.verbose = true;
-    consoleLogLevel = 7;
+    consoleLogLevel = 2;
     kernelParams = [
       # "quiet"
-      "udev.log_level=7"
+      "udev.log_level=2"
     ];
   };
 
