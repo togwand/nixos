@@ -34,9 +34,9 @@
     loader = {
       efi.canTouchEfiVariables = true;
       timeout = 25;
-      systemd-boot.enable = false;
+      systemd-boot.enable = true;
       grub = {
-        enable = true;
+        enable = false;
         efiSupport = true;
         device = "nodev";
         timeoutStyle = "menu";
