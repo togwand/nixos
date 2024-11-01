@@ -110,8 +110,8 @@
     xserver = {
       enable = false;
       videoDrivers = ["nvidia"];
+      xkb.options = "caps:swapescape";
     };
-    keyd.enable = true;
     displayManager.enable = false;
     blueman.enable = true;
     pipewire = {

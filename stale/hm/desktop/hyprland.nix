@@ -40,7 +40,7 @@
 
       input = {
         kb_layout = "latam";
-        kb_options = "caps:menu";
+        kb_options = "caps:swapescape";
         numlock_by_default = false;
         repeat_rate = 60;
         repeat_delay = 160;
@@ -124,6 +124,8 @@
       "$window-move" = "$window+CTRL+SHIFT";
 
       bind = [
+        ", Super_L, exec, pkill $app-launcher || $app-launcher"
+        ", Super_R, exec, pkill $app-launcher || $app-launcher"
         ", Menu, exec, pkill $app-launcher || $app-launcher"
         "$workspace, Delete, exit"
         "$workspace, Left, workspace, r-1"
