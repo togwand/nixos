@@ -33,14 +33,20 @@
     tmp.cleanOnBoot = true;
     loader = {
       efi.canTouchEfiVariables = true;
+      timeout = 20;
       systemd-boot.enable = false;
       grub = {
         enable = true;
         efiSupport = true;
         device = "nodev";
-        timeoutStyle = "menu"; # Test this setting for no-flickering boot
+        timeoutStyle = "menu";
+		useOSProber = false;
+		configurationLimit = 10;
+		gfxmodeEfi = "1920x1080";
+		splashImage = null;
+		splashMode = "normal";
+		backgroundColor = "#000000";
       };
-      timeout = 0;
     };
     plymouth = {
       enable = true;
