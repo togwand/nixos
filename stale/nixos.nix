@@ -51,7 +51,7 @@
     consoleLogLevel = 3;
     kernelParams = [
       "quiet"
-      "udev.log_level=7"
+      "udev.log_level=0"
     ];
   };
 
