@@ -97,24 +97,14 @@
     info.enable = false;
   };
 
-  console = {
-    useXkbConfig = true;
-  };
+  console.useXkbConfig = true;
 
   services = {
     getty = {
       autologinUser = user;
       autologinOnce = true;
     };
-    kmscon = {
-      enable = true;
-      autologinUser = user;
-      useXkbConfig = true;
-      hwRender = true;
-      # fonts options
-      # extraConfig
-      # extraOptions
-    };
+    kmscon.enable = false;
     displayManager.enable = false;
     xserver = {
       enable = false;
