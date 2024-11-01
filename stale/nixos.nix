@@ -50,7 +50,6 @@
     };
     consoleLogLevel = 3;
     kernelParams = [
-      "loglevel=3"
       "quiet"
       "udev.log_level=3"
     ];
@@ -100,13 +99,13 @@
 
   console = {
     keyMap = "la-latin1";
-    earlySetup = true;
+    earlySetup = false;
   };
 
   services = {
     getty = {
       autologinUser = user;
-      autologinOnce = true;
+      autologinOnce = false;
     };
     displayManager.enable = false;
     xserver = {
