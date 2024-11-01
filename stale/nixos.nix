@@ -33,7 +33,7 @@
     tmp.cleanOnBoot = true;
     loader = {
       efi.canTouchEfiVariables = true;
-      timeout = 20;
+      timeout = 25;
       systemd-boot.enable = false;
       grub = {
         enable = true;
