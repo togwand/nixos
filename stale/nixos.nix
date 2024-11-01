@@ -107,16 +107,12 @@
       autologinUser = user;
       autologinOnce = false;
     };
-    displayManager.enable = false;
     xserver = {
       enable = false;
       videoDrivers = ["nvidia"];
-      # xkb = {
-      #   layout = "latam";
-      #   # options = "terminate:ctrl_alt_bksp" # is the default
-      #   options = "caps:none";
-      # };
     };
+    keyd.enable = true;
+    displayManager.enable = false;
     blueman.enable = true;
     pipewire = {
       enable = true;
