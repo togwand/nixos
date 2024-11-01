@@ -45,12 +45,12 @@
     plymouth.enable = false;
     tmp.cleanOnBoot = true;
     initrd = {
-      verbose = true;
+      verbose = false;
       availableKernelModules = ["nvidia_drm"];
     };
     consoleLogLevel = 2;
     kernelParams = [
-      "quiet"
+      # "quiet"
       "udev.log_level=2"
     ];
   };
