@@ -47,7 +47,7 @@
       kernelModules = [
         "nvidia_drm"
       ];
-      systemd.enable = true;
+      # systemd.enable = true;
       verbose = false;
     };
     consoleLogLevel = 0;
