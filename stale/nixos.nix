@@ -98,11 +98,11 @@
       enable = true;
       defaultSession = "hyprland";
       autoLogin = {
-        enable = true;
+        enable = false;
         user = user;
       };
       sddm = {
-        enable = false;
+        enable = true;
         wayland.enable = true;
         theme = "sugar-dark";
       };
