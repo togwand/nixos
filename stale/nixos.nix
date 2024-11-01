@@ -44,10 +44,10 @@
       ];
     };
     initrd = {
-      kernelModules = [
-        "nvidia_drm"
-      ];
-      # systemd.enable = true;
+      # kernelModules = [
+      #   "nvidia_drm"
+      # ];
+      systemd.enable = true;
       verbose = false;
     };
     consoleLogLevel = 0;
