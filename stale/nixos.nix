@@ -111,11 +111,11 @@
     xserver = {
       enable = false;
       videoDrivers = ["nvidia"];
-      xkb = {
-        layout = "latam";
-        # options = "terminate:ctrl_alt_bksp" # is the default
-        options = "caps:none";
-      };
+      # xkb = {
+      #   layout = "latam";
+      #   # options = "terminate:ctrl_alt_bksp" # is the default
+      #   options = "caps:none";
+      # };
     };
     blueman.enable = true;
     pipewire = {

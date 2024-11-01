@@ -40,7 +40,7 @@
 
       input = {
         kb_layout = "latam";
-        # kb_options = ""; # Change this if needed
+        kb_options = "caps:none";
         numlock_by_default = false;
         repeat_rate = 60;
         repeat_delay = 160;
