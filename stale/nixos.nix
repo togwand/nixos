@@ -98,7 +98,6 @@
   };
 
   console = {
-    earlySetup = false; # Test false
     useXkbConfig = true;
   };
 
@@ -107,15 +106,15 @@
       autologinUser = user;
       autologinOnce = true;
     };
-    # kmscon = {
-    #   enable = true;
-    #   autologinUser = user;
-    #   useXkbConfig = true;
-    #   hwRender = false; # Test true
-    #   # fonts options
-    #   # extraConfig
-    #   # extraOptions
-    # };
+    kmscon = {
+      enable = true;
+      autologinUser = user;
+      useXkbConfig = true;
+      hwRender = false; # Test true
+      # fonts options
+      # extraConfig
+      # extraOptions
+    };
     displayManager.enable = false;
     xserver = {
       enable = false;
