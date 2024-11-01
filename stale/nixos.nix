@@ -102,7 +102,7 @@
   services = {
     getty = {
       autologinUser = user;
-      autologinOnce = true;
+      autologinOnce = false;
     };
     kmscon.enable = false;
     displayManager.enable = false;
