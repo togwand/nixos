@@ -102,7 +102,7 @@
         user = user;
       };
       sddm = {
-        enable = true;
+        enable = false;
         wayland.enable = true;
         theme = "sugar-dark";
       };
