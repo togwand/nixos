@@ -106,8 +106,8 @@
     getty = {
       autologinUser = user;
       autologinOnce = true;
-      greetingLine = "";
-      helpLine = '''';
+      # greetingLine = "";
+      # helpLine = "";
     };
     # kmscon = {
     #   enable = true;
