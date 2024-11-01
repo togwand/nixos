@@ -48,10 +48,10 @@
       verbose = false;
       availableKernelModules = ["nvidia_drm"];
     };
-    consoleLogLevel = 4;
+    consoleLogLevel = 3;
     kernelParams = [
       "quiet"
-      "udev.log_level=4"
+      "udev.log_level=3"
     ];
   };
 
