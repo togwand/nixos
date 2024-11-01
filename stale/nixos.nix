@@ -48,10 +48,11 @@
       verbose = false;
       availableKernelModules = ["nvidia_drm"];
     };
+    consoleLogLevel = 3;
     kernelParams = [
-      "loglevel=0"
+      "loglevel=3"
       "quiet"
-      "udev.log_level=0"
+      "udev.log_level=3"
     ];
   };
 
@@ -97,14 +98,18 @@
     info.enable = false;
   };
 
-  console.useXkbConfig = true;
+  console = {
+    enable = false;
+    useXkbConfig = true;
+    earlySetup = true;
+  };
 
   services = {
     getty = {
       autologinUser = user;
-      autologinOnce = false;
+      autologinOnce = true;
     };
-    kmscon.enable = false;
+    kmscon.enable = true;
     displayManager.enable = false;
     xserver = {
       enable = false;
