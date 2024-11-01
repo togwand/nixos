@@ -106,11 +106,6 @@
     getty = {
       autologinUser = user;
       autologinOnce = true;
-      helpLine = ''
-        wololo
-        wololo
-        wololo
-      '';
     };
     # kmscon = {
     #   enable = true;
