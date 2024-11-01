@@ -42,16 +42,16 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-    plymouth.enable = true;
+    plymouth.enable = false;
     tmp.cleanOnBoot = true;
     initrd = {
       verbose = false;
       availableKernelModules = ["nvidia_drm"];
     };
-    consoleLogLevel = 3;
+    consoleLogLevel = 0;
     kernelParams = [
       "quiet"
-      "udev.log_level=3"
+      "udev.log_level=0"
     ];
   };
 
