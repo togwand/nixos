@@ -37,7 +37,7 @@
     };
     plymouth.enable = true;
     tmp.cleanOnBoot = true;
-    initrd.verbose = true;
+    initrd.verbose = false;
     consoleLogLevel = 2;
     kernelParams = [
       # "quiet"
