@@ -30,26 +30,22 @@
   };
 
   boot = {
-    tmp.cleanOnBoot = true;
     loader = {
-      efi.canTouchEfiVariables = true;
       timeout = 1;
+      efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-    plymouth = {
-      enable = false;
-      theme = "abstract_ring";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {selected_themes = ["abstract_ring"];})
-      ];
-    };
-    initrd = {
-      verbose = false;
-    };
+    plymouth.enable = false;
+    tmp.cleanOnBoot = true;
+    initrd.verbose = false;
     consoleLogLevel = 0;
     kernelParams = [
       "quiet"
       "udev.log_level=0"
+      "boot.shell_on_fail"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=0"
+      "udev.log_priority=0"
     ];
   };
 
