@@ -95,14 +95,11 @@
 
   services = {
     displayManager = {
+      enable = false;
       defaultSession = "hyprland";
       autoLogin = {
         enable = false;
         user = user;
-      };
-      sddm = {
-        enable = true;
-        wayland.enable = true;
       };
     };
     xserver = {
