@@ -42,7 +42,7 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-    plymouth.enable = true;
+    plymouth.enable = false;
     tmp.cleanOnBoot = true;
     initrd = {
       verbose = false;
@@ -95,7 +95,6 @@
 
   services = {
     displayManager = {
-      enable = true;
       defaultSession = "hyprland";
       autoLogin = {
         enable = false;
@@ -104,7 +103,6 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-        theme = "sugar-dark";
       };
     };
     xserver = {
@@ -133,10 +131,6 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
-    systemPackages = with pkgs; [
-      sddm-sugar-dark
-      libsForQt5.qt5.qtgraphicaleffects
-    ];
   };
 
   programs = {
