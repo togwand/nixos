@@ -35,7 +35,10 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      theme = "breeze";
+    };
     tmp.cleanOnBoot = true;
     initrd.verbose = false;
     consoleLogLevel = 2;
