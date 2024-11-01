@@ -98,7 +98,7 @@
   };
 
   console = {
-    earlySetup = true; # Test true
+    earlySetup = false; # Test false
     useXkbConfig = true;
   };
 
@@ -106,8 +106,11 @@
     getty = {
       autologinUser = user;
       autologinOnce = true;
-      # greetingLine = "";
-      # helpLine = "";
+      helpLine = ''
+        wololo
+        wololo
+        wololo
+      '';
     };
     # kmscon = {
     #   enable = true;
