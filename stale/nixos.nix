@@ -42,12 +42,10 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-    plymouth = {
-      enable = false;
-    };
+    plymouth.enable = false;
     tmp.cleanOnBoot = true;
     initrd = {
-      verbose = false;
+      verbose = true;
       availableKernelModules = ["nvidia_drm"];
     };
     consoleLogLevel = 2;
