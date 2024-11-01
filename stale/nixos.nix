@@ -89,19 +89,31 @@
     };
   };
 
-  console.useXkbConfig = true;
-  time.timeZone = "Chile/Continental";
-  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    earlySetup = false; # Test true
+    useXkbConfig = true;
+  };
 
   services = {
-    displayManager = {
-      enable = false;
-      defaultSession = "hyprland";
-      autoLogin = {
-        enable = false;
-        user = user;
-      };
+    getty = {
+      autologinUser = user;
+      autologinOnce = true;
+      greetingLine = "Greeting line test";
+      helpLine = ''
+        Help line 1 test
+        Help line 2 test
+      '';
     };
+    # kmscon = {
+    #   enable = true;
+    #   autologinUser = user;
+    #   useXkbConfig = true;
+    #   hwRender = false; # Test true
+    #   # fonts options
+    #   # extraConfig
+    #   # extraOptions
+    # };
+    displayManager.enable = false;
     xserver = {
       enable = false;
       xkb.layout = "latam";
@@ -119,6 +131,9 @@
       jack.enable = true;
     };
   };
+
+  time.timeZone = "Chile/Continental";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   environment = {
     variables = {
