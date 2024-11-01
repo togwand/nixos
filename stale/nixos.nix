@@ -44,12 +44,12 @@
       ];
     };
     initrd = {
-      kernelModules = [
-        "nvidia"
-        "nvidia_modeset"
-        "nvidia_uvm"
-        "nvidia_drm"
-      ];
+      # kernelModules = [
+      #   "nvidia"
+      #   "nvidia_modeset"
+      #   "nvidia_uvm"
+      #   "nvidia_drm"
+      # ];
       systemd.enable = true;
       verbose = false;
     };
