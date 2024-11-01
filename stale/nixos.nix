@@ -99,8 +99,7 @@
   };
 
   console = {
-    enable = false;
-    useXkbConfig = true;
+    keyMap = "la-latin1";
     earlySetup = true;
   };
 
@@ -109,7 +108,6 @@
       autologinUser = user;
       autologinOnce = true;
     };
-    kmscon.enable = true;
     displayManager.enable = false;
     xserver = {
       enable = false;
