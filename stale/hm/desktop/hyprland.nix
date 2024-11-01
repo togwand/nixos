@@ -117,7 +117,7 @@
 
       monitor = ",1920x1080@60.00,auto,1";
 
-      "$workspace" = "SUPER";
+      "$workspace" = "SHIFT";
       "$window" = "ALT";
       "$window-focus" = "$window+CTRL";
       "$window-resize" = "$window+SHIFT";
