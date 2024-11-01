@@ -40,7 +40,7 @@
     initrd.verbose = false;
     consoleLogLevel = 2;
     kernelParams = [
-      # "quiet"
+      "quiet"
       "udev.log_level=2"
     ];
   };
