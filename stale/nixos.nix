@@ -42,7 +42,7 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-    plymouth.enable = false;
+    plymouth.enable = true;
     tmp.cleanOnBoot = true;
     initrd = {
       verbose = false;
@@ -94,6 +94,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
+    lvm.enable = false;
     displayManager = {
       enable = true;
       defaultSession = "hyprland";
