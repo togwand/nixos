@@ -36,15 +36,20 @@
       systemd-boot.enable = true;
     };
     plymouth = {
-      enable = false;
+      enable = true;
     };
     tmp.cleanOnBoot = true;
-    initrd.verbose = false;
+    initrd = {
+      verbose = false;
+      # availableKernelModules = ["nvidia_drm"];
+      # kernelModules = ["nvidia_drm"];
+    };
     consoleLogLevel = 2;
     kernelParams = [
       "quiet"
       "udev.log_level=2"
     ];
+    kernelModules = ["nvidia_drm"];
   };
 
   security = {
