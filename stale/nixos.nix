@@ -42,7 +42,7 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-    plymouth.enable = false;
+    plymouth.enable = true;
     tmp.cleanOnBoot = true;
     initrd = {
       verbose = false;
