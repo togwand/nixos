@@ -83,6 +83,8 @@
   console = {
     useXkbConfig = true;
     earlySetup = false;
+    # packages = with pkgs; [proggyfonts];
+    # font = "${pkgs.proggyfonts}/share/consolefonts/ProggySquare.pcf.gz";
   };
 
   services = {
@@ -129,7 +131,7 @@
   fonts = {
     packages = with pkgs; [
       (nerdfonts.override {fonts = ["0xProto"];})
-	  proggyfonts
+      proggyfonts
     ];
     enableDefaultPackages = true;
     fontconfig = {
