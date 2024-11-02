@@ -129,6 +129,7 @@
   fonts = {
     packages = with pkgs; [
       (nerdfonts.override {fonts = ["0xProto"];})
+	  proggyfonts
     ];
     enableDefaultPackages = true;
     fontconfig = {
@@ -144,9 +145,9 @@
         lcdfilter = "light";
       };
       includeUserConf = true;
+      allowBitmaps = true;
       cache32Bit = false;
       allowType1 = false;
-      allowBitmaps = false;
       useEmbeddedBitmaps = false;
       defaultFonts = {
         serif = ["DejaVu Serif"];

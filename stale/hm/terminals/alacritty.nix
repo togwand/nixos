@@ -2,6 +2,9 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      general = {
+        live_config_reload = false;
+      };
       window = {
         padding = {
           x = 0;
@@ -16,17 +19,17 @@
       };
       font = {
         normal = {
-          family = "0xProto Nerd Font Mono";
+          family = "ProggySquareTT";
           style = "Regular";
         };
         bold = {
-          family = "0xProto Nerd Font Mono";
+          family = "ProggySquareTT";
           style = "Bold";
         };
-        size = 12.5;
+        size = 12;
         offset = {
           x = 0;
-          y = -1;
+          y = 0;
         };
       };
       colors = {
