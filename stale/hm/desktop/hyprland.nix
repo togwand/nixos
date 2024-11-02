@@ -1,7 +1,7 @@
 {...}: {
   wayland.windowManager.hyprland = {
     enable = true;
-    xwayland.enable = false;
+    xwayland.enable = true;
     settings = {
       "$app-launcher" = "fuzzel";
       "$terminal-emulator" = "alacritty";
