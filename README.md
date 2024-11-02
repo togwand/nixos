@@ -14,7 +14,7 @@ Imperative flake config installation (from installation media):
 After any hardware change: $ sudo nixos-generate-config
 
 TODO:
-1. Check hyprland settings about cursor after driver fix, check environment variables and fonts (move to home manager if possible).
+1. Check hyprland settings about cursor after driver fix
 2. Choose a better mono font than 0xProto, install more special characters and emoji fonts
 3. Move stuff around (my secrets wink wink)
 4. Pick and configure shell (zsh or fish)
