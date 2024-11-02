@@ -1,6 +1,7 @@
 {...}: {
   wayland.windowManager.hyprland = {
     enable = true;
+    xwayland.enable = false;
     settings = {
       "$app-launcher" = "fuzzel";
       "$terminal-emulator" = "alacritty";
@@ -79,7 +80,7 @@
       };
 
       xwayland = {
-        enabled = true;
+        enabled = false;
         use_nearest_neighbor = false;
         force_zero_scaling = false;
       };
@@ -117,16 +118,13 @@
 
       monitor = ",1920x1080@60.00,auto,1";
 
-      "$workspace" = "SHIFT";
+      "$workspace" = "SUPER";
       "$window" = "ALT";
       "$window-focus" = "$window+CTRL";
       "$window-resize" = "$window+SHIFT";
       "$window-move" = "$window+CTRL+SHIFT";
 
       bind = [
-        ", Super_L, exec, pkill $app-launcher || $app-launcher"
-        ", Super_R, exec, pkill $app-launcher || $app-launcher"
-        ", Menu, exec, pkill $app-launcher || $app-launcher"
         "$workspace, Delete, exit"
         "$workspace, Left, workspace, r-1"
         "$workspace, Right, workspace, r+1"
@@ -135,7 +133,7 @@
 
         "$window, w, exec, $web-browser"
         "$window, e, exec, $terminal-emulator"
-        "$window, r, exec, pkill $app-launcher || $app-launcher"
+        "$window, a, exec, pkill $app-launcher || $app-launcher"
         "$window, q, killactive"
         "$window, f, fullscreen, 0"
         "$window, t, togglefloating"
