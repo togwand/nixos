@@ -120,7 +120,10 @@
   };
 
   programs = {
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland.enable = false;
+    };
     steam.enable = true;
     gamemode.enable = true;
   };
