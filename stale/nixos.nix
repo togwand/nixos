@@ -115,14 +115,14 @@
       VISUAL = "nvim";
     };
     sessionVariables = {
-      NIXOS_OZONE_WL = "1";
+      # NIXOS_OZONE_WL = "1";
     };
   };
 
   programs = {
     hyprland = {
       enable = true;
-      xwayland.enable = false;
+      xwayland.enable = true;
     };
     steam.enable = true;
     gamemode.enable = true;
