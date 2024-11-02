@@ -114,9 +114,10 @@
     variables = {
       VISUAL = "nvim";
     };
-    sessionVariables = {
-      # NIXOS_OZONE_WL = "1";
-    };
+    # sessionVariables = {
+    # };
+    # systemPackages = [
+    # ];
   };
 
   programs = {
