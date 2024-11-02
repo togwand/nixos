@@ -98,7 +98,7 @@
 
       cursor = {
         sync_gsettings_theme = true;
-        no_hardware_cursors = true;
+        no_hardware_cursors = "1";
         no_break_fs_vrr = true;
         min_refresh_rate = 60;
         hotspot_padding = 0;
