@@ -18,15 +18,7 @@
         multiplier = 3;
       };
       font = {
-        normal = {
-          family = "ProggySquareTT";
-          style = "Regular";
-        };
-        bold = {
-          family = "ProggySquareTT";
-          style = "Bold";
-        };
-        size = 12;
+        size = 20;
         offset = {
           x = 0;
           y = 0;

@@ -83,8 +83,6 @@
   console = {
     useXkbConfig = true;
     earlySetup = false;
-    # packages = with pkgs; [proggyfonts];
-    # font = "${pkgs.proggyfonts}/share/consolefonts/ProggySquare.pcf.gz";
   };
 
   services = {
@@ -130,31 +128,30 @@
 
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override {fonts = ["0xProto"];})
-      proggyfonts
+      cozette
     ];
     enableDefaultPackages = true;
     fontconfig = {
       enable = true;
-      antialias = true;
+      antialias = false;
       hinting = {
-        style = "medium";
+        style = "slight";
         enable = true;
         autohint = false;
       };
       subpixel = {
-        rgba = "none";
-        lcdfilter = "light";
+        rgba = "rgb";
+        lcdfilter = "none";
       };
       includeUserConf = true;
-      allowBitmaps = true;
+      allowBitmaps = false;
       cache32Bit = false;
       allowType1 = false;
       useEmbeddedBitmaps = false;
       defaultFonts = {
         serif = ["DejaVu Serif"];
         sansSerif = ["TeX Gyre Adventor"];
-        monospace = ["0xProto Nerd Font Mono"];
+        monospace = ["CozetteVector"];
         emoji = ["Noto Color Emoji"];
       };
     };
