@@ -81,9 +81,10 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   console = {
+    packages = with pkgs; [uw-ttyp0];
+    font = "t0-13b-uni";
     useXkbConfig = true;
     earlySetup = false;
-    font = "${pkgs.uw-ttyp0}/share/consolefonts/t0-13b-uni.psf";
   };
 
   services = {
@@ -127,7 +128,6 @@
 
   fonts = {
     packages = with pkgs; [
-      uw-ttyp0 # Bitmap Monospace
       (nerdfonts.override {fonts = ["CommitMono"];}) # OTF Monospace
       comfortaa # Sans Serif
       gentium-book-basic # Serif
@@ -138,10 +138,10 @@
     fontconfig = {
       enable = true;
       antialias = true;
-      allowBitmaps = true;
+      allowBitmaps = false;
       includeUserConf = true;
       defaultFonts = {
-        monospace = ["Ttyp0" "CommitMono Nerd Font Mono"];
+        monospace = ["CommitMono Nerd Font Mono"];
         sansSerif = ["Comfortaa"];
         serif = ["Gentium Basic"];
         emoji = ["Twitter Color Emoji"];

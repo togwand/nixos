@@ -4,7 +4,7 @@
     server.enable = false;
     settings = {
       main = {
-        font = "monospace:size=10:weight=Bold";
+        font = "monospace:size=19:weight=Bold";
         font-size-adjustment = 1;
         box-drawings-uses-font-glyphs = false;
         dpi-aware = false;
