@@ -48,9 +48,18 @@
       availableKernelModules = ["nvidia_drm"];
     };
     loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
       timeout = 0;
+      efi.canTouchEfiVariables = true;
+      # systemd-boot.enable = true;
+      grub = {
+        enable = true;
+        efiSupport = true;
+        useOSProber = true;
+        timeoutStyle = "menu";
+		default = "saved";
+        device = "nodev";
+        configurationLimit = 15;
+      };
     };
   };
 
@@ -77,8 +86,11 @@
     '';
   };
 
-  time.timeZone = "Chile/Continental";
   i18n.defaultLocale = "en_US.UTF-8";
+  time = {
+    timeZone = "Chile/Continental";
+    hardwareClockInLocalTime = true;
+  };
 
   console = {
     packages = with pkgs; [uw-ttyp0];
