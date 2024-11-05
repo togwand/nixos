@@ -4,7 +4,7 @@
     xwayland.enable = true;
     settings = {
       "$app-launcher" = "fuzzel";
-      "$terminal-emulator" = "alacritty";
+      "$terminal-emulator" = "foot";
       "$web-browser" = "firefox";
 
       general = {
@@ -110,7 +110,7 @@
         hide_on_key_press = false;
       };
 
-      exec-once = "$terminal-emulator & $web-browser";
+      exec-once = "$terminal-emulator";
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,12"
@@ -128,8 +128,8 @@
         "$workspace, Delete, exit"
         "$workspace, Left, workspace, r-1"
         "$workspace, Right, workspace, r+1"
-        "$workspace, Up, movetoworkspace, r+1"
-        "$workspace, Down, movetoworkspace, r-1"
+        "$workspace, 1, movetoworkspace, r-1"
+        "$workspace, 2, movetoworkspace, r+1"
 
         "$window, w, exec, $web-browser"
         "$window, e, exec, $terminal-emulator"
@@ -161,24 +161,24 @@
       binde = [
         "$window, Tab, cyclenext"
 
-        "$window-resize, Left, resizeactive, -10 0"
-        "$window-resize, Right, resizeactive, 10 0"
-        "$window-resize, Up, resizeactive, 0 -10"
-        "$window-resize, Down, resizeactive, 0 10"
+        "$window-resize, Left, resizeactive, -24 0"
+        "$window-resize, Right, resizeactive, 24 0"
+        "$window-resize, Up, resizeactive, 0 -24"
+        "$window-resize, Down, resizeactive, 0  24"
 
         "$window-focus, Left, movefocus, l"
         "$window-focus, Right, movefocus, r"
         "$window-focus, Up, movefocus, u"
         "$window-focus, Down, movefocus, d"
 
-        "$window-move, Left, moveactive, -15 0"
-        "$window-move, Right, moveactive, 15 0"
-        "$window-move, Up, moveactive, 0 -15"
-        "$window-move, Down, moveactive, 0 15"
+        "$window-move, Left, moveactive, -24 0"
+        "$window-move, Right, moveactive, 24 0"
+        "$window-move, Up, moveactive, 0 -24"
+        "$window-move, Down, moveactive, 0 24"
       ];
 
       dwindle = {
-        force_split = "1";
+        force_split = "2";
         preserve_split = true;
         smart_split = false;
         smart_resizing = false;

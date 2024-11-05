@@ -16,7 +16,7 @@
           ./desktop/swaync.nix
           ./desktop/fuzzel.nix
           ./desktop/gtk.nix
-          ./terminals/alacritty.nix
+          ./terminal/foot.nix
           ./web-browsers/firefox.nix
           ./gaming/mangohud.nix
           nxvim.homeManagerModules.nixvim

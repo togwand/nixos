@@ -83,6 +83,7 @@
   console = {
     useXkbConfig = true;
     earlySetup = false;
+    font = "${pkgs.uw-ttyp0}/share/consolefonts/t0-13b-uni.psf";
   };
 
   services = {
@@ -114,10 +115,8 @@
     variables = {
       VISUAL = "nvim";
     };
-    # sessionVariables = {
-    # };
-    # systemPackages = [
-    # ];
+    # sessionVariables = {};
+    # systemPackages = [];
   };
 
   programs = {
@@ -128,32 +127,37 @@
 
   fonts = {
     packages = with pkgs; [
-      cozette
+      uw-ttyp0 # Bitmap Monospace
+      (nerdfonts.override {fonts = ["CommitMono"];}) # OTF Monospace
+      comfortaa # Sans Serif
+      gentium-book-basic # Serif
+      twemoji-color-font # Emoji
+      babelstone-han # CJK
     ];
-    enableDefaultPackages = true;
+    enableDefaultPackages = false;
     fontconfig = {
       enable = true;
-      antialias = false;
+      antialias = true;
+      allowBitmaps = true;
+      includeUserConf = true;
+      defaultFonts = {
+        monospace = ["Ttyp0" "CommitMono Nerd Font Mono"];
+        sansSerif = ["Comfortaa"];
+        serif = ["Gentium Basic"];
+        emoji = ["Twitter Color Emoji"];
+      };
       hinting = {
-        style = "slight";
+        style = "full";
         enable = true;
-        autohint = false;
+        autohint = true;
       };
       subpixel = {
-        rgba = "rgb";
+        rgba = "none";
         lcdfilter = "none";
       };
-      includeUserConf = true;
-      allowBitmaps = false;
+      useEmbeddedBitmaps = false;
       cache32Bit = false;
       allowType1 = false;
-      useEmbeddedBitmaps = false;
-      defaultFonts = {
-        serif = ["DejaVu Serif"];
-        sansSerif = ["TeX Gyre Adventor"];
-        monospace = ["CozetteVector"];
-        emoji = ["Noto Color Emoji"];
-      };
     };
   };
 
