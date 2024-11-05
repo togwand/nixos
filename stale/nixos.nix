@@ -56,8 +56,9 @@
         efiSupport = true;
         useOSProber = true;
         timeoutStyle = "menu";
-		default = "saved";
+        default = "saved";
         device = "nodev";
+        splashImage = null;
         configurationLimit = 15;
       };
     };
