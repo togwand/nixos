@@ -47,6 +47,7 @@
       verbose = false;
       availableKernelModules = ["nvidia_drm"];
     };
+    supportedFilesystems = ["ntfs"];
     loader = {
       timeout = 1;
       efi.canTouchEfiVariables = true;
