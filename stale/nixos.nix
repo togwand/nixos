@@ -123,17 +123,19 @@
         support32Bit = true;
       };
     };
-	gvfs.enable = true;
-	udisks2.enable = true;
-	devmon.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
+    devmon.enable = true;
   };
 
   environment = {
+    systemPackages = with pkgs; [
+      exfat
+    ];
     variables = {
       VISUAL = "nvim";
     };
     # sessionVariables = {};
-    # systemPackages = [];
   };
 
   programs = {
