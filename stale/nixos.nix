@@ -136,6 +136,7 @@
     ];
     variables = {
       VISUAL = "nvim";
+      BROWSER = "firefox";
     };
     # sessionVariables = {};
   };

@@ -17,6 +17,7 @@
           ./desktop/fuzzel.nix
           ./desktop/gtk.nix
           ./terminal/foot.nix
+          ./terminal/ranger.nix
           ./web-browsers/firefox.nix
           ./gaming/mangohud.nix
           nxvim.homeManagerModules.nixvim
