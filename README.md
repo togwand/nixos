@@ -6,7 +6,7 @@ Imperative flake config installation (from installation media):
 
 1. Create partition table and format disk (cgdisk)
 2. Mount partitions (NixOS wiki install guide, no swap needed: 2GB file already declared)
-3. $ sudo nixos-generate-config
+3. $ sudo nixos-generate-config --root /mnt
 4. $ sudo cp /mnt/etc/nixos/hardware-configuration.nix /etc/nixos
 5. $ sudo nixos-install --impure --flake github:togwand/nixos-config/base#stale
 6. $ sudo nixos-enter -c 'passwd togwand'
