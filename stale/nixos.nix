@@ -149,11 +149,12 @@
 
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override {fonts = ["CommitMono"];}) # OTF Monospace
-      comfortaa # Sans Serif
-      gentium-book-basic # Serif
-      twemoji-color-font # Emoji
-      babelstone-han # CJK
+      (nerdfonts.override {fonts = ["CommitMono"];})
+      comfortaa
+      gentium-book-basic
+      noto-fonts-lgc-plus
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
     ];
     enableDefaultPackages = false;
     fontconfig = {
@@ -165,7 +166,7 @@
         monospace = ["CommitMono Nerd Font Mono"];
         sansSerif = ["Comfortaa"];
         serif = ["Gentium Basic"];
-        emoji = ["Twitter Color Emoji"];
+        emoji = ["Noto Color Emoji"];
       };
       hinting = {
         style = "full";

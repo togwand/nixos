@@ -4,29 +4,27 @@
     server.enable = false;
     settings = {
       main = {
-        font = "monospace:size=19:weight=Bold";
-        font-size-adjustment = 1;
+        font = "monospace:size=18.5:weight=Bold";
+        font-size-adjustment = 0.5;
         box-drawings-uses-font-glyphs = false;
         dpi-aware = false;
         pad = "0x0";
-        resize-delay-ms = 500;
         resize-by-cells = false;
         resize-keep-grid = false;
         bold-text-in-bright = false;
       };
       scrollback = {
-        lines = 10000;
+        lines = 5000;
         multiplier = 1;
       };
       cursor = {
         style = "beam";
         unfocused-style = "none";
-        blink = true;
-        blink-rate = "500";
+        blink = false;
         beam-thickness = "2px";
       };
       mouse = {
-        hide-when-typing = true;
+        hide-when-typing = false;
       };
       colors = {
         alpha = 1.0;
