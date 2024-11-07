@@ -81,19 +81,6 @@
     };
   };
 
-  security = {
-    rtkit.enable = true;
-    sudo.extraConfig = ''
-      Defaults timestamp_timeout=0
-    '';
-  };
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  time = {
-    timeZone = "Chile/Continental";
-    hardwareClockInLocalTime = true;
-  };
-
   console = {
     packages = with pkgs; [uw-ttyp0];
     font = "t0-13b-uni";
@@ -181,6 +168,19 @@
       cache32Bit = false;
       allowType1 = false;
     };
+  };
+
+  security = {
+    rtkit.enable = true;
+    sudo.extraConfig = ''
+      Defaults timestamp_timeout=0
+    '';
+  };
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  time = {
+    timeZone = "Chile/Continental";
+    hardwareClockInLocalTime = true;
   };
 
   documentation = {

@@ -9,8 +9,8 @@
       confirm_on_delete = true;
       dirname_in_tabs = false;
       display_free_space_in_status_bar = false;
-      display_size_in_main_column = false;
-      display_size_in_status_bar = true;
+      display_size_in_main_column = true;
+      display_size_in_status_bar = false;
       display_tags_in_all_columns = true;
       draw_borders = "both";
       draw_progress_bar_in_status_bar = true;

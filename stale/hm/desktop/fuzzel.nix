@@ -4,8 +4,9 @@
     settings = {
       border.width = 0;
       main = {
-        use-bold = true;
-        icon-theme = "hicolor";
+        font = "sans-serif:size=16";
+        use-bold = false;
+        dpi-aware = false;
         icons-enabled = true;
         hide-before-typing = false;
         match-mode = "exact";
@@ -15,13 +16,13 @@
         show-actions = false;
         list-executables-in-path = false;
         anchor = "center";
-        lines = 15;
-        width = 30;
-        tabs = 8;
-        horizontal-pad = 48;
-        vertical-pad = 24;
-        inner-pad = 16;
-        image-size-ratio = 0.5;
+        lines = 11;
+        width = 10;
+        tabs = 4;
+        horizontal-pad = 24;
+        vertical-pad = 16;
+        inner-pad = 10;
+        image-size-ratio = 0;
         layer = "overlay";
         exit-on-keyboard-focus-loss = true;
       };

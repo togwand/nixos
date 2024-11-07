@@ -116,7 +116,7 @@
         "HYPRCURSOR_SIZE,12"
       ];
 
-      monitor = ",1920x1080@60.00,auto,1";
+      monitor = ",1920x1080@60.00,0x0,1";
 
       "$workspace" = "SUPER";
       "$window" = "ALT";
