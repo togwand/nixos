@@ -18,6 +18,7 @@
           ./desktop/gtk.nix
           ./terminal/foot.nix
           ./terminal/ranger.nix
+          ./terminal/bat.nix
           ./web-browsers/firefox.nix
           ./gaming/mangohud.nix
           nxvim.homeManagerModules.nixvim

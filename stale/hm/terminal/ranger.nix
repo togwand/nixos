@@ -1,7 +1,14 @@
-{...}: {
+{pkgs, ...}: {
   programs.ranger = {
     enable = true;
+    extraPackages = with pkgs; [
+      poppler_utils
+      mediainfo
+    ];
     settings = {
+      automatically_count_files = false;
+      autosave_bookmarks = true;
+      autoupdate_cumulative_size = false;
       binary_size_prefix = true;
       column_ratios = "10,7";
       collapse_preview = false;
