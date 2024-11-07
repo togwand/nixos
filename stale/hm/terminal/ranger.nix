@@ -29,6 +29,7 @@
       preview_images = true;
       preview_images_method = "sixel";
       preview_max_size = 0;
+      save_backtick_bookmark = false;
       show_hidden = true;
       show_selection_in_titlebar = false;
       size_in_bytes = false;

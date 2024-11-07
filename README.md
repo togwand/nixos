@@ -16,5 +16,6 @@ After any hardware change: $ sudo nixos-generate-config
 TODO:
 1. Pick and configure shell (zsh or fish)
 2. Change colorscheme and theme of terminal, neovim and make the system match it.
+3. Test differnt app launcher and file browser (lack of features on current ones).
 3. Check vimjoyer videos to keep adding to the system
 4. Declarative installation method instead of imperative (need to research details)
