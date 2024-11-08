@@ -71,13 +71,16 @@
     firewall.enable = false;
   };
 
-  users.users = {
-    ${user} = {
-      isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-      ];
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users = {
+      ${user} = {
+        isNormalUser = true;
+        extraGroups = [
+          "wheel"
+          "networkmanager"
+        ];
+      };
     };
   };
 
@@ -129,6 +132,7 @@
   };
 
   programs = {
+    zsh.enable = true;
     hyprland.enable = true;
     steam.enable = true;
     gamemode.enable = true;

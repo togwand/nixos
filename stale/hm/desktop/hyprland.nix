@@ -126,8 +126,8 @@
 
       bind = [
         "$workspace, Delete, exit"
-        "$workspace, Left, workspace, r-1"
-        "$workspace, Right, workspace, r+1"
+        "$workspace, h, workspace, r-1"
+        "$workspace, l, workspace, r+1"
         "$workspace, 1, movetoworkspace, r-1"
         "$workspace, 2, movetoworkspace, r+1"
 
@@ -143,15 +143,15 @@
         "$window, 2, layoutmsg, togglesplit"
         "$window, 3, pseudo"
 
-        "$window, Left, layoutmsg, preselect l"
-        "$window, Right, layoutmsg, preselect r"
-        "$window, Up, layoutmsg, preselect u"
-        "$window, Down, layoutmsg, preselect d"
+        "$window, h, layoutmsg, preselect l"
+        "$window, j, layoutmsg, preselect d"
+        "$window, k, layoutmsg, preselect u"
+        "$window, l, layoutmsg, preselect r"
 
-        "$window-move, Left, swapwindow, l"
-        "$window-move, Right, swapwindow, r"
-        "$window-move, Up, swapwindow, u"
-        "$window-move, Down, swapwindow, d"
+        "$window-move, h, swapwindow, l"
+        "$window-move, j, swapwindow, d"
+        "$window-move, k, swapwindow, u"
+        "$window-move, l, swapwindow, r"
 
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 0.55 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume -l 0.55 @DEFAULT_AUDIO_SINK@ 5%-"
@@ -161,20 +161,20 @@
       binde = [
         "$window, Tab, cyclenext"
 
-        "$window-resize, Left, resizeactive, -24 0"
-        "$window-resize, Right, resizeactive, 24 0"
-        "$window-resize, Up, resizeactive, 0 -24"
-        "$window-resize, Down, resizeactive, 0  24"
+        "$window-resize, h, resizeactive, -24 0"
+        "$window-resize, j, resizeactive, 0  24"
+        "$window-resize, k, resizeactive, 0 -24"
+        "$window-resize, l, resizeactive, 24 0"
 
-        "$window-focus, Left, movefocus, l"
-        "$window-focus, Right, movefocus, r"
-        "$window-focus, Up, movefocus, u"
-        "$window-focus, Down, movefocus, d"
+        "$window-focus, h, movefocus, l"
+        "$window-focus, j, movefocus, d"
+        "$window-focus, k, movefocus, u"
+        "$window-focus, l, movefocus, r"
 
-        "$window-move, Left, moveactive, -24 0"
-        "$window-move, Right, moveactive, 24 0"
-        "$window-move, Up, moveactive, 0 -24"
-        "$window-move, Down, moveactive, 0 24"
+        "$window-move, h, moveactive, -24 0"
+        "$window-move, j, moveactive, 0 24"
+        "$window-move, k, moveactive, 0 -24"
+        "$window-move, l, moveactive, 24 0"
       ];
 
       dwindle = {

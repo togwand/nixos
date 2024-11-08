@@ -1,6 +1,6 @@
 # nixos-config
 
-My simple NixOS configurations flake, using home-manager as a NixOS module. Only unstable since stable is still worse for my use case.
+My simple NixOS configurations flake, using home-manager as a NixOS module. Only unstable since stable is still worse for my use case
 
 Imperative flake config installation (from installation media):
 
@@ -14,8 +14,9 @@ Imperative flake config installation (from installation media):
 After any hardware change: $ sudo nixos-generate-config
 
 TODO:
-1. Pick and configure shell (zsh or fish)
-2. Change colorscheme and theme of terminal, neovim and make the system match it.
-3. Test differnt app launcher and file browser (lack of features on current ones).
-3. Check vimjoyer videos to keep adding to the system
-4. Declarative installation method instead of imperative (need to research details)
+1. Configure zsh as much as I can
+2. Check vimjoyer videos to keep adding to the system
+3. Change colorscheme and theme of terminal, neovim and make the system match it
+4. Test different app launcher and file browser (lack of features on current ones)
+5. Check the programming language used for my installed pkgs
+6. Declarative installation method instead of imperative (need to research details)

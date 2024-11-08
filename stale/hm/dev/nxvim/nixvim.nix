@@ -13,6 +13,7 @@
     };
     opts = {
       number = true;
+      relativenumber = true;
       ignorecase = true;
       tabstop = 4;
       shiftwidth = 4;

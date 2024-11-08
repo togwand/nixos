@@ -16,6 +16,8 @@
           ./desktop/swaync.nix
           ./desktop/fuzzel.nix
           ./desktop/gtk.nix
+          ./terminal/bash.nix
+          ./terminal/zsh.nix
           ./terminal/foot.nix
           ./terminal/ranger.nix
           ./terminal/bat.nix
