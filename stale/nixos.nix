@@ -115,9 +115,7 @@
       autologinUser = user;
       autologinOnce = false;
     };
-    # gvfs.enable = true;
     devmon.enable = true;
-    # udisks2.enable = true;
     xserver = {
       enable = false;
       videoDrivers = ["nvidia"];

@@ -43,11 +43,13 @@
       save = 20000;
       size = 20000;
       ignorePatterns = [
+        ".."
         "cd *"
+        "ls"
         "ls *"
         "rm *"
+        "lsblk"
         "nix-prefetch-url *"
-        ".."
         "cl"
         "ra"
         "hl"
