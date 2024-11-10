@@ -98,7 +98,7 @@
       "d-flake-format" = "nix fmt";
       "d-flake-update" = "nix flake update";
       "d-git-commit" = "git commit -a";
-      "d-git-diff" = "git diff";
+      "d-git-diff" = "git diff|bat";
       "d-git-push" = "git push";
       "os-change-now" = "sudo nixos-rebuild switch";
       "os-change-at-boot" = "sudo nixos-rebuild boot";

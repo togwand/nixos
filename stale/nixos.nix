@@ -28,28 +28,24 @@
     mountPoint = "/boot";
     device = "/dev/disk/by-uuid/05C4-521F";
     fsType = "vfat";
-    # options = ["umask=022"];
   };
 
   fileSystems."nixos-root" = {
     mountPoint = "/";
     device = "/dev/disk/by-uuid/271815b6-fce2-4a33-be9d-a347bb5b12cf";
     fsType = "ext4";
-    # options = ["defaults"];
   };
 
   fileSystems."windows" = {
     mountPoint = "/mnt/windows";
     device = "/dev/disk/by-uuid/90F28A4FF28A398C";
     fsType = "ntfs";
-    # options = ["rw" "uid=1000"];
   };
 
   fileSystems."games" = {
     mountPoint = "/mnt/games";
     device = "/dev/disk/by-uuid/2A4283244282F3BB";
     fsType = "ntfs";
-    # options = ["rw" "uid=1000"];
   };
 
   swapDevices = [
@@ -74,7 +70,7 @@
         "sd_mod"
       ];
     };
-    supportedFilesystems = ["ntfs"];
+    supportedFilesystems = ["ntfs" "exfat"];
     loader = {
       timeout = 2;
       efi.canTouchEfiVariables = true;
@@ -120,7 +116,7 @@
       autologinOnce = false;
     };
     # gvfs.enable = true;
-    # devmon.enable = true;
+    devmon.enable = true;
     # udisks2.enable = true;
     xserver = {
       enable = false;
