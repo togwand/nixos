@@ -44,6 +44,8 @@
       size = 20000;
       ignorePatterns = [
         "cd *"
+        "ls *"
+        "rm *"
         "nix-prefetch-url *"
         ".."
         "cl"
@@ -54,7 +56,6 @@
         "d-flake-format"
         "d-flake-update"
         "d-git-commit"
-        "d-git-edit-commit"
         "d-git-diff"
         "d-git-push"
         "os-change-now"
@@ -97,7 +98,6 @@
       "d-flake-format" = "nix fmt";
       "d-flake-update" = "nix flake update";
       "d-git-commit" = "git commit -a";
-      "d-git-edit-commit" = "git commit -c HEAD";
       "d-git-diff" = "git diff";
       "d-git-push" = "git push";
       "os-change-now" = "sudo nixos-rebuild switch";
