@@ -56,6 +56,7 @@
         "os-change-now"
         "os-change-at-boot"
         "os-erase-generations"
+        "os-optimise-store"
         "os-test"
       ];
     };
@@ -72,11 +73,12 @@
       "off" = "systemctl poweroff";
       "d-flake-format" = "nix fmt";
       "d-flake-update" = "nix flake update";
-      "d-git-commit" = "git add -A && git commit & git push";
+      "d-git-commit" = "git add -A && git commit && git push";
       "d-git-diff" = "git diff|bat";
       "os-change-now" = "sudo nixos-rebuild switch";
       "os-change-at-boot" = "sudo nixos-rebuild boot";
       "os-erase-generations" = "nix-collect-garbage && sudo nix-collect-garbage -d";
+      "os-optimise-store" = "nix store optimise";
       "os-test" = "sudo nixos-rebuild test";
     };
     syntaxHighlighting = {
