@@ -129,6 +129,9 @@
       BROWSER = "firefox";
     };
     # sessionVariables = {};
+    pathsToLink = [
+      "/share/zsh"
+    ];
   };
 
   programs = {
