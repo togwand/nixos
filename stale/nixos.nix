@@ -1,18 +1,13 @@
 {
-  pkgs,
   config,
+  pkgs,
   user,
   host,
   hm,
   ...
 }: {
-  imports = [
-    /etc/nixos/hardware-configuration.nix
-    ./hm/home-manager.nix
-    hm.nixosModules.home-manager
-  ];
-
   hardware = {
+    cpu.intel.updateMicrocode = true;
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -29,6 +24,38 @@
     };
   };
 
+  fileSystems."nixos-boot" = {
+    mountPoint = "/boot";
+    device = "/dev/disk/by-uuid/05C4-521F";
+    fsType = "auto";
+    neededForBoot = true;
+    # options = ["umask=022"];
+  };
+
+  fileSystems."nixos-root" = {
+    mountPoint = "/";
+    device = "/dev/disk/by-uuid/271815b6-fce2-4a33-be9d-a347bb5b12cf";
+    fsType = "auto";
+    neededForBoot = true;
+    # options = ["defaults"];
+  };
+
+  fileSystems."windows" = {
+    mountPoint = "/mnt/windows";
+    device = "/dev/disk/by-uuid/90F28A4FF28A398C";
+    fsType = "auto";
+    neededForBoot = false;
+    # options = ["rw" "uid=1000"];
+  };
+
+  fileSystems."games" = {
+    mountPoint = "/mnt/games";
+    device = "/dev/disk/by-uuid/2A4283244282F3BB";
+    fsType = "auto";
+    neededForBoot = false;
+    # options = ["rw" "uid=1000"];
+  };
+
   swapDevices = [
     {
       device = "/swapfile";
@@ -39,19 +66,22 @@
   boot = {
     tmp.cleanOnBoot = true;
     consoleLogLevel = 3;
-    kernelParams = [
-      "quiet"
-      "udev.log_level=3"
-    ];
+    kernelParams = ["quiet" "udev.log_level=3"];
+    kernelModules = ["kvm-intel"];
     initrd = {
       verbose = false;
-      availableKernelModules = ["nvidia_drm"];
+      availableKernelModules = [
+        "nvidia_drm"
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "sd_mod"
+      ];
     };
     supportedFilesystems = ["ntfs"];
     loader = {
-      timeout = 1;
+      timeout = 2;
       efi.canTouchEfiVariables = true;
-      # systemd-boot.enable = true;
       grub = {
         enable = true;
         efiSupport = true;
@@ -76,10 +106,7 @@
     users = {
       ${user} = {
         isNormalUser = true;
-        extraGroups = [
-          "wheel"
-          "networkmanager"
-        ];
+        extraGroups = ["wheel" "networkmanager"];
       };
     };
   };
@@ -96,6 +123,9 @@
       autologinUser = user;
       autologinOnce = false;
     };
+    # gvfs.enable = true;
+    # devmon.enable = true;
+    # udisks2.enable = true;
     xserver = {
       enable = false;
       videoDrivers = ["nvidia"];
@@ -114,24 +144,15 @@
         support32Bit = true;
       };
     };
-    gvfs.enable = true;
-    udisks2.enable = true;
-    devmon.enable = true;
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      exfat
-      ntfs3g
-    ];
+    # systemPackages = with pkgs; [exfat ntfs3];
     variables = {
       VISUAL = "nvim";
       BROWSER = "firefox";
     };
-    # sessionVariables = {};
-    pathsToLink = [
-      "/share/zsh"
-    ];
+    pathsToLink = ["/share/zsh"];
   };
 
   programs = {
@@ -179,9 +200,7 @@
 
   security = {
     rtkit.enable = true;
-    sudo.extraConfig = ''
-      Defaults timestamp_timeout=0
-    '';
+    sudo.extraConfig = "Defaults timestamp_timeout=0";
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -199,9 +218,8 @@
   };
 
   nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
+    config.allowUnfree = true;
+    hostPlatform = "x86_64-linux";
   };
 
   nix = {
@@ -211,13 +229,15 @@
       options = "-d";
     };
     settings = {
-      experimental-features = [
-        "flakes"
-        "nix-command"
-      ];
+      experimental-features = ["flakes" "nix-command"];
       auto-optimise-store = false;
     };
   };
+
+  imports = [
+    hm.nixosModules.home-manager
+    ./hm/home-manager.nix
+  ];
 
   system.stateVersion = "24.05";
 }

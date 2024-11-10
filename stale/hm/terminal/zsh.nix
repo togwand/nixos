@@ -44,45 +44,66 @@
       size = 20000;
       ignorePatterns = [
         "cd *"
-        "clear"
         "nix-prefetch-url *"
+        ".."
+        "cl"
+        "ra"
+        "hl"
+        "re"
+        "off"
+        "d-flake-format"
+        "d-flake-update"
+        "d-git-commit"
+        "d-git-edit-commit"
+        "d-git-diff"
+        "d-git-push"
+        "os-change-now"
+        "os-change-at-boot"
+        "os-erase-generations"
+        "os-test"
       ];
     };
     historySubstringSearch = {
       enable = false;
     };
     initExtra = ''
-         unsetopt HIST_FCNTL_LOCK
-         unsetopt HIST_IGNORE_DUPS
-         unsetopt HIST_IGNORE_SPACE
-         unsetopt SHARE_HISTORY
-
+      unsetopt HIST_FCNTL_LOCK
+      unsetopt HIST_IGNORE_DUPS
+      unsetopt HIST_IGNORE_SPACE
+      unsetopt SHARE_HISTORY
       # Active options
-         setopt autolist
-         setopt listambiguous
-         setopt listpacked
-         setopt listrowsfirst
-         setopt globdots
-         setopt histexpiredupsfirst
-         setopt histfcntllock
-         setopt histfindnodups
-         setopt histignorespace
-         setopt histreduceblanks
-         setopt incappendhistory
-
+      setopt autolist
+      setopt listambiguous
+      setopt listpacked
+      setopt listrowsfirst
+      setopt globdots
+      setopt histexpiredupsfirst
+      setopt histfcntllock
+      setopt histfindnodups
+      setopt histignorespace
+      setopt histreduceblanks
+      setopt incappendhistory
       # Custom Prompts
       export PROMPT='%n:'
       export RPROMPT='%1~ %t'
     '';
     shellAliases = {
       ".." = "cd ..";
-      tflk = "sudo nixos-rebuild test --impure --flake .";
-      bflk = "sudo nixos-rebuild boot --impure --flake .";
-      sflk = "sudo nixos-rebuild switch --impure --flake .";
-      fflk = "nix fmt";
-      ra = "ranger";
-      dg = "nix-collect-garbage -d";
-      dgall = "sudo nix-collect-garbage -d";
+      "cl" = "clear";
+      "ra" = "ranger";
+      "hl" = "Hyprland";
+      "re" = "systemctl reboot";
+      "off" = "systemctl poweroff";
+      "d-flake-format" = "nix fmt";
+      "d-flake-update" = "nix flake update";
+      "d-git-commit" = "git commit -a";
+      "d-git-edit-commit" = "git commit -c HEAD";
+      "d-git-diff" = "git diff";
+      "d-git-push" = "git push";
+      "os-change-now" = "sudo nixos-rebuild switch";
+      "os-change-at-boot" = "sudo nixos-rebuild boot";
+      "os-erase-generations" = "nix-collect-garbage && sudo nix-collect-garbage -d";
+      "os-test" = "sudo nixos-rebuild test";
     };
     syntaxHighlighting = {
       enable = true;
