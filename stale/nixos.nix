@@ -28,7 +28,7 @@
     mountPoint = "/boot";
     device = "/dev/disk/by-uuid/05C4-521F";
     fsType = "vfat";
-    options = ["umask=022"];
+    # options = ["umask=022"];
   };
 
   fileSystems."nixos-root" = {
@@ -143,7 +143,6 @@
   };
 
   environment = {
-    # systemPackages = with pkgs; [exfat ntfs3];
     variables = {
       VISUAL = "nvim";
       BROWSER = "firefox";
