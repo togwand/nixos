@@ -27,32 +27,28 @@
   fileSystems."nixos-boot" = {
     mountPoint = "/boot";
     device = "/dev/disk/by-uuid/05C4-521F";
-    fsType = "auto";
-    neededForBoot = true;
-    # options = ["umask=022"];
+    fsType = "vfat";
+    options = ["umask=022"];
   };
 
   fileSystems."nixos-root" = {
     mountPoint = "/";
     device = "/dev/disk/by-uuid/271815b6-fce2-4a33-be9d-a347bb5b12cf";
-    fsType = "auto";
-    neededForBoot = true;
+    fsType = "ext4";
     # options = ["defaults"];
   };
 
   fileSystems."windows" = {
     mountPoint = "/mnt/windows";
     device = "/dev/disk/by-uuid/90F28A4FF28A398C";
-    fsType = "auto";
-    neededForBoot = false;
+    fsType = "ntfs";
     # options = ["rw" "uid=1000"];
   };
 
   fileSystems."games" = {
     mountPoint = "/mnt/games";
     device = "/dev/disk/by-uuid/2A4283244282F3BB";
-    fsType = "auto";
-    neededForBoot = false;
+    fsType = "ntfs";
     # options = ["rw" "uid=1000"];
   };
 
