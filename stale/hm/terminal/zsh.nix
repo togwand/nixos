@@ -11,14 +11,8 @@
     # localVariables = {};
     # sessionVariables = {};
     # initExtraFirst = '''';
-    initExtraBeforeCompInit = ''
-      zmodload zsh/complist
-    '';
-    completionInit = ''
-      autoload -U compinit
-      zstyle ':completion:*' menu select
-      compinit
-    '';
+    initExtraBeforeCompInit = builtins.readFile ./zsh/initExtraBeforeCompInit.zsh;
+    completionInit = builtins.readFile ./zsh/completionInit.zsh;
     autosuggestion = {
       enable = true;
       strategy = [
@@ -69,27 +63,7 @@
     historySubstringSearch = {
       enable = false;
     };
-    initExtra = ''
-      unsetopt HIST_FCNTL_LOCK
-      unsetopt HIST_IGNORE_DUPS
-      unsetopt HIST_IGNORE_SPACE
-      unsetopt SHARE_HISTORY
-      # Active options
-      setopt autolist
-      setopt listambiguous
-      setopt listpacked
-      setopt listrowsfirst
-      setopt globdots
-      setopt histexpiredupsfirst
-      setopt histfcntllock
-      setopt histfindnodups
-      setopt histignorespace
-      setopt histreduceblanks
-      setopt incappendhistory
-      # Custom Prompts
-      export PROMPT='%n:'
-      export RPROMPT='%1~ %t'
-    '';
+    initExtra = builtins.readFile ./zsh/initExtra.zsh;
     shellAliases = {
       ".." = "cd ..";
       "cl" = "clear";
