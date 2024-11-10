@@ -38,11 +38,11 @@
       size = 20000;
       ignorePatterns = [
         ".."
-        "cd *"
         "ls"
+        "lsblk"
+        "cd *"
         "ls *"
         "rm *"
-        "lsblk"
         "nix-prefetch-url *"
         "cl"
         "ra"
@@ -53,7 +53,6 @@
         "d-flake-update"
         "d-git-commit"
         "d-git-diff"
-        "d-git-push"
         "os-change-now"
         "os-change-at-boot"
         "os-erase-generations"
@@ -73,9 +72,8 @@
       "off" = "systemctl poweroff";
       "d-flake-format" = "nix fmt";
       "d-flake-update" = "nix flake update";
-      "d-git-commit" = "git commit -a";
+      "d-git-commit" = "git add -A && git commit & git push";
       "d-git-diff" = "git diff|bat";
-      "d-git-push" = "git push";
       "os-change-now" = "sudo nixos-rebuild switch";
       "os-change-at-boot" = "sudo nixos-rebuild boot";
       "os-erase-generations" = "nix-collect-garbage && sudo nix-collect-garbage -d";
