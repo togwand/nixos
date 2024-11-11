@@ -43,6 +43,7 @@
         "cd *"
         "ls *"
         "rm *"
+        "man *"
         "nix-prefetch-url *"
         "cl"
         "ra"
