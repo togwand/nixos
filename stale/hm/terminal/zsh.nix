@@ -11,8 +11,14 @@
     # localVariables = {};
     # sessionVariables = {};
     # initExtraFirst = '''';
-    initExtraBeforeCompInit = builtins.readFile ./zsh/initExtraBeforeCompInit.zsh;
-    completionInit = builtins.readFile ./zsh/completionInit.zsh;
+    initExtraBeforeCompInit = ''
+      zmodload zsh/complist
+    '';
+    completionInit = ''
+      autoload -U compinit
+      zstyle ':completion:*' menu select
+      compinit
+    '';
     autosuggestion = {
       enable = true;
       strategy = [
@@ -54,6 +60,7 @@
         "d-flake-update"
         "d-git-commit"
         "d-git-diff"
+        "d-set-os-symlink"
         "os-change-now"
         "os-change-at-boot"
         "os-erase-generations"
@@ -64,7 +71,31 @@
     historySubstringSearch = {
       enable = false;
     };
-    initExtra = builtins.readFile ./zsh/initExtra.zsh;
+    initExtra = ''
+      # Default options to false
+      unsetopt HIST_FCNTL_LOCK
+      unsetopt HIST_IGNORE_DUPS
+      unsetopt HIST_IGNORE_SPACE
+      unsetopt SHARE_HISTORY
+      # Active options
+      setopt autolist
+      setopt listambiguous
+      setopt listpacked
+      setopt listrowsfirst
+      setopt globdots
+      setopt histexpiredupsfirst
+      setopt histfcntllock
+      setopt histfindnodups
+      setopt histignorespace
+      setopt histreduceblanks
+      setopt incappendhistory
+      # Custom prompts
+      export PROMPT='%n:'
+      export RPROMPT='%0~ %t'
+    '';
+    shellGlobalAliases = {
+      "reload-hwcfg" = "sudo nixos-generate-config && sudo rm /etc/nixos/configuration.nix";
+    };
     shellAliases = {
       ".." = "cd ..";
       "cl" = "clear";
@@ -76,11 +107,12 @@
       "d-flake-update" = "nix flake update";
       "d-git-commit" = "git add -A && git commit && git push";
       "d-git-diff" = "git diff|bat";
-      "os-change-now" = "sudo nixos-rebuild switch";
-      "os-change-at-boot" = "sudo nixos-rebuild boot";
-      "os-erase-generations" = "nix-collect-garbage && sudo nix-collect-garbage -d";
+      "d-set-os-symlink" = "(ls flake.nix >> /dev/null 2>&1 && sudo ln -s $PWD/flake.nix /etc/nixos/flake.nix) || echo There is no flake.nix in this directory";
+      "os-change-now" = "reload-hwcfg && sudo nixos-rebuild switch --impure";
+      "os-change-at-boot" = "reload-hwcfg && sudo nixos-rebuild boot --impure";
+      "os-erase-generations" = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
       "os-optimise-store" = "nix store optimise";
-      "os-test" = "sudo nixos-rebuild test";
+      "os-test" = "sudo nixos-rebuild test --impure";
     };
     syntaxHighlighting = {
       enable = true;

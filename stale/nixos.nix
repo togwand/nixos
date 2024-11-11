@@ -7,7 +7,6 @@
   ...
 }: {
   hardware = {
-    cpu.intel.updateMicrocode = true;
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -20,32 +19,8 @@
     };
     bluetooth = {
       enable = true;
-      powerOnBoot = true;
+      powerOnBoot = false;
     };
-  };
-
-  fileSystems."nixos-boot" = {
-    mountPoint = "/boot";
-    device = "/dev/disk/by-uuid/05C4-521F";
-    fsType = "vfat";
-  };
-
-  fileSystems."nixos-root" = {
-    mountPoint = "/";
-    device = "/dev/disk/by-uuid/271815b6-fce2-4a33-be9d-a347bb5b12cf";
-    fsType = "ext4";
-  };
-
-  fileSystems."windows" = {
-    mountPoint = "/mnt/windows";
-    device = "/dev/disk/by-uuid/90F28A4FF28A398C";
-    fsType = "ntfs";
-  };
-
-  fileSystems."games" = {
-    mountPoint = "/mnt/games";
-    device = "/dev/disk/by-uuid/2A4283244282F3BB";
-    fsType = "ntfs";
   };
 
   swapDevices = [
@@ -59,16 +34,9 @@
     tmp.cleanOnBoot = true;
     consoleLogLevel = 3;
     kernelParams = ["quiet" "udev.log_level=3"];
-    kernelModules = ["kvm-intel"];
     initrd = {
       verbose = false;
-      availableKernelModules = [
-        "nvidia_drm"
-        "xhci_pci"
-        "ahci"
-        "usbhid"
-        "sd_mod"
-      ];
+      availableKernelModules = ["nvidia_drm"];
     };
     supportedFilesystems = ["ntfs" "exfat"];
     loader = {
@@ -208,7 +176,6 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-    hostPlatform = "x86_64-linux";
   };
 
   nix = {
@@ -226,6 +193,7 @@
   imports = [
     hm.nixosModules.home-manager
     ./hm/home-manager.nix
+    /etc/nixos/hardware-configuration.nix
   ];
 
   system.stateVersion = "24.05";
