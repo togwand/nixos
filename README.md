@@ -2,6 +2,12 @@
 
 My simple NixOS configurations flake, using home-manager as a NixOS module. Only unstable since stable is still worse for my use case
 
+To add drives not detected by hardware-configuration you need to do it manually by doing, for example, $ sudo mount -t ntfs3 /dev/by/something/your-drive /mnt/directory-for-the-mounting
+
+This example is for ntfs partitions to be added to hw-cfg you need to mount them as ntfs3 since ntfs or ntfs-3g is FUSE based and the perl script of hw-cfg doesn't currenly work with FUSE, and it probably never will) 
+
+In the case of ntfs3 the default permissions are read only for users but read and write for root, so one of my aliases (patch-hwcfg) fixes this (it is used on another alias, reload-hwfg, which is called when doing rebuilds with my custom zsh aliases too)
+
 # EVERYTHING BELOW THIS IS GOING TO BE OBSOLETE AFTER I FINISH MAKING MY PERFECT ISO AND PERFECT INSTALL SCRIPT AND PERFECT IMPERMANENT SETUP ON A DIFFERENT REPO 
 Imperative flake config installation (from installation media):
 

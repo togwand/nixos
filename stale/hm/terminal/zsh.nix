@@ -43,29 +43,8 @@
       save = 20000;
       size = 20000;
       ignorePatterns = [
-        ".."
-        "ls"
-        "lsblk"
+        "cd"
         "cd *"
-        "ls *"
-        "rm *"
-        "man *"
-        "nix-prefetch-url *"
-        "cl"
-        "ra"
-        "hl"
-        "re"
-        "off"
-        "d-flake-format"
-        "d-flake-update"
-        "d-git-commit"
-        "d-git-diff"
-        "d-set-os-symlink"
-        "os-change-now"
-        "os-change-at-boot"
-        "os-erase-generations"
-        "os-optimise-store"
-        "os-test"
       ];
     };
     historySubstringSearch = {
@@ -94,7 +73,11 @@
       export RPROMPT='%0~ %t'
     '';
     shellGlobalAliases = {
-      "reload-hwcfg" = "sudo nixos-generate-config && sudo rm /etc/nixos/configuration.nix";
+      "set-os-symlink" = "(ls flake.nix >> /dev/null 2>&1 && sudo ln -sf $PWD/flake.nix /etc/nixos/flake.nix) || echo There is no flake.nix in this directory";
+      "patch-hwcfg" = ''sudo rm /etc/nixos/configuration.nix && sudo sed -i $'/fsType = "ntfs3"/a \\      options = ["uid=$UID"];' /etc/nixos/hardware-configuration.nix'';
+      "reload-hwcfg" = "sudo nixos-generate-config && patch-hwcfg";
+      "d-flake-format" = "nix fmt";
+      "d-flake-update" = "nix flake update";
     };
     shellAliases = {
       ".." = "cd ..";
@@ -103,16 +86,13 @@
       "hl" = "Hyprland";
       "re" = "systemctl reboot";
       "off" = "systemctl poweroff";
-      "d-flake-format" = "nix fmt";
-      "d-flake-update" = "nix flake update";
-      "d-git-commit" = "git add -A && git commit && git push";
-      "d-git-diff" = "git diff|bat";
-      "d-set-os-symlink" = "(ls flake.nix >> /dev/null 2>&1 && sudo ln -s $PWD/flake.nix /etc/nixos/flake.nix) || echo There is no flake.nix in this directory";
+      "d-git-commit" = "d-flake-format && d-flake-update && git add -A && git commit && git push";
+      "d-git-diff" = "d-flake-format && git diff|bat";
       "os-change-now" = "reload-hwcfg && sudo nixos-rebuild switch --impure";
-      "os-change-at-boot" = "reload-hwcfg && sudo nixos-rebuild boot --impure";
+      "os-change-at-boot" = "reload-hwcfg && sudo nixos-rebuild boot --impure && systemctl reboot";
       "os-erase-generations" = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
       "os-optimise-store" = "nix store optimise";
-      "os-test" = "sudo nixos-rebuild test --impure";
+      "os-test" = "reload-hwcfg && sudo nixos-rebuild test --impure";
     };
     syntaxHighlighting = {
       enable = true;
