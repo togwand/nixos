@@ -157,7 +157,7 @@
 
   security = {
     rtkit.enable = true;
-    sudo.extraConfig = "Defaults timestamp_timeout=0";
+    sudo.extraConfig = "Defaults timestamp_timeout=1";
   };
 
   i18n.defaultLocale = "en_US.UTF-8";

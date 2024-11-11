@@ -74,7 +74,7 @@
     '';
     shellGlobalAliases = {
       "set-os-symlink" = "(ls flake.nix >> /dev/null 2>&1 && sudo ln -sf $PWD/flake.nix /etc/nixos/flake.nix) || echo There is no flake.nix in this directory";
-      "patch-hwcfg" = ''sudo rm /etc/nixos/configuration.nix && sudo sed -i $'/fsType = "ntfs3"/a \\      options = ["uid=$UID"];' /etc/nixos/hardware-configuration.nix'';
+      "patch-hwcfg" = ''sudo rm /etc/nixos/configuration.nix && sudo sed -i $'/fsType = "ntfs3"/a \\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix'';
       "reload-hwcfg" = "sudo nixos-generate-config && patch-hwcfg";
       "d-flake-format" = "nix fmt";
       "d-flake-update" = "nix flake update";
