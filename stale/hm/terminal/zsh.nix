@@ -78,8 +78,9 @@
       "reload-hwcfg" = "sudo nixos-generate-config && patch-hwcfg";
       "d-flake-format" = "nix fmt";
       "d-flake-update" = "nix flake update";
-      "d-generate-iso-result" = "nix run nixpkgs#nixos-generators -- --format iso --flake github:togwand/nixos-install#nixos-install -o result";
+      "d-generate-iso-result" = "nix run nixpkgs#nixos-generators -- --format iso --flake github:togwand/nixos-install#fast -o result";
       "d-burn-result-iso" = "sudo cp result/iso/nixos-*.iso \ ";
+      "d-create-and-burn-iso" = "d-generate-iso-result && d-burn-result-iso && sudo rm -r ./result";
     };
     shellAliases = {
       ".." = "cd ..";
