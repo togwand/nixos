@@ -86,7 +86,7 @@
       "hl" = "Hyprland";
       "re" = "systemctl reboot";
       "off" = "systemctl poweroff";
-      "d-git-commit" = "d-flake-format && d-flake-update && git add -A && git commit && git push";
+      "d-git-commit" = "d-flake-update && git add -A && d-flake-format && git add -A && git commit && git push";
       "d-git-diff" = "d-flake-format && git diff|bat";
       "os-change-now" = "reload-hwcfg && sudo nixos-rebuild switch --impure";
       "os-change-at-boot" = "reload-hwcfg && sudo nixos-rebuild boot --impure && systemctl reboot";
