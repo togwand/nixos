@@ -29,9 +29,10 @@ Imperative flake config installation (from installation media):
 
 TODO:
 1. Declarative installation method instead of imperative.
-2. Fix the goddamn history options that never seem to work as I want, as well as adding vim keys for the menu for an actually faster experience with current aliases.
-3. Add highlights, hooks, plugins, better completion and prompt to zsh.
-4. Check vimjoyer videos to keep adding to the system
-5. Check the programming language used for my installed pkgs (remove or replace rust ones)
-6. Change colorscheme and theme of terminal, neovim and make the system match it
-7. Test different app launcher and file browser (lack of features on current ones)
+2. Make script for the long command chain alias in zsh conf. 
+3. Fix the goddamn history options that never seem to work as I want, as well as adding vim keys for the menu for an actually faster experience with current aliases.
+4. Add highlights, hooks, plugins, better completion and prompt to zsh.
+5. Check vimjoyer videos to keep adding to the system
+6. Check the programming language used for my installed pkgs (remove or replace rust ones)
+7. Change colorscheme and theme of terminal, neovim and make the system match it
+8. Test different app launcher and file browser (lack of features on current ones)
