@@ -4,6 +4,7 @@
       ./plugins/lualine.nix
       ./plugins/comment.nix
       ./plugins/lsp.nix
+      ./plugins/treesitter.nix
     ];
     enable = true;
     viAlias = true;

@@ -4,6 +4,7 @@
     inlayHints = true;
     servers = {
       nixd.enable = true;
+      bashls.enable = true;
     };
   };
 }

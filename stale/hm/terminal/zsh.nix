@@ -11,14 +11,22 @@
     # localVariables = {};
     # sessionVariables = {};
     # initExtraFirst = '''';
-    initExtraBeforeCompInit = ''
-      zmodload zsh/complist
-    '';
-    completionInit = ''
-      autoload -U compinit
-      zstyle ':completion:*' menu select
-      compinit
-    '';
+    initExtraBeforeCompInit =
+      /*
+      bash
+      */
+      ''
+        zmodload zsh/complist
+      '';
+    completionInit =
+      /*
+      bash
+      */
+      ''
+        autoload -U compinit
+        zstyle ':completion:*' menu select
+        compinit
+      '';
     autosuggestion = {
       enable = true;
       strategy = [
@@ -50,28 +58,32 @@
     historySubstringSearch = {
       enable = false;
     };
-    initExtra = ''
-      # Default options to false
-      unsetopt HIST_FCNTL_LOCK
-      unsetopt HIST_IGNORE_DUPS
-      unsetopt HIST_IGNORE_SPACE
-      unsetopt SHARE_HISTORY
-      # Active options
-      setopt autolist
-      setopt listambiguous
-      setopt listpacked
-      setopt listrowsfirst
-      setopt globdots
-      setopt histexpiredupsfirst
-      setopt histfcntllock
-      setopt histfindnodups
-      setopt histignorespace
-      setopt histreduceblanks
-      setopt incappendhistory
-      # Custom prompts
-      export PROMPT='%n:'
-      export RPROMPT='%0~ %t'
-    '';
+    initExtra =
+      /*
+      bash
+      */
+      ''
+        # Default options to false
+        unsetopt HIST_FCNTL_LOCK
+        unsetopt HIST_IGNORE_DUPS
+        unsetopt HIST_IGNORE_SPACE
+        unsetopt SHARE_HISTORY
+        # Active options
+        setopt autolist
+        setopt listambiguous
+        setopt listpacked
+        setopt listrowsfirst
+        setopt globdots
+        setopt histexpiredupsfirst
+        setopt histfcntllock
+        setopt histfindnodups
+        setopt histignorespace
+        setopt histreduceblanks
+        setopt incappendhistory
+        # Custom prompts
+        export PROMPT='%n:'
+        export RPROMPT='%0~ %t'
+      '';
     shellGlobalAliases = {
       "os.patch-hwcfg" = ''sudo rm /etc/nixos/configuration.nix && sudo sed -i $'/fsType = "ntfs3"/a \\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix'';
       "os.reload-hwcfg" = "sudo nixos-generate-config && os.patch-hwcfg";
