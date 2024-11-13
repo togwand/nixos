@@ -78,7 +78,7 @@
       "reload-hwcfg" = "sudo nixos-generate-config && patch-hwcfg";
       "d-flake-format" = "nix fmt";
       "d-flake-update" = "nix flake update";
-      "d-generate-iso-result" = "nix run nixpkgs#nixos-generators -- --format iso --flake github:togwand/nixos-install#minimal result && echo The ISO has been created";
+      "d-generate-iso-result" = "nix run nixpkgs#nixos-generators -- --format iso --flake github:togwand/nixos-install#minimal -o result && echo The ISO has been created";
       "d-burn-result-iso" = ''read "dev?Enter the removable device path without /dev (e.g. sdc):" && sudo wipefs /dev/$dev && sudo cp result/iso/nixos-*.iso /dev/$dev && sudo sync /dev/$dev && sudo rm -r result && echo The NixOS ISO has been burned into the device'';
       "d-create-and-burn-iso" = "d-generate-iso-result && d-burn-result-iso";
     };
