@@ -2,37 +2,20 @@
 
 My simple NixOS configurations flake, using home-manager as a NixOS module. Only unstable since stable is still worse for my use case
 
-To add drives not detected by hardware-configuration you need to do it manually by doing, for example, $ sudo mount -t ntfs3 /dev/by/something/your-drive /mnt/directory-for-the-mounting
+FUSE type drives (ntfs and removable devices) don't work with the NixOS hardware detection method, and they are not added to the generated hardware configuration, and thus don't get added to fstab with this config.
 
-This example is for ntfs partitions to be added to hw-cfg you need to mount them as ntfs3 since ntfs or ntfs-3g is FUSE based and the perl script of hw-cfg doesn't currenly work with FUSE, and it probably never will) 
-
-In the case of ntfs3 the default permissions are read only for users but read and write for root, so one of my aliases (patch-hwcfg) fixes this (it is used on another alias, reload-hwfg, which is called when doing rebuilds with my custom zsh aliases too)
-
-# EVERYTHING BELOW THIS IS GOING TO BE OBSOLETE AFTER I FINISH MAKING MY PERFECT ISO AND PERFECT INSTALL SCRIPT AND PERFECT IMPERMANENT SETUP ON A DIFFERENT REPO 
-Imperative flake config installation (from installation media):
-
-1. Create partition table and format disk (e.g. $ sudo cgdisk /dev/sda), no swap needed (file declared in flake)
-2. Mount partitions following NixOS wiki install guide 
-3. $ sudo nixos-install --flake github:togwand/nixos-config/base#stale
-4. $ sudo nixos-enter -c 'passwd togwand'
-5. Reboot and clone this repo to add a symlink to flake.nix in /etc/nixos (same name)
-
-# If the installation fails (can't boot or throws error before install finishes) and/or there are mismatches or missing options between this flake nixos.nix and $ sudo nixos-generate-config --root /mnt:
-1. Keep following the NixOS wiki and perform the minimal installation
-2. Add the git package to environment.systemPackages and enable flakes
-3. On a new/empty directory do $ git clone https://github.com/togwand/nixos-config
-4. Enter the cloned directory if you haven't and modify the cloned nixos.nix to match the generated hardware-configuration.nix options created by nixos-generate-config
-5. $ sudo nixos-rebuild --flake .
-6. Reboot and add a symlink from flake.nix on the cloned repo to /etc/nixos (same name)
-
-# EVERYTHING ABOVE THIS IS GOING TO BE OBSOLETE AFTER I FINISH MAKING MY PERFECT ISO AND PERFECT INSTALL SCRIPT AND PERFECT IMPERMANENT SETUP ON A DIFFERENT REPO 
+For these you can try to mount with a compatible type manually (example: $ sudo mount -t ntfs3, instead of ntfs-3g or ntfs) and then with a few commands patch the hardware configuration after any hardware-configuration generation (you can replace the default hw config gen with an alias with the patch included, or create a program itself to manage it, etc). 
 
 TODO:
 1. Declarative installation method instead of imperative.
-2. Make script for the long command chain alias in zsh conf. 
-3. Fix the goddamn history options that never seem to work as I want, as well as adding vim keys for the menu for an actually faster experience with current aliases.
-4. Add highlights, hooks, plugins, better completion and prompt to zsh.
-5. Check vimjoyer videos to keep adding to the system
-6. Check the programming language used for my installed pkgs (remove or replace rust ones)
-7. Change colorscheme and theme of terminal, neovim and make the system match it
-8. Test different app launcher and file browser (lack of features on current ones)
+2. Replace ALL the complex zsh aliases with bash scripts. 
+3. Fix the zsh history and other options (do temporary setopt commands to check their behaviours before rebuilding the system)
+4. Add vim keys for the zsh menu (check the Mental Outlaw zsh video again).
+5. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration).
+6. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc).
+7. Check vimjoyer videos to keep adding to the system
+8. Change colorscheme and theme of terminal, neovim and make the system match it
+9. Check the programming language used for my installed pkgs (remove or replace rust ones)
+10. Tune hyprland options a little more, test a more aesthetic approach
+11. Test different app launcher and file browser (lack of features on current ones)
+12. Keep working on hyprland desktop (check useful utilities page and awersome hyprland repo)

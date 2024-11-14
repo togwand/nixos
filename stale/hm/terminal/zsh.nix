@@ -11,22 +11,14 @@
     # localVariables = {};
     # sessionVariables = {};
     # initExtraFirst = '''';
-    initExtraBeforeCompInit =
-      /*
-      bash
-      */
-      ''
-        zmodload zsh/complist
-      '';
-    completionInit =
-      /*
-      bash
-      */
-      ''
-        autoload -U compinit
-        zstyle ':completion:*' menu select
-        compinit
-      '';
+    initExtraBeforeCompInit = ''
+      zmodload zsh/complist
+    '';
+    completionInit = ''
+      autoload -U compinit
+      zstyle ':completion:*' menu select
+      compinit
+    '';
     autosuggestion = {
       enable = true;
       strategy = [
@@ -58,39 +50,35 @@
     historySubstringSearch = {
       enable = false;
     };
-    initExtra =
-      /*
-      bash
-      */
-      ''
-        # Default options to false
-        unsetopt HIST_FCNTL_LOCK
-        unsetopt HIST_IGNORE_DUPS
-        unsetopt HIST_IGNORE_SPACE
-        unsetopt SHARE_HISTORY
-        # Active options
-        setopt autolist
-        setopt listambiguous
-        setopt listpacked
-        setopt listrowsfirst
-        setopt globdots
-        setopt histexpiredupsfirst
-        setopt histfcntllock
-        setopt histfindnodups
-        setopt histignorespace
-        setopt histreduceblanks
-        setopt incappendhistory
-        # Custom prompts
-        export PROMPT='%n:'
-        export RPROMPT='%0~ %t'
-      '';
+    initExtra = ''
+      # Default options to false
+      unsetopt HIST_FCNTL_LOCK
+      unsetopt HIST_IGNORE_DUPS
+      unsetopt HIST_IGNORE_SPACE
+      unsetopt SHARE_HISTORY
+      # Active options
+      setopt autolist
+      setopt listambiguous
+      setopt listpacked
+      setopt listrowsfirst
+      setopt globdots
+      setopt histexpiredupsfirst
+      setopt histfcntllock
+      setopt histfindnodups
+      setopt histignorespace
+      setopt histreduceblanks
+      setopt incappendhistory
+      # Custom prompts
+      export PROMPT='%n:'
+      export RPROMPT='%0~ %t'
+    '';
     shellGlobalAliases = {
       "os.patch-hwcfg" = ''sudo rm /etc/nixos/configuration.nix && sudo sed -i $'/fsType = "ntfs3"/a \\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix'';
       "os.reload-hwcfg" = "sudo nixos-generate-config && os.patch-hwcfg";
       "flk.prepare" = "nix flake update && nix fmt";
       "os.prepare-build" = "os.reload-hwcfg && flk.prepare";
       "build-minimal-iso" = "nix build github:togwand/nixos-install#nixosConfigurations.minimal.config.system.build.isoImage && echo NixOS ISO created";
-      "burn-iso" = ''lsblk --noheadings --nodeps && read "dev?Enter the removable device path without /dev (e.g. sdc): " && read -s "confirmed?Are you sure you want to burn the iso into $dev? Confirm (RETURN) or abort (CTRL+C)..." && echo && sudo wipefs /dev/$dev && sudo cp result/iso/nixos-*.iso /dev/$dev && sudo sync /dev/$dev && sudo rm -r result && echo NixOS ISO burned into /dev/$dev''; # THIS REALLY NEEDS TO BECOME A SCRIPT ONCE I SORT THE NIXOSINSTALL REPO
+      "burn-iso" = ''lsblk --noheadings --nodeps && read "dev?Enter the removable device path without /dev (e.g. sdc): " && read -s "confirmed?Are you sure you want to burn the iso into /dev/$dev? Confirm (RETURN) or abort (CTRL+C)..." && echo && sudo wipefs /dev/$dev && sudo cp result/iso/nixos-*.iso /dev/$dev && sudo sync /dev/$dev && sudo rm -r result && echo NixOS ISO burned into /dev/$dev''; # THIS REALLY NEEDS TO BECOME A SCRIPT ONCE I SORT THE NIXOSINSTALL REPO
     };
     shellAliases = {
       ".." = "cd ..";
