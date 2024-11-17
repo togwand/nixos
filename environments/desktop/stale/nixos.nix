@@ -1,11 +1,17 @@
 {
   config,
   pkgs,
+  hm,
   user,
   host,
-  hm,
   ...
 }: {
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+    ./hm/home-manager.nix
+    hm.nixosModules.home-manager
+  ];
+
   hardware = {
     graphics = {
       enable = true;
@@ -189,12 +195,6 @@
       auto-optimise-store = false;
     };
   };
-
-  imports = [
-    hm.nixosModules.home-manager
-    ./hm/home-manager.nix
-    /etc/nixos/hardware-configuration.nix
-  ];
 
   system.stateVersion = "24.05";
 }

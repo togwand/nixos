@@ -17,14 +17,22 @@
     nxvim,
     ...
   }: let
-    user = "togwand";
-    host = "stale";
     sys = "x86_64-linux";
   in {
     formatter.${sys} = npkgs.legacyPackages.${sys}.alejandra;
-    nixosConfigurations.${host} = npkgs.lib.nixosSystem {
-      specialArgs = {inherit user host hm nxvim;};
-      modules = [./stale/nixos.nix];
+    nixosConfigurations."stale" = npkgs.lib.nixosSystem {
+      modules = [./environments/desktop/stale/nixos.nix];
+      specialArgs = {
+        inherit hm nxvim;
+        user = "togwand";
+        host = "stale";
+      };
+    };
+    nixosConfigurations."minimal" = npkgs.lib.nixosSystem {
+      modules = [./environments/iso/minimal/nixos.nix];
+      specialArgs = {
+        inherit hm nxvim;
+      };
     };
   };
 }

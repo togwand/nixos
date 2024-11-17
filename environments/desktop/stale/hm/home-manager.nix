@@ -1,15 +1,23 @@
 {
   pkgs,
-  user,
   nxvim,
+  user,
   ...
-}: {
+}: let
+  manager = pkgs.writeShellApplication {
+    name = "togwand-manager";
+    text = "${builtins.readFile ../../../../scripts/bash/manager.bash}";
+    # runtimeInputs = with pkgs; [
+    # ];
+  };
+in {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     users = {
       ${user} = {
         imports = [
+          nxvim.homeManagerModules.nixvim
           ./dev/git.nix
           ./dev/nxvim/nixvim.nix
           ./desktop/hyprland.nix
@@ -23,11 +31,11 @@
           ./terminal/bat.nix
           ./web-browsers/firefox.nix
           ./gaming/mangohud.nix
-          nxvim.homeManagerModules.nixvim
         ];
         programs.home-manager.enable = true;
         home = {
           packages = with pkgs; [
+            manager
             rclone
             pavucontrol
             discord

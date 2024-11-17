@@ -8,9 +8,10 @@
       "$web-browser" = "firefox";
 
       general = {
-        border_size = 0;
-        gaps_in = 0;
-        gaps_out = 0;
+        border_size = 1;
+        no_border_on_floating = false;
+        gaps_in = "0,10,10,0";
+        gaps_out = "10,0,10,0";
         gaps_workspaces = 0;
         layout = "dwindle";
         no_focus_fallback = true;
@@ -23,12 +24,12 @@
         active_opacity = 1.0;
         inactive_opacity = 1.0;
         fullscreen_opacity = 1.0;
-        drop_shadow = false;
         dim_inactive = true;
         dim_strength = 0.3;
         dim_special = 0.3;
         dim_around = 0.3;
         blur.enabled = false;
+        shadow.enabled = false;
       };
 
       animations = {
