@@ -1,6 +1,6 @@
 # nixos-config
 
-My NixOS flake containing environment, configurations, scripts, and more.
+My NixOS flake containing environment configurations, scripts, and more.
 
 #### Features:
  * Configurations/environments (desktop/stale, iso/minimal)
