@@ -1,9 +1,10 @@
 bin_name="${0##*/}"
 
+
 documentation() {
 cat << EOF
 [ DOCUMENTATION ]
-* Inputting anything besides nothing or one of the options gets you here
+* Inputting anything besides nothing or an option gets you here
 * To quickly abort the program or any running option just do 'CTRL+C'
 
 Instructions
@@ -22,8 +23,11 @@ Troubleshooting
 d) Documentation
 * Opens this documentation with the 'less' pager
 
-q) Quit
+q) Quit Menu
 * Exits the active menu (or the program if it's the main menu)
+
+Q) Quit Program
+* Exits the program successfully using 'exit 0'
 
 r) Reboot
 * Restarts the computer
@@ -51,15 +55,16 @@ r) Reboot
 
 1) Patch hardware file - REQUIRES ELEVATED PERMISSIONS
 * Generates NixOS hardware configuration
-* Patches it for mounted ntfs3 partitions
+* Patches the write permissions of UID 1000 for mounted ntfs3 partitions
 * Discards configuration.nix
 
-2) Rebuild configuration - REQUIRES ELEVATED PERMISSIONS
-* Asks user for a build type and one path to a flake
+2) Build flake configuration - REQUIRES ELEVATED PERMISSIONS
+* Asks user for a flake path/uri, and the build mode
+* To use the default values don't input anything when asked
+* The defaults are the current path on switch mode
 * It outputs a preview from the inputs
-* The user needs to type 'yes' to actually rebuild
+* User needs to confirm by entering "yes" (or nothing) to confirm
 * Any other input will return the user to the configuration menu
-
 
 [ STORE MENU ]
 
@@ -69,6 +74,32 @@ r) Reboot
 
 2) Replace identical with links
 * Runs "nix store optimise"
+
+
+[ FLAKES MENU ]
+
+1) Format files (.nix)
+* Asks for a flake path, using the current directory as the default
+* Formats all the nix files on the displayed path
+
+2) Update .lock file
+* Asks for a flake path, using the current directory as the default
+* Updates inputs of the displayed path flake
+
+
+[ GIT MENU ]
+
+1) Check diff
+* Asks for a path, using the current directory as the default
+* 'git diff' the inputted (or default) path
+
+2) Commit and push
+* Asks for a path, using the current directory as the default
+* Adds all the files of the path
+* Commits the working tree
+* Pushes commited changes to the remote branch with the same name
+
+
 EOF
 }
 
@@ -78,20 +109,22 @@ new_menu() {
 	local is_open=true
 	while [ "$is_open" = true ]
 	do
+		echo -e "\n * Path: $PWD"
 		if [ $EUID = 0 ]
 		then
-			echo -e "\n* Running with root privileges"
+			echo -e "* Running with root privileges"
 		fi
 		echo -e "\nGeneral"
 		echo -e "d) Documentation"
+		echo -e "q) Quit Menu"
+		echo -e "Q) Quit Program"
 		echo -e "r) Reboot"
-		echo -e "q) Quit"
 		echo -e "$txt"
 		IFS=' ' read -rp "Input: " -a input
 		for option in "${input[@]}"
 		do
 			case "$option" in
-				d) documentation|less;;r) systemctl reboot;;q) is_open=false;;
+				d) documentation|less;;q) is_open=false;;Q) exit 0;;r) systemctl reboot;;
 				1)$2;;2)$3;;3)$4;;4)$5;;5)$6;;6)$7;;7)$8;;8)$9;;9)${10};;10)${11};;
 				?) documentation|less;;
 				*) documentation|less
@@ -101,71 +134,71 @@ new_menu() {
 }
 
 
+confirm_execution() {
+	local loop=true
+	while $loop
+	do
+		local confirmation=""
+		read -rsN 1 confirmation
+		if [ "${confirmation,,}" = "y" ]
+		then
+			loop=false
+			$1
+		else
+			if [ "${confirmation,,}" = "n" ]
+			then
+				loop=false
+				return 1
+			else continue
+			fi
+		fi
+	done
+}
+
+
 patch_hw() {
 	if 
 		nixos-generate-config
 		sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
 		rm /etc/nixos/configuration.nix
-	then echo "Patched hardware config successfully!"
-	else echo "There was an error patching hardware config..."
+	then echo "Hardware configuration file patched!"
+	else echo "Hardware configuration file wasn't patched..."
 	fi
 }
 
 
-rebuild_config() {
+build_flake() {
 	if
-		local confirmation=""
-		echo -e "\nValid types = [test, boot, switch]\n"
-		read -rp "Type? " type
-		echo -e "\nFlake path examples"
-		echo -e "* Flake in github: github:repo/owner/flake/branch#config"
-		echo -e "* Relative directory flake: ./flake-rel-path#config\n"
-		read -rp "Flake path? " path
-		echo -e "\nConfiguration will be rebuilt with type '$type' and flake path '$path'"
-		echo -e "Type 'yes' to confirm the system rebuild\n"
-		read -rp "Confirm? " confirmation
-		if [ "$confirmation" = "yes" ]
-		then nixos-rebuild "$type" --impure --flake "$path"
-		else return
-		fi
-	then echo "Configuration has been rebuilt with type '$type' and flake path '$path'"
-	else echo "There was an error rebuilding the configuration..."
+		read -rp "Path: " path
+		path=${path:-$1}
+		read -rp "Mode: " mode
+		mode=${mode:-$2}
+		echo -e "\nBuild will use flake path [$path] and [$mode] mode. Confirm? (y/n)"
+		confirm_execution "nixos-rebuild $mode --quiet --impure --flake $path"
+	then echo "Flake configuration built! Path = \"$path\" Mode = \"$mode\""
+	else echo "Flake configuration wasn't built..."
 	fi
 }
 
 
 config_menu() {
+local default_mode="switch" default_path="."
 new_menu "
 Configuration Menu
 1) Patch hardware file
-2) Rebuild configuration
-" patch_hw rebuild_config
+2) Build flake configuration
+" patch_hw "build_flake $default_path $default_mode"
 }
 
 
-# store_menu() {
-# 	echo -e "\nHow do you want to manipulate the nix store"
-# 	echo -e "2) Collect garbage"
-# # "os.storage-optimise-partial" = "nix-collect-garbage && sudo nix-collect-garbage && nix store optimise";
-# 	echo -e "3) Collect garbage and generations\n"
-# # "os.storage-optimise-full" = "nix-collect-garbage -d && sudo nix-collect-garbage -d && nix store optimise";
-# }
-
 delete_unreachable() {
-	local include_gens=""
-	if
-		echo -e "\nType 'yes' to delete old generations along with files\n"
-		read -rp "Include generations? " include_gens
-		if [ "$include_gens" = "yes" ]
-		then nix-collect-garbage -d 
-		else nix-collect-garbage
-		fi
+	echo -e "Do you want to delete generations? (y/n)"
+	if ! confirm_execution "nix-collect-garbage -d"
 	then 
-		if [ "$include_gens" = "yes" ]
-		then echo "Deleted unreachable files and old generationss of user ID '$EUID'"
-		else echo "Deleted unreachable files of user ID '$EUID'"
-		fi
-	else echo "There was an error deleting unreachable files..."
+		nix-collect-garbage
+		echo "Deleted unreachable files of user ID '$EUID'!"
+		return 0
+	else echo "Deleted unreachable files and old generations of user ID '$EUID'!"
 	fi
 }
 
@@ -175,55 +208,83 @@ new_menu "
 Store Menu
 1) Delete unreachable files
 2) Replace identical with links
-" delete_unreachable "nix store optimise"
+" "delete_unreachable" "nix store optimise"
 }
 
 
-# flake_menu() {
-# 	echo -e "\nWhich flake directory do you want to manage?"
-# 	echo -e "How do you want to manage the flake?"
-# 	echo -e "1) Format .nix files"
-# 	echo -e "2) Update lock file\n"
-# }
+format_flake() {
+	if
+		read -rp "Path: " path
+		path=${path:-$1}
+		echo -e "\nFormat will use flake path [$path]. Confirm? (y/n)"
+		confirm_execution "nix fmt $path"
+	then echo "Flake files formatted! Path = \"$path\""
+	else echo "Flake files weren't formatted..."
+	fi
+}
+
+
+update_flake() {
+	if
+		read -rp "Path: " path
+		path=${path:-$1}
+		echo -e "\nUpdate will use path [$path]. Confirm? (y/n)"
+		confirm_execution "nix flake update --flake $path"
+	then echo "Flake .lock file updated! Path = \"$path\""
+	else echo "Flake .lock file wasn't updated..."
+	fi
+}
+
+
 flakes_menu() {
+local default_path="."
 new_menu "
-TEST Menu
-1)
-2)
-3) 
-" 1 2 3
+Flakes Menus
+1) Format files (.nix)
+2) Update .lock file
+" "format_flake $default_path" "update_flake $default_path"
 }
 
 
-# git_menu() {
-# 	echo -e "\nWhich git repository do you want to manage?"
-# 	echo -e "How do you want to manage the git repository?"
-# 	echo -e "1) See diff"
-# # "g.diff" = "nix fmt && git diff | bat";
-# 	echo -e "2) Add files"
-# 	echo -e "3) Commit changes"
-# 	echo -e "4) Push to remote\n"
-# # "g.push-after-commit" = "git add -A && nix fmt && git add -A && git commit && git push";
-# }
+check_diff(){
+	read -rp "Path: " path
+	path=${path:-$1}
+	echo -e "\nDiff will use path [$path]. Confirm? (y/n)"
+	confirm_execution "git diff $path"
+}
+
+
+commit_push(){
+	read -rp "Path: " path
+	path=${path:-$1}
+	git add -A "$path"
+	echo -e "\nCommit will use path [$path]. Confirm? (y/n)"
+	confirm_execution "git commit $path"
+	echo -e "\nPush will use path [$path]. Confirm? (y/n)"
+	confirm_execution "git push $path"
+}
+
+
 git_menu() {
+local default_path="."
 new_menu "
-TEST Menu
-1)
-2)
-3) 
-" 1 2 3
+Git Menu
+1) Check diff
+2) Commit and push
+" "check_diff $default_path" "commit_push $default_path"
 }
 
 
-# iso_menu() {
-# 	echo -e "\nHow do you want to manipulate ISO images?"
-# 	echo -e "1) Build an ISO using a flake"
-# # build-iso() {
+build_iso() {
+echo asd
 # # 	flake_uri=""
 # # 	flake_cfg=""
 # # 	nix build "$flake_uri"#nixosConfigurations."$flake_cfg".config.system.build.isoImage
-# # }
-# # burn-iso() {
+}
+
+
+burn_iso() {
+echo asd
 # #           # lsblk --noheadings --nodeps
 # #           # read "dev?Enter the removable device path without /dev (e.g. sdc): "
 # #           # read -s "confirmed?Are you sure you want to burn the iso into /dev/$dev? Confirm (RETURN) or abort (CTRL+C)..."
@@ -232,17 +293,15 @@ TEST Menu
 # #           # cp "result/iso/nixos-*.iso /dev/$dev"
 # #           # sync "/dev/$dev"
 # #           # echo "NixOS ISO burned into /dev/$dev"
-# # }
-# 	echo -e "2) Burn an ISO into a removable device\n"
-# # "tools.burn-new-minimal-iso" = "build-minimal-iso && burn-iso";
-# }
+}
+
+
 iso_menu() {
 new_menu "
-TEST Menu
-1)
-2)
-3) 
-" 1 2 3
+ISO images Menu
+1) Build from flake
+2) Burn into disk
+" build_iso burn_iso
 }
 
 
@@ -254,7 +313,7 @@ Main Menu
 3) Flakes
 4) Git
 5) ISO images
-" config_menu store_menu flakes_menu git_menu iso_menu
+" "config_menu" "store_menu" "flakes_menu" "git_menu" "iso_menu"
 }
 
 
