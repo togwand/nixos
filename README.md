@@ -8,7 +8,8 @@ My NixOS flake containing environment configurations, scripts, and more.
 
 
 #### Inputs:
- * Home-manager as a NixOS module unstable channel -> Earlier and more features, thus overall less issues than stable.
+ * Unstable channel of nixpkgs -> Earlier and more features, thus overall less issues than stable
+ * Home-manager master -> Closest one to the unstable channel
  * Nixvim -> Very modular and fairly easy to modify.
 
 
@@ -20,6 +21,9 @@ My NixOS flake containing environment configurations, scripts, and more.
 #### Formatter:
 Alejandra -> Good formatter, only a few minor issues on my end.
 
+
+##### CURRENT PRIORITY: 
+Scripts (Manager then Installer), Desktop(TODO 1-5), ISO(Reach the point of installing with the script), etc
 
 
 ## Environments
