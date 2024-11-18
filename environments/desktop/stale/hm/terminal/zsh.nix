@@ -43,8 +43,9 @@
       save = 20000;
       size = 20000;
       ignorePatterns = [
-        "cd"
         "cd *"
+        "cl"
+        "ra"
       ];
     };
     historySubstringSearch = {
