@@ -22,8 +22,11 @@ My NixOS flake containing environment configurations, scripts, and more.
 Alejandra -> Good formatter, only a few minor issues on my end.
 
 
-##### CURRENT PRIORITY: 
-Scripts (Manager then Installer), Desktop(TODO 1-5), ISO(Reach the point of installing with the script), etc
+### CURRENT PRIORITY: 
+ * Scripts: Manager -> Installer
+ * Desktop: TODO 1-5)
+ * ISO: Reach the point of installing with the script
+ * Completing TODO lists
 
 
 ## Environments
