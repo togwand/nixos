@@ -36,17 +36,16 @@ FUSE type drives (ntfs and removable devices) don't work with the NixOS hardware
 For these you can try to mount with a compatible type manually (example: $ sudo mount -t ntfs3, instead of ntfs-3g or ntfs) and then with a few commands patch the hardware configuration after any hardware-configuration generation (you can replace the default hw config gen with an alias with the patch included, or create a program itself to manage it, etc). 
 
 TODO:
-1. Remove zsh aliases that are basically shell scripts. 
-2. Tune hyprland options a little more, test a more aesthetic approach
-3. Fix the zsh history and other options (do temporary setopt commands to check their behaviours before rebuilding the system)
-4. Add vim keys for the zsh menu (check the Mental Outlaw zsh video again).
-5. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration).
-6. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc).
-7. Check vimjoyer videos to keep adding to the system
-8. Change colorscheme and theme of terminal, neovim and make the system match it
-9. Check the programming language used for my installed pkgs (remove or replace rust ones)
-10. Test different app launcher and file browser (lack of features on current ones)
-11. Keep working on hyprland desktop (check useful utilities page and awersome hyprland repo)
+1. Tune hyprland options a little more, test a more aesthetic approach
+2. Fix the zsh history and other options (do temporary setopt commands to check their behaviours before rebuilding the system)
+3. Add vim keys for the zsh menu (check the Mental Outlaw zsh video again).
+4. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration).
+5. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc).
+6. Check vimjoyer videos to keep adding to the system
+7. Change colorscheme and theme of terminal, neovim and make the system match it
+8. Check the programming language used for my installed pkgs (remove or replace rust ones)
+9. Test different app launcher and file browser (lack of features on current ones)
+10. Keep working on hyprland desktop (check useful utilities page and awersome hyprland repo)
 
 
 ### ISO
