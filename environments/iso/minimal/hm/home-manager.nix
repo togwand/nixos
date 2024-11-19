@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  nxvim,
+  ...
+}: let
   installer-script = pkgs.writeShellApplication {
     name = "togwand-installer";
     text = "${builtins.readFile ../../../../scripts/bash/installer.bash}";
@@ -13,6 +17,7 @@ in {
     users = {
       "nixos" = {
         imports = [
+          nxvim.homeManagerModules.nixvim
           ./zsh.nix
           ./ranger.nix
           ./nxvim/nixvim.nix

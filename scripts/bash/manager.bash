@@ -66,6 +66,7 @@ r) Reboot
 * User needs to confirm by entering "yes" (or nothing) to confirm
 * Any other input will return the user to the configuration menu
 
+
 [ STORE MENU ]
 
 1) Delete unreachable files - WORKS DIFFERENTLY WITH AND WITHOUT ROOT PERMISSIONS
@@ -73,31 +74,46 @@ r) Reboot
 * This option reads the current user profile, and deletes the files of that profile
 
 2) Replace identical with links
-* Runs "nix store optimise"
+* 'nix store optimise'
 
 
 [ FLAKES MENU ]
 
 1) Format files (.nix)
-* Asks for a flake path, using the current directory as the default
-* Formats all the nix files on the displayed path
+* 'nix fmt' on the current directory
 
 2) Update .lock file
-* Asks for a flake path, using the current directory as the default
-* Updates inputs of the displayed path flake
+* 'nix flake update' on the current directory
 
 
 [ GIT MENU ]
 
 1) Check diff
-* Asks for a path, using the current directory as the default
-* 'git diff' the inputted (or default) path
+* 'git diff' on the current directory
 
-2) Commit and push
-* Asks for a path, using the current directory as the default
-* Adds all the files of the path
-* Commits the working tree
-* Pushes commited changes to the remote branch with the same name
+2) Add
+* 'git add' on the current directory
+
+3) Commit
+* 'git add -A' on the current directory
+* 'git commit' on the current directory
+
+4) Push
+* 'git push' on the current directory
+
+
+[ ISO IMAGES MENU ]
+
+1) Build from flake
+* Asks user for a flake path and config name. Uses defaults without input
+* Displays preview of the path and asks for confirmation
+* Builds an iso with nix build into the current path (result directory)
+
+2) Burn into disk
+* Lists devices to help the user input one
+* Asks for device without /dev/ and for an iso path
+* Tests the device validity as a disk before continuing
+* Prepares the iso the copied into the device, copies and syncs afterwards
 
 
 EOF
@@ -109,7 +125,7 @@ new_menu() {
 	local is_open=true
 	while [ "$is_open" = true ]
 	do
-		echo -e "\n * Path: $PWD"
+		echo -e "\n* Path: $PWD"
 		if [ $EUID = 0 ]
 		then
 			echo -e "* Running with root privileges"
@@ -148,7 +164,6 @@ confirm_execution() {
 			if [ "${confirmation,,}" = "n" ]
 			then
 				loop=false
-				return 1
 			else continue
 			fi
 		fi
@@ -157,32 +172,24 @@ confirm_execution() {
 
 
 patch_hw() {
-	if 
-		nixos-generate-config
-		sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
-		rm /etc/nixos/configuration.nix
-	then echo "Hardware configuration file patched!"
-	else echo "Hardware configuration file wasn't patched..."
-	fi
+	nixos-generate-config
+	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
+	rm /etc/nixos/configuration.nix
 }
 
 
 build_flake() {
-	if
-		read -rp "Path: " path
-		path=${path:-$1}
-		read -rp "Mode: " mode
-		mode=${mode:-$2}
-		echo -e "\nBuild will use flake path [$path] and [$mode] mode. Confirm? (y/n)"
-		confirm_execution "nixos-rebuild $mode --quiet --impure --flake $path"
-	then echo "Flake configuration built! Path = \"$path\" Mode = \"$mode\""
-	else echo "Flake configuration wasn't built..."
-	fi
+	read -rp "Path: " path
+	path=${path:-$1}
+	read -rp "Mode: " mode
+	mode=${mode:-$2}
+	echo -e "\nBuild will use flake path [$path] and [$mode] mode. Confirm? (y/n)"
+	confirm_execution "nixos-rebuild $mode --quiet --impure --flake $path"
 }
 
 
 config_menu() {
-local default_mode="switch" default_path="."
+local default_path="." default_mode="switch"
 new_menu "
 Configuration Menu
 1) Patch hardware file
@@ -194,11 +201,7 @@ Configuration Menu
 delete_unreachable() {
 	echo -e "Do you want to delete generations? (y/n)"
 	if ! confirm_execution "nix-collect-garbage -d"
-	then 
-		nix-collect-garbage
-		echo "Deleted unreachable files of user ID '$EUID'!"
-		return 0
-	else echo "Deleted unreachable files and old generations of user ID '$EUID'!"
+	then nix-collect-garbage
 	fi
 }
 
@@ -212,96 +215,81 @@ Store Menu
 }
 
 
-format_flake() {
-	if
-		read -rp "Path: " path
-		path=${path:-$1}
-		echo -e "\nFormat will use flake path [$path]. Confirm? (y/n)"
-		confirm_execution "nix fmt $path"
-	then echo "Flake files formatted! Path = \"$path\""
-	else echo "Flake files weren't formatted..."
-	fi
-}
-
-
-update_flake() {
-	if
-		read -rp "Path: " path
-		path=${path:-$1}
-		echo -e "\nUpdate will use path [$path]. Confirm? (y/n)"
-		confirm_execution "nix flake update --flake $path"
-	then echo "Flake .lock file updated! Path = \"$path\""
-	else echo "Flake .lock file wasn't updated..."
-	fi
-}
-
-
 flakes_menu() {
-local default_path="."
 new_menu "
 Flakes Menus
 1) Format files (.nix)
 2) Update .lock file
-" "format_flake $default_path" "update_flake $default_path"
-}
-
-
-check_diff(){
-	read -rp "Path: " path
-	path=${path:-$1}
-	echo -e "\nDiff will use path [$path]. Confirm? (y/n)"
-	confirm_execution "git diff $path"
-}
-
-
-commit_push(){
-	read -rp "Path: " path
-	path=${path:-$1}
-	git add -A "$path"
-	echo -e "\nCommit will use path [$path]. Confirm? (y/n)"
-	confirm_execution "git commit $path"
-	echo -e "\nPush will use path [$path]. Confirm? (y/n)"
-	confirm_execution "git push $path"
+" "nix fmt" "nix flake update"
 }
 
 
 git_menu() {
-local default_path="."
 new_menu "
 Git Menu
 1) Check diff
-2) Commit and push
-" "check_diff $default_path" "commit_push $default_path"
+2) Add
+3) Commit
+4) Push
+" "git diff" "git add -A" "git commit" "git push"
 }
 
 
 build_iso() {
-echo asd
-# # 	flake_uri=""
-# # 	flake_cfg=""
-# # 	nix build "$flake_uri"#nixosConfigurations."$flake_cfg".config.system.build.isoImage
+	read -rp "Path: " path
+	path=${path:-$1}
+	read -rp "Config: " config
+	config=${config:-$2}
+	echo -e "\nBuild will use flake path [$path] and [$config] config. Confirm? (y/n)"
+	confirm_execution "nix build $path#nixosConfigurations.$config.config.system.build.isoImage"
+}
+
+
+list_devices() {
+	echo -e "\nDISKS AND PARTITIONS"
+	lsblk --noheadings
+}
+
+
+test_device() {
+	if test -b /dev/"$1"
+	then
+		if lsblk -ndo type /dev/"$1" | grep -qF part
+		then
+			echo -e "\nThis is a partition, not a disk"
+			return
+		fi
+	else
+		echo -e "\nThis is not a valid storage device"
+		return
+	fi
 }
 
 
 burn_iso() {
-echo asd
-# #           # lsblk --noheadings --nodeps
-# #           # read "dev?Enter the removable device path without /dev (e.g. sdc): "
-# #           # read -s "confirmed?Are you sure you want to burn the iso into /dev/$dev? Confirm (RETURN) or abort (CTRL+C)..."
-# #           # echo
-# #           # wipefs "/dev/$dev"
-# #           # cp "result/iso/nixos-*.iso /dev/$dev"
-# #           # sync "/dev/$dev"
-# #           # echo "NixOS ISO burned into /dev/$dev"
+	list_devices
+	read -rp "Device: " burnt
+	read -rp "ISO path: " path
+	path=${path:-$1}
+	if test_device "$burnt"
+	then
+		wipefs /dev/"$burnt"
+		echo "Are you sure you want to burn the iso on $path into /dev/$burnt? (y/n)"
+		confirm_execution "cp $path /dev/$burnt"
+		sync "/dev/$burnt"
+	else
+		return
+	fi
 }
 
 
 iso_menu() {
+local default_path="." default_config="minimal" default_iso_path="result/iso/nixos-*.iso"
 new_menu "
 ISO images Menu
 1) Build from flake
 2) Burn into disk
-" build_iso burn_iso
+" "build_iso $default_path $default_config" "burn_iso $default_iso_path"
 }
 
 
