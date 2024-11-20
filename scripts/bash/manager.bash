@@ -6,8 +6,8 @@ to_menu() {
 read_args() {
 	read -rp "$1 " arguments
 	if [ "$arguments" = '' ]
-	then $1 || true
-	else $1 "$arguments" || true;
+	then $1
+	else $1 "$arguments"
 	fi
 	
 }
@@ -193,7 +193,7 @@ o4() {
 	case $menu in
 		main) to_menu other;;
 		flake) build_iso;;
-		git) git push;;
+		git) read_args git push;;
 	esac
 }
 
