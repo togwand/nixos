@@ -40,8 +40,8 @@
     history = {
       path = "$ZDOTDIR/.zsh_history";
       share = true;
-      save = 20000;
-      size = 20000;
+      save = 1000;
+      size = 1000;
       ignorePatterns = [
         "cd *"
         "cl"
@@ -49,30 +49,32 @@
       ];
     };
     historySubstringSearch = {
-      enable = false;
+      enable = true;
     };
     initExtra = ''
-      # Default options to false
-      unsetopt HIST_FCNTL_LOCK
-      unsetopt HIST_IGNORE_DUPS
-      unsetopt HIST_IGNORE_SPACE
-      unsetopt SHARE_HISTORY
-      # Active options
-      setopt autolist
-      setopt listambiguous
-      setopt listpacked
-      setopt listrowsfirst
-      setopt globdots
-      setopt histexpiredupsfirst
-      setopt histfcntllock
-      setopt histfindnodups
-      setopt histignorespace
-      setopt histreduceblanks
-      setopt incappendhistory
-      # Custom prompts
-      export PROMPT='%n:'
-      export RPROMPT='%0~ %t'
-	  export MANPAGER='nvim +Man!'
+         ## Default options to false
+         # unsetopt HIST_FCNTL_LOCK
+         # unsetopt HIST_IGNORE_DUPS
+         # unsetopt HIST_IGNORE_SPACE
+         # unsetopt SHARE_HISTORY
+
+      ## Active options
+         # setopt autolist
+         # setopt listambiguous
+         # setopt listpacked
+         # setopt listrowsfirst
+         # setopt globdots
+         # setopt histexpiredupsfirst
+         # setopt histfcntllock
+         # setopt histfindnodups
+         # setopt histignorespace
+         # setopt histreduceblanks
+         # setopt incappendhistory
+
+      ## Custom prompts
+         export PROMPT='%n:'
+         export RPROMPT='%0~ %t'
+      export MANPAGER='nvim +Man!'
     '';
     shellAliases = {
       ".." = "cd ..";

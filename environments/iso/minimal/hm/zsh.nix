@@ -78,10 +78,10 @@
       "ra" = "ranger";
       "re" = "systemctl reboot";
       "off" = "systemctl poweroff";
-      "installer" = "togwand-installer";
-      "install" = "togwand-installer";
-      "installation" = "togwand-installer";
-      "script" = "togwand-installer";
+      "installer" = "nixos-installer";
+      "install" = "nixos-installer";
+      "installation" = "nixos-installer";
+      "script" = "nixos-installer";
     };
     syntaxHighlighting = {
       enable = true;

@@ -9,6 +9,7 @@
     "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     ./hm/home-manager.nix
     hm.nixosModules.home-manager
+    ../../../scripts/overlay.nix
   ];
 
   boot = {
@@ -28,11 +29,10 @@
     getty = {
       greetingLine = "My minimal NixOS installation environment";
       helpLine = lib.mkForce ''
-              Applications available on this installation environment:
-        Installer script: togwand-installer (aliases: installer, install, installation, script)
-        Script packages: disko
+        Applications available on this installation environment:
+        Installer script: nixos-installer (aliases: installer, install, installation, script)
         Configured: nixvim, zsh, ranger
-        Default: git, bat
+        Default: git, bat, disko
       '';
     };
     xserver.xkb = {

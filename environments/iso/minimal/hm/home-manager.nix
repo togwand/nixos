@@ -2,15 +2,7 @@
   pkgs,
   nxvim,
   ...
-}: let
-  installer-script = pkgs.writeShellApplication {
-    name = "togwand-installer";
-    text = "${builtins.readFile ../../../../scripts/bash/installer.bash}";
-    runtimeInputs = with pkgs; [
-      disko
-    ];
-  };
-in {
+}: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -30,6 +22,7 @@ in {
         home = {
           packages = with pkgs; [
             installer-script
+            disko
           ];
           file = {};
           username = "nixos";

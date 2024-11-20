@@ -3,13 +3,28 @@ to_menu() {
 	menu=$1
 }
 
-read_args() {
-	read -rp "$1 " arguments
-	if [ "$arguments" = '' ]
-	then $1 
-	else $1 "$arguments"
+cmd_args() {
+	local cmd=$1 defaults=$2
+	read -rep "$cmd " -i "$defaults" arguments
+	local full="$cmd $arguments"
+	if [ "${arguments}" = "" ]
+	then $cmd
+	else $full
 	fi
-	
+}
+
+nicer_bind() {
+	local alias="$1"
+	case $1 in
+		o1) alias="#1";;o2) alias="#2";;o3) alias="#3";;
+		o4) alias="#4";;o5) alias="#5";;o6) alias="#6";;
+		o7) alias="#7";;
+		change_directory) alias="directory change";;
+	esac
+	if $1
+	then echo "$alias ended, next!"
+	else echo "$alias ended with an error"
+	fi
 }
 
 help() {
@@ -19,6 +34,7 @@ DESCRIPTION
 
 USAGE
  Press a key to execute the displayed menu option (numbers) or a global keybind (letters)
+ You can queue options before the current one ends
 
 GLOBAL KEYBINDINGS
  c, C
@@ -33,7 +49,7 @@ EOF
 
 status() {
 cat << EOF
-MANAGER MENU
+SHELL MANAGER
  Press 'h' for help
 
 STATUS
@@ -86,6 +102,9 @@ GIT MENU
  2) Add
  3) Commit
  4) Push
+ 5) Switch
+ 6) Merge
+ 7) Free input
 EOF
 }
 
@@ -118,21 +137,20 @@ test_device() {
 	then
 		if lsblk -ndo type /dev/"$1" | grep -qF part
 		then
-			echo -e "\nThis is a partition, not a disk"
+			echo "this is a partition, not a disk"
 			return
 		fi
 	else
-		echo -e "\nThis is not a valid storage device"
+		echo "this is not a valid storage device"
 		return
 	fi
 }
 
 burn_iso() {
-	echo -e "\nDISKS AND PARTITIONS"
+	echo "disks and partitions"
 	lsblk --noheadings
-	read -rp "Device: " burnt
-	read -rp "ISO path: " path
-	path=${path:-result/iso/nixos-*.iso}
+	read -re -p "device: " burnt
+	read -rei result/iso/nixos-*.iso -p "path to iso: " path
 	if test_device "$burnt"
 	then
 		wipefs /dev/"$burnt"
@@ -145,8 +163,8 @@ burn_iso() {
 o1() {
 	case $menu in
 		main) to_menu system;;
-		system) read_args nix-collect-garbage;;
-		flake) nix fmt update;;
+		system) cmd_args "nix-collect-garbage" "-d --quiet";;
+		flake) nix fmt;;
 		git) git diff|bat;;
 		other) burn_iso;;
 	esac
@@ -157,7 +175,7 @@ o2() {
 		main) to_menu flake;;
 		system) nix store optimise;;
 		flake) nix flake update;;
-		git) git add -A;;
+		git) cmd_args "git add" "-A";;
 	esac
 }
 
@@ -168,11 +186,9 @@ patch_hw() {
 }
 
 build_config() {
-	read -rp "mode: " mode
-	mode=${mode:-switch}
-	read -rp "name: " name
-	name=${name:-""}
-	nixos-rebuild "$mode" --quiet --impure --flake ."$name"
+	read -rei "switch" -p "mode: " mode
+	read -rei "$HOSTNAME" -p "name: " name
+	nixos-rebuild "$mode" --quiet --impure --flake ."#$name"
 }
 
 o3() {
@@ -180,13 +196,12 @@ o3() {
 		main) to_menu git;;
 		system) patch_hw;;
 		flake) build_config;;
-		git) git commit;;
+		git) cmd_args "git commit" "";;
 	esac
 }
 
 build_iso() {
-	read -rp "name: " name
-	name=${name:minimal}
+	read -rei "minimal" -p "name: " name
 	nix build .#nixosConfigurations."$name".config.system.build.isoImage
 }
 
@@ -194,15 +209,39 @@ o4() {
 	case $menu in
 		main) to_menu other;;
 		flake) build_iso;;
-		git) read_args "git push";;
+		git) cmd_args "git push" "";;
+	esac
+}
+
+
+git_swap() {
+	git branch
+	cmd_args "git switch" ""
+}
+
+o5() {
+	case $menu in
+		git) git_swap;;
+	esac
+}
+
+o6() {
+	case $menu in
+		git) cmd_args "git merge" "";;
+	esac
+}
+
+o7() {
+	case $menu in
+		git) cmd_args "git" "";;
 	esac
 }
 
 change_directory() {
-	echo -e "\nDirectories here:"
+	echo "directories here:"
 	ls --group-directories-first -a1d -- */ 2> /dev/null
-	echo
-	read_args cd
+	cmd_args "cd" ".."
+	refresh=true
 }
 
 quit() {
@@ -220,12 +259,11 @@ do
 	show_interface
 	read -rsn 1 key
 	case $key in
-		1) o1;;
-		2) o2;;
-		3) o3;;
-		4) o4;;
-		c|C) change_directory;;
+		1) nicer_bind o1;;2) nicer_bind o2;;3) nicer_bind o3;;
+		4) nicer_bind o4;;5) nicer_bind o5;;6) nicer_bind o6;;
+		7) nicer_bind o7;;
+		c|C) nicer_bind change_directory;;
 		h|H) help|less;;
-		q|Q) quit;;
+		q|Q) clear && quit;;
 	esac
 done

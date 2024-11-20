@@ -12,10 +12,10 @@
     globals = {
       mapleader = " ";
     };
-	clipboard = {
-		register = "unnamedplus";
-		providers.wl-copy.enable = true;
-	};
+    clipboard = {
+      register = "unnamedplus";
+      providers.wl-copy.enable = true;
+    };
     opts = {
       number = true;
       relativenumber = true;

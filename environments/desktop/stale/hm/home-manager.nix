@@ -3,14 +3,7 @@
   nxvim,
   user,
   ...
-}: let
-  manager = pkgs.writeShellApplication {
-    name = "togwand-manager";
-    text = "${builtins.readFile ../../../../scripts/bash/manager.bash}";
-    # runtimeInputs = with pkgs; [
-    # ];
-  };
-in {
+}: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -35,7 +28,7 @@ in {
         programs.home-manager.enable = true;
         home = {
           packages = with pkgs; [
-            manager
+            shell-manager
             wl-clipboard
             rclone
             pavucontrol

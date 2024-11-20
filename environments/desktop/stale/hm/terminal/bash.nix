@@ -5,12 +5,11 @@
     historyControl = ["ignoredups"];
     shellAliases = {};
     shellOptions = [
-      "checkjobs"
+      "histappend"
       "checkwinsize"
-      "dotglob"
       "extglob"
       "globstar"
-      "histappend"
+      "dotglob"
     ];
   };
 }

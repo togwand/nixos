@@ -10,6 +10,7 @@
     /etc/nixos/hardware-configuration.nix
     ./hm/home-manager.nix
     hm.nixosModules.home-manager
+    ../../../scripts/overlay.nix
   ];
 
   hardware = {
