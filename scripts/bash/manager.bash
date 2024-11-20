@@ -193,7 +193,7 @@ o4() {
 	case $menu in
 		main) to_menu other;;
 		flake) build_iso;;
-		git) read_args "git push";;
+		git) git push;;
 	esac
 }
 
