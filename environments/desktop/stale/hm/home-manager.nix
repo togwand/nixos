@@ -36,6 +36,7 @@ in {
         home = {
           packages = with pkgs; [
             manager
+            wl-clipboard
             rclone
             pavucontrol
             discord

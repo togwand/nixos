@@ -12,6 +12,10 @@
     globals = {
       mapleader = " ";
     };
+	clipboard = {
+		register = "unnamedplus";
+		providers.wl-copy.enable = true;
+	};
     opts = {
       number = true;
       relativenumber = true;
@@ -21,7 +25,6 @@
       expandtab = false;
       termguicolors = true;
       updatetime = 300;
-      clipboard = "unnamedplus";
       mouse = "a";
     };
     colorschemes = {

@@ -1,255 +1,116 @@
-bin_name="${0##*/}"
+to_menu() {
+	refresh=true
+	menu=$1
+}
 
+read_args() {
+	read -rp "$1 " arguments
+	if [ "$arguments" = '' ]
+	then $1 || true
+	else $1 "$arguments" || true;
+	fi
+	
+}
 
-documentation() {
+help() {
 cat << EOF
-[ DOCUMENTATION ]
-* Inputting anything besides nothing or an option gets you here
-* To quickly abort the program or any running option just do 'CTRL+C'
+DESCRIPTION
+ My program for fast execution of shell commands and system management
 
-Instructions
-* Input an array of separated options and press enter to confirm execution order
-* Example: 2 1 3 q
+USAGE
+ Press a key to execute the displayed menu option (numbers) or a global keybind (letters)
 
-Troubleshooting
-* Potential issues listed here are documented per option
-* Some options will need elevated permissions (i.e. sudo $bin_name)
-* Other options may work one way or another depending on the permissions
-* If running with root privileges, a message will appear above the general options
-
-
-[ GENERAL ]
-
-d) Documentation
-* Opens this documentation with the 'less' pager
-
-q) Quit Menu
-* Exits the active menu (or the program if it's the main menu)
-
-Q) Quit Program
-* Exits the program successfully using 'exit 0'
-
-r) Reboot
-* Restarts the computer
-
-
-[ MAIN MENU ]
-
-1) Configuration
-* Manage the current system NixOS configuration
-
-2) Nix store
-* Manage the current system nix store
-
-3) Flakes
-* Manage a local flake directory
-
-4) Git
-* Manage a local git repository
-
-5) ISO images
-* Options for easy building and burning of ISO images
-
-
-[ CONFIGURATION MENU ]
-
-1) Patch hardware file - REQUIRES ELEVATED PERMISSIONS
-* Generates NixOS hardware configuration
-* Patches the write permissions of UID 1000 for mounted ntfs3 partitions
-* Discards configuration.nix
-
-2) Build flake configuration - REQUIRES ELEVATED PERMISSIONS
-* Asks user for a flake path/uri, and the build mode
-* To use the default values don't input anything when asked
-* The defaults are the current path on switch mode
-* It outputs a preview from the inputs
-* User needs to confirm by entering "yes" (or nothing) to confirm
-* Any other input will return the user to the configuration menu
-
-
-[ STORE MENU ]
-
-1) Delete unreachable files - WORKS DIFFERENTLY WITH AND WITHOUT ROOT PERMISSIONS
-* Prompts to delete old generations along garbage files, or just the files
-* This option reads the current user profile, and deletes the files of that profile
-
-2) Replace identical with links
-* 'nix store optimise'
-
-
-[ FLAKES MENU ]
-
-1) Format files (.nix)
-* 'nix fmt' on the current directory
-
-2) Update .lock file
-* 'nix flake update' on the current directory
-
-
-[ GIT MENU ]
-
-1) Check diff
-* 'git diff' on the current directory
-
-2) Add
-* 'git add' on the current directory
-
-3) Commit
-* 'git add -A' on the current directory
-* 'git commit' on the current directory
-
-4) Push
-* 'git push' on the current directory
-
-
-[ ISO IMAGES MENU ]
-
-1) Build from flake
-* Asks user for a flake path and config name. Uses defaults without input
-* Displays preview of the path and asks for confirmation
-* Builds an iso with nix build into the current path (result directory)
-
-2) Burn into disk
-* Lists devices to help the user input one
-* Asks for device without /dev/ and for an iso path
-* Tests the device validity as a disk before continuing
-* Prepares the iso the copied into the device, copies and syncs afterwards
-
-
+GLOBAL KEYBINDINGS
+ c, C
+ 		Change directories inside this program
+ h, H
+ 		Read about the program usage in a pager screen
+ q, Q
+ 		Go back to main menu.
+		If already on main menu, exit the program instead.
 EOF
 }
 
+status() {
+cat << EOF
+MANAGER MENU
+ Press 'h' for help
 
-new_menu() {
-	local txt=$1
-	local is_open=true
-	while [ "$is_open" = true ]
-	do
-		echo -e "\n* Path: $PWD"
-		if [ $EUID = 0 ]
-		then
-			echo -e "* Running with root privileges"
-		fi
-		echo -e "\nGeneral"
-		echo -e "d) Documentation"
-		echo -e "q) Quit Menu"
-		echo -e "Q) Quit Program"
-		echo -e "r) Reboot"
-		echo -e "$txt"
-		IFS=' ' read -rp "Input: " -a input
-		for option in "${input[@]}"
-		do
-			case "$option" in
-				d) documentation|less;;q) is_open=false;;Q) exit 0;;r) systemctl reboot;;
-				1)$2;;2)$3;;3)$4;;4)$5;;5)$6;;6)$7;;7)$8;;8)$9;;9)${10};;10)${11};;
-				?) documentation|less;;
-				*) documentation|less
-			esac
-		done
-	done
+STATUS
+ Location: $PWD
+EOF
+if [ $EUID = 0 ]
+then cat << EOF
+ Running as root
+EOF
+fi
 }
 
+main_menu() {
+cat << EOF
 
-confirm_execution() {
-	local loop=true
-	while $loop
-	do
-		local confirmation=""
-		read -rsN 1 confirmation
-		if [ "${confirmation,,}" = "y" ]
-		then
-			loop=false
-			$1
-		else
-			if [ "${confirmation,,}" = "n" ]
-			then
-				loop=false
-			else continue
-			fi
-		fi
-	done
+MAIN MENU
+ 1) System
+ 2) Flake
+ 3) Git
+EOF
 }
 
+system_menu() {
+cat << EOF
 
-patch_hw() {
-	nixos-generate-config
-	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
-	rm /etc/nixos/configuration.nix
+SYSTEM MENU
+ 1) Collect garbage
+ 2) Optimise store
+ 3) Patch hardware configuration
+EOF
 }
 
+flake_menu() {
+cat << EOF
 
-build_flake() {
-	read -rp "Path: " path
-	path=${path:-$1}
-	read -rp "Mode: " mode
-	mode=${mode:-$2}
-	echo -e "\nBuild will use flake path [$path] and [$mode] mode. Confirm? (y/n)"
-	confirm_execution "nixos-rebuild $mode --quiet --impure --flake $path"
+FLAKE MENU
+ 1) Format
+ 2) Update
+ 3) Build NixOS config
+ 4) Build ISO
+EOF
 }
-
-
-config_menu() {
-local default_path="." default_mode="switch"
-new_menu "
-Configuration Menu
-1) Patch hardware file
-2) Build flake configuration
-" patch_hw "build_flake $default_path $default_mode"
-}
-
-
-delete_unreachable() {
-	echo -e "Do you want to delete generations? (y/n)"
-	if ! confirm_execution "nix-collect-garbage -d"
-	then nix-collect-garbage
-	fi
-}
-
-
-store_menu() {
-new_menu "
-Store Menu
-1) Delete unreachable files
-2) Replace identical with links
-" "delete_unreachable" "nix store optimise"
-}
-
-
-flakes_menu() {
-new_menu "
-Flakes Menus
-1) Format files (.nix)
-2) Update .lock file
-" "nix fmt" "nix flake update"
-}
-
 
 git_menu() {
-new_menu "
-Git Menu
-1) Check diff
-2) Add
-3) Commit
-4) Push
-" "git diff" "git add -A" "git commit" "git push"
+cat << EOF
+
+GIT MENU
+ 1) Diff
+ 2) Add
+ 3) Commit
+ 4) Push
+EOF
 }
 
+other_menu() {
+cat << EOF
 
-build_iso() {
-	read -rp "Path: " path
-	path=${path:-$1}
-	read -rp "Config: " config
-	config=${config:-$2}
-	echo -e "\nBuild will use flake path [$path] and [$config] config. Confirm? (y/n)"
-	confirm_execution "nix build $path#nixosConfigurations.$config.config.system.build.isoImage"
+OTHER MENU
+ 1) Burn iso image
+EOF
 }
 
-
-list_devices() {
-	echo -e "\nDISKS AND PARTITIONS"
-	lsblk --noheadings
+show_interface() {
+	if $refresh
+	then 
+		refresh=false
+		clear
+		status
+		case $menu in
+			main) main_menu;;
+			system) system_menu;;
+			flake) flake_menu;;
+			git) git_menu;;
+			other) other_menu;;
+		esac
+	fi
 }
-
 
 test_device() {
 	if test -b /dev/"$1"
@@ -265,45 +126,104 @@ test_device() {
 	fi
 }
 
-
 burn_iso() {
-	list_devices
+	echo -e "\nDISKS AND PARTITIONS"
+	lsblk --noheadings
 	read -rp "Device: " burnt
 	read -rp "ISO path: " path
-	path=${path:-$1}
+	path=${path:-result/iso/nixos-*.iso}
 	if test_device "$burnt"
 	then
 		wipefs /dev/"$burnt"
-		echo "Are you sure you want to burn the iso on $path into /dev/$burnt? (y/n)"
-		confirm_execution "cp $path /dev/$burnt"
+		cp "$path" /dev/"$burnt"
 		sync "/dev/$burnt"
-	else
-		return
+	else return
 	fi
 }
 
-
-iso_menu() {
-local default_path="." default_config="minimal" default_iso_path="result/iso/nixos-*.iso"
-new_menu "
-ISO images Menu
-1) Build from flake
-2) Burn into disk
-" "build_iso $default_path $default_config" "burn_iso $default_iso_path"
+o1() {
+	case $menu in
+		main) to_menu system;;
+		system) read_args nix-collect-garbage;;
+		flake) nix fmt update;;
+		git) git diff|bat;;
+		other) burn_iso;;
+	esac
 }
 
-
-main_menu() {
-new_menu "
-Main Menu
-1) Configuration
-2) Nix store
-3) Flakes
-4) Git
-5) ISO images
-" "config_menu" "store_menu" "flakes_menu" "git_menu" "iso_menu"
+o2() {
+	case $menu in
+		main) to_menu flake;;
+		system) nix store optimise;;
+		flake) nix flake update;;
+		git) git add -A;;
+	esac
 }
 
+patch_hw() {
+	nixos-generate-config
+	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
+	rm /etc/nixos/configuration.nix
+}
 
-# SCRIPT START POINT
-main_menu
+build_config() {
+	read -rp "mode: " mode
+	mode=${mode:-switch}
+	read -rp "name: " name
+	name=${name:-""}
+	nixos-rebuild "$mode" --quiet --impure --flake ."$name"
+}
+
+o3() {
+	case $menu in
+		main) to_menu git;;
+		system) patch_hw;;
+		flake) build_config;;
+		git) git commit;;
+	esac
+}
+
+build_iso() {
+	read -rp "name: " name
+	name=${name:minimal}
+	nix build .#nixosConfigurations."$name".config.system.build.isoImage
+}
+
+o4() {
+	case $menu in
+		main) to_menu other;;
+		flake) build_iso;;
+		git) read_args git push;;
+	esac
+}
+
+change_directory() {
+	echo -e "\nDirectories here:"
+	ls --group-directories-first -a1d -- */ 2> /dev/null
+	echo
+	read_args cd
+}
+
+quit() {
+	if [ "$menu" = "main" ]
+	then exit
+	else
+		to_menu main
+	fi
+}
+
+menu="main"
+refresh=true
+while true
+do
+	show_interface
+	read -rsn 1 key
+	case $key in
+		1) o1;;
+		2) o2;;
+		3) o3;;
+		c|C) change_directory;;
+		h|H) help|less;;
+		q|Q) quit;;
+	esac
+done

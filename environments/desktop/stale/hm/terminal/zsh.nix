@@ -72,6 +72,7 @@
       # Custom prompts
       export PROMPT='%n:'
       export RPROMPT='%0~ %t'
+	  export MANPAGER='nvim +Man!'
     '';
     shellAliases = {
       ".." = "cd ..";
