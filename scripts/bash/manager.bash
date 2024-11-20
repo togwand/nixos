@@ -6,7 +6,7 @@ to_menu() {
 read_args() {
 	read -rp "$1 " arguments
 	if [ "$arguments" = '' ]
-	then $1
+	then $1 
 	else $1 "$arguments"
 	fi
 	
@@ -222,6 +222,7 @@ do
 		1) o1;;
 		2) o2;;
 		3) o3;;
+		4) o4;;
 		c|C) change_directory;;
 		h|H) help|less;;
 		q|Q) quit;;
