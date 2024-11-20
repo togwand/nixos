@@ -53,6 +53,7 @@ MAIN MENU
  1) System
  2) Flake
  3) Git
+ 4) Other
 EOF
 }
 
