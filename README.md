@@ -70,14 +70,14 @@ Setup a second beefier environment which is more comfortable for navigation (may
 5. Available on virtually all Linux systems.
 
 #### Manager
-A simple and interactive NixOS shell manager which is packaged into my desktop environments
+A simple interactive NixOS shell manager which is packaged into my desktop environments
 
 TODO:
 1. Upgrade help section and add manpage/documentation
 2. Make prettier somehow
 
 #### Installer
-A WIP fast insteractive NixOS installer which is packaged into my ISO environments
+A WIP fast and interactive NixOS installer which is packaged into my ISO environments
 
 TODO:
 1. Create a partition table (lsblk + read + fdisk or similar)
