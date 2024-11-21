@@ -3,7 +3,8 @@
   nxvim,
   user,
   ...
-}: {
+}:
+{
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -34,7 +35,7 @@
             pavucontrol
             discord
           ];
-          file = {};
+          file = { };
           username = user;
           homeDirectory = "/home/${user}";
           stateVersion = "24.05";

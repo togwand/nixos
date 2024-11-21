@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.mangohud = {
     enableSessionWide = false;
     enable = true;

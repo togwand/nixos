@@ -1,51 +1,149 @@
-list-devices() {
-	echo -e "\nDISKS AND PARTITIONS"
-	lsblk --noheadings
+help() {
+cat << EOF
+DESCRIPTION
+ My program for NixOS installation
+
+USAGE
+ Press a key to execute a keybind or the displayed menu option
+
+KEYBINDINGS
+ h, H
+ 		Read about the program usage in a pager screen
+ m, M
+ 		Print a manual installation guide and exit
+ q, Q
+		Exit the program
+
+KNOWN ISSUES
+ You can "queue" options before the current one ends
+EOF
 }
 
-confirmation_info() {
-	echo -e "Press 'y' to confirm, or any other key to cancel"
+manual_guide() {
+clear
+cat << EOF
+MANUAL INSTALLATION
+ Create partition table on disk (e.g. $ sudo cgdisk /dev/sda), no swap partition needed if swap file in custom config
+ Format partitions (e.g. mkfs.* ...)
+ Mount formatted partitions
+ $ sudo nixos-generate-config --root /mnt 
+ $ sudo cp /mnt/etc/nixos /etc/nixos
+ $ sudo nixos-install --impure --flake your_flake_uri#your_config_name
+ $ sudo nixos-enter --root /mnt -c 'passwd your_user_name'
+EOF
+exit
 }
 
-continue_or_exit() {
-	echo -e "\nDo you want to continue?"
-	confirmation_info
-	read -r -s -n 1 response
-	response=${response,,}
-	if [[ "$response" =~ ^(y)$ ]]
-	then return
-	else exit 1
-	fi
+status() {
+cat << EOF
+NIXOS INSTALLER
+ Press 'h' for help
+
+STATUS
+ Location: $PWD
+EOF
 }
 
-confirmation=false
-while [ "$confirmation" = false ]
-do
-	list-devices 
-	echo -e "\nWhich disk do you want to install NixOS in? (CTRL+C to abort)"
-	read -r new_nixos
-	if test -b /dev/"$new_nixos"
+menu() {
+cat << EOF
+
+MENU
+ 1) Clone a repository
+ 2) Guided installation
+ 3) Flake installation (disko)
+EOF
+}
+
+clone_repo() {
+	read -rei "https://github.com/togwand/nixos-config" -p "url to clone: " cloned_repo
+	read -rei "/home/clones/cloned_repo" -p "clone to: " destination
+	git clone "$cloned_repo" "$destination"
+}
+
+test_device() {
+	if test -b /dev/"$1"
 	then
-		if lsblk -ndo type /dev/"$new_nixos" | grep -qF part
-		then
-			echo -e "\nThis is a partition, not a disk"
-			continue
+		if lsblk -ndo type /dev/"$1" | grep -qF part
+		then echo "this is a partition, not a disk"
 		fi
-	else
-		echo -e "\nThis is not a valid storage device"
-		continue
+	else echo "this is not a valid storage device"
 	fi
-	echo -e "\nAre you sure you want to create a partition table and format /dev/$new_nixos to install NixOS?"
-	confirmation_info
-	read -r -s -n 1 confirm_or_not
-	confirm_or_not=${confirm_or_not,,}
-	if [[ "$confirm_or_not" =~ ^(y)$ ]]
-	then confirmation=true
-	else continue_or_exit
+}
+
+guided_install() {
+	lsblk
+	read -re -p "device: " nixos_disk
+ 	if ! test_device "$nixos_disk"
+	then return
 	fi
+	cgdisk /dev/"$nixos_disk"
+	mkfs.fat -F 32 /dev/"$nixos_disk"1
+	mkfs.ext4 /dev/"$nixos_disk"2
+	mount /dev/"$nixos_disk"2 /mnt
+	mkdir -p /mnt/boot
+	mount /dev/"$nixos_disk"1 /mnt/boot
+	lsblk
+	nixos-generate-config --root /mnt
+	sudo cp /mnt/etc/nixos /etc/nixos
+	read -rei "github:togwand/nixos-config" -p "flake uri: " flake_uri
+	read -rei "stale" -p "config name: " config_name
+	echo "flake installation with $flake_uri#$config_name"
+	nixos-install --root /mnt --impure --flake "$flake_uri"#"$config_name"
+	read -rei "togwand" -p "user name (for password): " user
+	nixos-enter --root /mnt -c "\'passwd $user\'"
+}
+
+flake_install() {
+	# Will need disko for this one
+	# See vimjoyer impermanence video and learn to use disko to make a disko config to install nixos with
+	# Slightly modify an existing file with disko using sed or something inside this function?
+	read -rei "github:togwand/nixos-config" -p "flake uri: " flake_uri
+	read -rei "stale" -p "config name: " config_name
+	echo "Full flake input: $flake_uri#$config_name"
+	echo "WIP, in the future you will be able to install with a flake+disko with your input"
+}
+
+show_interface() {
+	if $refresh
+	then 
+		refresh=false
+		clear
+		status
+		menu
+	fi
+}
+
+nicer_bind() {
+	local alias="$1"
+	case $1 in
+		clone_repo) alias="cloning";;
+		guided_install) alias="guided installation";;
+		flake_install) alias="flake+disko installation";;
+	esac
+	if $1
+	then echo "$alias ended, next!"
+	else echo "$alias ended with an error"
+	fi
+}
+
+if [ $EUID != 0 ]
+then
+	bin_name="${0##*/}"
+	echo "This program options require root permissions"
+	echo "Please restart it with elevated permissions (e.g. sudo $bin_name)"
+	exit
+fi
+refresh=true
+while true
+do
+	show_interface
+	read -rsn 1 key
+	case $key in
+		1) nicer_bind clone_repo;;
+		2) nicer_bind guided_install;;
+		3) nicer_bind flake_install;;
+		h|H) help|less;;
+		m|M) manual_guide;;
+		q|Q) clear && exit;;
+	esac
 done
-
-echo -e "\nMounting: $new_nixos ~> /mnt"
-mount "/dev/$new_nixos" /mnt 
-
-list-devices

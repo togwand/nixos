@@ -4,7 +4,8 @@
   pkgs,
   hm,
   ...
-}: {
+}:
+{
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     ./hm/home-manager.nix
@@ -14,25 +15,35 @@
 
   boot = {
     consoleLogLevel = 3;
-    kernelParams = ["quiet" "udev.log_level=3"];
+    kernelParams = [
+      "quiet"
+      "udev.log_level=3"
+    ];
     initrd.verbose = false;
   };
 
   users.defaultUserShell = pkgs.zsh;
 
   console = {
-    font = "t0-13b-uni.psf";
+    packages = with pkgs; [ uw-ttyp0 ];
+    font = "t0-13b-uni";
     useXkbConfig = true;
   };
 
   services = {
     getty = {
-      greetingLine = "My minimal NixOS installation environment";
+      greetingLine = "Minimal environment";
       helpLine = lib.mkForce ''
-        Applications available on this installation environment:
-        Installer script: nixos-installer (aliases: installer, install, installation, script)
-        Configured: nixvim, zsh, ranger
-        Default: git, bat, disko
+        Script:
+        nixos-installer
+
+        Applications:
+        bat (default)
+        disko (default)
+        git (default)
+        nixvim
+        ranger
+        zsh
       '';
     };
     xserver.xkb = {
@@ -45,7 +56,7 @@
     variables = {
       VISUAL = "nvim";
     };
-    pathsToLink = ["/share/zsh"];
+    pathsToLink = [ "/share/zsh" ];
   };
 
   programs = {
@@ -57,7 +68,10 @@
     config.allowUnfree = true;
   };
 
-  nix.settings.experimental-features = ["flakes" "nix-command"];
+  nix.settings.experimental-features = [
+    "flakes"
+    "nix-command"
+  ];
 
-  system.userActivationScripts.zshrc = "touch .zshrc";
+  system.stateVersion = "24.11";
 }

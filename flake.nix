@@ -11,28 +11,31 @@
       inputs.home-manager.follows = "hm";
     };
   };
-  outputs = {
-    npkgs,
-    hm,
-    nxvim,
-    ...
-  }: let
-    sys = "x86_64-linux";
-  in {
-    formatter.${sys} = npkgs.legacyPackages.${sys}.alejandra;
-    nixosConfigurations."stale" = npkgs.lib.nixosSystem {
-      modules = [./environments/desktop/stale/nixos.nix];
-      specialArgs = {
-        inherit hm nxvim;
-        user = "togwand";
-        host = "stale";
+  outputs =
+    {
+      npkgs,
+      hm,
+      nxvim,
+      ...
+    }:
+    let
+      sys = "x86_64-linux";
+    in
+    {
+      formatter.${sys} = npkgs.legacyPackages.${sys}.nixfmt-rfc-style;
+      nixosConfigurations."stale" = npkgs.lib.nixosSystem {
+        modules = [ ./environments/desktop/stale/nixos.nix ];
+        specialArgs = {
+          inherit hm nxvim;
+          user = "togwand";
+          host = "stale";
+        };
+      };
+      nixosConfigurations."minimal" = npkgs.lib.nixosSystem {
+        modules = [ ./environments/iso/minimal/nixos.nix ];
+        specialArgs = {
+          inherit hm nxvim;
+        };
       };
     };
-    nixosConfigurations."minimal" = npkgs.lib.nixosSystem {
-      modules = [./environments/iso/minimal/nixos.nix];
-      specialArgs = {
-        inherit hm nxvim;
-      };
-    };
-  };
 }

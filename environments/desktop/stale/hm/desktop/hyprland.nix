@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -34,8 +35,8 @@
         first_launch_animation = true;
       };
 
-      bezier = ["custom, 0, 0.7, 0.7, 1"];
-      animation = ["global, 1, 3, custom"];
+      bezier = [ "custom, 0, 0.7, 0.7, 1" ];
+      animation = [ "global, 1, 3, custom" ];
 
       input = {
         kb_layout = "latam";

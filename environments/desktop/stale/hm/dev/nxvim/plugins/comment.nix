@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   plugins.comment = {
     enable = true;
   };

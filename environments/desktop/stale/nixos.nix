@@ -5,7 +5,8 @@
   user,
   host,
   ...
-}: {
+}:
+{
   imports = [
     /etc/nixos/hardware-configuration.nix
     ./hm/home-manager.nix
@@ -40,12 +41,18 @@
   boot = {
     tmp.cleanOnBoot = true;
     consoleLogLevel = 3;
-    kernelParams = ["quiet" "udev.log_level=3"];
+    kernelParams = [
+      "quiet"
+      "udev.log_level=3"
+    ];
     initrd = {
       verbose = false;
-      availableKernelModules = ["nvidia_drm"];
+      availableKernelModules = [ "nvidia_drm" ];
     };
-    supportedFilesystems = ["ntfs" "exfat"];
+    supportedFilesystems = [
+      "ntfs"
+      "exfat"
+    ];
     loader = {
       timeout = 2;
       efi.canTouchEfiVariables = true;
@@ -73,13 +80,16 @@
     users = {
       ${user} = {
         isNormalUser = true;
-        extraGroups = ["wheel" "networkmanager"];
+        extraGroups = [
+          "wheel"
+          "networkmanager"
+        ];
       };
     };
   };
 
   console = {
-    packages = with pkgs; [uw-ttyp0];
+    packages = with pkgs; [ uw-ttyp0 ];
     font = "t0-13b-uni";
     useXkbConfig = true;
     earlySetup = false;
@@ -93,7 +103,7 @@
     devmon.enable = true;
     xserver = {
       enable = false;
-      videoDrivers = ["nvidia"];
+      videoDrivers = [ "nvidia" ];
       xkb = {
         layout = "latam";
         options = "caps:swapescape";
@@ -116,7 +126,7 @@
       VISUAL = "nvim";
       BROWSER = "firefox";
     };
-    pathsToLink = ["/share/zsh"];
+    pathsToLink = [ "/share/zsh" ];
   };
 
   programs = {
@@ -128,7 +138,7 @@
 
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override {fonts = ["CommitMono"];})
+      (nerdfonts.override { fonts = [ "CommitMono" ]; })
       comfortaa
       gentium-book-basic
       noto-fonts-lgc-plus
@@ -142,10 +152,10 @@
       allowBitmaps = false;
       includeUserConf = true;
       defaultFonts = {
-        monospace = ["CommitMono Nerd Font Mono"];
-        sansSerif = ["Comfortaa"];
-        serif = ["Gentium Basic"];
-        emoji = ["Noto Color Emoji"];
+        monospace = [ "CommitMono Nerd Font Mono" ];
+        sansSerif = [ "Comfortaa" ];
+        serif = [ "Gentium Basic" ];
+        emoji = [ "Noto Color Emoji" ];
       };
       hinting = {
         style = "full";
@@ -192,7 +202,10 @@
       options = "-d";
     };
     settings = {
-      experimental-features = ["flakes" "nix-command"];
+      experimental-features = [
+        "flakes"
+        "nix-command"
+      ];
       auto-optimise-store = false;
     };
   };

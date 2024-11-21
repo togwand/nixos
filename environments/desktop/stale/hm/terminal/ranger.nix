@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.ranger = {
     enable = true;
     extraPackages = with pkgs; [

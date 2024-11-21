@@ -2,7 +2,8 @@
   pkgs,
   nxvim,
   ...
-}: {
+}:
+{
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -10,9 +11,9 @@
       "nixos" = {
         imports = [
           nxvim.homeManagerModules.nixvim
+          ./nxvim/nixvim.nix
           ./zsh.nix
           ./ranger.nix
-          ./nxvim/nixvim.nix
         ];
         programs = {
           home-manager.enable = true;
@@ -21,10 +22,9 @@
         };
         home = {
           packages = with pkgs; [
-            installer-script
+            nixos-installer
             disko
           ];
-          file = {};
           username = "nixos";
           homeDirectory = "/home/nixos";
           stateVersion = "24.11";

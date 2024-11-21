@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.nixvim = {
     imports = [
       ./plugins/lualine.nix
@@ -12,6 +13,9 @@
     globals = {
       mapleader = " ";
     };
+    clipboard = {
+      register = "unnamedplus";
+    };
     opts = {
       number = true;
       relativenumber = true;
@@ -21,7 +25,6 @@
       expandtab = false;
       termguicolors = false;
       updatetime = 300;
-      clipboard = "unnamedplus";
     };
     colorschemes = {
       everforest.enable = true;

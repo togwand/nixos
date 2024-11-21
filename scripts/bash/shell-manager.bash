@@ -1,40 +1,10 @@
-to_menu() {
-	refresh=true
-	menu=$1
-}
-
-cmd_args() {
-	local cmd=$1 defaults=$2
-	read -rep "$cmd " -i "$defaults" arguments
-	local full="$cmd $arguments"
-	if [ "${arguments}" = "" ]
-	then $cmd
-	else $full
-	fi
-}
-
-nicer_bind() {
-	local alias="$1"
-	case $1 in
-		o1) alias="#1";;o2) alias="#2";;o3) alias="#3";;
-		o4) alias="#4";;o5) alias="#5";;o6) alias="#6";;
-		o7) alias="#7";;
-		change_directory) alias="directory change";;
-	esac
-	if $1
-	then echo "$alias ended, next!"
-	else echo "$alias ended with an error"
-	fi
-}
-
 help() {
 cat << EOF
 DESCRIPTION
  My program for fast execution of shell commands and system management
 
 USAGE
- Press a key to execute the displayed menu option (numbers) or a global keybind (letters)
- You can queue options before the current one ends
+ Press a key to execute a keybind or the displayed menu option
 
 GLOBAL KEYBINDINGS
  c, C
@@ -42,8 +12,11 @@ GLOBAL KEYBINDINGS
  h, H
  		Read about the program usage in a pager screen
  q, Q
- 		Go back to main menu.
-		If already on main menu, exit the program instead.
+ 		Go back to main menu
+		If already on main menu, exit the program instead
+
+KNOWN ISSUES
+ You can "queue" options before the current one ends
 EOF
 }
 
@@ -116,19 +89,18 @@ OTHER MENU
 EOF
 }
 
-show_interface() {
-	if $refresh
-	then 
-		refresh=false
-		clear
-		status
-		case $menu in
-			main) main_menu;;
-			system) system_menu;;
-			flake) flake_menu;;
-			git) git_menu;;
-			other) other_menu;;
-		esac
+to_menu() {
+	refresh=true
+	menu=$1
+}
+
+cmd_args() {
+	local cmd=$1 defaults=$2
+	read -rep "$cmd " -i "$defaults" arguments
+	local full="$cmd $arguments"
+	if [ "${arguments}" = "" ]
+	then $cmd
+	else $full
 	fi
 }
 
@@ -136,28 +108,21 @@ test_device() {
 	if test -b /dev/"$1"
 	then
 		if lsblk -ndo type /dev/"$1" | grep -qF part
-		then
-			echo "this is a partition, not a disk"
-			return
+		then echo "this is a partition, not a disk"
 		fi
-	else
-		echo "this is not a valid storage device"
-		return
+	else echo "this is not a valid storage device"
 	fi
 }
 
 burn_iso() {
-	echo "disks and partitions"
-	lsblk --noheadings
+	lsblk
 	read -re -p "device: " burnt
-	read -rei result/iso/nixos-*.iso -p "path to iso: " path
-	if test_device "$burnt"
-	then
-		wipefs /dev/"$burnt"
-		cp "$path" /dev/"$burnt"
-		sync "/dev/$burnt"
-	else return
+	if ! test_device "$burnt"
+	then return
 	fi
+	wipefs /dev/"$burnt"
+	cp result/iso/nixos-*.iso /dev/"$burnt"
+	sync "/dev/$burnt"
 }
 
 o1() {
@@ -180,6 +145,9 @@ o2() {
 }
 
 patch_hw() {
+	# FUSE mounts aren't compatible with nixos hardware detection, and aren't added to the hardware configuration
+	# NTFS drives (Windows) have different drivers but only ntfs3 (not to be confused with ntfs-3g) is not FUSE
+	# For NTFS do $ sudo mount -t ntfs3 (instead of ntfs/ntfs-3g) and then patch the hardware config
 	nixos-generate-config
 	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
 	rm /etc/nixos/configuration.nix
@@ -201,8 +169,9 @@ o3() {
 }
 
 build_iso() {
-	read -rei "minimal" -p "name: " name
-	nix build .#nixosConfigurations."$name".config.system.build.isoImage
+	read -rei "github:togwand/nixos-config" -p "flake uri: " flake_uri
+	read -rei "minimal" -p "name: " config_name
+	nix build "$flake_uri"#nixosConfigurations."$config_name".config.system.build.isoImage
 }
 
 o4() {
@@ -235,6 +204,36 @@ o7() {
 	case $menu in
 		git) cmd_args "git" "";;
 	esac
+}
+
+show_interface() {
+	if $refresh
+	then 
+		refresh=false
+		clear
+		status
+		case $menu in
+			main) main_menu;;
+			system) system_menu;;
+			flake) flake_menu;;
+			git) git_menu;;
+			other) other_menu;;
+		esac
+	fi
+}
+
+nicer_bind() {
+	local alias="$1"
+	case $1 in
+		o1) alias="#1";;o2) alias="#2";;o3) alias="#3";;
+		o4) alias="#4";;o5) alias="#5";;o6) alias="#6";;
+		o7) alias="#7";;
+		change_directory) alias="directory change";;
+	esac
+	if $1
+	then echo "$alias ended, next!"
+	else echo "$alias ended with an error"
+	fi
 }
 
 change_directory() {

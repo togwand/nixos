@@ -1,9 +1,10 @@
-{...}: {
+{ ... }:
+{
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    historyControl = ["ignoredups"];
-    shellAliases = {};
+    historyControl = [ "ignoredups" ];
+    shellAliases = { };
     shellOptions = [
       "histappend"
       "checkwinsize"
