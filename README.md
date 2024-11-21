@@ -1,10 +1,6 @@
 # nixos-config
 NixOS flake with environments, scripts, and more
 
-## Features
- * environments -> NixOS configurations for desktop & iso
- * scripts -> NixOS overlays for bash
-
 ### Inputs
  * nixpkgs/nixos-unstable -> Earlier and more features, overall less issues than stable
  * home-manager/master -> Some apps are easier to configure with it (e.g. zsh, hyprland)
