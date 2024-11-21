@@ -1,16 +1,16 @@
 # nixos-config
 NixOS flake with environments, scripts, and more
 
-## Features:
+## Features
  * environments -> NixOS configurations for desktop & iso
  * scripts -> NixOS overlays for bash
 
-#### Inputs:
+### Inputs
  * nixpkgs/nixos-unstable -> Earlier and more features, overall less issues than stable
  * home-manager/master -> Some apps are easier to configure with it (e.g. zsh, hyprland)
  * nixvim/main -> Very modular and fairly easy to modify
 
-#### Formatter:
+### Formatter
  * nixfmt -> Might not be compact but it's consistent and fast
 
 TODO:
@@ -55,8 +55,7 @@ tty + nixos-installer configuration for a fast and easy installation
 ## Scripts
 They become binaries by using NixOS writeScriptBin (custom shebang) & overlays (very modular)
 
-### Bash:
-
+### Bash
 #### shell-manager
 An interactive NixOS shell command manager
 
