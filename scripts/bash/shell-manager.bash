@@ -145,9 +145,20 @@ o2() {
 }
 
 patch_hw() {
-	# FUSE mounts aren't compatible with nixos hardware detection, and aren't added to the hardware configuration
-	# NTFS drives (Windows) have different drivers but only ntfs3 (not to be confused with ntfs-3g) is not FUSE
-	# For NTFS do $ sudo mount -t ntfs3 (instead of ntfs/ntfs-3g) and then patch the hardware config
+	echo "Patch hardware configuration for ntfs drives? (yes/no)"
+	read -rei "no" -p "answer: " answer
+	if [ "$answer" = "yes" ]
+	then 
+		blkid | grep
+		lsblk
+		read -re -p "device which has ntfs partitions: " ntfs_drive
+		read -re -p "partition numbers to mount: " -a ntfs_partitions
+		for partition in "${ntfs_partitions[@]}"
+		do
+			read -re -p "where to mount the partition #$partition? " part_mountpoint
+			mount /dev/"$ntfs_drive"/ /mnt/"$part_mountpoint"
+		done
+	fi
 	nixos-generate-config
 	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
 	rm /etc/nixos/configuration.nix

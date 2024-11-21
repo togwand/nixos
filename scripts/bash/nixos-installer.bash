@@ -60,37 +60,85 @@ clone_repo() {
 	git clone "$cloned_repo" "$destination"
 }
 
+confirm_prompt() {
+	echo "$1"
+	echo "Confirm by entering \"yes\". Anything else will exit this option (previous changes will remain)"
+	read -rei "$3" -p "$2 " confirmation
+	if [ "$confirmation" = yes ]
+	then return 0
+	else return 1
+	fi
+}
+
 test_device() {
 	if test -b /dev/"$1"
 	then
 		if lsblk -ndo type /dev/"$1" | grep -qF part
-		then echo "this is a partition, not a disk"
+		then 
+			echo "this is a partition, not a disk"
+			return 1
 		fi
-	else echo "this is not a valid storage device"
+	else 
+		echo "this is not a valid storage device"
+		return 1
 	fi
+	umount /dev/"$1"?*
+}
+
+install-patch-hw-config() {
+	echo "Patch hardware configuration for ntfs drives? (yes/no)"
+	read -rei "no" -p "answer: " answer
+	if [ "$answer" = "yes" ]
+	then 
+		blkid | grep
+		lsblk
+		read -re -p "device which has ntfs partitions: " ntfs_drive
+		read -re -p "partition numbers to mount: " -a ntfs_partitions
+		for partition in "${ntfs_partitions[@]}"
+		do
+			read -re -p "where to mount the partition #$partition? " part_mountpoint
+			mount /dev/"$ntfs_drive"/ /mnt/"$part_mountpoint"
+		done
+	fi
+	nixos-generate-config --root /mnt --dir /etc/nixos
+	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
+	rm /etc/nixos/configuration.nix
 }
 
 guided_install() {
-	lsblk
 	read -re -p "device: " nixos_disk
- 	if ! test_device "$nixos_disk"
-	then return
+	if ! confirm_prompt "/dev/$nixos_disk will be tested for validity and all partitions unmounted" "continue? " "no"
+	then return 1
+	else 
+		if ! test_device "$nixos_disk"
+		then return 1
+		fi
+	fi
+	echo "Please make a partition table with 2 spots, the first one for the esp, the second one for the root?"
+	if ! confirm_prompt "/dev/$nixos_disk will be partitioned and all data lost" "continue? " "no"
+	then return 1
 	fi
 	cgdisk /dev/"$nixos_disk"
+	echo "Did you make a partition table with 2 spots, the first one for the esp, the second one for the root?"
+	if ! confirm_prompt "/dev/$nixos_disk will be formatted and all data lost" "continue? " "no"
+	then return 1
+	fi
 	mkfs.fat -F 32 /dev/"$nixos_disk"1
 	mkfs.ext4 /dev/"$nixos_disk"2
 	mount /dev/"$nixos_disk"2 /mnt
 	mkdir -p /mnt/boot
 	mount /dev/"$nixos_disk"1 /mnt/boot
-	lsblk
-	nixos-generate-config --root /mnt
-	sudo cp /mnt/etc/nixos /etc/nixos
+	install-patch-hw-config
 	read -rei "github:togwand/nixos-config" -p "flake uri: " flake_uri
 	read -rei "stale" -p "config name: " config_name
 	echo "flake installation with $flake_uri#$config_name"
 	nixos-install --root /mnt --impure --flake "$flake_uri"#"$config_name"
-	read -rei "togwand" -p "user name (for password): " user
-	nixos-enter --root /mnt -c "\'passwd $user\'"
+	if ! confirm_prompt "You are about to give an user a password" "continue? " "yes"
+	then return 1
+	else
+		read -rei "togwand" -p "user to be granted password: " user
+		nixos-enter --root /mnt -c "passwd $user"
+	fi
 }
 
 flake_install() {

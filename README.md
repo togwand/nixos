@@ -12,11 +12,9 @@ NixOS flake with environments, scripts, and more
 TODO:
 1. nixos-installer (1-2)
 2. shell-manager (1)
-3. stale (1-5)
-4. nixos-installer (3)
-5. stale (6-10)
-6. shell-manager (2-3)
-7. iso (1)
+3. stale (1-10)
+4. shell-manager (2-3)
+5. iso (1)
 
 ## Environments
 Declarative configurations, including options, packages, programs, variables, etc
@@ -56,9 +54,8 @@ They become binaries by using NixOS writeScriptBin (custom shebang) & overlays (
 An interactive NixOS shell command manager
 
 TODO:
-1. Add ntfs detection and mounting as ntfs3 (with error checking) before patching hardware config
-2. Upgrade help section and add manpage/documentation
-3. Make prettier somehow
+1. Upgrade help section and add manpage/documentation
+2. Make prettier somehow
 
 #### nixos-installer
 An interactive NixOS installer
