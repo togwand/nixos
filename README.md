@@ -10,10 +10,10 @@ NixOS flake with environments, scripts, and more
  * nixfmt -> Might not be compact but it's consistent and fast
 
 TODO:
-3. stale (1-10)
 1. nixos-installer (1-2)
-4. shell-manager (1-2)
-5. iso (1)
+2. stale (1-10)
+3. shell-manager (1-2)
+4. iso (1)
 
 ## Environments
 Declarative configurations, including options, packages, programs, variables, etc

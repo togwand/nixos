@@ -146,7 +146,7 @@ o2() {
 
 patch_hw() {
 	echo "Patch hardware configuration for ntfs drives? (yes/no)"
-	read -rei "no" -p "answer: " answer
+	read -rei "yes" -p "answer: " answer
 	if [ "$answer" = "yes" ]
 	then 
 		blkid|grep ntfs
@@ -155,11 +155,16 @@ patch_hw() {
 		read -re -p "partition numbers to mount: " -a ntfs_partitions
 		for partition in "${ntfs_partitions[@]}"
 		do
-			read -re -p "where to mount the partition #$partition? " part_mountpoint
-			if ! ls /mnt/"$part_mountpoint"
-			then mkdir -p /mnt/"$part_mountpoint"
+			if df -H | grep /dev/"$ntfs_drive$partition"
+			then
+				echo "unmounting previously mounted ntfs partition dev/$ntfs_drive/$partition"
+				umount /dev/"$ntfs_drive$partition"
 			fi
-			mount -t ntfs3 /dev/"$ntfs_drive$partition" /mnt/"$part_mountpoint"
+			read -rei "/mnt/ntfs-$partition" -p "partition #$partition mountpoint: " part_mountpoint
+			if ! ls "$part_mountpoint"
+			then mkdir -p "$part_mountpoint"
+			fi
+			mount -t ntfs3 /dev/"$ntfs_drive$partition" "$part_mountpoint"
 		done
 	fi
 	nixos-generate-config
