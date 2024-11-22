@@ -48,26 +48,9 @@ menu() {
 cat << EOF
 
 MENU
- 1) Clone a repository
- 2) Guided installation
- 3) Flake installation (disko)
+ 1) Guided installation
+ 2) Disko installation
 EOF
-}
-
-clone_repo() {
-	read -rei "https://github.com/togwand/nixos-config" -p "url to clone: " cloned_repo
-	read -rei "/home/clones/cloned_repo" -p "clone to: " destination
-	git clone "$cloned_repo" "$destination"
-}
-
-confirm_prompt() {
-	echo "$1"
-	echo "Confirm by entering \"yes\". Anything else will exit this option (previous changes will remain)"
-	read -rei "$3" -p "$2 " confirmation
-	if [ "$confirmation" = yes ]
-	then return 0
-	else return 1
-	fi
 }
 
 test_device() {
@@ -82,7 +65,6 @@ test_device() {
 		echo "this is not a valid storage device"
 		return 1
 	fi
-	umount /dev/"$1"?*
 }
 
 install-patch-hw() {
@@ -101,62 +83,78 @@ install-patch-hw() {
 				echo "unmounting previously mounted ntfs partition dev/$ntfs_drive/$partition"
 				umount /dev/"$ntfs_drive$partition"
 			fi
-			read -rei "/mnt/ntfs-$partition" -p "partition #$partition mountpoint: " part_mountpoint
+			read -rei "/mnt/mnt/ntfs-$partition" -p "partition #$partition mountpoint: " part_mountpoint
 			if ! ls "$part_mountpoint"
 			then mkdir -p "$part_mountpoint"
 			fi
 			mount -t ntfs3 /dev/"$ntfs_drive$partition" "$part_mountpoint"
 		done
 	fi
-	nixos-generate-config --root /mnt --dir /etc/nixos
+	nixos-generate-config --root /mnt
+	cp -r /mnt/etc/nixos/hardware-configuration.nix /etc/nixos
 	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
-	rm /etc/nixos/configuration.nix
 }
 
 guided_install() {
-	read -re -p "device: " nixos_disk
-	if ! confirm_prompt "/dev/$nixos_disk will be tested for validity and all partitions unmounted" "continue? " "no"
+	echo "You need to specify a flake and a configuration name before the installation"
+	echo "Do you want to clone a flake repository before that (y/n)?"
+	read -rsn 1 clone_or_not
+	case $clone_or_not in 
+		y)
+			if ! read -rei "https://github.com/togwand/nixos-config" -p "url to clone: " cloned_repo
+				read -rei "/home/guided_install/cloned_flake" -p "clone to: " destination
+				git clone "$cloned_repo" "$destination"
+			then return 1
+			fi
+			;;
+		*) return 1
+	esac
+	echo "If you want to modify the flake before continuing use ctrl+c when asked for inputs"
+	read -rei "/home/guided_install/cloned_flake" -p "flake uri: " flake_uri
+	read -rei "stale" -p "config name: " config_name
+	if ! nix build --dry-run --impure "$flake_uri#$config_name"
+	then echo "Flake didn't pass building test, please check errors on the local directory"
+	fi
+	lsblk
+	echo "Enter the disk (i.e. without the /dev) you will be using to install NixOS.
+	It must be a \"disk\", not a partition"
+	read -re -p "nixos disk: " nixos_disk
+	echo "/dev/$nixos_disk will be tested and wiped"
+	read -rei "no" -p "continue? (yes/no) " test_and_wipe
+	if [ "$test_and_wipe" != "yes" ]
 	then return 1
 	else 
-		if ! test_device "$nixos_disk"
+		if ! test_device /dev/"$nixos_disk"
 		then return 1
 		fi
 	fi
-	echo "Please make a partition table with 2 spots, the first one for the esp, the second one for the root?"
-	if ! confirm_prompt "/dev/$nixos_disk will be partitioned and all data lost" "continue? " "no"
+	wipefs -af /dev/"$nixos_disk"
+	blkdiscard -f /dev/"$nixos_disk"
+	echo "You will make a table with 2 partitions:
+	#1 100-500 MiB of space, type ef00 (the \"esp\")
+	#2 remaining space, default type (fs root partition)"
+	read -rei "no" -p "continue? (yes/no) " test_and_wipe
+	if ! confirm_prompt "About to enter cgdisk to assign a partition table to /dev/$nixos_disk" "continue? " "yes"
 	then return 1
 	fi
 	cgdisk /dev/"$nixos_disk"
-	echo "Did you make a partition table with 2 spots, the first one for the esp, the second one for the root?"
-	if ! confirm_prompt "/dev/$nixos_disk will be formatted and all data lost" "continue? " "no"
-	then return 1
-	fi
+	echo "Formatting and mounting partitions"
 	mkfs.fat -F 32 /dev/"$nixos_disk"1
 	mkfs.ext4 /dev/"$nixos_disk"2
 	mount /dev/"$nixos_disk"2 /mnt
 	mkdir -p /mnt/boot
 	mount /dev/"$nixos_disk"1 /mnt/boot
 	install-patch-hw
-	read -rei "github:togwand/nixos-config" -p "flake uri: " flake_uri
-	read -rei "stale" -p "config name: " config_name
-	echo "flake installation with $flake_uri#$config_name"
 	nixos-install --root /mnt --impure --flake "$flake_uri"#"$config_name"
-	if ! confirm_prompt "You are about to give an user a password" "continue? " "yes"
-	then return 1
-	else
-		read -rei "togwand" -p "user to be granted password: " user
-		nixos-enter --root /mnt -c "passwd $user"
-	fi
+	read -rei "togwand" -p "user without password: " user
+	nixos-enter --root /mnt -c "passwd $user"
+	systemctl reboot
 }
 
 flake_install() {
-	# Will need disko for this one
+	echo "WIP, in the future you will be able to install with disko"
 	# See vimjoyer impermanence video and learn to use disko to make a disko config to install nixos with
 	# Slightly modify an existing file with disko using sed or something inside this function?
-	read -rei "github:togwand/nixos-config" -p "flake uri: " flake_uri
-	read -rei "stale" -p "config name: " config_name
-	echo "Full flake input: $flake_uri#$config_name"
-	echo "WIP, in the future you will be able to install with a flake+disko with your input"
 }
 
 show_interface() {
@@ -172,9 +170,8 @@ show_interface() {
 nicer_bind() {
 	local alias="$1"
 	case $1 in
-		clone_repo) alias="cloning";;
 		guided_install) alias="guided installation";;
-		flake_install) alias="flake+disko installation";;
+		flake_install) alias="disko installation";;
 	esac
 	if $1
 	then echo "$alias ended, next!"
@@ -195,9 +192,8 @@ do
 	show_interface
 	read -rsn 1 key
 	case $key in
-		1) nicer_bind clone_repo;;
-		2) nicer_bind guided_install;;
-		3) nicer_bind flake_install;;
+		1) nicer_bind guided_install;;
+		2) nicer_bind flake_install;;
 		h|H) help|less;;
 		m|M) manual_guide;;
 		q|Q) clear && exit;;
