@@ -85,19 +85,22 @@ test_device() {
 	umount /dev/"$1"?*
 }
 
-install-patch-hw-config() {
+install-patch-hw() {
 	echo "Patch hardware configuration for ntfs drives? (yes/no)"
 	read -rei "no" -p "answer: " answer
 	if [ "$answer" = "yes" ]
 	then 
-		blkid | grep
+		blkid|grep ntfs
 		lsblk
 		read -re -p "device which has ntfs partitions: " ntfs_drive
 		read -re -p "partition numbers to mount: " -a ntfs_partitions
 		for partition in "${ntfs_partitions[@]}"
 		do
 			read -re -p "where to mount the partition #$partition? " part_mountpoint
-			mount /dev/"$ntfs_drive"/ /mnt/"$part_mountpoint"
+			if ! ls /mnt/"$part_mountpoint"
+			then mkdir -p /mnt/"$part_mountpoint"
+			fi
+			mount -t ntfs3 /dev/"$ntfs_drive$partition" /mnt/"$part_mountpoint"
 		done
 	fi
 	nixos-generate-config --root /mnt --dir /etc/nixos
@@ -128,7 +131,7 @@ guided_install() {
 	mount /dev/"$nixos_disk"2 /mnt
 	mkdir -p /mnt/boot
 	mount /dev/"$nixos_disk"1 /mnt/boot
-	install-patch-hw-config
+	install-patch-hw
 	read -rei "github:togwand/nixos-config" -p "flake uri: " flake_uri
 	read -rei "stale" -p "config name: " config_name
 	echo "flake installation with $flake_uri#$config_name"

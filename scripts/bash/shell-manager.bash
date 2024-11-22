@@ -149,14 +149,17 @@ patch_hw() {
 	read -rei "no" -p "answer: " answer
 	if [ "$answer" = "yes" ]
 	then 
-		blkid | grep
+		blkid|grep ntfs
 		lsblk
 		read -re -p "device which has ntfs partitions: " ntfs_drive
 		read -re -p "partition numbers to mount: " -a ntfs_partitions
 		for partition in "${ntfs_partitions[@]}"
 		do
 			read -re -p "where to mount the partition #$partition? " part_mountpoint
-			mount /dev/"$ntfs_drive"/ /mnt/"$part_mountpoint"
+			if ! ls /mnt/"$part_mountpoint"
+			then mkdir -p /mnt/"$part_mountpoint"
+			fi
+			mount -t ntfs3 /dev/"$ntfs_drive$partition" /mnt/"$part_mountpoint"
 		done
 	fi
 	nixos-generate-config

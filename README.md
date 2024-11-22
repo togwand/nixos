@@ -10,10 +10,9 @@ NixOS flake with environments, scripts, and more
  * nixfmt -> Might not be compact but it's consistent and fast
 
 TODO:
-1. nixos-installer (1-2)
-2. shell-manager (1)
 3. stale (1-10)
-4. shell-manager (2-3)
+1. nixos-installer (1-2)
+4. shell-manager (1-2)
 5. iso (1)
 
 ## Environments
@@ -61,6 +60,5 @@ TODO:
 An interactive NixOS installer
 
 TODO:
-1. Finish a basic installer (without disko)
-2. Learn disko and put it into the flake_install function
-3. Make the installation be impermanent
+1. Learn disko and put it into the flake_install function
+2. Make the installation be impermanent
