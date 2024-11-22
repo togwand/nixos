@@ -54,15 +54,9 @@ EOF
 }
 
 test_device() {
-	if test -b /dev/"$1"
-	then
-		if lsblk -ndo type /dev/"$1" | grep -qF part
-		then 
-			echo "this is a partition, not a disk"
-			return 1
-		fi
-	else 
-		echo "this is not a valid storage device"
+	if lsblk -ndo type "$1" | grep -qF part
+	then 
+		echo "this is a partition, not a disk"
 		return 1
 	fi
 }
@@ -101,49 +95,39 @@ guided_install() {
 	read -rsn 1 clone_or_not
 	case $clone_or_not in 
 		y)
-			if ! read -rei "https://github.com/togwand/nixos-config" -p "url to clone: " cloned_repo
-				read -rei "/home/guided_install/cloned_flake" -p "clone to: " destination
-				git clone "$cloned_repo" "$destination"
-			then return 1
-			fi
+			read -rei "https://github.com/togwand/nixos-config" -p "url to clone: " cloned_repo
+			read -rei "/home/guided_install/cloned_flake" -p "clone to: " destination
+			git clone "$cloned_repo" "$destination"
 			;;
 		*) return 1
 	esac
-	echo "If you want to modify the flake before continuing use ctrl+c when asked for inputs"
 	read -rei "/home/guided_install/cloned_flake" -p "flake uri: " flake_uri
 	read -rei "stale" -p "config name: " config_name
-	if ! nix build --dry-run --impure "$flake_uri#$config_name"
-	then echo "Flake didn't pass building test, please check errors on the local directory"
-	fi
 	lsblk
-	echo "Enter the disk (i.e. without the /dev) you will be using to install NixOS.
-	It must be a \"disk\", not a partition"
-	read -re -p "nixos disk: " nixos_disk
-	echo "/dev/$nixos_disk will be tested and wiped"
+	echo "Enter the disk you will be using to install NixOS"
+	read -rei "/dev/sda" -p "nixos disk: " nixos_disk
+	echo "$nixos_disk will be tested and wiped"
 	read -rei "no" -p "continue? (yes/no) " test_and_wipe
 	if [ "$test_and_wipe" != "yes" ]
 	then return 1
 	else 
-		if ! test_device /dev/"$nixos_disk"
+		if ! test_device "$nixos_disk"
 		then return 1
 		fi
 	fi
-	wipefs -af /dev/"$nixos_disk"
-	blkdiscard -f /dev/"$nixos_disk"
-	echo "You will make a table with 2 partitions:
-	#1 100-500 MiB of space, type ef00 (the \"esp\")
-	#2 remaining space, default type (fs root partition)"
-	read -rei "no" -p "continue? (yes/no) " test_and_wipe
-	if ! confirm_prompt "About to enter cgdisk to assign a partition table to /dev/$nixos_disk" "continue? " "yes"
-	then return 1
-	fi
-	cgdisk /dev/"$nixos_disk"
+	wipefs -af "$nixos_disk"
+	blkdiscard -f "$nixos_disk"
+	echo "Make a table with 2 partitions:
+	 #1 100-500 MiB of space, type ef00 (the \"esp\")
+	 #2 remaining space, default type (fs root partition)"
+	read -rsn 1 -p "Press any key to continue " test_and_wipe
+	cgdisk "$nixos_disk"
 	echo "Formatting and mounting partitions"
-	mkfs.fat -F 32 /dev/"$nixos_disk"1
-	mkfs.ext4 /dev/"$nixos_disk"2
-	mount /dev/"$nixos_disk"2 /mnt
+	mkfs.fat -F 32 "$nixos_disk"1
+	mkfs.ext4 "$nixos_disk"2
+	mount "$nixos_disk"2 /mnt
 	mkdir -p /mnt/boot
-	mount /dev/"$nixos_disk"1 /mnt/boot
+	mount "$nixos_disk"1 /mnt/boot
 	install-patch-hw
 	nixos-install --root /mnt --impure --flake "$flake_uri"#"$config_name"
 	read -rei "togwand" -p "user without password: " user
