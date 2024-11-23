@@ -146,7 +146,7 @@ o2() {
 
 patch_hw() {
 	echo "Patch hardware configuration for ntfs drives? (yes/no)"
-	read -rei "yes" -p "answer: " answer
+	read -rei "no" -p "answer: " answer
 	if [ "$answer" = "yes" ]
 	then 
 		blkid|grep ntfs
