@@ -28,14 +28,16 @@
       nixosConfigurations."minimal_iso" = nixpkgs.lib.nixosSystem {
         modules = [ 
 		./environments/minimal_iso.nix
-		"${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+		disko.nixosModules.default
 		home-manager.nixosModules.home-manager
 		nixvim.homeManagerModules.nixvim
+		"${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
 		];
       };
       nixosConfigurations."stale" = nixpkgs.lib.nixosSystem {
         modules = [ 
 		./environments/stale.nix 
+		disko.nixosModules.default
 		home-manager.nixosModules.home-manager
 		nixvim.homeManagerModules.nixvim
 		];

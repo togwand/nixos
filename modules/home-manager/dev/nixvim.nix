@@ -2,10 +2,7 @@
 {
   programs.nixvim = {
     imports = [
-      ./plugins/lualine.nix
-      ./plugins/comment.nix
-      ./plugins/lsp.nix
-      ./plugins/treesitter.nix
+      ./nixvim/plugins.nix
     ];
     enable = true;
     viAlias = true;

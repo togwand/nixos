@@ -21,7 +21,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   console = {
-    packages = with pkgs; [ uw-ttyp0 ];
+	packages.default = lib.mkForce [ pkgs.uw-ttyp0 ];
     font = "t0-13b-uni";
     useXkbConfig = true;
   };
