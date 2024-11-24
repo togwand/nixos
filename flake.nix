@@ -1,41 +1,44 @@
+{ modulesPath,... }:
 {
   inputs = {
-    npkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    hm = {
+	disko = {
+		url = "github:nix-community/disko/master";
+		inputs.nixpkgs.follows = "nixpkgs";
+	};
+    home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "npkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    nxvim = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixvim = {
       url = "github:nix-community/nixvim/main";
-      inputs.nixpkgs.follows = "npkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "hm";
     };
   };
   outputs =
     {
-      npkgs,
-      hm,
-      nxvim,
+	  disko,
+      home-manager,
+      nixpkgs,
+      nixvim,
       ...
-    }:
-    let
-      sys = "x86_64-linux";
-    in
-    {
-      formatter.${sys} = npkgs.legacyPackages.${sys}.nixfmt-rfc-style;
-      nixosConfigurations."stale" = npkgs.lib.nixosSystem {
-        modules = [ ./environments/desktop/stale/nixos.nix ];
-        specialArgs = {
-          inherit hm nxvim;
-          user = "togwand";
-          host = "stale";
-        };
+    }: {
+      formatter."x86_64-linux" = nixpkgs.legacyPackages."x86_64-linux".nixfmt-rfc-style;
+      nixosConfigurations."minimal_iso" = nixpkgs.lib.nixosSystem {
+        modules = [ 
+		./environments/minimal_iso.nix
+		"${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+		home-manager.nixosModules.home-manager
+		nixvim.homeManagerModules.nixvim
+		];
       };
-      nixosConfigurations."minimal" = npkgs.lib.nixosSystem {
-        modules = [ ./environments/iso/minimal/nixos.nix ];
-        specialArgs = {
-          inherit hm nxvim;
-        };
+      nixosConfigurations."stale" = nixpkgs.lib.nixosSystem {
+        modules = [ 
+		./environments/stale.nix 
+		home-manager.nixosModules.home-manager
+		nixvim.homeManagerModules.nixvim
+		];
       };
     };
 }

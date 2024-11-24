@@ -1,16 +1,12 @@
 {
   lib,
-  modulesPath,
   pkgs,
-  hm,
   ...
 }:
 {
   imports = [
-    "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-    ./hm/home-manager.nix
-    hm.nixosModules.home-manager
-    ../../../scripts/overlay.nix
+    ../home-manager.nix
+    ../scripts.nix
   ];
 
   boot = {

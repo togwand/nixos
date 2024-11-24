@@ -1,6 +1,5 @@
 {
   pkgs,
-  nxvim,
   user,
   ...
 }:
@@ -11,7 +10,6 @@
     users = {
       ${user} = {
         imports = [
-          nxvim.homeManagerModules.nixvim
           ./dev/git.nix
           ./dev/nxvim/nixvim.nix
           ./desktop/hyprland.nix

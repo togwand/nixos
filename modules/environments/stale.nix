@@ -8,12 +8,12 @@
 }:
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
-    ./hm/home-manager.nix
-    hm.nixosModules.home-manager
-    ../../../scripts/overlay.nix
+    ../home-manager.nix
+    ../scripts.nix
   ];
 
+
+  hardware.cpu.intel.updateMicrocode = true;
   hardware = {
     graphics = {
       enable = true;
@@ -47,8 +47,9 @@
     ];
     initrd = {
       verbose = false;
-      availableKernelModules = [ "nvidia_drm" ];
+      availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" "nvidia_drm" ];
     };
+	kernelModules = [ "kvm-intel" ];
     supportedFilesystems = [
       "ntfs"
       "exfat"
@@ -72,8 +73,10 @@
   networking = {
     hostName = host;
     networkmanager.enable = true;
+	useDHCP = true;
     firewall.enable = false;
   };
+
 
   users = {
     defaultUserShell = pkgs.zsh;
@@ -192,6 +195,7 @@
   };
 
   nixpkgs = {
+  	hostPlatform = "x86_64-linux";
     config.allowUnfree = true;
   };
 

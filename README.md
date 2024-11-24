@@ -2,24 +2,33 @@
 NixOS flake with environments, scripts, and more
 
 ### Inputs
- * nixpkgs/nixos-unstable -> Earlier and more features, overall less issues than stable
+ * disko/master -> For an easier and more reliable way to install NixOS as well as not generating-nixos-config
  * home-manager/master -> Some apps are easier to configure with it (e.g. zsh, hyprland)
+ * nixpkgs/nixos-unstable -> Earlier and more features, overall less issues than stable
  * nixvim/main -> Very modular and fairly easy to modify
 
 ### Formatter
  * nixfmt -> Might not be compact but it's consistent and fast
 
 TODO:
-1. nixos-installer (1-2)
-2. stale (1-10)
-3. shell-manager (1-2)
-4. iso (1)
+1. Reestructure and modularize directories
+2. Add disko as an input to flake
+3. nixos-installer
+4. stale
+5. shell-manager
+6. environments
 
-## Environments
-Declarative configurations, including options, packages, programs, variables, etc
+## Modules
+Nix files including derivations, functions and configurations
 
-### Desktop
-Desktop workstation environments for a balanced gaming + development experience
+### Environments
+NixOS configurations including system options, submodules, packages and variables
+
+TODO:
+1. Make a comfy iso environment
+
+#### minimal_iso
+tty + nixos-installer configuration for a fast and easy installation
 
 #### stale
 Hyprland + shell-manager configuration to enhance my workflow
@@ -36,21 +45,11 @@ TODO:
 9. Test different app launcher and file browser (lack of features on current ones)
 10. Keep working on hyprland desktop (check useful utilities page and awersome hyprland repo)
 
-### ISO
-Installation media environments with tools for installation and recovery
-
-TODO:
-1. Setup a second beefier environment which is more comfortable for navigation (maybe including browser, etc)
-
-#### minimal
-tty + nixos-installer configuration for a fast and easy installation
-
 ## Scripts
-They become binaries by using NixOS writeScriptBin (custom shebang) & overlays (very modular)
+Code not written in nix used as inputs for a nix overlays + writeScriptBin module
 
-### Bash
 #### shell-manager
-An interactive NixOS shell command manager
+An interactive shell command manager
 
 TODO:
 1. Upgrade help section and add manpage/documentation
@@ -61,4 +60,5 @@ An interactive NixOS installer
 
 TODO:
 1. Learn disko and put it into the flake_install function
-2. Make the installation be impermanent
+2. Make more modular, add functions for repeates stuff and simplify code 
+3. Better help section

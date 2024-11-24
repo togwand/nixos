@@ -48,17 +48,8 @@ menu() {
 cat << EOF
 
 MENU
- 1) Guided installation
- 2) Disko installation
+ 1) Installation
 EOF
-}
-
-test_device() {
-	if lsblk -ndo type "$1" | grep -qF part
-	then 
-		echo "this is a partition, not a disk"
-		return 1
-	fi
 }
 
 install-patch-hw() {
@@ -89,7 +80,7 @@ install-patch-hw() {
 	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
 }
 
-guided_install() {
+install() {
 	echo "You need to specify a flake and a configuration name before the installation"
 	echo "Do you want to clone a flake repository before that (y/n)?"
 	read -rsn 1 clone_or_not
@@ -110,10 +101,6 @@ guided_install() {
 	read -rei "no" -p "continue? (yes/no) " test_and_wipe
 	if [ "$test_and_wipe" != "yes" ]
 	then return 1
-	else 
-		if ! test_device "$nixos_disk"
-		then return 1
-		fi
 	fi
 	wipefs -af "$nixos_disk"
 	blkdiscard -f "$nixos_disk"
@@ -135,12 +122,6 @@ guided_install() {
 	systemctl reboot
 }
 
-flake_install() {
-	echo "WIP, in the future you will be able to install with disko"
-	# See vimjoyer impermanence video and learn to use disko to make a disko config to install nixos with
-	# Slightly modify an existing file with disko using sed or something inside this function?
-}
-
 show_interface() {
 	if $refresh
 	then 
@@ -148,18 +129,6 @@ show_interface() {
 		clear
 		status
 		menu
-	fi
-}
-
-nicer_bind() {
-	local alias="$1"
-	case $1 in
-		guided_install) alias="guided installation";;
-		flake_install) alias="disko installation";;
-	esac
-	if $1
-	then echo "$alias ended, next!"
-	else echo "$alias ended with an error"
 	fi
 }
 
@@ -176,8 +145,8 @@ do
 	show_interface
 	read -rsn 1 key
 	case $key in
-		1) nicer_bind guided_install;;
-		2) nicer_bind flake_install;;
+		1) clone_flake;;
+		2) install;;
 		h|H) help|less;;
 		m|M) manual_guide;;
 		q|Q) clear && exit;;
