@@ -1,5 +1,5 @@
 {
   imports = [
-    ./mangohud.nix
+    ./bash-scripts
   ];
 }

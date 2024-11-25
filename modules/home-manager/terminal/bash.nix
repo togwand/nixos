@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.terminal.bash.enable {
     home-manager.users.${user}.programs.bash = {
       enable = true;
       enableCompletion = true;

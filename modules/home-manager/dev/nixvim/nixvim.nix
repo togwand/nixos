@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.dev.nixvim.enable {
     home-manager.users.${user}.programs.nixvim = {
       enable = true;
       viAlias = true;

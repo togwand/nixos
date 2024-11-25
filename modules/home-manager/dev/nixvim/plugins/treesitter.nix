@@ -1,12 +1,10 @@
 {
   config,
-  lib,
   pkgs,
   user,
   ...
 }:
 {
-  options = { };
   config = {
     home-manager.users.${user}.programs.nixvim.plugins.treesitter = {
       enable = true;

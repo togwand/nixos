@@ -48,10 +48,10 @@ TODO:
 1. Test and add more nix options to all modules
 
 ### home-manager
-Includes all my home-manager programs configurations
+Home-manager programs configurations
 
-### scripts
-Overlays using the writeScriptBin writer, one overlay per language
+### overlays
+Derivations built with a nix writer or similar builder, one overlay per derivation
 
 ## Scripts
 Executable and portable* code not written in nix 

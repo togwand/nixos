@@ -6,8 +6,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.terminal.ranger.enable {
     home-manager.users.${user}.programs.ranger = {
       enable = true;
       extraPackages = with pkgs; [

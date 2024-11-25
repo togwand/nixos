@@ -1,9 +1,5 @@
-{ config, lib, ... }:
 {
-  options = {
-    modules.home-manager.terminal.enable = lib.mkEnableOption "enables home-manager terminal programs";
-  };
-  imports = lib.mkIf config.modules.home-manager.terminal.enable [
+  imports = [
     ./bash.nix
     ./bat.nix
     ./foot.nix

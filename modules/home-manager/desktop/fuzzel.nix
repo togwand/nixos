@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.desktop.fuzzel.enable {
     home-manager.users.${user}.programs.fuzzel = {
       enable = true;
       settings = {

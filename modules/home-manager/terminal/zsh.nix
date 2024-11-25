@@ -6,8 +6,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.terminal.zsh.enable {
     home-manager.users.${user}.programs.zsh = {
       enable = true;
       dotDir = ".zsh";

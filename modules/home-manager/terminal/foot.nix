@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.terminal.foot.enable {
     home-manager.users.${user}.programs.foot = {
       enable = true;
       server.enable = false;

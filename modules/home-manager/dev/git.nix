@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.dev.git.enable {
     home-manager.users.${user} = {
       programs.git-credential-oauth.enable = true;
       programs.git = {

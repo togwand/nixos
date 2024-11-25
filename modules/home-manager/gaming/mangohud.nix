@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.gaming.mangohud.enable {
     home-manager.users.${user}.programs.mangohud = {
       enableSessionWide = false;
       enable = true;

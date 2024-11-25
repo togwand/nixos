@@ -6,8 +6,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.desktop.gtk.enable {
     home-manager.users.${user}.gtk = {
       enable = true;
       cursorTheme = {

@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.desktop.hyprland.enable {
     home-manager.users.${user}.wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;

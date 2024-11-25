@@ -86,6 +86,29 @@
     };
   };
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users = {
+      ${user} = {
+        programs.home-manager.enable = true;
+        home = {
+          packages = with pkgs; [
+            shell-manager
+            wl-clipboard
+            rclone
+            pavucontrol
+            discord
+          ];
+          file = { };
+          username = user;
+          homeDirectory = "/home/${user}";
+          stateVersion = "24.11";
+        };
+      };
+    };
+  };
+
   console = {
     packages = with pkgs; [ uw-ttyp0 ];
     font = "t0-13b-uni";

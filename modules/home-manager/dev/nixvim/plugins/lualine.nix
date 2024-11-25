@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.dev.nixvim.lualine.enable {
     home-manager.users.${user}.programs.nixvim.plugins.lualine = {
       enable = true;
       settings = {

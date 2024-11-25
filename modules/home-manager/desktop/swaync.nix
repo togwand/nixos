@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.desktop.swaync.enable {
     home-manager.users.${user}.services.swaync = {
       enable = true;
       settings = {

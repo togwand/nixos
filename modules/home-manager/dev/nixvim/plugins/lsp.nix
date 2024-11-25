@@ -5,8 +5,7 @@
   ...
 }:
 {
-  options = { };
-  config = {
+  config = lib.mkIf config.modules.home-manager.dev.nixvim.lsp.enable {
     home-manager.users.${user}.programs.nixvim.plugins.lsp = {
       enable = true;
       inlayHints = true;

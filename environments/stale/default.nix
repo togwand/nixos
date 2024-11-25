@@ -5,7 +5,6 @@
     inputs.home-manager.nixosModules.home-manager
     ./config.nix
     ./devices.nix
-    ./home.nix
     ./modules.nix
   ];
 
