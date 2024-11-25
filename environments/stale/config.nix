@@ -1,48 +1,16 @@
 {
   config,
+  host,
+  lib,
   pkgs,
   user,
-  host,
   ...
 }:
 {
-  imports = [
-    ../home-manager.nix
-    ../scripts.nix
-  ];
-
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/eaf2c5ab-8651-4702-948b-9d463d381f85";
-      fsType = "ext4";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A508-86F5";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
-
-  fileSystems."/mnt/windows" =
-    { device = "/dev/disk/by-uuid/06C8132AC813178F";
-      fsType = "ntfs3";
-    };
-
-  fileSystems."/mnt/games" =
-    { device = "/dev/disk/by-uuid/D0BA1E03BA1DE72E";
-      fsType = "ntfs3";
-    };
-
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 2 * 1024;
-    }
-  ];
-
   hardware = {
-  	cpu = {
-		intel.updateMicrocode = true;
-	};
+    cpu = {
+      intel.updateMicrocode = true;
+    };
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -68,9 +36,15 @@
     ];
     initrd = {
       verbose = false;
-      availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" "nvidia_drm" ];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "sd_mod"
+        "nvidia_drm"
+      ];
     };
-	kernelModules = [ "kvm-intel" ];
+    kernelModules = [ "kvm-intel" ];
     supportedFilesystems = [
       "ntfs"
       "exfat"
@@ -94,10 +68,9 @@
   networking = {
     hostName = host;
     networkmanager.enable = true;
-	useDHCP = true;
+    useDHCP = lib.mkDefault true;
     firewall.enable = false;
   };
-
 
   users = {
     defaultUserShell = pkgs.zsh;
@@ -196,6 +169,29 @@
     };
   };
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users = {
+      ${user} = {
+        programs.home-manager.enable = true;
+        home = {
+          packages = with pkgs; [
+            shell-manager
+            wl-clipboard
+            rclone
+            pavucontrol
+            discord
+          ];
+          file = { };
+          username = user;
+          homeDirectory = "/home/${user}";
+          stateVersion = "24.11";
+        };
+      };
+    };
+  };
+
   security = {
     rtkit.enable = true;
     sudo.extraConfig = "Defaults timestamp_timeout=1";
@@ -216,7 +212,7 @@
   };
 
   nixpkgs = {
-  	hostPlatform = "x86_64-linux";
+    hostPlatform = "x86_64-linux";
     config.allowUnfree = true;
   };
 
@@ -235,5 +231,5 @@
     };
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

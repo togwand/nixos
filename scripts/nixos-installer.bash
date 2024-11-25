@@ -28,7 +28,7 @@ MANUAL INSTALLATION
  Mount formatted partitions
  $ sudo nixos-generate-config --root /mnt 
  $ sudo cp /mnt/etc/nixos /etc/nixos
- $ sudo nixos-install --impure --flake your_flake_uri#your_config_name
+ $ sudo nixos-install --flake your_flake_uri#your_config_name
  $ sudo nixos-enter --root /mnt -c 'passwd your_user_name'
 EOF
 exit
@@ -50,34 +50,6 @@ cat << EOF
 MENU
  1) Installation
 EOF
-}
-
-install-patch-hw() {
-	echo "Patch hardware configuration for ntfs drives? (yes/no)"
-	read -rei "yes" -p "answer: " answer
-	if [ "$answer" = "yes" ]
-	then 
-		blkid|grep ntfs
-		lsblk
-		read -re -p "device which has ntfs partitions: " ntfs_drive
-		read -re -p "partition numbers to mount: " -a ntfs_partitions
-		for partition in "${ntfs_partitions[@]}"
-		do
-			if df -H | grep /dev/"$ntfs_drive$partition"
-			then
-				echo "unmounting previously mounted ntfs partition dev/$ntfs_drive/$partition"
-				umount /dev/"$ntfs_drive$partition"
-			fi
-			read -rei "/mnt/mnt/ntfs-$partition" -p "partition #$partition mountpoint: " part_mountpoint
-			if ! ls "$part_mountpoint"
-			then mkdir -p "$part_mountpoint"
-			fi
-			mount -t ntfs3 /dev/"$ntfs_drive$partition" "$part_mountpoint"
-		done
-	fi
-	nixos-generate-config --root /mnt
-	cp -r /mnt/etc/nixos/hardware-configuration.nix /etc/nixos
-	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
 }
 
 install() {
@@ -115,8 +87,9 @@ install() {
 	mount "$nixos_disk"2 /mnt
 	mkdir -p /mnt/boot
 	mount "$nixos_disk"1 /mnt/boot
-	install-patch-hw
-	nixos-install --root /mnt --impure --flake "$flake_uri"#"$config_name"
+	# install-patch-hw
+	# disko command to mount stuff in the disko file
+	nixos-install --root /mnt --flake "$flake_uri"#"$config_name"
 	read -rei "togwand" -p "user without password: " user
 	nixos-enter --root /mnt -c "passwd $user"
 	systemctl reboot

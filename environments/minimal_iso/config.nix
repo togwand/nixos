@@ -1,14 +1,10 @@
 {
   lib,
   pkgs,
+  user,
   ...
 }:
 {
-  imports = [
-    ../home-manager.nix
-    ../scripts.nix
-  ];
-
   boot = {
     consoleLogLevel = 3;
     kernelParams = [
@@ -21,7 +17,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   console = {
-	packages.default = lib.mkForce [ pkgs.uw-ttyp0 ];
+    packages.default = lib.mkForce [ pkgs.uw-ttyp0 ];
     font = "t0-13b-uni";
     useXkbConfig = true;
   };
@@ -57,6 +53,29 @@
 
   programs = {
     zsh.enable = true;
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users = {
+      ${user} = {
+        programs = {
+          home-manager.enable = true;
+          git.enable = true;
+          bat.enable = true;
+        };
+        home = {
+          packages = with pkgs; [
+            nixos-installer
+          ];
+          file = { };
+          username = user;
+          homeDirectory = "/home/${user}";
+          stateVersion = "24.11";
+        };
+      };
+    };
   };
 
   nixpkgs = {

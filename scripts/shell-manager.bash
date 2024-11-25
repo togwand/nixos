@@ -52,7 +52,6 @@ cat << EOF
 SYSTEM MENU
  1) Collect garbage
  2) Optimise store
- 3) Patch hardware configuration
 EOF
 }
 
@@ -104,22 +103,9 @@ cmd_args() {
 	fi
 }
 
-test_device() {
-	if test -b /dev/"$1"
-	then
-		if lsblk -ndo type /dev/"$1" | grep -qF part
-		then echo "this is a partition, not a disk"
-		fi
-	else echo "this is not a valid storage device"
-	fi
-}
-
 burn_iso() {
 	lsblk
 	read -re -p "device: " burnt
-	if ! test_device "$burnt"
-	then return
-	fi
 	wipefs /dev/"$burnt"
 	cp result/iso/nixos-*.iso /dev/"$burnt"
 	sync "/dev/$burnt"
@@ -144,38 +130,10 @@ o2() {
 	esac
 }
 
-patch_hw() {
-	echo "Patch hardware configuration for ntfs drives? (yes/no)"
-	read -rei "no" -p "answer: " answer
-	if [ "$answer" = "yes" ]
-	then 
-		blkid|grep ntfs
-		lsblk
-		read -re -p "device which has ntfs partitions: " ntfs_drive
-		read -re -p "partition numbers to mount: " -a ntfs_partitions
-		for partition in "${ntfs_partitions[@]}"
-		do
-			if df -H | grep /dev/"$ntfs_drive$partition"
-			then
-				echo "unmounting previously mounted ntfs partition dev/$ntfs_drive/$partition"
-				umount /dev/"$ntfs_drive$partition"
-			fi
-			read -rei "/mnt/ntfs-$partition" -p "partition #$partition mountpoint: " part_mountpoint
-			if ! ls "$part_mountpoint"
-			then mkdir -p "$part_mountpoint"
-			fi
-			mount -t ntfs3 /dev/"$ntfs_drive$partition" "$part_mountpoint"
-		done
-	fi
-	nixos-generate-config
-	sed -i $'/fsType = "ntfs3"/a\\      options = ["uid=1000"];' /etc/nixos/hardware-configuration.nix
-	rm /etc/nixos/configuration.nix
-}
-
 build_config() {
 	read -rei "switch" -p "mode: " mode
 	read -rei "$HOSTNAME" -p "name: " name
-	nixos-rebuild "$mode" --quiet --impure --flake ."#$name"
+	nixos-rebuild "$mode" --quiet --flake ."#$name"
 }
 
 o3() {
@@ -189,7 +147,7 @@ o3() {
 
 build_iso() {
 	read -rei "github:togwand/nixos-config" -p "flake uri: " flake_uri
-	read -rei "minimal" -p "name: " config_name
+	read -rei "minimal_iso" -p "name: " config_name
 	nix build "$flake_uri"#nixosConfigurations."$config_name".config.system.build.isoImage
 }
 
