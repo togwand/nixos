@@ -62,7 +62,7 @@ Executable and portable* code not written in nix
 An interactive shell command manager
 
 TODO:
-1. Add function to swap between root and not root (with a restart of the program perhaps) 
+1. Add function to swap between root and not root (with a restart of the program perhaps)
 2. Better git options and aggregate its commands into functions
 3. Upgrade help section and add manpage/documentation
 4. Make prettier somehow
