@@ -49,7 +49,7 @@ EOF
 }
 
 install_nixos_flake() {
-	read -rei "https://github.com/togwand/nixos-config" -p "flake uri to git clone: " git_repo
+	read -rei "https://github.com/togwand/nixos-config/experimental" -p "flake uri to git clone: " git_repo
 	read -rei "/tmp/cloned_repo" -p "clone flake to: " flake_clone
 	git clone "$git_repo" "$flake_clone"
 	echo "Edit flake clone before installing? (y/n)"
