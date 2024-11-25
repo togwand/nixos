@@ -54,7 +54,7 @@ install_nixos_flake() {
 	read -rei "/tmp/installation_flake" -p "clone flake to: " flake_clone
 	sudo -u nixos git clone "$git_repo" "$flake_clone"
 	cd "$flake_clone" || true
-	sudo -u nixos switch "$branch"
+	sudo -u nixos git switch "$branch"
 	echo "Edit flake clone before installing? (y/n)"
 	read -rsn 1 edit_answer
 	case $edit_answer in 
@@ -69,7 +69,7 @@ install_nixos_flake() {
 	read -rei "togwand" -p "user: " user
 	local copy_path="/mnt/home/$user/git/installation_flake"
 	sudo -u nixos mkdir -p "$copy_path"
-	sudo -u nixos cp -r "$flake_clone" "$copy_path"
+	sudo -u nixos cp -r "$flake_clone" /mnt/home/"$user"/git
 	nixos-enter --root /mnt -c "passwd $user"
 	systemctl reboot
 }
