@@ -8,6 +8,8 @@
 }:
 {
   hardware = {
+    # enableAllFirmware = true;
+    enableRedistributableFirmware = true;
     cpu = {
       intel.updateMicrocode = true;
     };
@@ -26,6 +28,67 @@
       powerOnBoot = true;
     };
   };
+
+  disko.devices.disk.main = {
+    device = "/dev/disk/by-id/ata-CT120BX500SSD1_1949E3DC2F9B";
+    type = "disk";
+    content = {
+      type = "gpt";
+      partitions = {
+        esp = {
+          name = "esp";
+          size = "550M";
+          type = "EF00";
+          content = {
+            type = "filesystem";
+            format = "vfat";
+            mountpoint = "/boot";
+            mountOptions = [ "umask=0077" ];
+          };
+        };
+        root = {
+          name = "root";
+          size = "100%";
+          content = {
+            type = "filesystem";
+            format = "ext4";
+            mountpoint = "/";
+          };
+        };
+      };
+    };
+  };
+
+  fileSystems."/mnt/windows" = {
+    device = "/dev/disk/by-uuid/06C8132AC813178F";
+    fsType = "ntfs3";
+  };
+
+  fileSystems."/mnt/games" = {
+    device = "/dev/disk/by-uuid/D0BA1E03BA1DE72E";
+    fsType = "ntfs3";
+  };
+
+  # fileSystems."/" = {
+  #   device = "/dev/disk/by-uuid/eaf2c5ab-8651-4702-948b-9d463d381f85";
+  #   fsType = "ext4";
+  # };
+  #
+  # fileSystems."/boot" = {
+  #   device = "/dev/disk/by-uuid/A508-86F5";
+  #   fsType = "vfat";
+  #   options = [
+  #     "fmask=0022"
+  #     "dmask=0022"
+  #   ];
+  # };
+
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 2 * 1024;
+    }
+  ];
 
   boot = {
     tmp.cleanOnBoot = true;
@@ -81,6 +144,29 @@
           "wheel"
           "networkmanager"
         ];
+      };
+    };
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users = {
+      ${user} = {
+        programs.home-manager.enable = true;
+        home = {
+          packages = with pkgs; [
+            shell-manager
+            wl-clipboard
+            rclone
+            pavucontrol
+            discord
+          ];
+          file = { };
+          username = user;
+          homeDirectory = "/home/${user}";
+          stateVersion = "24.11";
+        };
       };
     };
   };
@@ -166,29 +252,6 @@
       useEmbeddedBitmaps = false;
       cache32Bit = false;
       allowType1 = false;
-    };
-  };
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users = {
-      ${user} = {
-        programs.home-manager.enable = true;
-        home = {
-          packages = with pkgs; [
-            shell-manager
-            wl-clipboard
-            rclone
-            pavucontrol
-            discord
-          ];
-          file = { };
-          username = user;
-          homeDirectory = "/home/${user}";
-          stateVersion = "24.11";
-        };
-      };
     };
   };
 

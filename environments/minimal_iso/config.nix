@@ -61,13 +61,14 @@
     users = {
       ${user} = {
         programs = {
-          home-manager.enable = true;
-          git.enable = true;
           bat.enable = true;
+          git.enable = true;
+          home-manager.enable = true;
         };
         home = {
           packages = with pkgs; [
             nixos-installer
+            disko
           ];
           file = { };
           username = user;

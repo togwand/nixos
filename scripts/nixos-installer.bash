@@ -13,9 +13,6 @@ KEYBINDINGS
  		Print a manual installation guide and exit
  q, Q
 		Exit the program
-
-KNOWN ISSUES
- You can "queue" options before the current one ends
 EOF
 }
 
@@ -26,10 +23,9 @@ MANUAL INSTALLATION
  Create partition table on disk (e.g. $ sudo cgdisk /dev/sda), no swap partition needed if swap file in custom config
  Format partitions (e.g. mkfs.* ...)
  Mount formatted partitions
- $ sudo nixos-generate-config --root /mnt 
- $ sudo cp /mnt/etc/nixos /etc/nixos
  $ sudo nixos-install --flake your_flake_uri#your_config_name
  $ sudo nixos-enter --root /mnt -c 'passwd your_user_name'
+ Reboot
 EOF
 exit
 }
@@ -48,49 +44,27 @@ menu() {
 cat << EOF
 
 MENU
- 1) Installation
+ 1) Install NixOS from a flake
 EOF
 }
 
-install() {
-	echo "You need to specify a flake and a configuration name before the installation"
-	echo "Do you want to clone a flake repository before that (y/n)?"
-	read -rsn 1 clone_or_not
-	case $clone_or_not in 
-		y)
-			read -rei "https://github.com/togwand/nixos-config" -p "url to clone: " cloned_repo
-			read -rei "/home/guided_install/cloned_flake" -p "clone to: " destination
-			git clone "$cloned_repo" "$destination"
-			;;
-		*) return 1
+install_nixos_flake() {
+	read -rei "https://github.com/togwand/nixos-config" -p "flake uri to git clone: " git_repo
+	read -rei "/tmp/cloned_repo" -p "clone flake to: " flake_clone
+	git clone "$git_repo" "$flake_clone"
+	echo "Edit flake clone before installing? (y/n)"
+	read -rsn 1 edit_answer
+	case $edit_answer in 
+		y) sudo -u nixos ranger "$flake_clone";;
 	esac
-	read -rei "/home/guided_install/cloned_flake" -p "flake uri: " flake_uri
+	echo "ATTENTION, this is the POINT OF NO RETURN, if you wish to abort use CTRL+C"
+	echo "Configuration name needed for disko and nixos-install"
 	read -rei "stale" -p "config name: " config_name
-	lsblk
-	echo "Enter the disk you will be using to install NixOS"
-	read -rei "/dev/sda" -p "nixos disk: " nixos_disk
-	echo "$nixos_disk will be tested and wiped"
-	read -rei "no" -p "continue? (yes/no) " test_and_wipe
-	if [ "$test_and_wipe" != "yes" ]
-	then return 1
-	fi
-	wipefs -af "$nixos_disk"
-	blkdiscard -f "$nixos_disk"
-	echo "Make a table with 2 partitions:
-	 #1 100-500 MiB of space, type ef00 (the \"esp\")
-	 #2 remaining space, default type (fs root partition)"
-	read -rsn 1 -p "Press any key to continue " test_and_wipe
-	cgdisk "$nixos_disk"
-	echo "Formatting and mounting partitions"
-	mkfs.fat -F 32 "$nixos_disk"1
-	mkfs.ext4 "$nixos_disk"2
-	mount "$nixos_disk"2 /mnt
-	mkdir -p /mnt/boot
-	mount "$nixos_disk"1 /mnt/boot
-	# install-patch-hw
-	# disko command to mount stuff in the disko file
-	nixos-install --root /mnt --flake "$flake_uri"#"$config_name"
-	read -rei "togwand" -p "user without password: " user
+	disko -m disko -f "$flake_clone"#"$config_name"
+	nixos-install --root /mnt --flake "$flake_clone"#"$config_name"
+	echo "Enter a user name for setting its password and copying the flake clone to the installed filesystem" 
+	read -rei "togwand" -p "user: " user
+	cp "$flake_clone" /mnt/home/"$user"/installation
 	nixos-enter --root /mnt -c "passwd $user"
 	systemctl reboot
 }
@@ -118,8 +92,7 @@ do
 	show_interface
 	read -rsn 1 key
 	case $key in
-		1) clone_flake;;
-		2) install;;
+		1) install_nixos_flake;;
 		h|H) help|less;;
 		m|M) manual_guide;;
 		q|Q) clear && exit;;

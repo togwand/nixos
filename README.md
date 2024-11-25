@@ -3,7 +3,7 @@ Nix flake for my NixOS configurations, including environments, modules, scripts 
 
 ### Inputs
  * nixpkgs/nixos-unstable -> Earlier and more features, overall less issues than stable
- * disko/master -> For an easier and more reliable way to install NixOS as well as not generating-nixos-config
+ * disko/master -> For an easier and more reliable way to install NixOS as well as not using generated filesystems
  * home-manager/master -> Some apps are easier to configure with it (e.g. zsh, hyprland)
  * nixvim/main -> Very modular and fairly easy to modify
 
@@ -11,19 +11,17 @@ Nix flake for my NixOS configurations, including environments, modules, scripts 
  * nixfmt -> Might not be compact but it's consistent and fast
 
 TODO:
-1. environments 1
-2. home-manager
+1. home-manager
+2. stale
 3. nixos-installer
-4. stale
-5. shell-manager
-6. environments 2
+4. shell-manager
+5. environments
 
 ## Environments
 NixOS configurations including system options, submodules, packages and variables
 
 TODO:
-1. Add disko as an input to flake
-2. Make a comfy iso environment
+1. Make a comfy iso environment
 
 ### minimal_iso
 tty + nixos-installer configuration for a fast and easy installation
@@ -50,7 +48,7 @@ Nix overlays, options, etc
 Includes all my home-manager programs configurations, with options added for modularity
 
 TODO: 
-1. Add the options and test with different environments
+1. Add options to program submodules and test with different environments
 
 ### scripts
 Overlays with the writeScriptBin writer, one overlay per language
@@ -64,14 +62,13 @@ Executable and portable* code not written in nix
 An interactive shell command manager
 
 TODO:
-1. Better git options and aggregate its commands into functions
-2. Upgrade help section and add manpage/documentation
-3. Make prettier somehow
+1. Add function to swap between root and not root (with a restart of the program perhaps) 
+2. Better git options and aggregate its commands into functions
+3. Upgrade help section and add manpage/documentation
+4. Make prettier somehow
 
 #### nixos-installer
 An interactive NixOS installer
 
 TODO:
-1. Learn disko and put it into the flake_install function
-2. Make more modular, add functions for repeates stuff and simplify code 
-3. Better help section
+1. Better help section

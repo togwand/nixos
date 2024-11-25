@@ -1,9 +1,9 @@
 { inputs, user, ... }:
 {
   imports = [
+    inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     ./config.nix
-    ./disko.nix
   ];
 
   home-manager.users.${user}.imports = [
