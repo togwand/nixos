@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  user,
   ...
 }:
 {
@@ -24,16 +23,8 @@
     getty = {
       greetingLine = "Minimal environment";
       helpLine = lib.mkForce ''
-        Script:
+        Installation script:
         nixos-installer
-
-        Applications:
-        bat (default)
-        disko (default)
-        git (default)
-        nixvim
-        ranger
-        zsh
       '';
     };
     xserver.xkb = {
@@ -51,30 +42,6 @@
 
   programs = {
     zsh.enable = true;
-  };
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users = {
-      ${user} = {
-        programs = {
-          bat.enable = true;
-          git.enable = true;
-          home-manager.enable = true;
-        };
-        home = {
-          packages = with pkgs; [
-            nixos-installer
-            disko
-          ];
-          file = { };
-          username = user;
-          homeDirectory = "/home/${user}";
-          stateVersion = "24.11";
-        };
-      };
-    };
   };
 
   nixpkgs = {

@@ -11,11 +11,11 @@ Nix flake for my NixOS configurations, including environments, modules, scripts 
  * nixfmt -> Might not be compact but it's consistent and fast
 
 TODO:
-1. home-manager
-2. stale
+1. stale
+2. shell-manager
+3. modules
 3. nixos-installer
-4. shell-manager
-5. environments
+4. environments
 
 ## Environments
 NixOS configurations including system options, submodules, packages and variables
@@ -42,16 +42,16 @@ TODO:
 10. Keep working on hyprland desktop (check useful utilities page and awersome hyprland repo)
 
 ## Modules
-Nix overlays, options, etc
+Nix overlays, configurations, and more which are toggleable with custom options
+
+TODO:
+1. Test and add more nix options to all modules
 
 ### home-manager
-Includes all my home-manager programs configurations, with options added for modularity
-
-TODO: 
-1. Add options to program submodules and test with different environments
+Includes all my home-manager programs configurations
 
 ### scripts
-Overlays with the writeScriptBin writer, one overlay per language
+Overlays using the writeScriptBin writer, one overlay per language
 
 ## Scripts
 Executable and portable* code not written in nix 
@@ -71,4 +71,5 @@ TODO:
 An interactive NixOS installer
 
 TODO:
-1. Better help section
+1. Add functions or options for better customization
+2. Better help section
