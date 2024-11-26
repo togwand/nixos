@@ -14,7 +14,6 @@ TODO:
 1. stale
 2. shell-manager
 3. modules
-3. nixos-installer
 4. environments
 
 ## Environments
@@ -23,10 +22,10 @@ NixOS configurations including system options, submodules, packages and variable
 TODO:
 1. Make a comfy iso environment
 
-### minimal_iso
+#### minimal_iso
 tty + nixos-installer configuration for a fast and easy installation
 
-### stale
+#### stale
 Hyprland + shell-manager configuration to enhance my workflow
 
 TODO:
@@ -47,10 +46,10 @@ Nix overlays, configurations, and more which are toggleable with custom options
 TODO:
 1. Test and add more nix options to all modules
 
-### home-manager
+#### home-manager
 Home-manager programs configurations
 
-### overlays
+#### overlays
 Derivations built with a nix writer or similar builder, one overlay per derivation
 
 ## Scripts
@@ -64,12 +63,6 @@ An interactive shell command manager
 TODO:
 1. Add function to swap between root and not root (with a restart of the program perhaps)
 2. Better git options and aggregate its commands into functions
-3. Upgrade help section and add manpage/documentation
-4. Make prettier somehow
 
 #### nixos-installer
 An interactive NixOS installer
-
-TODO:
-1. Add functions or options for better customization
-2. Better help section
