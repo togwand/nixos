@@ -60,9 +60,8 @@
 
         misc = {
           disable_hyprland_logo = true;
-          disable_splash_rendering = false;
+          disable_splash_rendering = true;
           font_family = "TeXGyreAdventor";
-          force_default_wallpaper = "2";
           vfr = true;
           vrr = "0";
           layers_hog_keyboard_focus = false;
@@ -115,7 +114,7 @@
           hide_on_key_press = false;
         };
 
-        exec-once = "$terminal-emulator";
+        exec-once = "$terminal-emulator && hyprpaper";
         env = [
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,12"

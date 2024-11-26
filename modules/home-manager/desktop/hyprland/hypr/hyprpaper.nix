@@ -9,16 +9,13 @@
     home-manager.users.${user}.services.hyprpaper = {
       enable = true;
       settings = {
-        ipc = "off";
-        splash = true;
-        splash_offset = 5.0;
-
+        ipc = "on";
+        splash = false;
         preload = [
-          "~/collection/images/wallpapers/chill-mountain.png"
+          "~/collection/images/wallpapers/blue-forest.jpg"
         ];
-
         wallpaper = [
-          ",~/collection/images/wallpapers/chill-mountain.png"
+          ",~/collection/images/wallpapers/blue-forest.jpg"
         ];
       };
     };
