@@ -45,6 +45,7 @@ cat << EOF
 
 MENU
  1) Install NixOS from a flake
+
 EOF
 }
 
@@ -66,7 +67,6 @@ install_nixos_flake() {
 		read -rsn 1 flake_option
 		case $flake_option in 
 			1)
-				sudo -u nixos ranger
 				read -rei "https://github.com/togwand/nixos-config" -p "git repo to clone: " repo
 				read -rei "experimental" -p "git branch to use: " branch
 				read -rei "/tmp" -p "clone root directory: " clone_path
@@ -95,17 +95,19 @@ install_nixos_flake() {
 			*)  continue;;
 		esac
 	done
+
 	disko -m disko -f "$flake_uri#$config_name"
 	nixos-install --root /mnt --no-root-password --flake "$flake_uri#$config_name"
+	
 	while true
 	do
 	echo "All Users:"
-	nixos-enter --root /mnt -c "sudo passwd -Sa | grep -v nixbld | grep -v messagebus | grep -v polkituser | grep -v systemd- | grep -v nm-openvpn | grep -v rtkit | grep -v nm-iodine | grep -v nobody | grep -v nscd | grep -Eo '^[^ ]+'"
+	nixos-enter --root /mnt -c "passwd -Sa | grep -v nixbld | grep -v messagebus | grep -v polkituser | grep -v systemd- | grep -v nm-openvpn | grep -v rtkit | grep -v nm-iodine | grep -v nobody | grep -v nscd | grep -Eo '^[^ ]+'"
 	echo "Please enter a user to give password to"
 	read -rei "togwand" -p "user: " user
-	nixos-enter --root /mnt -c "sudo passwd $user"
+	nixos-enter --root /mnt -c "passwd $user"
 	echo "Users with passwords:"
-	nixos-enter --root /mnt -c "sudo passwd -Sa | grep P | grep -Eo '^[^ ]+'"
+	nixos-enter --root /mnt -c "passwd -Sa | grep P | grep -Eo '^[^ ]+'"
 	echo "Stop giving passwords to users? (y/n)"
 	read -rsn 1 end_passwd
 	case $end_passwd in
@@ -113,8 +115,9 @@ install_nixos_flake() {
 	    *) continue;;
 	esac
 	done
+	
 	echo "Users with passwords:"
-	nixos-enter --root /mnt -c "sudo passwd -Sa | grep P | grep -Eo '^[^ ]+'"
+	nixos-enter --root /mnt -c "passwd -Sa | grep P | grep -Eo '^[^ ]+'"
 	echo "Please enter a user to copy the used flake to"
 	read -rei "togwand" -p "user: " user
 	local git_path="/mnt/home/$user/git" make_path
@@ -124,11 +127,11 @@ install_nixos_flake() {
 			sudo -u nixos mkdir -p "$make_path"
 			sudo -u nixos cp -r "$flake_uri" "$git_path";;
 		2)
-			read -rei "nixos-config" -p "name of the directory: " directory_name
+			read -rei "nixos-config" -p "copied flake name: " directory_name
 			make_path="$git_path/$directory_name"
 			sudo -u nixos mkdir -p "$make_path"
-			if ! sudo -u nixos cp -r "$flake_uri" "$git_path"
-			then "The flake uri you specified was a remote one, so it wasn't copied"
+			if ! sudo -u nixos cp -r "$flake_uri" "$git_path" 2> /dev/null
+			then echo "The flake uri you specified was a remote one, so it wasn't copied!"
 			fi
 	esac
 	echo "Installation from flake finished. Press enter to reboot"
