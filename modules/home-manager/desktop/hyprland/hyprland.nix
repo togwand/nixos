@@ -59,8 +59,8 @@
         };
 
         misc = {
-          disable_hyprland_logo = false;
-          disable_splash_rendering = true;
+          disable_hyprland_logo = true;
+          disable_splash_rendering = false;
           font_family = "TeXGyreAdventor";
           force_default_wallpaper = "2";
           vfr = true;
@@ -121,7 +121,7 @@
           "HYPRCURSOR_SIZE,12"
         ];
 
-        monitor = ",1920x1080@60.00,0x0,1";
+        monitor = ",1920x1080@99.93,0x0,1";
 
         "$workspace" = "SUPER";
         "$window" = "ALT";

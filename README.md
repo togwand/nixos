@@ -29,7 +29,7 @@ tty + nixos-installer configuration for a fast and easy installation
 Hyprland + shell-manager configuration to enhance my workflow
 
 TODO:
-1. Tune hyprland options a little more, test a more aesthetic approach
+1. Keep working on hyprland options and desktop
 2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
 3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
 4. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
@@ -38,7 +38,6 @@ TODO:
 7. Change colorscheme and theme of terminal, neovim and make the system match it
 8. Check the programming language used for my installed pkgs (remove or replace rust ones)
 9. Test different app launcher and file browser (lack of features on current ones)
-10. Keep working on hyprland desktop (check useful utilities page and awersome hyprland repo)
 
 ## Modules
 Nix overlays, configurations, and more which are toggleable with custom options
@@ -47,7 +46,7 @@ TODO:
 1. Test and add more nix options to all modules
 
 #### home-manager
-Home-manager programs configurations
+Home-manager configurations for programs and services
 
 #### overlays
 Derivations built with a nix writer or similar builder, one overlay per derivation

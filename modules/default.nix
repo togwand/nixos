@@ -8,14 +8,16 @@
     modules = {
       home-manager = {
         desktop = {
+          hyprland = {
+            enable = lib.mkEnableOption "";
+            hyprpaper.enable = lib.mkEnableOption "";
+          };
           firefox.enable = lib.mkEnableOption "";
           fuzzel.enable = lib.mkEnableOption "";
           gtk.enable = lib.mkEnableOption "";
-          hyprland.enable = lib.mkEnableOption "";
           swaync.enable = lib.mkEnableOption "";
         };
         dev = {
-          git.enable = lib.mkEnableOption "";
           nixvim = {
             enable = lib.mkEnableOption "";
             comment.enable = lib.mkEnableOption "";
@@ -23,6 +25,7 @@
             lualine.enable = lib.mkEnableOption "";
             treesitter.enable = lib.mkEnableOption "";
           };
+          git.enable = lib.mkEnableOption "";
         };
         gaming = {
           mangohud.enable = lib.mkEnableOption "";
