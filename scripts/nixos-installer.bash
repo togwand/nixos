@@ -49,11 +49,12 @@ EOF
 }
 
 install_nixos_flake() {
-	read -rei "https://github.com/togwand/nixos-config" -p "flake uri to git clone: " git_repo
-	read -rei "experimental" -p "branch to use: " branch
-	read -rei "/tmp/installation_flake" -p "clone flake to: " flake_clone
-	sudo -u nixos git clone "$git_repo" "$flake_clone"
-	cd "$flake_clone" || true
+	read -rei "https://github.com/togwand/nixos-config" -p "git repo to clone: " repo
+	read -rei "experimental" -p "git branch to use: " branch
+	read -rei "/tmp" -p "clone flake to: " clone_path
+	read -rei "nixos-config" -p "clone name: " clone_name
+	sudo -u nixos git clone "$repo" "$clone_path/$clone_name"
+	cd "$clone_path/$clone_name" || true
 	sudo -u nixos git switch "$branch"
 	echo "Edit flake clone before installing? (y/n)"
 	read -rsn 1 edit_answer
@@ -63,15 +64,20 @@ install_nixos_flake() {
 	echo "ATTENTION, this is the POINT OF NO RETURN, if you wish to abort use CTRL+C"
 	echo "Configuration name needed for disko and nixos-install"
 	read -rei "stale" -p "config name: " config_name
-	disko -m disko -f "$flake_clone"#"$config_name"
-	nixos-install --root /mnt --flake "$flake_clone"#"$config_name"
-	echo "Enter a user name for setting its password and copy the flake used to install" 
+	disko -m disko -f "$clone_path/$clone_name#$config_name"
+	nixos-install --root /mnt --flake "$clone_path/$clone_name#$config_name"
 	read -rei "togwand" -p "user: " user
-	local copy_path="/mnt/home/$user/git/installation_flake"
-	sudo -u nixos mkdir -p "$copy_path"
-	sudo -u nixos cp -r "$flake_clone" /mnt/home/"$user"/git
 	nixos-enter --root /mnt -c "passwd $user"
-	systemctl reboot
+	local git_path="/mnt/home/$user/git"
+	local make_path="$git_path/$clone_name"
+	sudo -u nixos mkdir -p "$make_path"
+	sudo -u nixos cp -r "$clone_path/$clone_name" "$git_path"
+	nixos-enter --root /mnt -c "passwd $user"
+	read -rs reboot_input
+	echo "Press enter to reboot"
+	case $reboot_input in 
+		*) systemctl reboot;;
+	esac
 }
 
 show_interface() {
