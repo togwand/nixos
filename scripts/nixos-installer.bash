@@ -67,14 +67,13 @@ install_nixos_flake() {
 	disko -m disko -f "$clone_path/$clone_name#$config_name"
 	nixos-install --root /mnt --flake "$clone_path/$clone_name#$config_name"
 	read -rei "togwand" -p "user: " user
-	nixos-enter --root /mnt -c "passwd $user"
 	local git_path="/mnt/home/$user/git"
 	local make_path="$git_path/$clone_name"
 	sudo -u nixos mkdir -p "$make_path"
 	sudo -u nixos cp -r "$clone_path/$clone_name" "$git_path"
 	nixos-enter --root /mnt -c "passwd $user"
-	read -rs reboot_input
 	echo "Press enter to reboot"
+	read -rs reboot_input
 	case $reboot_input in 
 		*) systemctl reboot;;
 	esac
