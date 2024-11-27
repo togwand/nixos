@@ -190,6 +190,10 @@
           "$window-move, k, moveactive, 0 -24"
           "$window-move, l, moveactive, 24 0"
         ];
+		
+		bindl = [
+			", Print, exec, hyprshot -m region"
+		];
 
         dwindle = {
           force_split = "2";

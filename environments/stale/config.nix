@@ -98,6 +98,7 @@
             wl-clipboard
             rclone
             pavucontrol
+            hyprshot
             discord
           ];
           file = { };
