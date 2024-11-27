@@ -10,7 +10,7 @@
       enable = true;
       xwayland.enable = true;
       settings = {
-        "$app-launcher" = "fuzzel";
+        "$app-launcher" = "tofi-drun";
         "$terminal-emulator" = "foot";
         "$web-browser" = "firefox";
 
