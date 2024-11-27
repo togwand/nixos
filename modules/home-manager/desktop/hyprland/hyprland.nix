@@ -114,7 +114,7 @@
           hide_on_key_press = false;
         };
 
-        exec-once = "$terminal-emulator && hyprpaper";
+        exec-once = "$terminal-emulator && hyprpaper && waybar";
         env = [
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,12"

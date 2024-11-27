@@ -16,6 +16,7 @@
           fuzzel.enable = lib.mkEnableOption "";
           gtk.enable = lib.mkEnableOption "";
           swaync.enable = lib.mkEnableOption "";
+          waybar.enable = lib.mkEnableOption "";
         };
         dev = {
           nixvim = {

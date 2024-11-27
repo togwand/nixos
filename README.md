@@ -37,7 +37,6 @@ TODO:
 6. Check vimjoyer videos to keep adding to the system
 7. Change colorscheme and theme of terminal, neovim and make the system match it
 8. Check the programming language used for my installed pkgs (remove or replace rust ones)
-9. Test different app launcher and file browser (lack of features on current ones)
 
 ## Modules
 Nix overlays, configurations, and more which are toggleable with custom options
@@ -60,8 +59,9 @@ Executable and portable* code not written in nix
 An interactive shell command manager
 
 TODO:
-1. Add function to swap between root and not root (with a restart of the program perhaps)
-2. Better git options and aggregate its commands into functions
+1. Set the flake to be used to be a remote one instead of local
+2. Add function to swap between root and not root (with a restart of the program perhaps)
+3. Better git options and aggregate its commands into functions
 
 #### nixos-installer
 An interactive NixOS installer
