@@ -12,10 +12,10 @@
         ipc = "on";
         splash = false;
         preload = [
-          "magic-sky.jpg"
+          "~/collection/images/wallpapers/magic-sky.jpg"
         ];
         wallpaper = [
-          ",magic-sky.jpg"
+          ",~/collection/images/wallpapers/magic-sky.jpg"
         ];
       };
     };
