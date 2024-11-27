@@ -12,6 +12,7 @@
             enable = lib.mkEnableOption "";
             hyprpaper.enable = lib.mkEnableOption "";
           };
+          bemenu.enable = lib.mkEnableOption "";
           firefox.enable = lib.mkEnableOption "";
           fuzzel.enable = lib.mkEnableOption "";
           gtk.enable = lib.mkEnableOption "";

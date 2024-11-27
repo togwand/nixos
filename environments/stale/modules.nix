@@ -6,6 +6,7 @@
           enable = true;
           hyprpaper.enable = true;
         };
+        bemenu.enable = true;
         firefox.enable = true;
         fuzzel.enable = true;
         gtk.enable = true;
