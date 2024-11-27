@@ -5,8 +5,8 @@
   ...
 }:
 {
-  config = lib.mkIf config.modules.home-manager.desktop.walker.enable {
-    home-manager.users.${user}.programs.walker = {
+  config = lib.mkIf config.modules.home-manager.desktop.tofi.enable {
+    home-manager.users.${user}.programs.tofi = {
       enable = true;
       settings = {
         background-color = "#000000";

@@ -5,6 +5,6 @@
     ./fuzzel.nix
     ./gtk.nix
     ./swaync.nix
-    ./walker.nix
+    ./tofi.nix
   ];
 }

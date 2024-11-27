@@ -10,7 +10,7 @@
         fuzzel.enable = true;
         gtk.enable = true;
         swaync.enable = true;
-        walker.enable = true;
+        tofi.enable = true;
       };
       dev = {
         nixvim = {
