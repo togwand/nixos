@@ -6,11 +6,11 @@
           enable = true;
           hyprpaper.enable = true;
         };
-        bemenu.enable = true;
         firefox.enable = true;
         fuzzel.enable = true;
         gtk.enable = true;
         swaync.enable = true;
+        walker.enable = true;
       };
       dev = {
         nixvim = {
