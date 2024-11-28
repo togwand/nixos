@@ -147,6 +147,7 @@
     variables = {
       VISUAL = "nvim";
       BROWSER = "firefox";
+      TERMINAL = "foot";
     };
     pathsToLink = [ "/share/zsh" ];
   };

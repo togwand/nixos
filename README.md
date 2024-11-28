@@ -60,8 +60,9 @@ An interactive shell command manager
 
 TODO:
 1. Set the flake to be used to be a remote one instead of local
-2. Add function to swap between root and not root (with a restart of the program perhaps)
-3. Better git options and aggregate its commands into functions
+2. Make the options be abortable/cancellable with ctrl+c without exiting the program 
+3. Add function to swap between root and not root (with a restart of the program perhaps)
+4. Better git options and aggregate its commands into functions
 
 #### nixos-installer
 An interactive NixOS installer
