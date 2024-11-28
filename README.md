@@ -28,21 +28,21 @@ tty + nixos-installer configuration for a fast and easy installation
 #### stale
 Hyprland + shell-manager configuration to enhance my workflow
 
-TODO:
-1. Keep working on hyprland options and desktop
-2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
-3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
-4. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
-5. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
-6. Check vimjoyer videos to keep adding to the system
-7. Change colorscheme and theme of terminal, neovim and make the system match it
-8. Check the programming language used for my installed pkgs (remove or replace rust ones)
+1. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
+2. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
+3. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
+4. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+5. Check vimjoyer videos to keep adding to the system
+6. Change colorscheme and theme of terminal, neovim and make the system match it
+7. Check the programming language used for my installed pkgs (remove or replace rust ones)
 
 ## Modules
 Nix overlays, configurations, and more which are toggleable with custom options
 
 TODO:
-1. Test and add more nix options to all modules
+1. Change the options that depend on other programs to be in the same directory as the environment that used the other program (example hyprland uses firefox then move that option and similar ones to the directory of an environment instead of the main hyprland module, only hyprland only options in the hyprland module)
+2. Make options for enable/disable options inside the configuration of modules (ex for minimal iso versus desktop environments)
+3. Test and add more nix options to all modules
 
 #### home-manager
 Home-manager configurations for programs and services
@@ -59,10 +59,11 @@ Executable and portable* code not written in nix
 An interactive shell command manager
 
 TODO:
-1. Set the flake to be used to be a remote one instead of local
-2. Make the options be abortable/cancellable with ctrl+c without exiting the program 
-3. Add function to swap between root and not root (with a restart of the program perhaps)
-4. Better git options and aggregate its commands into functions
+1. git diff to be git diff HEAD or git diff --staged
+2. Set the flake to be used to be a remote one instead of local
+3. Make the options be abortable/cancellable with ctrl+c without exiting the program 
+4. Add function to swap between root and not root (with a restart of the program perhaps)
+5. Better git options and aggregate its commands into functions
 
 #### nixos-installer
 An interactive NixOS installer

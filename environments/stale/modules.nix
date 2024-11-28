@@ -7,7 +7,6 @@
           hyprpaper.enable = true;
         };
         firefox.enable = true;
-        fuzzel.enable = true;
         gtk.enable = true;
         swaync.enable = true;
         tofi.enable = true;

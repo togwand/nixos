@@ -148,6 +148,7 @@
       VISUAL = "nvim";
       BROWSER = "firefox";
       TERMINAL = "foot";
+      HYPRSHOT_DIR = "~/collection/images/screen-pictures";
     };
     pathsToLink = [ "/share/zsh" ];
   };
