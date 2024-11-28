@@ -5,5 +5,6 @@
     ./gtk.nix
     ./swaync.nix
     ./tofi.nix
+    ./waybar.nix
   ];
 }

@@ -16,6 +16,7 @@
           gtk.enable = lib.mkEnableOption "";
           swaync.enable = lib.mkEnableOption "";
           tofi.enable = lib.mkEnableOption "";
+          waybar.enable = lib.mkEnableOption "";
         };
         dev = {
           nixvim = {

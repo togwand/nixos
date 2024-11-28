@@ -10,6 +10,7 @@
         gtk.enable = true;
         swaync.enable = true;
         tofi.enable = true;
+        waybar.enable = true;
       };
       dev = {
         nixvim = {
