@@ -28,13 +28,14 @@ tty + nixos-installer configuration for a fast and easy installation
 #### stale
 Hyprland + shell-manager configuration to enhance my workflow
 
-1. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
-2. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
-3. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
-4. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
-5. Check vimjoyer videos to keep adding to the system
-6. Change colorscheme and theme of terminal, neovim and make the system match it
-7. Check the programming language used for my installed pkgs (remove or replace rust ones)
+1. Try all awesome hyprland and are we wayland programs, test all the wiki configuration and faq
+2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
+3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
+4. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
+5. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+6. Check vimjoyer videos to keep adding to the system
+7. Change colorscheme and theme of terminal, neovim and make the system match it
+8. Check the programming language used for my installed pkgs (remove or replace rust ones)
 
 ## Modules
 Nix overlays, configurations, and more which are toggleable with custom options
@@ -59,11 +60,10 @@ Executable and portable* code not written in nix
 An interactive shell command manager
 
 TODO:
-1. git diff to be git diff HEAD or git diff --staged
-2. Set the flake to be used to be a remote one instead of local
-3. Make the options be abortable/cancellable with ctrl+c without exiting the program 
-4. Add function to swap between root and not root (with a restart of the program perhaps)
-5. Better git options and aggregate its commands into functions
+1. Make the options be abortable/cancellable with ctrl+c without exiting the program (subshell?)
+2. Set the flake to be used to be a remote one instead of local on all related options
+3. Add function to swap between root and not root (with a restart of the program perhaps)
+4. Check the script from top to bottom to update further
 
 #### nixos-installer
 An interactive NixOS installer

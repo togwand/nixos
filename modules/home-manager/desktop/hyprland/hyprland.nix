@@ -150,12 +150,12 @@
           "$window, a, exec, pkill $app-launcher || $app-launcher"
           "$window, q, killactive"
           "$window, f, fullscreen, 0"
-          "$window, t, togglefloating"
-          "$window, c, centerwindow"
-          "$window, p, pin"
           "$window, 1, layoutmsg, swapsplit"
           "$window, 2, layoutmsg, togglesplit"
           "$window, 3, pseudo"
+          "$window, 4, togglefloating"
+          "$window, 5, centerwindow"
+          "$window, 6, pin"
 
           "$window, h, layoutmsg, preselect l"
           "$window, j, layoutmsg, preselect d"
@@ -193,6 +193,8 @@
 
         bindl = [
           ", Print, exec, hyprshot -m region"
+          "$workspace , p, exec, hyprshot -m output -m active"
+          "$window , p, exec, hyprshot -m window -m active"
         ];
 
         dwindle = {

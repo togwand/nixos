@@ -34,7 +34,6 @@ then cat << EOF
 EOF
 fi
 }
-
 main_menu() {
 cat << EOF
 
@@ -70,13 +69,10 @@ git_menu() {
 cat << EOF
 
 GIT MENU
- 1) Diff
- 2) Add
- 3) Commit
- 4) Push
- 5) Switch
- 6) Merge
- 7) Free input
+ 1) Full diff
+ 2) Send changes
+ 3) Switch branch and merge with current
+ 4) Custom args
 EOF
 }
 
@@ -116,9 +112,15 @@ o1() {
 		main) to_menu system;;
 		system) cmd_args "nix-collect-garbage" "-d --quiet";;
 		flake) nix fmt;;
-		git) git diff|bat;;
+		git) git add --all && git diff HEAD|bat;;
 		other) burn_iso;;
 	esac
+}
+
+send_changes() {
+	git add --all
+	git commit
+	git push
 }
 
 o2() {
@@ -126,7 +128,7 @@ o2() {
 		main) to_menu flake;;
 		system) nix store optimise;;
 		flake) nix flake update;;
-		git) cmd_args "git add" "-A";;
+		git) send_changes;;
 	esac
 }
 
@@ -136,12 +138,23 @@ build_config() {
 	nixos-rebuild "$mode" --quiet --flake ."#$name"
 }
 
+switch_merge() {
+	local current_branch
+	current_branch="$(git branch --show-current)"
+	echo "[BRANCHES]"
+	git branch
+	read -rei "base" -p "switch to: " next_branch
+	git switch "$next_branch"
+	git merge "$current_branch"
+	echo "switched to $next_branch and merged with $current_branch"
+}
+
 o3() {
 	case $menu in
 		main) to_menu git;;
 		system) patch_hw;;
 		flake) build_config;;
-		git) cmd_args "git commit" "";;
+		git) switch_merge;;
 	esac
 }
 
@@ -155,30 +168,6 @@ o4() {
 	case $menu in
 		main) to_menu other;;
 		flake) build_iso;;
-		git) cmd_args "git push" "";;
-	esac
-}
-
-
-git_swap() {
-	git branch
-	cmd_args "git switch" ""
-}
-
-o5() {
-	case $menu in
-		git) git_swap;;
-	esac
-}
-
-o6() {
-	case $menu in
-		git) cmd_args "git merge" "";;
-	esac
-}
-
-o7() {
-	case $menu in
 		git) cmd_args "git" "";;
 	esac
 }
@@ -203,8 +192,7 @@ nicer_bind() {
 	local alias="$1"
 	case $1 in
 		o1) alias="#1";;o2) alias="#2";;o3) alias="#3";;
-		o4) alias="#4";;o5) alias="#5";;o6) alias="#6";;
-		o7) alias="#7";;
+		o4) alias="#4";;
 		change_directory) alias="directory change";;
 	esac
 	if $1
@@ -216,7 +204,7 @@ nicer_bind() {
 change_directory() {
 	echo "directories here:"
 	ls --group-directories-first -a1d -- */ 2> /dev/null
-	cmd_args "cd" ".."
+	cmd_args "cd" ""
 	refresh=true
 }
 
@@ -236,8 +224,7 @@ do
 	read -rsn 1 key
 	case $key in
 		1) nicer_bind o1;;2) nicer_bind o2;;3) nicer_bind o3;;
-		4) nicer_bind o4;;5) nicer_bind o5;;6) nicer_bind o6;;
-		7) nicer_bind o7;;
+		4) nicer_bind o4;;
 		c|C) nicer_bind change_directory;;
 		h|H) help|less;;
 		q|Q) clear && quit;;
