@@ -192,9 +192,9 @@
         ];
 
         bindl = [
-          ", Print, exec, hyprshot -m region"
-          "$workspace , p, exec, hyprshot -m output -m active"
-          "$window , p, exec, hyprshot -m window -m active"
+          ", Print, exec, hyprshot -m region -t 1000"
+          "$workspace , p, exec, hyprshot -m output -m active -t 2000"
+          "$window , p, exec, hyprshot -m window -m active -t 2000"
         ];
 
         dwindle = {
