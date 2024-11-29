@@ -83,6 +83,7 @@
             max-length = 10;
           };
           "temperature" = {
+            thermal-zone = 2;
             format = " {temperatureC} °C";
             tooltip = false;
           };
