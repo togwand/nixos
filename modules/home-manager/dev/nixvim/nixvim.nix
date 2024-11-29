@@ -29,7 +29,12 @@
         mouse = "a";
       };
       colorschemes = {
-        everforest.enable = true;
+        everforest = {
+          enable = true;
+          settings = {
+            transparent_background = 1;
+          };
+        };
       };
     };
   };

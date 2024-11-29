@@ -17,23 +17,48 @@
         general = {
           border_size = 1;
           no_border_on_floating = false;
-          gaps_in = "0,10,10,0";
-          gaps_out = "10,0,10,0";
+          gaps_in = "8,8,8,8";
+          gaps_out = "16,16,16,16";
           gaps_workspaces = 0;
+          "col.inactive_border" = "rgba(444444ff)";
+          "col.active_border" = "rgba(2D48B9ff)";
           layout = "dwindle";
           no_focus_fallback = true;
-          resize_on_border = false;
+          resize_on_border = true;
+          extend_border_grab_area = 32;
+          hover_icon_on_border = true;
           allow_tearing = true;
+          resize_corner = 0;
+          snap = {
+            enabled = false; # Didn't work when I tried it
+          };
         };
 
         decoration = {
-          rounding = 0;
+          rounding = 10;
           active_opacity = 1.0;
           inactive_opacity = 1.0;
           fullscreen_opacity = 1.0;
           dim_inactive = false;
-          blur.enabled = false;
-          shadow.enabled = false;
+          dim_strength = 0.0;
+          blur = {
+            enabled = true;
+            size = 3;
+            passes = 1;
+            ignore_opacity = false;
+            new_optimizations = true;
+            xray = true;
+            noise = 0.0;
+            contrast = 2.0;
+            brightness = 1.0;
+            vibrancy = 0.5;
+            vibrancy_darkness = 0.15;
+            special = false;
+            popups = false;
+          };
+          shadow = {
+            enabled = false;
+          };
         };
 
         animations = {
@@ -196,6 +221,10 @@
           "$workspace , c, exec, hyprpicker -a -f hex"
           "$workspace , p, exec, hyprshot -m output -m active -t 2000"
           "$window , p, exec, hyprshot -m window -m active -t 2000"
+        ];
+
+        bindm = [
+          "$window, mouse:272, movewindow"
         ];
 
         dwindle = {

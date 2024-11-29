@@ -34,7 +34,7 @@
           hide-when-typing = false;
         };
         colors = {
-          alpha = 1.0;
+          alpha = 0.8;
           background = "2d353b";
           foreground = "d3c6aa";
           regular0 = "475258"; # Black

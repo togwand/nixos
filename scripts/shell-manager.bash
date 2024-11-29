@@ -133,7 +133,7 @@ o2() {
 }
 
 build_config() {
-	read -rei "switch" -p "mode: " mode
+	read -rei "test" -p "mode: " mode
 	read -rei "$HOSTNAME" -p "name: " name
 	nixos-rebuild "$mode" --quiet --flake ."#$name"
 }
@@ -152,7 +152,6 @@ switch_merge() {
 o3() {
 	case $menu in
 		main) to_menu git;;
-		system) patch_hw;;
 		flake) build_config;;
 		git) switch_merge;;
 	esac

@@ -34,9 +34,17 @@
           };
           modules-left = [
             "hyprland/workspaces"
-            "hyprland/submap"
             "wlr/taskbar"
           ];
+          "hyprland/window" = {
+            format = "{title}";
+            icon = true;
+            icon-size = 24;
+            max-length = 70;
+            rewrite = {
+              "(.*) — Mozilla Firefox" = "$1";
+            };
+          };
           modules-center = [
             "hyprland/window"
           ];
@@ -71,10 +79,9 @@
               ""
             ];
           };
-          "memory" = {
-            interval = 30;
-            format = "  {used}G";
-            max-length = 10;
+          "temperature" = {
+            thermal-zone = 2;
+            format = " {temperatureC} °C";
             tooltip = false;
           };
           "cpu" = {
@@ -82,9 +89,10 @@
             format = "  {usage}%";
             max-length = 10;
           };
-          "temperature" = {
-            thermal-zone = 2;
-            format = " {temperatureC} °C";
+          "memory" = {
+            interval = 30;
+            format = "  {used}G";
+            max-length = 10;
             tooltip = false;
           };
           "group/hardware" = {
@@ -134,10 +142,13 @@
         background: rgba(0, 0, 0, 0.2);
         }
         #workspaces button.active {
-        background-color: rgba (128, 128, 128, 0.5);
+        background-color: rgba (100, 100, 100, 0.4);
         }
         #workspaces button.urgent {
         background-color: #eb4d4b;
+        }
+        #taskbar button.active {
+        background-color: rgba (100, 100, 100, 0.4);
         }
         #mode {
         background-color: #64727d;
