@@ -114,7 +114,7 @@
           hide_on_key_press = false;
         };
 
-        exec-once = "hyprpaper && waybar && $terminal-emulator";
+        exec-once = "waybar";
         env = [
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,12"
@@ -193,6 +193,7 @@
 
         bindl = [
           ", Print, exec, hyprshot -m region -t 1000"
+          "$workspace , c, exec, hyprpicker -a -f hex"
           "$workspace , p, exec, hyprshot -m output -m active -t 2000"
           "$window , p, exec, hyprshot -m window -m active -t 2000"
         ];

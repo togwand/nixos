@@ -99,6 +99,7 @@
             rclone
             pavucontrol
             hyprshot
+            hyprpicker
             discord
           ];
           file = { };
