@@ -56,11 +56,11 @@
           };
           shadow = {
             enabled = true;
-            range = 16;
+            range = 24;
             render_power = 3;
             sharp = false;
             ignore_window = true;
-            color = "rgba(2D48B9cc)";
+            color = "rgba(2D48B9dd)";
             color_inactive = "rgba(333333aa)";
             scale = 1.0;
           };
@@ -73,19 +73,12 @@
 
         bezier = [ "custom, 0, 0.7, 0.7, 1" ];
         animation = [
-          "global, 1, 100, custom"
-          "windowsIn, 1, 3, custom, popin 50%"
-          "windowsOut, 1, 2, custom, popin 0%"
-          "windowsMove, 1, 2, custom"
-          "layers, 1, 2, custom, popin 0%"
-          "fadeIn, 1, 3, custom"
-          "fadeOut, 1, 2, custom"
-          "fadeSwitch, 1, 6, custom"
-          "fadeShadow, 1, 6, custom"
-          "fadeDim, 1, 6, custom"
-          "fadeLayersIn, 1, 3, custom"
-          "fadeLayersOut, 1, 1, custom"
-          "workspaces, 1, 2, custom, slidefadevert 25%"
+          "global, 1, 2, custom"
+          "workspaces, 1, 2, custom, slidefadevert 15%"
+          "windows, 1, 2, custom, popin 55%"
+          "layers, 1, 1, custom, fade"
+          "fadeIn, 0"
+          "fadeShadow, 1, 7, custom"
         ];
 
         input = {
@@ -174,8 +167,8 @@
 
         bind = [
           "$workspace, Delete, exit"
-          "$workspace, k, workspace, r-1"
-          "$workspace, j, workspace, r+1"
+          "$workspace, q, movetoworkspace, r-1"
+          "$workspace, e, movetoworkspace, r+1"
           "$workspace, 1, workspace, 1"
           "$workspace, 2, workspace, 2"
           "$workspace, 3, workspace, 3"
@@ -186,8 +179,6 @@
           "$workspace, 8, workspace, 8"
           "$workspace, 9, workspace, 9"
           "$workspace, 0, workspace, 10"
-          "$workspace, q, movetoworkspace, r-1"
-          "$workspace, e, movetoworkspace, r+1"
 
           "$window, w, exec, $web-browser"
           "$window, e, exec, $terminal-emulator"
@@ -217,6 +208,9 @@
         ];
 
         binde = [
+          "$workspace, k, workspace, r-1"
+          "$workspace, j, workspace, r+1"
+
           "$window, Tab, cyclenext"
 
           "$window-resize, h, resizeactive, -24 0"

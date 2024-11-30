@@ -142,13 +142,13 @@
         background: rgba(0, 0, 0, 0.2);
         }
         #workspaces button.active {
-        background-color: rgba (100, 100, 100, 0.7);
+        background-color: rgba (100, 100, 100, 0.5);
         }
         #workspaces button.urgent {
         background-color: #eb4d4b;
         }
         #taskbar button.active {
-        background-color: rgba (100, 100, 100, 0.7);
+        background-color: rgba (100, 100, 100, 0.5);
         }
         #mode {
         background-color: #64727d;

@@ -163,7 +163,7 @@
 
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "CommitMono" ]; })
+      nerd-fonts.commit-mono
       comfortaa
       gentium-book-basic
       noto-fonts-lgc-plus
