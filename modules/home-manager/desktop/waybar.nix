@@ -13,7 +13,7 @@
           output = [
             "DP-1"
           ];
-          layer = "bottom";
+          layer = "top";
           position = "top";
           height = 24;
           width = 0;
@@ -118,7 +118,7 @@
         min-height: 0;
         }
         window#waybar {
-        background-color: rgba(43, 48, 59, 0.5);
+        background-color: rgba (50, 50, 50, 0.4);
         color: #ffffff;
         transition-property: background-color;
         transition-duration: .5s;
@@ -142,13 +142,13 @@
         background: rgba(0, 0, 0, 0.2);
         }
         #workspaces button.active {
-        background-color: rgba (100, 100, 100, 0.4);
+        background-color: rgba (100, 100, 100, 0.7);
         }
         #workspaces button.urgent {
         background-color: #eb4d4b;
         }
         #taskbar button.active {
-        background-color: rgba (100, 100, 100, 0.4);
+        background-color: rgba (100, 100, 100, 0.7);
         }
         #mode {
         background-color: #64727d;

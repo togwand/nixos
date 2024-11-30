@@ -15,13 +15,11 @@
         "$web-browser" = "firefox";
 
         general = {
-          border_size = 1;
-          no_border_on_floating = false;
+          border_size = 0;
+          no_border_on_floating = true;
           gaps_in = "8,8,8,8";
           gaps_out = "16,16,16,16";
           gaps_workspaces = 0;
-          "col.inactive_border" = "rgba(444444ff)";
-          "col.active_border" = "rgba(2D48B9ff)";
           layout = "dwindle";
           no_focus_fallback = true;
           resize_on_border = true;
@@ -30,12 +28,12 @@
           allow_tearing = true;
           resize_corner = 0;
           snap = {
-            enabled = false; # Didn't work when I tried it
+            enabled = false;
           };
         };
 
         decoration = {
-          rounding = 10;
+          rounding = 0;
           active_opacity = 1.0;
           inactive_opacity = 1.0;
           fullscreen_opacity = 1.0;
@@ -57,7 +55,14 @@
             popups = false;
           };
           shadow = {
-            enabled = false;
+            enabled = true;
+            range = 16;
+            render_power = 3;
+            sharp = false;
+            ignore_window = true;
+            color = "rgba(2D48B9cc)";
+            color_inactive = "rgba(333333aa)";
+            scale = 1.0;
           };
         };
 
@@ -67,7 +72,21 @@
         };
 
         bezier = [ "custom, 0, 0.7, 0.7, 1" ];
-        animation = [ "global, 1, 3, custom" ];
+        animation = [
+          "global, 1, 100, custom"
+          "windowsIn, 1, 3, custom, popin 50%"
+          "windowsOut, 1, 2, custom, popin 0%"
+          "windowsMove, 1, 2, custom"
+          "layers, 1, 2, custom, popin 0%"
+          "fadeIn, 1, 3, custom"
+          "fadeOut, 1, 2, custom"
+          "fadeSwitch, 1, 6, custom"
+          "fadeShadow, 1, 6, custom"
+          "fadeDim, 1, 6, custom"
+          "fadeLayersIn, 1, 3, custom"
+          "fadeLayersOut, 1, 1, custom"
+          "workspaces, 1, 2, custom, slidefadevert 25%"
+        ];
 
         input = {
           kb_layout = "latam";
@@ -155,8 +174,8 @@
 
         bind = [
           "$workspace, Delete, exit"
-          "$workspace, h, workspace, r-1"
-          "$workspace, l, workspace, r+1"
+          "$workspace, k, workspace, r-1"
+          "$workspace, j, workspace, r+1"
           "$workspace, 1, workspace, 1"
           "$workspace, 2, workspace, 2"
           "$workspace, 3, workspace, 3"
