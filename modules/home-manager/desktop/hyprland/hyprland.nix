@@ -92,20 +92,33 @@
           natural_scroll = false;
           follow_mouse = "0";
           focus_on_close = "0";
+          mouse_refocus = false;
           float_switch_override_focus = "0";
+          special_fallthrough = false;
           off_window_axis_events = "3";
           emulate_discrete_scroll = "0";
+        };
+
+        group = {
+          auto_group = false;
+          groupbar = {
+            enabled = false;
+          };
         };
 
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
-          font_family = "TeXGyreAdventor";
+          font_family = "monospace";
           vfr = true;
-          vrr = "0";
-          layers_hog_keyboard_focus = false;
+          vrr = "0"; # Adaptive Sync
+          always_follow_on_dnd = false;
+          layers_hog_keyboard_focus = true;
+          animate_manual_resizes = true;
+          animate_mouse_windowdragging = false;
+          disable_autoreload = true;
           enable_swallow = false;
-          focus_on_activate = false;
+          focus_on_activate = true;
           background_color = "rgb(282828)";
           new_window_takes_over_fullscreen = "1";
           exit_window_retains_fullscreen = true;
