@@ -85,9 +85,11 @@
           kb_layout = "latam";
           kb_options = "caps:swapescape";
           numlock_by_default = false;
+          resolve_binds_by_sym = false;
           repeat_rate = 60;
           repeat_delay = 160;
           force_no_accel = true;
+          natural_scroll = false;
           follow_mouse = "0";
           focus_on_close = "0";
           float_switch_override_focus = "0";
@@ -157,8 +159,7 @@
           "HYPRCURSOR_SIZE,12"
         ];
 
-        monitor = ",1920x1080@99.93,0x0,1";
-
+        monitor = ",1920x1080@60.00,0x0,1";
         "$workspace" = "SUPER";
         "$window" = "ALT";
         "$window-focus" = "$window+CTRL";

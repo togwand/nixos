@@ -10,7 +10,7 @@
       (self: super: {
         shell-manager = pkgs.writeScriptBin "shell-manager" ''
           #!/usr/bin/env bash
-          ${builtins.readFile ../../../scripts/shell-manager.bash}
+          ${builtins.readFile ../../../scripts/shell-manager.sh}
         '';
       })
     ];

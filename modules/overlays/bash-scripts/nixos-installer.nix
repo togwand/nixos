@@ -10,7 +10,7 @@
       (self: super: {
         nixos-installer = pkgs.writeScriptBin "nixos-installer" ''
           #!/usr/bin/env bash
-          ${builtins.readFile ../../../scripts/nixos-installer.bash}
+          ${builtins.readFile ../../../scripts/nixos-installer.sh}
         '';
       })
     ];

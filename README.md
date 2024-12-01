@@ -5,10 +5,8 @@ Nix flake for my NixOS configurations, including environments, modules, scripts 
  * nixpkgs/nixos-unstable -> Earlier and more features, overall less issues than stable
  * disko/master -> For an easier and more reliable way to install NixOS as well as not using generated filesystems
  * home-manager/master -> Some apps are easier to configure with it (e.g. zsh, hyprland)
- * nixvim/main -> Very modular and fairly easy to modify
-
-### Formatter
- * nixfmt -> Might not be compact but it's consistent and fast
+ * nixvim/main -> Very modular and fairly easy to modify, also adds several inputs to the flake (e.g. treefmt)
+   * treefmt-nix -> Allows for an easy and informative formatting of any language in the flake
 
 TODO:
 1. stale
@@ -28,7 +26,8 @@ tty + nixos-installer configuration for a fast and easy installation
 #### stale
 Hyprland + shell-manager configuration to enhance my workflow
 
-1. Try all awesome hyprland and are we wayland programs, test all the wiki configuration and faq
+TODO:
+1. Fix hyprland configuration
 2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
 3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
 4. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
@@ -51,8 +50,11 @@ Home-manager configurations for programs and services
 #### overlays
 Derivations built with a nix writer or similar builder, one overlay per derivation
 
+#### treefmt-nix
+All the flake language formatters and their configurations
+
 ## Scripts
-Executable and portable* code not written in nix 
+Executable and portable* code not written in nix
 
 * Not technically portable as the shebang is declared in a module
 

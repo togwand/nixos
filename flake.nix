@@ -16,12 +16,15 @@
     };
   };
   outputs =
-    { nixpkgs, ... }@inputs:
+    { nixpkgs, systems, ... }@inputs:
     let
-      arch = "x86_64-linux";
+      eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
+      treefmtEval = eachSystem (
+        pkgs: inputs.nixvim.inputs.treefmt-nix.lib.evalModule pkgs ./modules/treefmt-nix
+      );
     in
     {
-      formatter.${arch} = nixpkgs.legacyPackages.${arch}.nixfmt-rfc-style;
+      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
       nixosConfigurations."minimal_iso" = nixpkgs.lib.nixosSystem {
         modules = [
           ./environments/minimal_iso
