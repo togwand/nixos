@@ -114,12 +114,11 @@
           vrr = "0"; # Adaptive Sync
           always_follow_on_dnd = false;
           layers_hog_keyboard_focus = true;
-          animate_manual_resizes = true;
+          animate_manual_resizes = false;
           animate_mouse_windowdragging = false;
           disable_autoreload = true;
           enable_swallow = false;
           focus_on_activate = true;
-          background_color = "rgb(282828)";
           new_window_takes_over_fullscreen = "1";
           exit_window_retains_fullscreen = true;
           initial_workspace_tracking = "0";
@@ -128,11 +127,15 @@
         };
 
         binds = {
-          workspace_center_on = "0";
-          focus_preferred_method = "1";
-          movefocus_cycles_fullscreen = true;
-          disable_keybind_grabbing = true;
-          window_direction_monitor_fallback = false;
+          pass_mouse_when_bound = true;
+          scroll_event_delay = 160;
+          workspace_back_and_forth = false;
+          allow_workspace_cycles = false;
+          workspace_center_on = "1";
+          focus_preferred_method = "0";
+          movefocus_cycles_fullscreen = false;
+          disable_keybind_grabbing = false;
+          window_direction_monitor_fallback = true;
         };
 
         xwayland = {
@@ -150,6 +153,7 @@
           explicit_sync = "1";
           explicit_sync_kms = "1";
           direct_scanout = false;
+          expand_undersized_textures = true;
         };
 
         cursor = {
@@ -158,13 +162,15 @@
           no_break_fs_vrr = true;
           min_refresh_rate = 60;
           hotspot_padding = 0;
-          inactive_timeout = 10;
+          inactive_timeout = 0;
           no_warps = true;
           persistent_warps = false;
           warp_on_change_workspace = false;
           enable_hyprcursor = true;
           hide_on_key_press = false;
         };
+
+        # Keywords
 
         exec-once = "waybar";
         env = [
