@@ -16,13 +16,14 @@
         "$app-launcher" = "tofi-drun";
         "$status-bar" = "waybar";
 
-        "$group" = "CTRL+SHIFT";
-        "$workspace" = "SUPER";
-        "$workspace-hard" = "$workspace+CTRL";
-        "$window" = "ALT";
-        "$window-medium" = "$window+SHIFT";
-        "$window-hard" = "$window+CTRL";
-        "$window-harder" = "$window+SHIFT+CTRL";
+        "$workspace-easy" = "SUPER";
+        "$workspace" = "$workspace-easy+SHIFT";
+        "$window-easy" = "ALT";
+        "$window" = "$window-easy+SHIFT";
+        "$window-medium" = "$window-easy+CTRL";
+        "$window-hard" = "$window-easy+CTRL+SHIFT";
+        "$window-harder" = "$window-easy+CTRL+SUPER";
+        "$window-hardest" = "$window-easy+CTRL+SHIFT+SUPER";
 
         # Keywords
         monitor = ",1920x1080@99.93,0x0,1";
@@ -51,68 +52,76 @@
         ];
 
         bindm = [
-          "$window, mouse:272, movewindow"
+          "$window-easy, mouse:272, movewindow"
         ];
 
         binde = [
-          "$window-medium, h, resizeactive, -24 0"
-          "$window-medium, j, resizeactive, 0  24"
-          "$window-medium, k, resizeactive, 0 -24"
-          "$window-medium, l, resizeactive, 24 0"
+          "$workspace-easy, j, workspace, r+1"
+          "$workspace-easy, k, workspace, r-1"
 
-          "$window-harder, h, moveactive, -24 0"
-          "$window-harder, j, moveactive, 0 24"
-          "$window-harder, k, moveactive, 0 -24"
-          "$window-harder, l, moveactive, 24 0"
+          "$workspace, j, movetoworkspace, r+1"
+          "$workspace, k, movetoworkspace, r-1"
+
+          "$window-easy, Tab, cyclenext"
+
+          "$window, j, changegroupactive, b"
+          "$window, k, changegroupactive, f"
+          "$window, q, movegroupwindow, b"
+          "$window, e, movegroupwindow, f"
+          "$window, Tab, cyclenext, prev"
+
+          "$window-medium, h, movefocus, l"
+          "$window-medium, j, movefocus, d"
+          "$window-medium, k, movefocus, u"
+          "$window-medium, l, movefocus, r"
+
+          "$window-hard, h, moveactive, -24 0"
+          "$window-hard, j, moveactive, 0 24"
+          "$window-hard, k, moveactive, 0 -24"
+          "$window-hard, l, moveactive, 24 0"
+
+          "$window-harder, h, resizeactive, -24 0"
+          "$window-harder, j, resizeactive, 0  24"
+          "$window-harder, k, resizeactive, 0 -24"
+          "$window-harder, l, resizeactive, 24 0"
         ];
 
         bind = [
           ", Print, exec, hyprshot -m region -t 1000"
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 0.55 @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume -l 0.55 @DEFAULT_AUDIO_SINK@ 5%-"
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%-"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
-          "$group, z, movegroupwindow, b"
-          "$group, x, movegroupwindow, f"
-          "$group, c, togglegroup"
-          "$group, h, moveintogroup, l"
-          "$group, j, moveintogroup, d"
-          "$group, k, moveintogroup, u"
-          "$group, l, moveintogroup, r"
+          "$workspace-easy, s, exec, hyprshot -m output -m active -t 2000"
+          "$workspace-easy, e, exec, hyprpicker -a -f rgb"
+          "$workspace-easy, 1, workspace, 1"
+          "$workspace-easy, 2, workspace, 2"
+          "$workspace-easy, 3, workspace, 3"
+          "$workspace-easy, 4, workspace, 4"
+          "$workspace-easy, 5, workspace, 5"
+          "$workspace-easy, 6, workspace, 6"
+          "$workspace-easy, 7, workspace, 7"
+          "$workspace-easy, 8, workspace, 8"
+          "$workspace-easy, 9, workspace, 9"
+          "$workspace-easy, 0, workspace, 10"
 
-          "$workspace, z, workspace, r-1"
-          "$workspace, x, workspace, r+1"
+          "$workspace, s, exec, hyprshot -m region -t 1000"
+          "$workspace, q, exit"
           "$workspace, e, exec, hyprpicker -a -f hex"
-          "$workspace, s, exec, hyprshot -m output -m active -t 2000"
-          "$workspace, 1, workspace, 1"
-          "$workspace, 2, workspace, 2"
-          "$workspace, 3, workspace, 3"
-          "$workspace, 4, workspace, 4"
-          "$workspace, 5, workspace, 5"
-          "$workspace, 6, workspace, 6"
-          "$workspace, 7, workspace, 7"
-          "$workspace, 8, workspace, 8"
-          "$workspace, 9, workspace, 9"
-          "$workspace, 0, workspace, 10"
 
-          "$workspace-hard, z, movetoworkspace, r-1"
-          "$workspace-hard, x, movetoworkspace, r+1"
-          "$workspace-hard, q, exit"
+          "$window-easy, a, exec, pkill $app-launcher || $app-launcher"
+          "$window-easy, s, exec, hyprshot -m window -m active -t 2000"
+          "$window-easy, f, fullscreen, 0"
+          "$window-easy, h, layoutmsg, preselect l"
+          "$window-easy, j, layoutmsg, preselect d"
+          "$window-easy, k, layoutmsg, preselect u"
+          "$window-easy, l, layoutmsg, preselect r"
+          "$window-easy, q, killactive"
+          "$window-easy, w, exec, $web-browser"
+          "$window-easy, e, exec, $terminal-emulator"
 
-          "$window, z, changegroupactive, b"
-          "$window, x, changegroupactive, f"
-          "$window, c, lockactivegroup, toggle"
-          "$window, a, exec, pkill $app-launcher || $app-launcher"
-          "$window, d, moveoutofgroup, active"
-          "$window, f, fullscreen, 0"
-          "$window, h, layoutmsg, preselect l"
-          "$window, j, layoutmsg, preselect d"
-          "$window, k, layoutmsg, preselect u"
-          "$window, l, layoutmsg, preselect r"
-          "$window, q, killactive"
-          "$window, w, exec, $web-browser"
-          "$window, e, exec, $terminal-emulator"
-          "$window, s, exec, hyprshot -m window -m active -t 2000"
+          "$window, x, lockactivegroup, toggle"
+          "$window, f, togglegroup"
           "$window, 1, changegroupactive, 1"
           "$window, 2, changegroupactive, 2"
           "$window, 3, changegroupactive, 3"
@@ -123,26 +132,23 @@
           "$window, 8, changegroupactive, 8"
           "$window, 9, changegroupactive, 9"
           "$window, 0, changegroupactive, 10"
-          "$window, Tab, cyclenext"
 
-          "$window-medium, z, layoutmsg, swapsplit"
-          "$window-medium, x, layoutmsg, togglesplit"
+          "$window-medium, x, pin"
           "$window-medium, c, centerwindow"
           "$window-medium, s, pseudo"
           "$window-medium, f, togglefloating"
-          "$window-medium, p, pin"
-          "$window-medium, Tab, cyclenext, prev"
+          "$window-medium, q, layoutmsg, swapsplit"
+          "$window-medium, e, layoutmsg, togglesplit"
 
-          "$window-hard, h, movefocus, l"
-          "$window-hard, j, movefocus, d"
-          "$window-hard, k, movefocus, u"
-          "$window-hard, l, movefocus, r"
-          "$window-hard, s, exec, hyprshot -m region -t 1000"
+          "$window-hard, h, swapwindow, l"
+          "$window-hard, j, swapwindow, d"
+          "$window-hard, k, swapwindow, u"
+          "$window-hard, l, swapwindow, r"
 
-          "$window-harder, h, swapwindow, l"
-          "$window-harder, j, swapwindow, d"
-          "$window-harder, k, swapwindow, u"
-          "$window-harder, l, swapwindow, r"
+          "$window-hardest, h, movewindoworgroup, l"
+          "$window-hardest, j, movewindoworgroup, d"
+          "$window-hardest, k, movewindoworgroup, u"
+          "$window-hardest, l, movewindoworgroup, r"
         ];
 
         # Options
