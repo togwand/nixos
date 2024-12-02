@@ -79,7 +79,6 @@
           "$group, j, moveintogroup, d"
           "$group, k, moveintogroup, u"
           "$group, l, moveintogroup, r"
-          "$group, q, moveoutofgroup, active"
 
           "$workspace, z, workspace, r-1"
           "$workspace, x, workspace, r+1"
@@ -104,6 +103,7 @@
           "$window, x, changegroupactive, f"
           "$window, c, lockactivegroup, toggle"
           "$window, a, exec, pkill $app-launcher || $app-launcher"
+          "$window, d, moveoutofgroup, active"
           "$window, f, fullscreen, 0"
           "$window, h, layoutmsg, preselect l"
           "$window, j, layoutmsg, preselect d"
@@ -228,7 +228,7 @@
         group = {
           auto_group = true;
           insert_after_current = true;
-          focus_removed_window = true;
+          focus_removed_window = false;
           drag_into_group = true;
           merge_groups_on_drag = true;
           merge_groups_on_groupbar = true;
