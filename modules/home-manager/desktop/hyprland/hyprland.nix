@@ -15,11 +15,14 @@
         "$web-browser" = "firefox";
         "$app-launcher" = "tofi-drun";
         "$status-bar" = "waybar";
+
+        "$group" = "CTRL+SHIFT";
         "$workspace" = "SUPER";
+        "$workspace-hard" = "$workspace+CTRL";
         "$window" = "ALT";
-        "$window-focus" = "$window+CTRL";
-        "$window-resize" = "$window+SHIFT";
-        "$window-move" = "$window+CTRL+SHIFT";
+        "$window-medium" = "$window+SHIFT";
+        "$window-hard" = "$window+CTRL";
+        "$window-harder" = "$window+SHIFT+CTRL";
 
         # Keywords
         monitor = ",1920x1080@99.93,0x0,1";
@@ -32,6 +35,8 @@
           "$status-bar"
           "[workspace 1 silent] $web-browser"
           "[workspace 2 silent] $terminal-emulator"
+          "[workspace 2 silent] $terminal-emulator"
+          "[workspace 3 silent] $terminal-emulator"
         ];
 
         bezier = [ "custom, 0, 0.7, 0.7, 1" ];
@@ -49,39 +54,37 @@
           "$window, mouse:272, movewindow"
         ];
 
-        bindl = [
-          ", Print, exec, hyprshot -m region -t 1000"
-          "$workspace , c, exec, hyprpicker -a -f hex"
-          "$workspace , p, exec, hyprshot -m output -m active -t 2000"
-          "$window , p, exec, hyprshot -m window -m active -t 2000"
-        ];
-
         binde = [
-          "$workspace, k, workspace, r-1"
-          "$workspace, j, workspace, r+1"
+          "$window-medium, h, resizeactive, -24 0"
+          "$window-medium, j, resizeactive, 0  24"
+          "$window-medium, k, resizeactive, 0 -24"
+          "$window-medium, l, resizeactive, 24 0"
 
-          "$window, Tab, cyclenext"
-
-          "$window-resize, h, resizeactive, -24 0"
-          "$window-resize, j, resizeactive, 0  24"
-          "$window-resize, k, resizeactive, 0 -24"
-          "$window-resize, l, resizeactive, 24 0"
-
-          "$window-focus, h, movefocus, l"
-          "$window-focus, j, movefocus, d"
-          "$window-focus, k, movefocus, u"
-          "$window-focus, l, movefocus, r"
-
-          "$window-move, h, moveactive, -24 0"
-          "$window-move, j, moveactive, 0 24"
-          "$window-move, k, moveactive, 0 -24"
-          "$window-move, l, moveactive, 24 0"
+          "$window-harder, h, moveactive, -24 0"
+          "$window-harder, j, moveactive, 0 24"
+          "$window-harder, k, moveactive, 0 -24"
+          "$window-harder, l, moveactive, 24 0"
         ];
 
         bind = [
-          "$workspace, Delete, exit"
-          "$workspace, q, movetoworkspace, r-1"
-          "$workspace, e, movetoworkspace, r+1"
+          ", Print, exec, hyprshot -m region -t 1000"
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 0.55 @DEFAULT_AUDIO_SINK@ 5%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume -l 0.55 @DEFAULT_AUDIO_SINK@ 5%-"
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+          "$group, z, movegroupwindow, b"
+          "$group, x, movegroupwindow, f"
+          "$group, c, togglegroup"
+          "$group, h, moveintogroup, l"
+          "$group, j, moveintogroup, d"
+          "$group, k, moveintogroup, u"
+          "$group, l, moveintogroup, r"
+          "$group, q, moveoutofgroup, active"
+
+          "$workspace, z, workspace, r-1"
+          "$workspace, x, workspace, r+1"
+          "$workspace, e, exec, hyprpicker -a -f hex"
+          "$workspace, s, exec, hyprshot -m output -m active -t 2000"
           "$workspace, 1, workspace, 1"
           "$workspace, 2, workspace, 2"
           "$workspace, 3, workspace, 3"
@@ -93,33 +96,56 @@
           "$workspace, 9, workspace, 9"
           "$workspace, 0, workspace, 10"
 
-          "$window, w, exec, $web-browser"
-          "$window, e, exec, $terminal-emulator"
-          "$window, a, exec, pkill $app-launcher || $app-launcher"
-          "$window, q, killactive"
-          "$window, f, fullscreen, 0"
-          "$window, 1, layoutmsg, swapsplit"
-          "$window, 2, layoutmsg, togglesplit"
-          "$window, 3, pseudo"
-          "$window, 4, togglefloating"
-          "$window, 5, centerwindow"
-          "$window, 6, pin"
+          "$workspace-hard, z, movetoworkspace, r-1"
+          "$workspace-hard, x, movetoworkspace, r+1"
+          "$workspace-hard, q, exit"
 
+          "$window, z, changegroupactive, b"
+          "$window, x, changegroupactive, f"
+          "$window, c, lockactivegroup, toggle"
+          "$window, a, exec, pkill $app-launcher || $app-launcher"
+          "$window, f, fullscreen, 0"
           "$window, h, layoutmsg, preselect l"
           "$window, j, layoutmsg, preselect d"
           "$window, k, layoutmsg, preselect u"
           "$window, l, layoutmsg, preselect r"
+          "$window, q, killactive"
+          "$window, w, exec, $web-browser"
+          "$window, e, exec, $terminal-emulator"
+          "$window, s, exec, hyprshot -m window -m active -t 2000"
+          "$window, 1, changegroupactive, 1"
+          "$window, 2, changegroupactive, 2"
+          "$window, 3, changegroupactive, 3"
+          "$window, 4, changegroupactive, 4"
+          "$window, 5, changegroupactive, 5"
+          "$window, 6, changegroupactive, 6"
+          "$window, 7, changegroupactive, 7"
+          "$window, 8, changegroupactive, 8"
+          "$window, 9, changegroupactive, 9"
+          "$window, 0, changegroupactive, 10"
+          "$window, Tab, cyclenext"
 
-          "$window-move, h, swapwindow, l"
-          "$window-move, j, swapwindow, d"
-          "$window-move, k, swapwindow, u"
-          "$window-move, l, swapwindow, r"
+          "$window-medium, z, layoutmsg, swapsplit"
+          "$window-medium, x, layoutmsg, togglesplit"
+          "$window-medium, c, centerwindow"
+          "$window-medium, s, pseudo"
+          "$window-medium, f, togglefloating"
+          "$window-medium, p, pin"
+          "$window-medium, Tab, cyclenext, prev"
 
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 0.55 @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume -l 0.55 @DEFAULT_AUDIO_SINK@ 5%-"
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          "$window-hard, h, movefocus, l"
+          "$window-hard, j, movefocus, d"
+          "$window-hard, k, movefocus, u"
+          "$window-hard, l, movefocus, r"
+          "$window-hard, s, exec, hyprshot -m region -t 1000"
+
+          "$window-harder, h, swapwindow, l"
+          "$window-harder, j, swapwindow, d"
+          "$window-harder, k, swapwindow, u"
+          "$window-harder, l, swapwindow, r"
         ];
 
+        # Options
         dwindle = {
           force_split = "2";
           preserve_split = true;
@@ -130,13 +156,13 @@
         };
 
         general = {
-          border_size = 1;
+          border_size = 2;
           no_border_on_floating = false;
           gaps_in = "8,8,8,8";
           gaps_out = "16,16,16,16";
           gaps_workspaces = 0;
+          "col.active_border" = "rgba(333333aa) rgba(333333aa) rgba(333333aa) rgba(2D48B9dd) 19deg";
           "col.inactive_border" = "rgba(333333aa)";
-          "col.active_border" = "rgba(333333aa) rgba(333333aa) rgba(333333aa) rgba(333333aa) rgba(333333aa) rgba(2D48B9cc) 20deg";
           layout = "dwindle";
           no_focus_fallback = true;
           resize_on_border = true;
@@ -200,9 +226,32 @@
         };
 
         group = {
-          auto_group = false;
+          auto_group = true;
+          insert_after_current = true;
+          focus_removed_window = true;
+          drag_into_group = true;
+          merge_groups_on_drag = true;
+          merge_groups_on_groupbar = true;
+          merge_floated_into_tiled_on_groupbar = true;
+          group_on_movetoworkspace = false;
+          "col.border_active" = "rgba(333333aa) rgba(333333aa) rgba(333333aa) rgba(9B59B6dd) 19deg";
+          "col.border_inactive" = "rgba(333333aa)";
+          "col.border_locked_active" = "rgba(333333aa) rgba(333333aa) rgba(333333aa) rgba(B6596Bdd) 19deg";
+          "col.border_locked_inactive" = "rgba(333333aa)";
           groupbar = {
-            enabled = false;
+            enabled = true;
+            font_family = "sans";
+            font_size = 9;
+            gradients = true;
+            height = 12;
+            stacked = false;
+            render_titles = true;
+            scrolling = true;
+            text_color = "rgb(ffffff)";
+            "col.active" = "rgba(9B59B699)";
+            "col.inactive" = "rgba(00000000)";
+            "col.locked_active" = "rgba(B6596B99)";
+            "col.locked_inactive" = "rgba(00000000)";
           };
         };
 

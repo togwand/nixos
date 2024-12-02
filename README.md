@@ -9,9 +9,8 @@ Nix flake for my NixOS configurations, including environments, modules, scripts 
    * treefmt-nix -> Allows for an easy and informative formatting of any language in the flake
 
 TODO:
-1. stale (1)
-2. shell-manager
-1. stale
+1. shell-manager
+2. stale
 3. modules
 4. environments
 
@@ -28,14 +27,13 @@ tty + nixos-installer configuration for a fast and easy installation
 Hyprland + shell-manager configuration to enhance my workflow
 
 TODO:
-1. Fix hyprland configuration
-2. Fix theming of every part of the system, especially cursors and icons
-3. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
-4. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
-5. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
-6. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
-7. Check vimjoyer videos to keep adding to the system
-8. Check the programming language used for my installed pkgs (remove or replace rust ones)
+1. Fix theming of every part of the system, especially cursors and icons
+2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
+3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
+4. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
+5. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+6. Check vimjoyer videos to keep adding to the system
+7. Check the programming language used for my installed pkgs (remove or replace rust ones)
 
 ## Modules
 Nix overlays, configurations, and more which are toggleable with custom options

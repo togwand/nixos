@@ -24,17 +24,17 @@
             active-only = false;
             all-outputs = true;
             disable-scroll = true;
-          };
-          "wlr/taskbar" = {
-            all-outputs = false;
-            format = "{icon}";
-            icon-size = 16;
-            sort-by-app-id = true;
-            on-click = "activate";
+            format = " {icon}  {windows} ";
+            format-window-separator = " ";
+            window-rewrite-default = "";
+            window-rewrite = {
+              "foot" = "";
+              "class<firefox>" = "";
+              "title<.*youtube.*>" = "";
+            };
           };
           modules-left = [
             "hyprland/workspaces"
-            "wlr/taskbar"
           ];
           "hyprland/window" = {
             format = "{title}";
@@ -50,14 +50,12 @@
           ];
           "clock" = {
             interval = 60;
-            format = "{:%d-%m-%Y}";
-            max-length = 25;
-            tooltip = true;
-            tooltip-format = "{:%H:%M}";
+            format = "  {:%H:%M}";
+            tooltip-format = "{:%d-%m-%Y}";
           };
           "bluetooth" = {
             on-click = "blueman-manager";
-            format = "  Bluetooth";
+            format = " Bluetooth";
             format-connected = " {device_alias}";
             format-connected-battery = " {device_alias} ({device_battery_percentage}%)";
             format-device-preference = [
@@ -87,12 +85,10 @@
           "cpu" = {
             interval = 10;
             format = "  {usage}%";
-            max-length = 10;
           };
           "memory" = {
             interval = 30;
             format = "  {used}G";
-            max-length = 10;
             tooltip = false;
           };
           "group/hardware" = {
@@ -118,10 +114,8 @@
         min-height: 0;
         }
         window#waybar {
-        background-color: rgba (50, 50, 50, 0.4);
+        background-color: transparent;
         color: #ffffff;
-        transition-property: background-color;
-        transition-duration: .5s;
         }
         window#waybar.hidden {
         opacity: 0.2;
@@ -142,13 +136,10 @@
         background: rgba(0, 0, 0, 0.2);
         }
         #workspaces button.active {
-        background-color: rgba (100, 100, 100, 0.5);
+        background-color: rgba (0, 187, 233, 0.7);
         }
         #workspaces button.urgent {
         background-color: #eb4d4b;
-        }
-        #taskbar button.active {
-        background-color: rgba (100, 100, 100, 0.5);
         }
         #mode {
         background-color: #64727d;
@@ -197,13 +188,13 @@
         #bluetooth,
         #wireplumber,
         #wireplumber.muted {
-        background-color: #2164d7;
+        background-color: rgba (33, 100, 215, 0.5);
         }
         #temperature,
         #temperature.critical,
         #cpu,
         #memory {
-        background-color: #9b59b6;
+        background-color: rgba (155, 89, 182, 0.5);
         }
       '';
     };
