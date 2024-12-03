@@ -62,7 +62,7 @@ EOF
     optimise-store() {
       sudo -u "$user" nix store optimise
     }
-    confirm "optimise-store" wait
+    confirm "optimise-store"
   }
 }
 
@@ -118,7 +118,7 @@ EOF
       sudo -u "$user" git add --all
       sudo -u "$user" git diff HEAD|sudo -u "$user" bat
     }
-    confirm "full-diff" wait
+    confirm "full-diff"
   }
   o2() {
     send-changes() {
