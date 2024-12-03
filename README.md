@@ -9,16 +9,18 @@ Nix flake for my NixOS configurations, including environments, modules, scripts 
    * treefmt-nix -> Allows for an easy and informative formatting of any language in the flake
 
 TODO:
-1. stale
-2. modules
-3. environments
-4. shell-manager
+1. nixos-installer
+2. shell-manager
+3. stale
+4. modules
+5. environments
 
 ## Environments
 NixOS configurations including system options, submodules, packages and variables
 
 TODO:
 1. Make a comfy iso environment
+2. Make a server environment
 
 #### minimal_iso
 tty + nixos-installer configuration for a fast and easy installation
@@ -57,12 +59,17 @@ Executable and portable* code not written in nix
 
 * Not technically portable as the shebang is declared in a module
 
+TODO
+1. Change names to be more fun
+
 #### shell-manager
 An interactive shell command manager
 
-TODO:
-1. Find a way to repeat less the sudo -u $user parts
-2. Fix the bug with git push
+TODO
+1. Finish the help section (descriptions for menu commands)
 
 #### nixos-installer
 An interactive NixOS installer
+
+TODO
+1. Refactor as with the shell-manager

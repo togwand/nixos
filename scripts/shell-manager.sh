@@ -1,36 +1,70 @@
+any-key() {
+  read -rsn 1 -p "Press any key to continue" -t "$1"
+}
+
+await() {
+  echo -e "$2"
+  any-key "$1"
+}
+
+is-root() {
+  if [ "$USER" != "root" ]
+  then
+    await 1.5 "Root user is required..."
+    return 1
+  fi
+}
+
+is-user() {
+  if [ "$USER" = "root" ]
+  then
+    await 1.5 "Normal user is required..."
+    return 1
+  fi
+}
+
 run() {
   if ! eval "$1"
   then
-    echo -e "\n$1 ended with an error. Press any key to continue"
-    read -rsn 1
-    return
-  fi
-  if [ "$2" = "wait" ]
-  then
-    echo -e "\n$1 completed. Press any key to continue"
-    read -rsn 1
+    await 30 "\nError..."
+    return 1
+  else await 5 "\nSuccess!"
   fi
 }
 
 confirm() {
-  echo -e "\nConfirm command: $1"
-  while true
-  do
-    read -reN 1 key 2> /dev/null
-    case $key in
-      "$(printf '\r')") run "$@" && break ;;
-      *) break ;;
-    esac
-  done
+  echo -e "Do $1 as $USER?\n"
+  read -reN 1 key 2> /dev/null
+  case $key in
+    "$(printf '\r')")
+      run "$@"
+  esac
 }
 
-cmd-args() {
-  local cmd=$1 defaults=$2
-  read -rep "$cmd " -i "$defaults" arguments
-  local full="$cmd $arguments"
+read-cmd() {
+  echo "COMMAND"
+  read -rei "$1" command
+  case $2 in
+    confirm) confirm "$command" ;;
+    *) run "$command" ;;
+  esac
+}
+
+read-args() {
+  echo -e "COMMAND\t\t\tARGUMENTS"
+  read -rep "$1 " -i "$2" arguments
   if [ "${arguments}" = "" ]
-  then $cmd
-  else $full
+  then
+    case $3 in
+      confirm) confirm "$@" ;;
+      *) run "$@" ;;
+    esac
+  else
+    local full="$1 $arguments"
+    case $3 in
+      confirm) confirm "$full" ;;
+      *) run "$full" ;;
+    esac
   fi
 }
 
@@ -40,7 +74,7 @@ SHELL MANAGER
  Press 'h' for help
 
 STATUS
- User: $user
+ User: $USER
  Location: $PWD
 
 EOF
@@ -51,18 +85,13 @@ system-menu() {
 SYSTEM MENU
  1) Collect garbage
  2) Optimise store
+
 EOF
   o1() {
-    collect-garbage() {
-      cmd-args "sudo -u $user nix-collect-garbage" "-d"
-    }
-    confirm "collect-garbage"
+    read-args "nix-collect-garbage" "-d"
   }
   o2() {
-    optimise-store() {
-      sudo -u "$user" nix store optimise
-    }
-    confirm "optimise-store"
+    run "nix store optimise"
   }
 }
 
@@ -73,18 +102,19 @@ FLAKE MENU
  2) Update
  3) Build NixOS config
  4) Build ISO
+
 EOF
   o1() {
-    format-flake() {
-      sudo -u "$user" nix fmt
-    }
-    confirm "format-flake" wait
+    if is-user
+    then
+      run "nix fmt"
+    fi
   }
   o2() {
-    update-flake() {
-      sudo -u "$user" nix flake update
-    }
-    confirm "update-flake"
+    if is-user
+    then
+      run "nix flake update"
+    fi
   }
   o3() {
     build-config() {
@@ -93,7 +123,10 @@ EOF
       read -rei "$HOSTNAME" -p "name: " name
       nixos-rebuild "$mode" --flake "$flake_uri#$name"
     }
-    confirm "build-config" wait
+    if is-root
+    then
+      confirm "build-config"
+    fi
   }
   o4() {
     build-iso() {
@@ -101,7 +134,10 @@ EOF
       read -rei "minimal_iso" -p "name: " config_name
       nix build "$flake_uri"#nixosConfigurations."$config_name".config.system.build.isoImage
     }
-    confirm "build-iso" wait
+    if is-root
+    then
+      confirm "build-iso"
+    fi
   }
 }
 
@@ -112,118 +148,233 @@ GIT MENU
  2) Send changes
  3) Switch branch and merge with current
  4) Custom args
+
 EOF
   o1() {
     full-diff() {
-      sudo -u "$user" git add --all
-      sudo -u "$user" git diff HEAD|sudo -u "$user" bat
+      git add --all
+      git diff HEAD|bat
     }
-    confirm "full-diff" wait
+    if is-user
+    then
+      run "full-diff"
+    fi
   }
   o2() {
     send-changes() {
-      sudo -u "$user" git add --all
-      sudo -u "$user" git commit
-      sudo -u "$user" git push
+      git add --all
+      git commit
+      git push
     }
-    confirm "send-changes" wait
+    if is-user
+    then
+      confirm "send-changes"
+    fi
   }
   o3() {
     switch-merge() {
       local current_branch
       current_branch="$(git branch --show-current)"
-      sudo -u "$user" echo "[BRANCHES]"
-      sudo -u "$user" git branch
+      echo "[BRANCHES]"
+      git branch
       read -rei "base" -p "switch to: " next_branch
-      sudo -u "$user" git switch "$next_branch"
-      sudo -u "$user" git merge "$current_branch"
-      sudo -u "$user" echo "switched to $next_branch and merged with $current_branch"
+      git switch "$next_branch"
+      git merge "$current_branch"
+      echo "switched to $next_branch and merged with $current_branch"
     }
-    confirm "switch-merge" wait
+    if is-user
+    then
+      confirm "switch-merge"
+    fi
   }
   o4() {
     git-custom() {
-      cmd-args "sudo -u $user git" ""
+      read-args "git" ""
     }
-    confirm "git-custom" wait
+    if is-user
+    then run "git-custom"
+    fi
   }
 }
 
 misc-menu() {
   cat << EOF
 MISC MENU
- 1) Burn iso image
+ 1) Custom command
+ 2) Burn iso image
+
 EOF
   o1() {
+    read-cmd ""
+  }
+  o2() {
     burn-iso() {
-      sudo -u "$user" lsblk
+      lsblk
       read -re -p "device: " burnt
-      sudo -u "$user" wipefs -a /dev/"$burnt"
+      wipefs -a /dev/"$burnt"
       read -rei "result/iso" -p "path to iso: " iso_path
-      sudo -u "$user" cp "$iso_path/nixos-*.iso" "/dev/$burnt"
-      sudo -u "$user" sync "/dev/$burnt"
+      cp "$iso_path/nixos-*.iso" "/dev/$burnt"
+      sync "/dev/$burnt"
     }
-    confirm "burn-iso" wait
+    if is-root
+    then
+      confirm "burn-iso"
+    fi
   }
 }
 
+new-user () {
+  users=$(passwd -Sa|grep P|grep -Eo '^[^ ]+')
+  echo "USERS"
+  echo -e "$users\n"
+  while read -rep "New user: " new_user
+  do
+    if [[ -z "${new_user}" ]]
+    then
+      echo "Not a valid input!"
+      return 1
+    else
+      if ! echo "$users"|grep -w "$new_user"
+      then
+        echo "Not a valid user!"
+        return 1
+      else
+        exec sudo -u "$new_user" bash "${BASH_SOURCE[0]}" $menu
+      fi
+    fi
+  done
+}
+
+to-root() {
+  exec sudo bash "${BASH_SOURCE[0]}" $menu
+}
+
 switch-user() {
-  echo -e "\nUSERS"
-  passwd -Sa | grep P | grep -Eo '^[^ ]+'
-  echo -e "\nWhich user do you want to run this program with?"
-  read -re user
+  case $USER in
+    root) new-user ;;
+    *) to-root ;;
+  esac
 }
 
 change-directory() {
-  echo "directories here:"
+  echo -e "\nDIRECTORIES HERE\n"
   ls --group-directories-first -a1d -- */ 2> /dev/null
-  cmd-args "cd" ""
+  echo
+  read-args "cd" "."
 }
 
 help() {
   cat << EOF
+NAME
+shell-manager
+
+
 DESCRIPTION
  My program for fast execution of shell commands and system management
 
+
 USAGE
+ Simply execute the program as any user by its name
  Use the keybinds below to execute an option
+ You can pass the menu as an option: system, flake, git, misc (default: flake)
+
 
 TIPS
  If asked for confirmation, press Enter (all other keys abort execution)
  You can abort some ongoing commands with CTRL+C
 
+
 KEYBINDS
- digit
+ digits
  		Execute the currently displayed menu option by its number (0 equals 10)
+
  s, S
  		Changes the active menu to the system menu
+
  f, F
  		Changes the active menu to the flake menu
+
  g, G
  		Changes the active menu to the git menu
+
  m, M
  		Changes the active menu to the misc menu, which contains ungrouped commands
+
  u, U
- 		Change the user to execute commands with when they don't use root permissions
+		Restarts the program with a different user
+ 		root -> select a user from a list
+		other -> change to root
+
  c, C
  		Change the program directory
+
  h, H
  		Read about the program usage in a pager screen
+
  q, Q
 		Exit the program
+
+
+SYSTEM MENU
+
+Collect garbage
+ WIP
+
+Optimise store
+ WIP
+
+
+FLAKE MENU
+
+Format
+ WIP
+
+Update
+ WIP
+
+Build NixOS config
+ WIP
+
+Build ISO
+ WIP
+
+
+GIT MENU
+
+Full diff
+ WIP
+
+Send changes
+ WIP
+
+Switch branch and merge with current
+ WIP
+
+Custom args
+ WIP
+
+
+MISC MENU
+
+Custom command
+ WIP
+
+Burn iso image
+ WIP
 EOF
 }
 
-if [ $EUID != 0 ]
-then
-  echo "Not running as root, restart with elevated permissions"
-  exit
-fi
-
 stty -echoctl
 trap " " SIGINT
-user=$USER
-menu="system"
+
+menu="flake"
+case "$1" in
+  system) menu="system" ;;
+  flake) menu="flake" ;;
+  git) menu="git" ;;
+  misc) menu="misc" ;;
+esac
+shift
 
 while true
 do
@@ -272,8 +423,8 @@ do
     g|G) menu="git" ;;
     m|M) menu="misc" ;;
     u|U) run "switch-user" ;;
-    c|C) run "change-directory" ;;
-    h|H) run "help|less" ;;
-    q|Q) clear && exit ;;
+    c|C) change-directory ;;
+    h|H) help|bat ;;
+    q|Q) confirm "clear && exit" ;;
   esac
 done

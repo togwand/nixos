@@ -36,8 +36,6 @@
           "$status-bar"
           "[workspace 1 silent] $web-browser"
           "[workspace 2 silent] $terminal-emulator"
-          "[workspace 2 silent] $terminal-emulator"
-          "[workspace 3 silent] $terminal-emulator"
         ];
 
         bezier = [ "custom, 0, 0.7, 0.7, 1" ];
@@ -106,8 +104,8 @@
           "$workspace-easy, 0, workspace, 10"
 
           "$workspace, s, exec, hyprshot -m region -t 1000"
-          "$workspace, q, exit"
           "$workspace, e, exec, hyprpicker -a -f hex"
+          "$workspace, Delete, exit"
 
           "$window-easy, a, exec, pkill $app-launcher || $app-launcher"
           "$window-easy, s, exec, hyprshot -m window -m active -t 2000"
