@@ -124,7 +124,7 @@ EOF
     send-changes() {
       sudo -u "$user" git add --all
       sudo -u "$user" git commit
-      git push
+      sudo -u "$user" git push
     }
     confirm "send-changes" wait
   }
