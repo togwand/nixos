@@ -9,10 +9,10 @@ Nix flake for my NixOS configurations, including environments, modules, scripts 
    * treefmt-nix -> Allows for an easy and informative formatting of any language in the flake
 
 TODO:
-1. shell-manager
-2. stale
-3. modules
-4. environments
+1. stale
+2. modules
+3. environments
+4. shell-manager
 
 ## Environments
 NixOS configurations including system options, submodules, packages and variables
@@ -61,10 +61,7 @@ Executable and portable* code not written in nix
 An interactive shell command manager
 
 TODO:
-1. Make the options be abortable/cancellable with ctrl+c without exiting the program (subshell?)
-2. Set the flake to be used to be a remote one instead of local on all related options
-3. Add function to swap between root and not root (with a restart of the program perhaps)
-4. Check the script from top to bottom to update further
+1. Find a way to repeat less the sudo -u $user parts
 
 #### nixos-installer
 An interactive NixOS installer
