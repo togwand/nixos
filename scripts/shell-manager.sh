@@ -34,7 +34,8 @@ cmd-args() {
   fi
 }
 
-header() { cat << EOF
+header() {
+  cat << EOF
 SHELL MANAGER
  Press 'h' for help
 
@@ -117,13 +118,13 @@ EOF
       sudo -u "$user" git add --all
       sudo -u "$user" git diff HEAD|sudo -u "$user" bat
     }
-    confirm "full-diff"
+    confirm "full-diff" wait
   }
   o2() {
     send-changes() {
       sudo -u "$user" git add --all
       sudo -u "$user" git commit
-      su -c git push
+      sudo -u "$user" git push
     }
     confirm "send-changes" wait
   }
