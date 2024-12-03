@@ -124,7 +124,7 @@ EOF
     send-changes() {
       sudo -u "$user" git add --all
       sudo -u "$user" git commit
-      sudo -u "$user" git push
+      git push
     }
     confirm "send-changes" wait
   }
@@ -167,6 +167,13 @@ EOF
   }
 }
 
+switch-user() {
+  echo -e "\nUSERS"
+  passwd -Sa | grep P | grep -Eo '^[^ ]+'
+  echo -e "\nWhich user do you want to run this program with?"
+  read -re user
+}
+
 change-directory() {
   echo "directories here:"
   ls --group-directories-first -a1d -- */ 2> /dev/null
@@ -207,14 +214,19 @@ KEYBINDS
 EOF
 }
 
-switch-user() {
-  echo -e "\nUSERS"
-  passwd -Sa | grep P | grep -Eo '^[^ ]+'
-  echo -e "\nWhich user do you want to run this program with?"
-  read -re user
-}
+if [ $EUID != 0 ]
+then
+  echo "Not running as root, restart with elevated permissions"
+  exit
+fi
 
-interface() {
+stty -echoctl
+trap " " SIGINT
+user=$USER
+menu="system"
+
+while true
+do
   o1() { return
   }
   o2() { return
@@ -264,20 +276,4 @@ interface() {
     h|H) run "help|less" ;;
     q|Q) clear && exit ;;
   esac
-}
-
-if [ $EUID != 0 ]
-then
-  echo "Not running as root, restart with elevated permissions"
-  exit
-fi
-
-stty -echoctl
-trap " " SIGINT
-user=$USER
-menu="system"
-
-while true
-do
-  interface
 done
