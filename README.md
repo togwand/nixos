@@ -62,6 +62,7 @@ An interactive shell command manager
 
 TODO:
 1. Find a way to repeat less the sudo -u $user parts
+2. Fix the bug with git push
 
 #### nixos-installer
 An interactive NixOS installer
