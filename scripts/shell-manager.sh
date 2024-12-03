@@ -34,8 +34,7 @@ cmd-args() {
   fi
 }
 
-header() {
-  cat << EOF
+header() { cat << EOF
 SHELL MANAGER
  Press 'h' for help
 
@@ -124,7 +123,7 @@ EOF
     send-changes() {
       sudo -u "$user" git add --all
       sudo -u "$user" git commit
-      sudo -u "$user" git push
+      su -c git push
     }
     confirm "send-changes" wait
   }
