@@ -25,11 +25,11 @@
           "XG2402_140" = "    323.399  1920 1928 1960 2000   1080 1141 1149 1155   +hsync -vsync";
         };
       };
-      # outputs = {
-      # edid.modelines."XG2402_90" = "202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
-      # outputs."DP-1".edid = "XG2402_90.bin";
-      # outputs."DP-1".mode = "e";
-      # };
+      outputs = {
+        edid.modelines."XG2402_90" = "202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
+        outputs."DP-1".edid = "XG2402_90.bin";
+        outputs."DP-1".mode = "e";
+      };
     };
     nvidia = {
       modesetting.enable = true;
@@ -169,6 +169,17 @@
       BROWSER = "firefox";
       TERMINAL = "foot";
       HYPRSHOT_DIR = "collection/images/hyprshot";
+      GDK_BACKEND = "wayland,x11,*";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      SDL_VIDEODRIVER = "wayland";
+      CLUTTER_BACKEND = "wayland";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      LIBVA_DRIVER_NAME = "nvidia";
     };
     pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [

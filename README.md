@@ -9,7 +9,7 @@ Nix flake for my NixOS configurations, including environments, modules, scripts 
    * treefmt-nix -> Allows for an easy and informative formatting of any language in the flake
 
 TODO:
-1. stale (1-2)
+1. stale (1)
 2. nixos-installer
 3. shell-manager
 4. scripts
@@ -30,15 +30,14 @@ tty + nixos-installer configuration for a fast and easy installation
 Hyprland + shell-manager configuration to enhance my workflow
 
 TODO:
-1. Creating custom monitor display modes/modelines on wayland
-2. Check all environment variables in the hyprland wiki page to enable them in the system config
-3. Fix theming of every part of the system, especially cursors and icons
-4. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
-5. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
-6. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
-7. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
-8. Check vimjoyer videos to keep adding to the system
-9. Check the programming language used for my installed pkgs (remove or replace rust ones)
+1. Creating custom monitor display modes/modelines on wayland (try with disconnecting and reconnecting the cable maybe?)
+2. Fix theming of every part of the system, especially cursors and icons
+3. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
+4. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
+5. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
+6. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+7. Check vimjoyer videos to keep adding to the system
+8. Check the programming language used for my installed pkgs (remove or replace rust ones)
 
 ## Modules
 Nix overlays, configurations, and more which are toggleable with custom options
