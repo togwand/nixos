@@ -26,7 +26,7 @@
         "$window-hardest" = "$window-easy+CTRL+SHIFT+SUPER";
 
         # Keywords
-        monitor = ",1920x1080@99.93,0x0,1";
+        monitor = ",1920x1080@60.00,0x0,1";
         exec-once = [
           "$status-bar"
           "[workspace 1 silent] $web-browser"
@@ -211,7 +211,7 @@
           kb_options = "caps:swapescape";
           numlock_by_default = false;
           resolve_binds_by_sym = false;
-          repeat_rate = 100;
+          repeat_rate = 60;
           repeat_delay = 160;
           force_no_accel = true;
           natural_scroll = false;
