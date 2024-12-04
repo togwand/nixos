@@ -26,8 +26,10 @@
         };
       };
       outputs = {
-        outputs."DP-1".edid = "XG2402_90.bin";
-        outputs."DP-1".mode = "e";
+        "DP-1" = {
+          edid = "XG2402_90.bin";
+          mode = "e";
+        };
       };
     };
     nvidia = {

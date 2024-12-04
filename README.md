@@ -68,7 +68,8 @@ TODO
 An interactive shell command manager
 
 TODO
-1. Finish the help section (descriptions for menu commands)
+1. Make all the commands not start with the confirm but by reading the neccesary and then confirming each important step, like I did with nixos rebuild
+2. Finish the help section (descriptions for menu commands)
 
 #### nixos-installer
 An interactive NixOS installer
