@@ -16,21 +16,21 @@
       enable = true;
       enable32Bit = true;
     };
-    # display = {
-    #   edid = {
-    #     enable = true;
-    #     modelines = {
-    #       "XG2402_90" = "     202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
-    #       "XG2402_110" = "    250.36   1920 1928 1960 2000   1080 1124 1132 1138   +hsync -vsync";
-    #       "XG2402_140" = "    323.399  1920 1928 1960 2000   1080 1141 1149 1155   +hsync -vsync";
-    #     };
-    #   };
-    # outputs = {
-    # edid.modelines."XG2402_90" = "202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
-    # outputs."DP-1".edid = "XG2402_90.bin";
-    # outputs."DP-1".mode = "e";
-    # };
-    # };
+    display = {
+      edid = {
+        enable = true;
+        modelines = {
+          "XG2402_90" = "     202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
+          "XG2402_110" = "    250.36   1920 1928 1960 2000   1080 1124 1132 1138   +hsync -vsync";
+          "XG2402_140" = "    323.399  1920 1928 1960 2000   1080 1141 1149 1155   +hsync -vsync";
+        };
+      };
+      # outputs = {
+      # edid.modelines."XG2402_90" = "202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
+      # outputs."DP-1".edid = "XG2402_90.bin";
+      # outputs."DP-1".mode = "e";
+      # };
+    };
     nvidia = {
       modesetting.enable = true;
       open = false;
