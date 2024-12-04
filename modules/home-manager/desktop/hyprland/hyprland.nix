@@ -26,11 +26,26 @@
         "$window-hardest" = "$window-easy+CTRL+SHIFT+SUPER";
 
         # Keywords
-        monitor = ", 1920x1080@60, auto, 1";
+        monitor = ", 1920x1080@90, auto, 1";
         exec-once = [
           "$status-bar"
           "[workspace 1 silent] $web-browser"
           "[workspace 2 silent] $terminal-emulator"
+        ];
+
+        env = [
+          "GDK_BACKEND,wayland,x11,*"
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "SDL_VIDEODRIVER,wayland"
+          "CLUTTER_BACKEND,wayland"
+          "XDG_SESSION_DESKTOP,Hyprland"
+          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+          "QT_QPA_PLATFORMTHEME,qt5ct"
+          "GBM_BACKEND,nvidia-drm"
+          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          "LIBVA_DRIVER_NAME,nvidia"
         ];
 
         bezier = [ "custom, 0, 0.7, 0.7, 1" ];

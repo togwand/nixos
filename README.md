@@ -30,7 +30,7 @@ tty + nixos-installer configuration for a fast and easy installation
 Hyprland + shell-manager configuration to enhance my workflow
 
 TODO:
-TEST NIXOS HARDWARE.DISPLAY AS WELL AS HYPRLAND ENVIRONMENT VARIABLES
+TEST NIXOS HARDWARE.DISPLAY AND/OR CREATE EDID FILE MANUALLY. TEST IF PUTTING PACKAGES IN THE SYSTEM INSTEAD OF HOME-MANAGER FOR ALL FAILED CASES WITH A PROGRAM WORKS
 1. Creating custom monitor display modes/modelines on wayland (don't work: kanshi, wlr-randr, hyprland monitor option, video= kernel option, )
 2. Fix theming of every part of the system, especially cursors and icons
 3. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)

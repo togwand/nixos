@@ -101,7 +101,6 @@
             hyprshot
             hyprpicker
             discord
-            read-edid
           ];
           file = { };
           username = user;

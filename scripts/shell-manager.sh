@@ -119,7 +119,7 @@ EOF
   o3() {
     build-config() {
       read -rei "switch" -p "mode: " mode
-      read -rei "github:togwand/nixos-config/experimental" -p "uri: " flake_uri
+      read -rei "." -p "uri: " flake_uri
       read -rei "$HOSTNAME" -p "name: " name
       nixos-rebuild "$mode" --flake "$flake_uri#$name"
     }
