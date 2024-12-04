@@ -26,7 +26,7 @@
         "$window-hardest" = "$window-easy+CTRL+SHIFT+SUPER";
 
         # Keywords
-        monitor = ",1920x1080@60.00,0x0,1";
+        monitor = "DP-1, modeline 323.399 1920 1928 1960 2000 1080 1141 1149 1155 +hsync -vsync, 0x0, 1";
         exec-once = [
           "$status-bar"
           "[workspace 1 silent] $web-browser"
@@ -211,7 +211,7 @@
           kb_options = "caps:swapescape";
           numlock_by_default = false;
           resolve_binds_by_sym = false;
-          repeat_rate = 120;
+          repeat_rate = 140;
           repeat_delay = 160;
           force_no_accel = true;
           natural_scroll = false;
