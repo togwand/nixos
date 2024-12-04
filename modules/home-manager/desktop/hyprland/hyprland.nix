@@ -27,11 +27,11 @@
 
         # Keywords
         monitor = ",1920x1080@99.93,0x0,1";
-        env = [
-          "XDG_SESSION_TYPE,wayland"
-          "XDG_CURRENT_DESKTOP,Hyprland"
-          "XDG_SESSION_DESKTOP,Hyprland"
-        ];
+        # env = [
+        #   "XDG_SESSION_TYPE,wayland"
+        #   "XDG_CURRENT_DESKTOP,Hyprland"
+        #   "XDG_SESSION_DESKTOP,Hyprland"
+        # ];
         exec-once = [
           "$status-bar"
           "[workspace 1 silent] $web-browser"

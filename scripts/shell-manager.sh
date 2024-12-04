@@ -188,12 +188,7 @@ EOF
     fi
   }
   o4() {
-    git-custom() {
-      read-args "git" ""
-    }
-    if is-user
-    then run "git-custom"
-    fi
+    read-args "git" ""
   }
 }
 
