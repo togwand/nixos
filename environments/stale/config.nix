@@ -26,7 +26,6 @@
         };
       };
       outputs = {
-        edid.modelines."XG2402_90" = "202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
         outputs."DP-1".edid = "XG2402_90.bin";
         outputs."DP-1".mode = "e";
       };
