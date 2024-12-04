@@ -30,6 +30,7 @@ tty + nixos-installer configuration for a fast and easy installation
 Hyprland + shell-manager configuration to enhance my workflow
 
 TODO:
+FOR 1. TEST NIXOS OPTIONS AS WELL AS ENVIRONMENT VARIABLES FOR CREATING CUSTOM MODELINES IN HYPRLAND
 1. Creating custom monitor display modes/modelines on wayland (neither kanshi,wlr-randr,etc nor custom hyprland monitor resolution/modeline worked because they are not in the default modes for the card+monitor?)
 2. Fix theming of every part of the system, especially cursors and icons
 3. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)

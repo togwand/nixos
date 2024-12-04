@@ -34,8 +34,8 @@
     kernelParams = [
       "quiet"
       "udev.log_level=3"
-      "quiet video=DP-1:1920x1080@90"
-      "quiet video=DP1:1920x1080@140"
+      "video=DP-1:1920x1080@90"
+      "video=DP1:1920x1080@140"
     ];
     initrd = {
       verbose = false;
