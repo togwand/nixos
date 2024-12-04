@@ -69,16 +69,6 @@
       timeout = 2;
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
-      # grub = {
-      #   enable = false;
-      #   efiSupport = true;
-      #   useOSProber = true;
-      #   timeoutStyle = "menu";
-      #   default = "saved";
-      #   device = "nodev";
-      #   splashImage = null;
-      #   configurationLimit = 15;
-      # };
     };
   };
 
@@ -143,7 +133,7 @@
       enable = true;
       defaultSession = "hyprland-uwsm";
       autoLogin = {
-        enable = false;
+        enable = true;
         user = user;
       };
       sddm = {
