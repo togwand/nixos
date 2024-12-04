@@ -34,8 +34,6 @@
     kernelParams = [
       "quiet"
       "udev.log_level=3"
-      "video=DP-1:1920x1080@90"
-      "video=DP1:1920x1080@140"
     ];
     initrd = {
       verbose = false;
@@ -103,6 +101,7 @@
             hyprshot
             hyprpicker
             discord
+            read-edid
           ];
           file = { };
           username = user;
