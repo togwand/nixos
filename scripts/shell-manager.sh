@@ -121,11 +121,11 @@ EOF
       read -rei "switch" -p "mode: " mode
       read -rei "." -p "uri: " flake_uri
       read -rei "$HOSTNAME" -p "name: " name
-      nixos-rebuild "$mode" --flake "$flake_uri#$name"
+      read-args "nixos-rebuild $mode --flake $flake_uri#$name" "" confirm
     }
     if is-root
     then
-      confirm "build-config"
+      build-config
     fi
   }
   o4() {

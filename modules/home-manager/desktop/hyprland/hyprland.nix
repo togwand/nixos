@@ -9,6 +9,7 @@
     home-manager.users.${user}.wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
+      systemd.enable = false;
       settings = {
         # Variables
         "$terminal-emulator" = "foot";
@@ -28,24 +29,9 @@
         # Keywords
         monitor = ", 1920x1080@90, auto, 1";
         exec-once = [
-          "$status-bar"
-          "[workspace 1 silent] $web-browser"
-          "[workspace 2 silent] $terminal-emulator"
-        ];
-
-        env = [
-          "GDK_BACKEND,wayland,x11,*"
-          "QT_QPA_PLATFORM,wayland;xcb"
-          "SDL_VIDEODRIVER,wayland"
-          "CLUTTER_BACKEND,wayland"
-          "XDG_SESSION_DESKTOP,Hyprland"
-          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
-          "QT_QPA_PLATFORM,wayland;xcb"
-          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-          "QT_QPA_PLATFORMTHEME,qt5ct"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "LIBVA_DRIVER_NAME,nvidia"
+          "uwsm app -- $status-bar"
+          "[workspace 1 silent] uwsm app -- $web-browser"
+          "[workspace 2 silent] uwsm app -- $terminal-emulator"
         ];
 
         bezier = [ "custom, 0, 0.7, 0.7, 1" ];
@@ -95,13 +81,13 @@
         ];
 
         bind = [
-          ", Print, exec, hyprshot -m region -t 1000"
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%-"
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ", Print, exec, uwsm app -- hyprshot -m region -t 1000"
+          ", XF86AudioRaiseVolume, exec, uwsm app -- wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%+"
+          ", XF86AudioLowerVolume, exec, uwsm app -- wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%-"
+          ", XF86AudioMute, exec, uwsm app -- wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
-          "$workspace-easy, s, exec, hyprshot -m output -m active -t 2000"
-          "$workspace-easy, e, exec, hyprpicker -a -f rgb"
+          "$workspace-easy, s, exec, uwsm app -- hyprshot -m output -m active -t 2000"
+          "$workspace-easy, e, exec, uwsm app -- hyprpicker -a -f rgb"
           "$workspace-easy, 1, workspace, 1"
           "$workspace-easy, 2, workspace, 2"
           "$workspace-easy, 3, workspace, 3"
@@ -113,20 +99,20 @@
           "$workspace-easy, 9, workspace, 9"
           "$workspace-easy, 0, workspace, 10"
 
-          "$workspace, s, exec, hyprshot -m region -t 1000"
-          "$workspace, e, exec, hyprpicker -a -f hex"
-          "$workspace, Delete, exit"
+          "$workspace, s, exec, uwsm app -- hyprshot -m region -t 1000"
+          "$workspace, e, exec, uwsm app -- hyprpicker -a -f hex"
+          "$workspace, Delete, exec, uwsm stop"
 
-          "$window-easy, a, exec, pkill $app-launcher || $app-launcher"
-          "$window-easy, s, exec, hyprshot -m window -m active -t 2000"
+          "$window-easy, a, exec, uwsm app -- pkill $app-launcher || uwsm app -- $app-launcher"
+          "$window-easy, s, exec, uwsm app -- hyprshot -m window -m active -t 2000"
           "$window-easy, f, fullscreen, 0"
           "$window-easy, h, layoutmsg, preselect l"
           "$window-easy, j, layoutmsg, preselect d"
           "$window-easy, k, layoutmsg, preselect u"
           "$window-easy, l, layoutmsg, preselect r"
           "$window-easy, q, killactive"
-          "$window-easy, w, exec, $web-browser"
-          "$window-easy, e, exec, $terminal-emulator"
+          "$window-easy, w, exec, uwsm app -- $web-browser"
+          "$window-easy, e, exec, uwsm app -- $terminal-emulator"
 
           "$window, x, lockactivegroup, toggle"
           "$window, f, togglegroup"
