@@ -15,7 +15,6 @@
         "$terminal-emulator" = "foot";
         "$web-browser" = "firefox";
         "$app-launcher" = "tofi-drun";
-        "$status-bar" = "waybar";
 
         "$workspace-easy" = "SUPER";
         "$workspace" = "$workspace-easy+SHIFT";
@@ -27,9 +26,10 @@
         "$window-hardest" = "$window-easy+CTRL+SHIFT+SUPER";
 
         # Keywords
-        monitor = ", 1920x1080@90, auto, 1";
+        monitor = "DP-1, modeline 202.86 1920 1928 1960 2000 1080 1113 1121 1127 +hsync -vsync, auto, 1";
         exec-once = [
-          "uwsm app -- $status-bar"
+          "systemctl --user enable --now waybar.service"
+          "systemctl --user enable --now hyprpaper.service"
           "[workspace 1 silent] uwsm app -- $web-browser"
           "[workspace 2 silent] uwsm app -- $terminal-emulator"
         ];
