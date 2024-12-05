@@ -52,7 +52,7 @@
     kernelParams = [
       "quiet"
       "udev.log_level=3"
-      "drm.edid_firmware=DP-1:FHD_144.bin,DP-1:FHD_120.bin,DP-1:FHD_105.bin,DP-1:FHD_90.bin,DP-1:FHD_75.bin"
+      "drm.edid_firmware=DP-1:FHD_144.bin"
     ];
     initrd = {
       verbose = false;
