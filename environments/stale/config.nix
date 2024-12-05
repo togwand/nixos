@@ -20,19 +20,16 @@
       edid = {
         enable = true;
         modelines = {
-          "FHD_75" = "     167.85   1920 1928 1960 2000   1080 1105 1113 1119   +hsync -vsync";
-          "FHD_90" = "     202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
-          "FHD_105" = "    238.35   1920 1928 1960 2000   1080 1121 1129 1135   +hsync -vsync";
-          "FHD_120" = "    274.56   1920 1928 1960 2000   1080 1130 1138 1144   +hsync -vsync";
-          "FHD_144" = "    333.216  1920 1928 1960 2000   1080 1143 1151 1157   +hsync -vsync";
+          "1080@144" = ''
+            333.216  1920 1928 1960 2000  1080 1143 1151 1157  +hsync -vsync
+            Modeline "1080@120"  274.560  1920 1928 1960 2000  1080 1130 1138 1144  +hsync -vsync
+            Modeline "1080@105"  238.350  1920 1928 1960 2000  1080 1121 1129 1135  +hsync -vsync
+            Modeline "1080@90"   202.860  1920 1928 1960 2000  1080 1113 1121 1127  +hsync -vsync
+            Modeline "1080@75"   167.850  1920 1928 1960 2000  1080 1105 1113 1119  +hsync -vsync
+            Modeline "1080@60"   133.320  1920 1928 1960 2000  1080 1097 1105 1111  +hsync -vsync
+          '';
         };
       };
-      # outputs = {
-      #   "DP-1" = {
-      #     edid = "FHD_144.bin";
-      #     # mode = "";
-      #   };
-      # };
     };
     nvidia = {
       modesetting.enable = true;
@@ -52,7 +49,7 @@
     kernelParams = [
       "quiet"
       "udev.log_level=3"
-      "drm.edid_firmware=DP-1:edid/FHD_144.bin,DP-1:edid/FHD_120.bin,DP-1:edid/FHD_105.bin,DP-1:edid/FHD_90.bin,DP-1:edid/FHD_75.bin"
+      "drm.edid_firmware=edid/1080@144.bin"
     ];
     initrd = {
       verbose = false;

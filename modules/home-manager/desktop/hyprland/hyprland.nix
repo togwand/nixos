@@ -26,7 +26,7 @@
         "$window-hardest" = "$window-easy+CTRL+SHIFT+SUPER";
 
         # Keywords
-        monitor = "DP-1, highrr, auto, 1";
+        monitor = ", highrr, auto, 1";
         exec-once = [
           "systemctl --user enable --now waybar.service"
           "systemctl --user enable --now hyprpaper.service"
