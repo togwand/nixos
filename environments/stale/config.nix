@@ -27,7 +27,7 @@
       };
       outputs = {
         "DP-1" = {
-          edid = "XG2402_90.bin";
+          edid = "XG2402_140.bin";
           mode = "e";
         };
       };
