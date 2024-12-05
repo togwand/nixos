@@ -53,6 +53,7 @@
       "quiet"
       "udev.log_level=3"
       "drm.edid_firmware=DP-1:FHD_144.bin"
+      "video=DP1:e"
     ];
     initrd = {
       verbose = false;
