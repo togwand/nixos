@@ -26,7 +26,7 @@
         "$window-hardest" = "$window-easy+CTRL+SHIFT+SUPER";
 
         # Keywords
-        monitor = ", highrr, auto, 1";
+        monitor = ", preferred, auto, 1";
         exec-once = [
           "systemctl --user enable --now waybar.service"
           "systemctl --user enable --now hyprpaper.service"
@@ -212,7 +212,7 @@
           kb_options = "caps:swapescape";
           numlock_by_default = false;
           resolve_binds_by_sym = false;
-          repeat_rate = 144;
+          repeat_rate = 60;
           repeat_delay = 160;
           force_no_accel = true;
           natural_scroll = false;
