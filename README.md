@@ -9,10 +9,10 @@ Nix flake for my NixOS configurations, including environments, modules, scripts 
    * treefmt-nix -> Allows for an easy and informative formatting of any language in the flake
 
 TODO:
-1. nixos-installer
+1. modules
 2. shell-manager
-3. scripts
-4. modules
+3. nixos-installer
+4. scripts
 5. environments
 
 ## Environments
@@ -41,9 +41,11 @@ TODO:
 Nix overlays, configurations, and more which are toggleable with custom options
 
 TODO:
-1. Change the options that depend on other programs to be in the same directory as the environment that used the other program (example hyprland uses firefox then move that option and similar ones to the directory of an environment instead of the main hyprland module, only hyprland only options in the hyprland module)
-2. Make options for enable/disable options inside the configuration of modules (ex for minimal iso versus desktop environments)
-3. Test and add more nix options to all modules
+1. Make the modules... more modular (separate current modules into more modules)
+2. Recheck all content and identify issues with reinstallations and hard-coded values for hardware and similar issues
+3. Change the options that depend on other programs to be in the same directory as the environment that used the other program (example hyprland uses firefox then move that option and similar ones to the directory of an environment instead of the main hyprland module, only hyprland only options in the hyprland module)
+4. Make options for enable/disable options inside the configuration of modules (ex for minimal iso versus desktop environments)
+5. Test and add more nix options to all modules
 
 #### home-manager
 Home-manager configurations for programs and services
@@ -67,10 +69,12 @@ An interactive shell command manager
 
 TODO
 1. Make all the commands not start with the confirm but by reading the neccesary and then confirming each important step, like I did with nixos rebuild
-2. Finish the help section (descriptions for menu commands)
+2. Make a rclone section for sure and fast method to copy and synsc my stuff after changes after changes
+3. Finish the help section (descriptions for menu commands)
 
 #### nixos-installer
 An interactive NixOS installer
 
 TODO
-1. Refactor as with the shell-manager
+1. Add a way to silently do ntfsfix -db to all partitions with a ntfs filesystem?
+2. Refactor as with the shell-manager

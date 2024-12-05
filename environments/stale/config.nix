@@ -20,17 +20,19 @@
       edid = {
         enable = true;
         modelines = {
-          "XG2402_90" = "     202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
-          "XG2402_110" = "    250.36   1920 1928 1960 2000   1080 1124 1132 1138   +hsync -vsync";
-          "XG2402_140" = "    323.399  1920 1928 1960 2000   1080 1141 1149 1155   +hsync -vsync";
+          "FHD_75" = "     167.85   1920 1928 1960 2000   1080 1105 1113 1119   +hsync -vsync";
+          "FHD_90" = "     202.86   1920 1928 1960 2000   1080 1113 1121 1127   +hsync -vsync";
+          "FHD_105" = "    238.35   1920 1928 1960 2000   1080 1121 1129 1135   +hsync -vsync";
+          "FHD_120" = "    274.56   1920 1928 1960 2000   1080 1130 1138 1144   +hsync -vsync";
+          "FHD_144" = "    333.216  1920 1928 1960 2000   1080 1143 1151 1157   +hsync -vsync";
         };
       };
-      outputs = {
-        "DP-1" = {
-          edid = "XG2402_140.bin";
-          mode = "e";
-        };
-      };
+      #   outputs = {
+      #     "DP-1" = {
+      #       edid = "FHD_144.bin";
+      #       mode = "e";
+      #     };
+      #   };
     };
     nvidia = {
       modesetting.enable = true;
@@ -50,6 +52,7 @@
     kernelParams = [
       "quiet"
       "udev.log_level=3"
+      "drm.edid_firmware=DP-1:FHD_144.bin,DP-1:FHD_120.bin,DP-1:FHD_105.bin,DP-1:FHD_90.bin,DP-1:FHD_75.bin"
     ];
     initrd = {
       verbose = false;
@@ -69,7 +72,16 @@
     loader = {
       timeout = 2;
       efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
+      grub = {
+        enable = true;
+        efiSupport = true;
+        useOSProber = true;
+        timeoutStyle = "menu";
+        default = "saved";
+        device = "nodev";
+        splashImage = null;
+        configurationLimit = 15;
+      };
     };
   };
 
@@ -112,7 +124,7 @@
           file = { };
           username = user;
           homeDirectory = "/home/${user}";
-          stateVersion = "24.11";
+          stateVersion = "25.05";
         };
       };
     };
@@ -275,5 +287,5 @@
     };
   };
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

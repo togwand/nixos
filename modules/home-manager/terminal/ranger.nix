@@ -50,7 +50,7 @@
         viewmode = "miller";
         sixel_dithering = "None";
         wrap_plaintext_previews = false;
-        wrap_scroll = true;
+        wrap_scroll = false;
       };
     };
   };
