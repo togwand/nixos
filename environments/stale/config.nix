@@ -27,12 +27,12 @@
           "FHD_144" = "    333.216  1920 1928 1960 2000   1080 1143 1151 1157   +hsync -vsync";
         };
       };
-      #   outputs = {
-      #     "DP-1" = {
-      #       edid = "FHD_144.bin";
-      #       mode = "e";
-      #     };
-      #   };
+      outputs = {
+        "DP-1" = {
+          edid = "FHD_144.bin";
+          mode = "e";
+        };
+      };
     };
     nvidia = {
       modesetting.enable = true;
@@ -52,8 +52,6 @@
     kernelParams = [
       "quiet"
       "udev.log_level=3"
-      "drm.edid_firmware=DP-1:FHD_144.bin"
-      "video=DP1:e"
     ];
     initrd = {
       verbose = false;
