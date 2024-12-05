@@ -30,7 +30,7 @@
       outputs = {
         "DP-1" = {
           edid = "FHD_144.bin";
-          mode = "";
+          # mode = "";
         };
       };
     };
