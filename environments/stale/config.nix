@@ -28,7 +28,7 @@
       };
       outputs = {
         "DP-1" = {
-          edid = "1080@105.bin";
+          edid = "1080@120.bin";
         };
       };
     };
@@ -77,7 +77,7 @@
         default = "saved";
         device = "nodev";
         splashImage = null;
-        configurationLimit = 4;
+        configurationLimit = 3;
       };
     };
   };
