@@ -67,7 +67,7 @@
       "exfat"
     ];
     loader = {
-      timeout = 2;
+      timeout = 3;
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
@@ -77,7 +77,7 @@
         default = "saved";
         device = "nodev";
         splashImage = null;
-        configurationLimit = 3;
+        configurationLimit = 7;
       };
     };
   };

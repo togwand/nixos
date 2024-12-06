@@ -13,7 +13,8 @@ TODO:
 2. shell-manager
 3. nixos-installer
 4. scripts
-5. environments
+5. stale
+6. environments
 
 ## Environments
 NixOS configurations including system options, submodules, packages and variables
@@ -76,5 +77,4 @@ TODO
 An interactive NixOS installer
 
 TODO
-1. Add a way to silently do ntfsfix -db to all partitions with a ntfs filesystem?
-2. Refactor as with the shell-manager
+1. Refactor as with the shell-manager
