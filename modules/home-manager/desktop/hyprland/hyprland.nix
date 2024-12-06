@@ -212,7 +212,7 @@
           kb_options = "caps:swapescape";
           numlock_by_default = false;
           resolve_binds_by_sym = false;
-          repeat_rate = 120;
+          repeat_rate = 90;
           repeat_delay = 160;
           force_no_accel = true;
           natural_scroll = false;
