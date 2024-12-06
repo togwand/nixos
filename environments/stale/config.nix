@@ -78,7 +78,7 @@
         default = "saved";
         device = "nodev";
         splashImage = null;
-        configurationLimit = 15;
+        configurationLimit = 5;
       };
     };
   };
