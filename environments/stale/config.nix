@@ -24,12 +24,11 @@
           "1080@120" = "274.560  1920 1928 1960 2000  1080 1130 1138 1144  +hsync -vsync";
           "1080@105" = "238.350  1920 1928 1960 2000  1080 1121 1129 1135  +hsync -vsync";
           "1080@90" = " 202.860  1920 1928 1960 2000  1080 1113 1121 1127  +hsync -vsync";
-          "1080@60" = " 133.320  1920 1928 1960 2000  1080 1097 1105 1111  +hsync -vsync";
         };
       };
       outputs = {
         "DP-1" = {
-          edid = "1080@90.bin";
+          edid = "1080@105.bin";
         };
       };
     };
@@ -78,7 +77,7 @@
         default = "saved";
         device = "nodev";
         splashImage = null;
-        configurationLimit = 5;
+        configurationLimit = 4;
       };
     };
   };
