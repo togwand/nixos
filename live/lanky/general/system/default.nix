@@ -26,10 +26,9 @@
 
   services = {
     getty = {
-      greetingLine = "Minimal environment";
+      greetingLine = "Lanky NixOS configuration ready";
       helpLine = lib.mkForce ''
-        Installation script:
-        goris
+        Install an OS with "goris"
       '';
     };
     xserver.xkb = {
