@@ -1,8 +1,8 @@
 {
   imports = [
-    ./comment.nix
-    ./lsp.nix
-    ./lualine.nix
-    ./treesitter.nix
+    ./comment
+    ./lsp
+    ./lualine
+    ./treesitter
   ];
 }

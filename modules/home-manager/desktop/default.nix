@@ -1,10 +1,11 @@
 {
   imports = [
+    ./firefox
+    ./foot
+    ./gtk
     ./hyprland
-    ./firefox.nix
-    ./gtk.nix
-    ./swaync.nix
-    ./tofi.nix
-    ./waybar.nix
+    ./swaync
+    ./tofi
+    ./waybar
   ];
 }

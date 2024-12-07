@@ -1,35 +1,25 @@
-# nixos-config
-Nix flake for my NixOS configurations, including environments, modules, scripts and more
+# nixos
+My NixOS configurations and options
 
-### Inputs
- * nixpkgs/nixos-unstable -> Earlier and more features, overall less issues than stable
- * disko/master -> For an easier and more reliable way to install NixOS as well as not using generated filesystems
- * home-manager/master -> Some apps are easier to configure with it (e.g. zsh, hyprland)
- * nixvim/main -> Very modular and fairly easy to modify, also adds several inputs to the flake (e.g. treefmt)
-   * treefmt-nix -> Allows for an easy and informative formatting of any language in the flake
+#### TODO
+1. Change the options that depend on other programs to be in the same directory as the environment that used the other program (example hyprland uses firefox then move that option and similar ones to the directory of an environment instead of the main hyprland module, only hyprland only options in the hyprland module)
+2. Test and add more nix options to all modules
+3. Make a comfy live config
+4. Make a server config type
 
-TODO:
-1. modules
-2. shell-manager
-3. nixos-installer
-4. scripts
-5. stale
-6. environments
+## Desktop
+Persistent NixOS for daily drive desktops with user-grade hardware
 
-## Environments
-NixOS configurations including system options, submodules, packages and variables
+### stale
+For gaming and dev (and of course, game dev) on a 2020 computer
 
-TODO:
-1. Make a comfy iso environment
-2. Make a server environment
+#### TARGET SPECS
+* Storage type: Crucial BX500 (x2) (NixOS & Windows/Games)
+* Monitor: ViewSonic XG2402
+* GPU: GTX 1650 Super
+* CPU: i5-9400f
 
-#### minimal_iso
-tty + nixos-installer configuration for a fast and easy installation
-
-#### stale
-Hyprland + shell-manager configuration to enhance my workflow
-
-TODO:
+#### TODO
 1. Fix theming of every part of the system, especially cursors and icons
 2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
 3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
@@ -38,43 +28,20 @@ TODO:
 6. Check vimjoyer videos to keep adding to the system
 7. Check the programming language used for my installed pkgs (remove or replace rust ones)
 
+## Live
+Non persistent NixOS ISO images for removable installation media
+
+### lanky
+For quick installation or recovery
+
 ## Modules
-Nix overlays, configurations, and more which are toggleable with custom options
+Additional NixOS configurations and options
 
-TODO:
-1. Make the modules... more modular (separate current modules into more modules)
-2. Recheck all content and identify issues with reinstallations and hard-coded values for hardware and similar issues
-3. Change the options that depend on other programs to be in the same directory as the environment that used the other program (example hyprland uses firefox then move that option and similar ones to the directory of an environment instead of the main hyprland module, only hyprland only options in the hyprland module)
-4. Make options for enable/disable options inside the configuration of modules (ex for minimal iso versus desktop environments)
-5. Test and add more nix options to all modules
+### home-manager
+Per user programs and services
 
-#### home-manager
-Home-manager configurations for programs and services
+### intel
+Generic settings needed when the CPU used for a configuration is from Intel
 
-#### overlays
-Derivations built with a nix writer or similar builder, one overlay per derivation
-
-#### treefmt-nix
-All the flake language formatters and their configurations
-
-## Scripts
-Executable and portable* code not written in nix
-
-* Not technically portable as the shebang is declared in a module
-
-TODO
-1. Change names to be more fun
-
-#### shell-manager
-An interactive shell command manager
-
-TODO
-1. Make all the commands not start with the confirm but by reading the neccesary and then confirming each important step, like I did with nixos rebuild
-2. Make a rclone section for sure and fast method to copy and synsc my stuff after changes after changes
-3. Finish the help section (descriptions for menu commands)
-
-#### nixos-installer
-An interactive NixOS installer
-
-TODO
-1. Refactor as with the shell-manager
+### nvidia
+Generic settings needed when the GPU used for a configuration is from Nvidia

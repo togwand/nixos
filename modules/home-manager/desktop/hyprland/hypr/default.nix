@@ -1,5 +1,5 @@
 {
   imports = [
-    ./hyprpaper.nix
+    ./hyprpaper
   ];
 }

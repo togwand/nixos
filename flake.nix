@@ -1,5 +1,14 @@
 {
+  description = "flake for togwand/nixos";
   inputs = {
+    cadoras = {
+      url = "github:togwand/cadoras";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    goris = {
+      url = "github:togwand/goris";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     disko = {
       url = "github:nix-community/disko/master";
@@ -16,34 +25,32 @@
     };
   };
   outputs =
-    { nixpkgs, systems, ... }@inputs:
+    { nixpkgs, ... }@inputs:
     let
-      eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
-      treefmtEval = eachSystem (
-        pkgs: inputs.nixvim.inputs.treefmt-nix.lib.evalModule pkgs ./modules/treefmt-nix
-      );
     in
     {
-      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
-      nixosConfigurations."minimal_iso" = nixpkgs.lib.nixosSystem {
-        modules = [
-          ./environments/minimal_iso
-          ./modules
-        ];
-        specialArgs = {
-          inherit inputs;
-          user = "nixos";
+      nixosConfigurations = {
+        "stale" = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./desktop/stale
+            ./modules
+          ];
+          specialArgs = {
+            inherit inputs;
+            user = "togwand";
+            host = "stale";
+          };
         };
-      };
-      nixosConfigurations."stale" = nixpkgs.lib.nixosSystem {
-        modules = [
-          ./environments/stale
-          ./modules
-        ];
-        specialArgs = {
-          inherit inputs;
-          user = "togwand";
-          host = "stale";
+        "lanky" = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./live/lanky
+            ./modules
+          ];
+          specialArgs = {
+            inherit inputs;
+            user = "nixos";
+            host = "lanky";
+          };
         };
       };
     };

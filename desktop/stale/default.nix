@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./general
+    ./specs
+    ./storage
+  ];
+}

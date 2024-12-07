@@ -1,6 +1,6 @@
 {
   imports = [
-    ./git
-    ./nixvim
+    ./disko
+    ./ntfs
   ];
 }
