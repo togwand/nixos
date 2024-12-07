@@ -16,6 +16,7 @@
       home = {
         packages = with pkgs; [
           inputs.cadoras.default
+          git-credential-oauth
           wl-clipboard
           rclone
           pavucontrol
