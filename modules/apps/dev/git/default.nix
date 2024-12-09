@@ -17,6 +17,17 @@
       programs.git = {
         enable = true;
         lfs.enable = true;
+        diff-so-fancy = {
+          enable = true;
+          pagerOpts = [
+            "--tabs=4"
+            "-RX"
+          ];
+          markEmptyLines = true;
+          rulerWidth = null;
+          stripLeadingSymbols = true;
+          useUnicodeRuler = false;
+        };
         userEmail = "togwand@gmail.com";
         userName = "togwand";
         extraConfig = {

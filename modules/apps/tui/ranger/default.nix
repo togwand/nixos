@@ -12,6 +12,7 @@
       extraPackages = with pkgs; [
         poppler_utils
         mediainfo
+        highlight
       ];
       settings = {
         automatically_count_files = false;
