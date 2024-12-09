@@ -26,8 +26,6 @@
   };
   outputs =
     { nixpkgs, ... }@inputs:
-    let
-    in
     {
       nixosConfigurations = {
         "stale" = nixpkgs.lib.nixosSystem {
@@ -48,7 +46,7 @@
           ];
           specialArgs = {
             inherit inputs;
-            user = "nixos";
+            user = "hacker";
             host = "lanky";
           };
         };

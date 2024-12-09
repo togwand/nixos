@@ -10,7 +10,7 @@
     users.defaultUserShell = pkgs.zsh;
     environment.pathsToLink = [ "/share/zsh" ];
     programs.zsh.enable = true;
-    home-manager.users.${user}.programs.zsh = {
+    home-manager.users.${user}.programs.zsh = lib.mkIf config.generic.home-manager.enable {
       enable = true;
       dotDir = ".zsh";
       defaultKeymap = "viins";

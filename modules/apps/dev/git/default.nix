@@ -7,7 +7,12 @@
 }:
 {
   config = lib.mkIf config.apps.dev.git.enable {
-    home-manager.users.${user} = {
+    home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
+      wayland.windowManager.hyprland.settings = lib.mkIf config.apps.desktop.hyprland.enable {
+        bind = lib.mkIf config.apps.desktop.firefox.enable [
+          "$window-easy, c, exec, uwsm app -- firefox -new-tab https://github.com/login/device?skip_account_picker=true"
+        ];
+      };
       home.packages = with pkgs; [ git-credential-oauth ];
       programs.git = {
         enable = true;

@@ -7,7 +7,7 @@
 }:
 {
   config = lib.mkIf config.apps.tui.ranger.enable {
-    home-manager.users.${user}.programs.ranger = {
+    home-manager.users.${user}.programs.ranger = lib.mkIf config.generic.home-manager.enable {
       enable = true;
       extraPackages = with pkgs; [
         poppler_utils

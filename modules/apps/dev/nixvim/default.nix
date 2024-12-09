@@ -9,10 +9,10 @@
     ./plugins
   ];
   config = lib.mkIf config.apps.dev.nixvim.enable {
-    environment.variables = {
+    environment.variables = lib.mkIf config.generic.home-manager.enable {
       VISUAL = "nvim";
     };
-    home-manager.users.${user}.programs.nixvim = {
+    home-manager.users.${user}.programs.nixvim = lib.mkIf config.generic.home-manager.enable {
       enable = true;
       viAlias = true;
       vimAlias = true;

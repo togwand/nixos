@@ -8,7 +8,6 @@
   config = lib.mkIf config.generic.linux.enable {
 
     hardware.enableRedistributableFirmware = true;
-
     boot = {
       consoleLogLevel = 3;
       initrd.verbose = false;

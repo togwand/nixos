@@ -16,7 +16,6 @@
     };
 
     boot.initrd.availableKernelModules = [ "nvidia_drm" ];
-
     services.xserver.videoDrivers = [ "nvidia" ];
 
     environment.variables = {

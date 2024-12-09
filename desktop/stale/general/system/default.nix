@@ -57,48 +57,6 @@
     earlySetup = false;
   };
 
-  services = {
-    getty = {
-      autologinUser = user;
-      autologinOnce = false;
-    };
-    displayManager = {
-      enable = true;
-      defaultSession = "hyprland-uwsm";
-      autoLogin = {
-        enable = true;
-        user = user;
-      };
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-        theme = "sugar-dark";
-      };
-    };
-    xserver = {
-      enable = false;
-      xkb.layout = "latam";
-    };
-    blueman.enable = true;
-    pipewire = {
-      enable = true;
-      pulse.enable = true;
-      jack.enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-    };
-    devmon.enable = true;
-  };
-
-  environment = {
-    systemPackages = with pkgs; [
-      sddm-sugar-dark
-      libsForQt5.qt5.qtgraphicaleffects
-    ];
-  };
-
   fonts = {
     packages = with pkgs; [
       nerd-fonts.commit-mono

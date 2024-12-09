@@ -6,7 +6,7 @@
 }:
 {
   config = lib.mkIf config.apps.desktop.swaync.enable {
-    home-manager.users.${user}.services.swaync = {
+    home-manager.users.${user}.services.swaync = lib.mkIf config.generic.home-manager.enable {
       enable = true;
       settings = {
         positionX = "left";
