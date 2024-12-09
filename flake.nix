@@ -25,7 +25,7 @@
     };
   };
   outputs =
-    { nixpkgs, ... }@inputs:
+    { nixpkgs, self, ... }@inputs:
     {
       nixosConfigurations = {
         "stale" = nixpkgs.lib.nixosSystem {
@@ -34,7 +34,7 @@
             ./modules
           ];
           specialArgs = {
-            inherit inputs;
+            inherit self inputs;
             user = "togwand";
             host = "stale";
           };
@@ -45,7 +45,7 @@
             ./modules
           ];
           specialArgs = {
-            inherit inputs;
+            inherit self inputs;
             user = "hacker";
             host = "lanky";
           };

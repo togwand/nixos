@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  self,
   user,
   ...
 }:
@@ -12,10 +13,10 @@
         ipc = "on";
         splash = false;
         preload = [
-          "~/collection/images/wallpapers/magic-sky.jpg"
+          "${self}/pictures/magic-sky.jpg"
         ];
         wallpaper = [
-          ",~/collection/images/wallpapers/magic-sky.jpg"
+          ", ${self}/pictures/magic-sky.jpg"
         ];
       };
     };

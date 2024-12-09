@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  self,
   user,
   ...
 }:
@@ -22,7 +23,7 @@
   boot = {
     supportedFilesystems = [ "exfat" ];
     loader = {
-      timeout = 3;
+      timeout = 4;
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
@@ -31,7 +32,7 @@
         timeoutStyle = "menu";
         default = "saved";
         device = "nodev";
-        splashImage = null;
+        splashImage = "${self}/pictures/magic-sky.jpg";
         configurationLimit = 7;
       };
     };

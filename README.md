@@ -47,3 +47,6 @@ Generic configurations needed for hardware or other modules
 
 ### inputs
 Settings brought and used by this flake's inputs
+
+## Pictures
+External images or similar media that some modules use (e.g. backgrounds)
