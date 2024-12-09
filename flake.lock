@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733754113,
-        "narHash": "sha256-qpqjJc7AXDZJaWUGTWQCmOiFI5aWEulObxrY+TMBkHA=",
+        "lastModified": 1733778691,
+        "narHash": "sha256-uT5c0bGLYBSbdTkDOx/02rqYIC0M6linArT2zNp7zlU=",
         "owner": "togwand",
         "repo": "cadoras",
-        "rev": "cc286880d25ea0f59fdebd5d86d2a4af780c6249",
+        "rev": "aef4a0a9baaac92342a51f2f45f7b1b8e3c08dba",
         "type": "github"
       },
       "original": {
@@ -174,11 +174,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733765336,
-        "narHash": "sha256-AX3ssIg5+YHbDeqj9rTnexiLaIKjj/vcvUbJGwH+pPo=",
+        "lastModified": 1733778625,
+        "narHash": "sha256-/QEJkbrwhzpqFm6p4nKJ/d2IWjVhn+1c+O92ext59Xg=",
         "owner": "togwand",
         "repo": "goris",
-        "rev": "de8b5513981dc35f45256b3f624d5d102e3bd286",
+        "rev": "ea434602584c03e9025a8db3288acdbc74ee750b",
         "type": "github"
       },
       "original": {

@@ -1,7 +1,6 @@
 {
   imports = [
     ./beautysh
-    ./mdsh
     ./nixfmt
   ];
 }

@@ -2,7 +2,6 @@
 {
   imports = [
     ./bash
-    ./bat
     ./ranger
     ./rclone
     ./zsh
