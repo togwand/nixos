@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733687217,
-        "narHash": "sha256-Ac0UcNyXQHd0CKYnUECcFB9+BDy/qOAc2yEdcCKOVx4=",
+        "lastModified": 1733754113,
+        "narHash": "sha256-qpqjJc7AXDZJaWUGTWQCmOiFI5aWEulObxrY+TMBkHA=",
         "owner": "togwand",
         "repo": "cadoras",
-        "rev": "51f3ac4293ffb35012582e1e1caf3c362503bcb0",
+        "rev": "cc286880d25ea0f59fdebd5d86d2a4af780c6249",
         "type": "github"
       },
       "original": {

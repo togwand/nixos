@@ -35,7 +35,7 @@
         "$terminal-emulator" = lib.mkIf config.apps.desktop.foot.enable "foot";
         "$web-browser" = lib.mkIf config.apps.desktop.firefox.enable "firefox";
         "$app-launcher" = lib.mkIf config.apps.desktop.tofi.enable "tofi-drun";
-        "$status-bar" = lib.mkIf config.apps.desktop.waybar.enable "waybar";
+        "$status-bar-service" = lib.mkIf config.apps.desktop.waybar.enable "waybar.service";
 
         "$workspace-easy" = "SUPER";
         "$workspace" = "$workspace-easy+SHIFT";
@@ -49,7 +49,7 @@
         # Keywords
         monitor = ", preferred, auto, 1";
         exec-once = [
-          "systemctl --user enable --now $status-bar.service"
+          "systemctl --user enable --now $status-bar-service"
           "systemctl --user enable --now hyprpaper.service"
           "[workspace 1 silent] uwsm app -- $web-browser"
           "[workspace 2 silent] uwsm app -- $terminal-emulator"
