@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./hyprpaper
+    ./hyprshot
+    ./hyprpicker
+  ];
+}

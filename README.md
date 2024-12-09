@@ -2,13 +2,12 @@
 My NixOS configurations and options
 
 #### TODO
-1. Change the options that depend on other programs to be in the same directory as the environment that used the other program (example hyprland uses firefox then move that option and similar ones to the directory of an environment instead of the main hyprland module, only hyprland only options in the hyprland module)
-2. Test and add more nix options to all modules
-3. Make a comfy live config
-4. Make a server config type
+1. Test and add more nix options to all modules
+2. Make a comfy live config
+3. Make a server config type
 
 ## Desktop
-Persistent NixOS for daily drive desktops with user-grade hardware
+Persistent NixOS for daily drive desktops with user-grade hardware (and a latin american keyboard)
 
 ### stale
 For gaming and dev (and of course, game dev) on a 2020 computer
@@ -35,13 +34,13 @@ Non persistent NixOS ISO images for removable installation media
 For quick installation or recovery
 
 ## Modules
-Additional NixOS configurations and options
+Always available to use NixOS options and optional configurations
 
-### home-manager
-Per user programs and services
+### apps
+Ready to use programs and services
 
-### intel
-Generic settings needed when the CPU used for a configuration is from Intel
+### generic
+Generic configurations needed for hardware or other modules
 
-### nvidia
-Generic settings needed when the GPU used for a configuration is from Nvidia
+### inputs
+Settings brought and used by this flake's inputs

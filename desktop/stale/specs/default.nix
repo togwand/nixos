@@ -4,7 +4,7 @@
     ./kernel
   ];
   config = {
-    nvidia.enable = true;
-    intel.enable = true;
+    generic.intel.enable = true;
+    generic.nvidia.enable = true;
   };
 }

@@ -1,5 +1,4 @@
 {
-  host,
   lib,
   pkgs,
   user,
@@ -7,11 +6,6 @@
 }:
 {
   hardware = {
-    enableRedistributableFirmware = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
     bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -26,16 +20,7 @@
   ];
 
   boot = {
-    tmp.cleanOnBoot = true;
-    consoleLogLevel = 3;
-    kernelParams = [
-      "quiet"
-      "udev.log_level=3"
-    ];
-    supportedFilesystems = [
-      "exfat"
-    ];
-    initrd.verbose = false;
+    supportedFilesystems = [ "exfat" ];
     loader = {
       timeout = 3;
       efi.canTouchEfiVariables = true;
@@ -53,29 +38,22 @@
   };
 
   networking = {
-    hostName = host;
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
     firewall.enable = false;
   };
 
-  users = {
-    defaultUserShell = pkgs.zsh;
-    users = {
-      ${user} = {
-        isNormalUser = true;
-        extraGroups = [
-          "wheel"
-          "networkmanager"
-        ];
-      };
-    };
+  users.users.${user} = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
   };
 
   console = {
     packages = with pkgs; [ uw-ttyp0 ];
     font = "t0-13b-uni";
-    useXkbConfig = true;
     earlySetup = false;
   };
 
@@ -99,11 +77,7 @@
     };
     xserver = {
       enable = false;
-      videoDrivers = [ "nvidia" ];
-      xkb = {
-        layout = "latam";
-        options = "caps:swapescape";
-      };
+      xkb.layout = "latam";
     };
     blueman.enable = true;
     pipewire = {
@@ -119,36 +93,10 @@
   };
 
   environment = {
-    variables = {
-      VISUAL = "nvim";
-      BROWSER = "firefox";
-      TERMINAL = "foot";
-      HYPRSHOT_DIR = "collection/images/hyprshot";
-      GDK_BACKEND = "wayland,x11,*";
-      SDL_VIDEODRIVER = "wayland";
-      CLUTTER_BACKEND = "wayland";
-      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      QT_QPA_PLATFORM = "wayland;xcb";
-      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      QT_QPA_PLATFORMTHEME = "qt5ct";
-    };
-    pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
       sddm-sugar-dark
       libsForQt5.qt5.qtgraphicaleffects
     ];
-  };
-
-  programs = {
-    zsh.enable = true;
-    hyprland = {
-      enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
-      systemd.setPath.enable = true;
-    };
-    steam.enable = true;
-    gamemode.enable = true;
   };
 
   fonts = {
@@ -206,25 +154,12 @@
     nixos.enable = false;
   };
 
-  nixpkgs = {
-    hostPlatform = "x86_64-linux";
-    config.allowUnfree = true;
-  };
-
   nix = {
     gc = {
       automatic = true;
       dates = "daily";
       options = "-d";
     };
-    settings = {
-      experimental-features = [
-        "flakes"
-        "nix-command"
-      ];
-      auto-optimise-store = false;
-    };
+    settings.auto-optimise-store = false;
   };
-
-  system.stateVersion = "25.05";
 }
