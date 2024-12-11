@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cadoras": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733948644,
+        "narHash": "sha256-wKHxqZOcLnbLaC/dRIxz9LhT9ws8X3telSwxEoqHEwE=",
+        "owner": "togwand",
+        "repo": "cadoras",
+        "rev": "af832bd1c423afabae7ae0ba92c324bc25383cea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "togwand",
+        "repo": "cadoras",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -147,6 +163,22 @@
         "type": "github"
       }
     },
+    "goris": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733948394,
+        "narHash": "sha256-u+8+FlRxm8n7UWz31+SEPEGTAlKYYqkUpbgnEqatjv0=",
+        "owner": "togwand",
+        "repo": "goris",
+        "rev": "d5dad630d91de4d912a0f37b70bed65f0c95c355",
+        "type": "github"
+      },
+      "original": {
+        "owner": "togwand",
+        "repo": "goris",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -250,11 +282,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1733847310,
-        "narHash": "sha256-VHzWuZYK/m5OFXzAczrjnI7vH6knj0sfLnziRVDqgFE=",
+        "lastModified": 1733938086,
+        "narHash": "sha256-OtXjQpHPduliLp/WyvlYSPx6DqO7M4PKpfljfVSOzrk=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "b752606681ded3f69e99ed568c7075b3578dce48",
+        "rev": "220632813768aa8bcc49dd95c7312dc287062877",
         "type": "github"
       },
       "original": {
@@ -284,6 +316,22 @@
       "original": {
         "owner": "NuschtOS",
         "repo": "search",
+        "type": "github"
+      }
+    },
+    "pralius": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733948956,
+        "narHash": "sha256-qn54VRE4X6DLr6ErK02TVJjujgf+fcWwWkSONE/4wbU=",
+        "owner": "togwand",
+        "repo": "pralius",
+        "rev": "6f2e79c47dc328aa6b8f90a84edc8fe457af5780",
+        "type": "github"
+      },
+      "original": {
+        "owner": "togwand",
+        "repo": "pralius",
         "type": "github"
       }
     },
@@ -334,16 +382,19 @@
     },
     "wandpkgs": {
       "inputs": {
+        "cadoras": "cadoras",
+        "goris": "goris",
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "pralius": "pralius"
       },
       "locked": {
-        "lastModified": 1733877115,
-        "narHash": "sha256-QyifXkm5OHhh+4567HVksfj3nJz5qD2bltFaFxBO36o=",
+        "lastModified": 1733949140,
+        "narHash": "sha256-jLiYcMk+vHb3hF3AY1uOzwgQgq+isPCSzXjubuSYcPQ=",
         "owner": "togwand",
         "repo": "wandpkgs",
-        "rev": "f76ce8ce49de959001f7484e9e1fa87db5043273",
+        "rev": "a9bb482ba764be7b1986af712f5f9aadda70f5d0",
         "type": "github"
       },
       "original": {

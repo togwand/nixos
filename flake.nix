@@ -26,30 +26,25 @@
       self,
       ...
     }@inputs:
+    let
+      use =
+        path: host: user:
+        nixpkgs.lib.nixosSystem {
+          modules = [
+            path
+            ./modules
+          ];
+          specialArgs = {
+            inherit self inputs wandpkgs;
+            host = host;
+            user = user;
+          };
+        };
+    in
     {
       nixosConfigurations = {
-        "stale" = nixpkgs.lib.nixosSystem {
-          modules = [
-            ./desktop/stale
-            ./modules
-          ];
-          specialArgs = {
-            inherit wandpkgs self inputs;
-            user = "togwand";
-            host = "stale";
-          };
-        };
-        "lanky" = nixpkgs.lib.nixosSystem {
-          modules = [
-            ./live/lanky
-            ./modules
-          ];
-          specialArgs = {
-            inherit wandpkgs self inputs;
-            user = "hacker";
-            host = "lanky";
-          };
-        };
+        stale = use ./desktop/stale "stale" "togwand";
+        lanky = use ./live/lanky "lanky" "hacker";
       };
     };
 }

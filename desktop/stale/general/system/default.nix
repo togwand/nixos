@@ -33,7 +33,7 @@
         timeoutStyle = "menu";
         default = "saved";
         device = "nodev";
-        theme = wandpkgs.crosscode-grub;
+        theme = wandpkgs.grub-crosscode;
         splashImage = "${self}/pictures/magic-sky.jpg";
         splashMode = "normal";
         configurationLimit = 10;
