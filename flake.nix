@@ -1,15 +1,10 @@
 {
-  description = "flake for togwand/nixos";
   inputs = {
-    cadoras = {
-      url = "github:togwand/cadoras";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    goris = {
-      url = "github:togwand/goris";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    wandpkgs = {
+      url = "github:togwand/wandpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +20,12 @@
     };
   };
   outputs =
-    { nixpkgs, self, ... }@inputs:
+    {
+      nixpkgs,
+      wandpkgs,
+      self,
+      ...
+    }@inputs:
     {
       nixosConfigurations = {
         "stale" = nixpkgs.lib.nixosSystem {
@@ -34,7 +34,7 @@
             ./modules
           ];
           specialArgs = {
-            inherit self inputs;
+            inherit wandpkgs self inputs;
             user = "togwand";
             host = "stale";
           };
@@ -45,7 +45,7 @@
             ./modules
           ];
           specialArgs = {
-            inherit self inputs;
+            inherit wandpkgs self inputs;
             user = "hacker";
             host = "lanky";
           };

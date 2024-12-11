@@ -3,6 +3,7 @@
   pkgs,
   self,
   user,
+  wandpkgs,
   ...
 }:
 {
@@ -23,7 +24,7 @@
   boot = {
     supportedFilesystems = [ "exfat" ];
     loader = {
-      timeout = 4;
+      timeout = null;
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
@@ -32,8 +33,10 @@
         timeoutStyle = "menu";
         default = "saved";
         device = "nodev";
+        theme = wandpkgs.crosscode-grub;
         splashImage = "${self}/pictures/magic-sky.jpg";
-        configurationLimit = 7;
+        splashMode = "normal";
+        configurationLimit = 10;
       };
     };
   };

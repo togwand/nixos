@@ -1,7 +1,7 @@
 {
-  inputs,
   lib,
   pkgs,
+  wandpkgs,
   ...
 }:
 {
@@ -15,10 +15,13 @@
 
   # home-manager.users.${user}.home.packages = with pkgs; [ ];
 
-  environment.systemPackages = with pkgs; [
-    inputs.goris.default
-    disko
-  ];
+  environment.systemPackages =
+    with pkgs;
+    with wandpkgs;
+    [
+      goris
+      disko
+    ];
 
   services = {
     xserver.xkb.layout = "latam";

@@ -1,7 +1,7 @@
 {
-  inputs,
   pkgs,
   user,
+  wandpkgs,
   ...
 }:
 {
@@ -16,11 +16,14 @@
     pavucontrol
   ];
 
-  environment.systemPackages = with pkgs; [
-    inputs.cadoras.default
-    sddm-sugar-dark
-    libsForQt5.qt5.qtgraphicaleffects
-  ];
+  environment.systemPackages =
+    with pkgs;
+    with wandpkgs;
+    [
+      cadoras
+      sddm-sugar-dark
+      libsForQt5.qt5.qtgraphicaleffects
+    ];
 
   services = {
     getty = {
