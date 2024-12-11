@@ -222,7 +222,7 @@
               kb_options = config.services.xserver.xkb.options;
               numlock_by_default = false;
               resolve_binds_by_sym = false;
-              repeat_rate = 120;
+              repeat_rate = 100;
               repeat_delay = 160;
               force_no_accel = true;
               natural_scroll = false;
