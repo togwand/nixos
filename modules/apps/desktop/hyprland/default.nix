@@ -178,7 +178,7 @@
               resize_on_border = true;
               extend_border_grab_area = 32;
               hover_icon_on_border = true;
-              allow_tearing = true;
+              allow_tearing = false;
               resize_corner = 0;
               snap = {
                 enabled = false;
@@ -222,7 +222,7 @@
               kb_options = config.services.xserver.xkb.options;
               numlock_by_default = false;
               resolve_binds_by_sym = false;
-              repeat_rate = 105;
+              repeat_rate = 120;
               repeat_delay = 160;
               force_no_accel = true;
               natural_scroll = false;
