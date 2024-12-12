@@ -10,8 +10,8 @@
       enableSessionWide = false;
       enable = true;
       settings = {
-        fps_limit = "0, 60, 100, 120";
-        fps_limit_method = "early"; # early or late
+        fps_limit = "0, 60, 65, 70, 75, 80, 85, 90, 100, 120";
+        fps_limit_method = "late"; # early or late
         vsync = "-1";
         gl_vsync = "-2";
 
@@ -81,8 +81,8 @@
 
         toggle_fps_limit = "Control_L+Shift_L+KP_Divide";
         toggle_hud = "Control_L+Shift_L+KP_Multiply";
-        toggle_logging = "Control_L+Shift_L+KP_Subtract";
-        reload_cfg = "";
+        toggle_logging = "";
+        reload_cfg = "Control_L+Shift_L+KP_Subtract";
         toggle_preset = "";
         upload_log = "";
         toggle_hud_position = "";
