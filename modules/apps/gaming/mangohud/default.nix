@@ -10,8 +10,8 @@
       enableSessionWide = false;
       enable = true;
       settings = {
-        fps_limit = "0, 60, 65, 70, 75, 80, 85, 90, 100, 120";
-        fps_limit_method = "late"; # early or late
+        fps_limit = "0, 60, 80, 100, 120";
+        fps_limit_method = "early"; # early or late
         vsync = "-1";
         gl_vsync = "-2";
 
