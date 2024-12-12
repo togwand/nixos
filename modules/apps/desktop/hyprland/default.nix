@@ -168,11 +168,11 @@
             general = {
               border_size = 2;
               no_border_on_floating = false;
-              gaps_in = "8,8,8,8";
-              gaps_out = "16,16,16,16";
+              gaps_in = "3,3,3,3";
+              gaps_out = "9,9,9,9";
               gaps_workspaces = 0;
-              "col.active_border" = "rgba(333333aa) rgba(333333aa) rgba(333333aa) rgba(2D48B9dd) 19deg";
-              "col.inactive_border" = "rgba(333333aa)";
+              "col.active_border" = "rgba(2D48B988)";
+              "col.inactive_border" = "rgba(33333333)";
               layout = "dwindle";
               no_focus_fallback = true;
               resize_on_border = true;
@@ -186,7 +186,7 @@
             };
 
             decoration = {
-              rounding = 12;
+              rounding = 0;
               active_opacity = 1.0;
               inactive_opacity = 1.0;
               fullscreen_opacity = 1.0;
@@ -223,7 +223,7 @@
               numlock_by_default = false;
               resolve_binds_by_sym = false;
               repeat_rate = 80;
-              repeat_delay = 160;
+              repeat_delay = 130;
               force_no_accel = true;
               natural_scroll = false;
               follow_mouse = "0";
@@ -244,23 +244,23 @@
               merge_groups_on_groupbar = true;
               merge_floated_into_tiled_on_groupbar = true;
               group_on_movetoworkspace = false;
-              "col.border_active" = "rgba(333333aa) rgba(333333aa) rgba(333333aa) rgba(9B59B6dd) 19deg";
-              "col.border_inactive" = "rgba(333333aa)";
-              "col.border_locked_active" = "rgba(333333aa) rgba(333333aa) rgba(333333aa) rgba(B6596Bdd) 19deg";
-              "col.border_locked_inactive" = "rgba(333333aa)";
+              "col.border_active" = "rgba(2DB0B988)";
+              "col.border_inactive" = "rgba(33333333)";
+              "col.border_locked_active" = "rgba(2D48B988)";
+              "col.border_locked_inactive" = "rgba(33333333)";
               groupbar = {
                 enabled = true;
                 font_family = "sans";
-                font_size = 9;
-                gradients = true;
-                height = 12;
+                font_size = 8;
+                gradients = false;
+                height = 0;
                 stacked = false;
                 render_titles = true;
                 scrolling = true;
                 text_color = "rgb(ffffff)";
-                "col.active" = "rgba(9B59B699)";
+                "col.active" = "rgba(2DB0B988)";
                 "col.inactive" = "rgba(00000000)";
-                "col.locked_active" = "rgba(B6596B99)";
+                "col.locked_active" = "rgba(2D48B988)";
                 "col.locked_inactive" = "rgba(00000000)";
               };
             };
@@ -287,7 +287,7 @@
 
             binds = {
               pass_mouse_when_bound = false;
-              scroll_event_delay = 160;
+              scroll_event_delay = 130;
               workspace_back_and_forth = false;
               allow_workspace_cycles = false;
               workspace_center_on = "1";
