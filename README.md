@@ -20,11 +20,12 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 * CPU: i5-9400f
 
 #### TODO
-1. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
-2. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
-3. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
-4. Fix theming of every part of the system, especially cursors and icons
-5. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+1. Finish nnn configuration and add plugins
+2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
+3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
+4. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
+5. Fix theming of every part of the system, especially cursors and icons
+6. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
 
 ## Live
 Non persistent NixOS ISO images for removable installation media

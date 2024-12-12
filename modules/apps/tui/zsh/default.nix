@@ -71,8 +71,6 @@
       shellAliases = {
         ".." = "cd ..";
         "cl" = "clear";
-        "ra" = lib.mkIf config.apps.tui.ranger.enable "ranger";
-        "hl" = lib.mkIf config.apps.desktop.hyprland.enable "Hyprland";
         "re" = "systemctl reboot";
         "off" = "systemctl poweroff";
       };

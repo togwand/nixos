@@ -11,6 +11,7 @@
   config = lib.mkIf config.apps.dev.nixvim.enable {
     environment.variables = lib.mkIf config.generic.home-manager.enable {
       VISUAL = "nvim";
+      EDITOR = "nvim";
     };
     home-manager.users.${user}.programs.nixvim = lib.mkIf config.generic.home-manager.enable {
       enable = true;
