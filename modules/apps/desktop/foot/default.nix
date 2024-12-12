@@ -11,7 +11,7 @@
     };
     home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
       wayland.windowManager.hyprland.settings = lib.mkIf config.apps.desktop.hyprland.enable {
-        exec-once = [ "[workspace 2 silent] uwsm app -- foot" ];
+        exec-once = [ "[workspace 1 silent] uwsm app -- foot" ];
         bind = [ "$window-easy, e, exec, uwsm app -- foot" ];
       };
       programs.foot = {

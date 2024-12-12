@@ -2,16 +2,13 @@
 My NixOS configurations and options
 
 #### TODO
-1. Check vimjoyer videos to learn more about nix options (and nix in general)
+1. Learn more about nix (vimjoyer+official documentation)
 2. Test and add more nix options to all modules
 3. Make a comfy live config
 4. Make a server config type
 
 ## Desktop
 Persistent NixOS for daily drive desktops with user-grade hardware
-
-#### TODO
-1. Find a way to make the xkbconfig more generic rather than forced (right now it's latam for every config)
 
 ### stale
 For gaming and dev (and of course, game dev) on a 2020 computer
