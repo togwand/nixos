@@ -7,17 +7,21 @@
 }:
 {
   config = lib.mkIf config.apps.tui.nnn.enable {
-    home-manager.users.${user}.programs.nnn = lib.mkIf config.generic.home-manager.enable {
+    home-manager.users.${user} = {
       wayland.windowManager.hyprland.settings = lib.mkIf config.apps.desktop.hyprland.enable {
-        bind = [ "$window-easy, n, exec, uwsm app -- $TERM -e nnn -edioUT e" ];
+        bind = lib.mkIf config.apps.desktop.foot.enable [
+          "$window-easy, n, exec, uwsm app -- foot -e nnn -edioUT e"
+        ];
       };
-      enable = true;
-      extraPackages = with pkgs; [
-        ffmpegthumbnailer
-        mediainfo
-        sxiv
-      ];
-      package = pkgs.nnn.override { withEmojis = true; };
+      programs.nnn = lib.mkIf config.generic.home-manager.enable {
+        enable = true;
+        package = pkgs.nnn.override { withEmojis = true; };
+        extraPackages = with pkgs; [
+          ffmpegthumbnailer
+          mediainfo
+          sxiv
+        ];
+      };
     };
   };
 }
