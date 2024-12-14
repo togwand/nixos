@@ -21,12 +21,14 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 * CPU: i5-9400f
 
 #### TODO
-2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
-3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
-4. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
-5. Add mpv to apps as a home-manager program
-6. Fix theming of every part of the system, especially cursors and icons
-7. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+1. Move xdg.MimeApps out of lf module
+2. Add options for wandpkgs programs (needed in lf module)
+3. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
+4. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
+5. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
+6. Add mpv to apps as a home-manager program
+7. Fix theming of every part of the system, especially cursors and icons
+8. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
 
 ## Live
 Non persistent NixOS ISO images for removable installation media
