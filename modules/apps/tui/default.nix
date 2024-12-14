@@ -2,7 +2,7 @@
 {
   imports = [
     ./bash
-    ./nnn
+    ./lf
     ./rclone
     ./zsh
   ];

@@ -1,4 +1,6 @@
 {
+  config,
+  lib,
   pkgs,
   user,
   wandpkgs,
@@ -11,10 +13,12 @@
     gaming.enable = true;
   };
 
-  home-manager.users.${user}.home.packages = with pkgs; [
-    wl-clipboard
-    pavucontrol
-  ];
+  home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
+    home.packages = with pkgs; [
+      wl-clipboard
+      pavucontrol
+    ];
+  };
 
   environment.systemPackages =
     with pkgs;

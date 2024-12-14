@@ -1,6 +1,8 @@
 {
+  config,
   lib,
   pkgs,
+  user,
   wandpkgs,
   ...
 }:
@@ -13,7 +15,9 @@
     tui.rclone.enable = false;
   };
 
-  # home-manager.users.${user}.home.packages = with pkgs; [ ];
+  home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
+    # home.packages = with pkgs; [ ];
+  };
 
   environment.systemPackages =
     with pkgs;

@@ -6,14 +6,7 @@
 }:
 {
   config = lib.mkIf config.apps.desktop.foot.enable {
-    environment.variables = lib.mkIf config.generic.home-manager.enable {
-      TERMINAL = "foot";
-    };
     home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
-      wayland.windowManager.hyprland.settings = lib.mkIf config.apps.desktop.hyprland.enable {
-        exec-once = [ "[workspace 1 silent] uwsm app -- foot" ];
-        bind = [ "$window-easy, e, exec, uwsm app -- foot" ];
-      };
       programs.foot = {
         enable = true;
         server.enable = false;
@@ -26,7 +19,7 @@
             pad = "0x0";
             resize-by-cells = false;
             resize-keep-grid = false;
-            bold-text-in-bright = false;
+            bold-text-in-bright = "palette-based";
           };
           scrollback = {
             lines = 5000;
@@ -63,7 +56,7 @@
             bright7 = "d3c6aa"; # White
           };
           csd = {
-            preferred = "none";
+            preferred = "server";
           };
         };
       };

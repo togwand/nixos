@@ -6,7 +6,6 @@
 }:
 {
   config = lib.mkIf config.generic.linux.enable {
-
     hardware.enableRedistributableFirmware = true;
     boot = {
       consoleLogLevel = 3;
@@ -16,12 +15,9 @@
         "udev.log_level=3"
       ];
     };
-
+    nixpkgs.hostPlatform = "x86_64-linux";
     networking.hostName = host;
-
     console.useXkbConfig = true;
     services.xserver.xkb.options = "caps:swapescape";
-
-    nixpkgs.hostPlatform = "x86_64-linux";
   };
 }

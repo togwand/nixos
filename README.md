@@ -3,9 +3,10 @@ My NixOS configurations and options
 
 #### TODO
 1. Learn more about nix (vimjoyer+official documentation)
-2. Test and add more nix options to all modules
-3. Make a comfy live config
-4. Make a server config type
+2. Replace with pkgs; or similar with inherit ()
+3. Test and add more nix options to all modules
+4. Make a comfy live config
+5. Make a server config type
 
 ## Desktop
 Persistent NixOS for daily drive desktops with user-grade hardware
@@ -20,12 +21,12 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 * CPU: i5-9400f
 
 #### TODO
-1. Finish nnn configuration and add plugins
 2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
 3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
 4. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
-5. Fix theming of every part of the system, especially cursors and icons
-6. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+5. Add mpv to apps as a home-manager program
+6. Fix theming of every part of the system, especially cursors and icons
+7. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
 
 ## Live
 Non persistent NixOS ISO images for removable installation media
