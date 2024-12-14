@@ -11,8 +11,9 @@
       home.packages = with pkgs; [
         file
         chafa
+        poppler_utils
         python312Packages.pygments
-        ansi
+        tree
       ];
       wayland.windowManager.hyprland.settings = lib.mkIf config.apps.desktop.hyprland.enable {
         exec-once = [
@@ -31,24 +32,38 @@
         };
         commands = {
           get-mime-type = "%xdg-mime query filetype \"$f\"";
+          cadoras = "$cadoras";
           open = "$$OPENER $f";
+          touch = "$touch newfile";
+          mkdir = "$mkdir newdir";
         };
         previewer = {
-          keybinding = "i";
+          keybinding = null;
           source = pkgs.writeShellScript "pv.sh" ''
             #!/bin/sh
             case "$(file -Lb --mime-type -- "$1")" in
-            image/*) chafa -f sixel -s "$2x$3" --animate off --polite on "$1";exit 1;;
+            inode/directory) tree -CL 2 --filelimit=30 --dirsfirst --noreport "$1";exit 0;;
+            image/*) chafa -f sixel -s "$2x$3" --animate off --polite on "$1";exit 0;;
             esac
+
             formatter="16m"
-            style="material"
+            style="nord"
             case "$1" in
-            *.nix) pygmentize -l nix -f $formatter -O style=$style <"$1";;
-            *.sh) pygmentize -l shell -f $formatter -O style=$style <"$1";;
-            *.md) pygmentize -l md -f $formatter -O style=$style <"$1";;
-            *.toml) pygmentize -l toml -f $formatter -O style=$style <"$1";;
-            *.lock) pygmentize -l json -f $formatter -O style=$style <"$1";;
-            *.txt) pygmentize -l text -f $formatter -O style=$style <"$1";;
+            *.nix) pygmentize -l nix -f $formatter -O style=$style <"$1";exit 0;;
+            *.sh) pygmentize -l shell -f $formatter -O style=$style <"$1";exit 0;;
+            *.md) pygmentize -l md -f $formatter -O style=$style <"$1";exit 0;;
+            *.lock) pygmentize -l json -f $formatter -O style=$style <"$1";exit 0;;
+            *.txt) pygmentize -l text -f $formatter -O style=$style <"$1";exit 0;;
+            *.toml) pygmentize -l toml -f $formatter -O style=$style <"$1";exit 0;;
+            *.pdf) 
+            pdf_base=$(basename "$1" .pdf)
+            pdftocairo -jpeg -singlefile "$1" "/tmp/$pdf_base"
+            chafa -f sixel -s "$2x$3" --animate off --polite on "/tmp/$pdf_base.jpg"
+            exit 0;;
+            esac
+
+            case "$(file -Lb --mime-type -- "$1")" in
+            text/plain) cat "$1";;
             esac
           '';
         };
@@ -59,9 +74,9 @@
           dircounts = false;
           dirfirst = true;
           dironly = false;
-          dirpreviews = false;
+          dirpreviews = true;
           drawbox = true;
-          hidden = true;
+          hidden = false;
           history = true;
           icons = false;
           ignorecase = true;
@@ -69,28 +84,25 @@
           incsearch = true;
           incfilter = true;
           info = [
-            "time"
+            "size"
           ];
-          infotimefmtnew = "_2/1";
-          infotimefmtold = "";
           mouse = false;
           number = false;
           preview = true;
           ratios = [
             2
-            2
-            7
-            6
+            3
           ];
           reverse = false;
           roundbox = false;
           rulerfmt = "";
+          selmode = "dir";
           showbinds = false;
           sixel = true;
           smartcase = true;
           smartdia = true;
           sortby = "ext";
-          statfmt = "%S| %u| \\033[36m%p\\033[0m| -> %l";
+          statfmt = "%t| %u| \\033[36m%p\\033[0m| -> %l";
           tabstop = 4;
           timefmt = "02-01-2006";
           truncatechar = "~";
@@ -99,10 +111,10 @@
         };
         keybindings = {
           "z" = "$$SHELL";
-          "x" = "delete";
+          "x" = "delete; reload";
           "c" = "clear";
           "v" = "toggle";
-          "n" = "search-next";
+          "n" = "mkdir; reload";
           "m" = "mark-load";
           "s" = "mark-save";
           "d" = "cut";
@@ -114,17 +126,18 @@
           "q" = "quit";
           "w" = "";
           "r" = "rename";
-          "t" = null;
+          "t" = "touch; reload";
           "y" = "copy";
           "u" = "unselect";
-          "i" = "invert";
-          "p" = "paste";
+          "i" = null;
+          "p" = "paste; reload";
           "gg" = "top";
-          "N" = "search-prev";
+          "V" = "invert";
+          "N" = null;
           "M" = null;
           "F" = null;
           "G" = "bottom";
-          "H" = null;
+          "H" = "set hidden!";
           "L" = null;
           "[" = null;
           "]" = null;
@@ -135,7 +148,7 @@
           "\"&\"" = null;
           "\"/\"" = "search";
           "\"?\"" = "search-back";
-          "\"<space>\"" = "";
+          "\"<space>\"" = "tag-toggle";
           "\"<enter>\"" = "open";
           "\"<c-b>\"" = null;
           "\"<c-d>\"" = "half-down";
