@@ -79,7 +79,7 @@
             if [[ -n $2 ]]
             then chafa -f sixels -s "$2x$3" "$1";exit
             fi;;
-            text/plain) cat "$1";exit;;
+            text/plain) echo<"$("$1")";exit;;
             *) mediainfo "$1";exit;;
             esac
           '';

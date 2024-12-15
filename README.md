@@ -3,7 +3,7 @@ My NixOS configurations and options
 
 #### TODO
 1. Learn more about nix (vimjoyer+official documentation)
-2. Replace with pkgs; or similar with inherit ()
+2. Replace "with pkgs;" or similar with "inherit ()"
 3. Test and add more nix options to all modules
 4. Make a comfy live config
 5. Make a server config type
@@ -27,8 +27,9 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 4. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
 5. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
 6. Add mpv to apps as a home-manager program
-7. Fix theming of every part of the system, especially cursors and icons
-8. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+7. Make waybar prettier with a better style (need to learn more about css too)
+8. Fix theming of every part of the system, especially cursors and icons
+9. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
 
 ## Live
 Non persistent NixOS ISO images for removable installation media
@@ -41,6 +42,12 @@ Always available to use NixOS options and optional configurations
 
 ### apps
 Ready to use programs and services
+
+### derivations
+Nix derivations for git repositories
+
+#### TODO
+1. For programs or scripts, make derivations with dependencies and all build steps
 
 ### generic
 Generic configurations needed for hardware or other modules

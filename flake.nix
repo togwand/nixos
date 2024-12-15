@@ -1,10 +1,14 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    wandpkgs = {
-      url = "github:togwand/wandpkgs";
-      inputs.nixpkgs.follows = "nixpkgs";
+    rice = {
+      flake = false;
+      url = "github:togwand/rice";
     };
+    tools = {
+      flake = false;
+      url = "github:togwand/tools";
+    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     disko = {
       url = "github:nix-community/disko/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +26,6 @@
   outputs =
     {
       nixpkgs,
-      wandpkgs,
       self,
       ...
     }@inputs:
@@ -35,7 +38,7 @@
             ./modules
           ];
           specialArgs = {
-            inherit self inputs wandpkgs;
+            inherit self inputs;
             host = host;
             user = user;
           };
