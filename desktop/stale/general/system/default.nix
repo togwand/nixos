@@ -33,7 +33,7 @@
         timeoutStyle = "menu";
         default = "saved";
         device = "nodev";
-        theme = (import "${self}/derivations/tools/cadoras" { inherit inputs pkgs; });
+        theme = import "${self}/derivations/rice/crosscode-grub" { inherit inputs pkgs; };
         splashImage = "${self}/pictures/magic-sky.jpg";
         splashMode = "normal";
         configurationLimit = 10;
