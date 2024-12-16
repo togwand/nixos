@@ -1,18 +1,26 @@
-{ lib, ... }: {
-  imports = [
-    ./rice
-    ./tools
-  ];
-  options = {
-    derivations = {
-    rice = {
-	arknights-grub.enable = lib.mkEnableOption "";
-	crosscode-grub.enable = lib.mkEnableOption "";
-	};
-	tools = {
-	cadoras.enable = lib.mkEnableOption "";
-	goris.enable = lib.mkEnableOption "";
-	};
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  self,
+  ...
+}:
+{
+  options.derivations = {
+    tools = {
+      cadoras.enable = lib.mkEnableOption "";
+      goris.enable = lib.mkEnableOption "";
+    };
   };
+  config = {
+    environment.systemPackages = [
+      (lib.mkIf config.derivations.tools.cadoras.enable (
+        import "${self}/derivations/tools/cadoras" { inherit inputs pkgs; }
+      ))
+      (lib.mkIf config.derivations.tools.goris.enable (
+        import "${self}/derivations/tools/goris" { inherit inputs pkgs; }
+      ))
+    ];
   };
 }

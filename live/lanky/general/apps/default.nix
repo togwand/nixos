@@ -3,10 +3,11 @@
   lib,
   pkgs,
   user,
-  wandpkgs,
   ...
 }:
 {
+  derivations.tools.goris.enable = true;
+
   apps = {
     dev = {
       enable = true;
@@ -19,13 +20,9 @@
     # home.packages = with pkgs; [ ];
   };
 
-  environment.systemPackages =
-    with pkgs;
-    with wandpkgs;
-    [
-      goris
-      disko
-    ];
+  environment.systemPackages = with pkgs; [
+    disko
+  ];
 
   services = {
     xserver.xkb.layout = "latam";

@@ -3,10 +3,11 @@
   lib,
   pkgs,
   user,
-  wandpkgs,
   ...
 }:
 {
+  derivations.tools.cadoras.enable = true;
+
   apps = {
     desktop.enable = true;
     dev.enable = true;
@@ -20,14 +21,10 @@
     ];
   };
 
-  environment.systemPackages =
-    with pkgs;
-    with wandpkgs;
-    [
-      cadoras
-      sddm-sugar-dark
-      libsForQt5.qt5.qtgraphicaleffects
-    ];
+  environment.systemPackages = with pkgs; [
+    sddm-sugar-dark
+    libsForQt5.qt5.qtgraphicaleffects
+  ];
 
   services = {
     getty = {

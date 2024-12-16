@@ -1,9 +1,9 @@
 {
+  inputs,
   lib,
   pkgs,
   self,
   user,
-  wandpkgs,
   ...
 }:
 {
@@ -33,7 +33,7 @@
         timeoutStyle = "menu";
         default = "saved";
         device = "nodev";
-        theme = wandpkgs.grub-crosscode;
+        theme = (import "${self}/derivations/tools/cadoras" { inherit inputs pkgs; });
         splashImage = "${self}/pictures/magic-sky.jpg";
         splashMode = "normal";
         configurationLimit = 10;

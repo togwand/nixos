@@ -79,7 +79,7 @@
             if [[ -n $2 ]]
             then chafa -f sixels -s "$2x$3" "$1";exit
             fi;;
-            text/plain) echo<"$("$1")";exit;;
+            text/plain) cat "$1";exit;;
             *) mediainfo "$1";exit;;
             esac
           '';
@@ -172,8 +172,7 @@
           "\"?\"" = "search-back";
           "\"<space>\"" = "tag-toggle";
           "\"<enter>\"" = "open";
-          "\"<c-c>\"" = # Need to add a cadoras option to the apps modules and mkIf here if enabled
-            "$cadoras";
+          "\"<c-c>\"" = lib.mkIf config.derivations.tools.cadoras.enable "$cadoras";
           "\"<c-b>\"" = null;
           "\"<c-s>\"" = "$$SHELL";
           "\"<c-d>\"" = "half-down";
