@@ -1,4 +1,4 @@
-# nixos
+# nixos a
 My NixOS configurations and options
 
 #### TODO
