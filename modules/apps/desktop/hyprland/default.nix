@@ -165,7 +165,7 @@
           };
 
           general = {
-            border_size = 2;
+            border_size = 1;
             no_border_on_floating = false;
             gaps_in = "3,3,3,3";
             gaps_out = "9,9,9,9";
@@ -192,19 +192,7 @@
             dim_inactive = false;
             dim_strength = 0.0;
             blur = {
-              enabled = true;
-              size = 3;
-              passes = 1;
-              ignore_opacity = false;
-              new_optimizations = true;
-              xray = true;
-              noise = 0.0;
-              contrast = 2.0;
-              brightness = 1.0;
-              vibrancy = 0.5;
-              vibrancy_darkness = 0.15;
-              special = false;
-              popups = false;
+              enabled = false;
             };
             shadow = {
               enabled = false;

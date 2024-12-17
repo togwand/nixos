@@ -42,7 +42,8 @@
             #!/bin/sh
             format_ext() {
             local formatter style
-            formatter="16m" 
+            # formatter="16m"
+            formatter="terminal"
             style="nord"
             pygmentize -l $1 -f $formatter -O style=$style <"$2";exit
             }
