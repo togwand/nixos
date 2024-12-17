@@ -17,16 +17,6 @@
         python312Packages.pygments
         python312Packages.docx2txt
       ];
-      xdg.mimeApps = {
-        enable = true;
-        # associations.added = {};
-        # associations.removed = {};
-        defaultApplications = {
-          "text/markdown" = [ "nvim.desktop" ];
-          "text/x-todo-txt" = [ "nvim.desktop" ];
-          "application/toml" = [ "nvim.desktop" ];
-        };
-      };
       wayland.windowManager.hyprland.settings = lib.mkIf config.apps.desktop.hyprland.enable {
         exec-once = [
           (lib.mkIf config.apps.desktop.foot.enable "[workspace 1 silent] uwsm app -- foot lf")
