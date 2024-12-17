@@ -38,6 +38,9 @@
           push = {
             autoSetupRemote = true;
           };
+          pull = {
+            rebase = false;
+          };
         };
       };
     };
