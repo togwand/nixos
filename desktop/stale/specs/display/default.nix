@@ -10,7 +10,7 @@
     };
     outputs = {
       "DP-1" = {
-        edid = "XG2402@120.bin";
+        edid = "XG2402@80.bin";
       };
     };
   };
