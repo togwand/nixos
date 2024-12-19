@@ -32,25 +32,15 @@
           tabstop = 4;
           shiftwidth = 4;
           expandtab = false;
-          termguicolors = false;
+          termguicolors = true;
           updatetime = 300;
           mouse = "a";
         };
         colorschemes = {
-          # everforest = {
-          #   enable = false;
-          #   settings = {
-          #     transparent_background = 1;
-          #   };
-          # };
-          ayu = {
+          nightfox = {
             enable = true;
-            settings.mirage = true;
+            flavor = "nordfox";
           };
-          # base16 = {
-          #   enable = true;
-          #   colorscheme = "catppuccin";
-          # };
         };
       };
     };
