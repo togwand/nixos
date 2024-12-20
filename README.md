@@ -27,7 +27,7 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 * CPU: i5-9400f
 
 #### TODO
-1. Fix the lang when using xdg-open for text instead of "e" on lf
+1. Fix the colorscheme of nixvim -> foot -> lf previews
 2. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
 3. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
 4. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)

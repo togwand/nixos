@@ -13,6 +13,13 @@
       VISUAL = "nvim";
       EDITOR = "nvim";
     };
+    xdg.mime = lib.mkIf config.generic.home-manager.enable {
+      defaultApplications = {
+        "application/toml" = [ "nvim.desktop" ];
+        "application/json" = [ "nvim.desktop" ];
+        "text/markdown" = [ "nvim.desktop" ];
+      };
+    };
     home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
       programs.nixvim = {
         enable = true;
@@ -41,6 +48,8 @@
             enable = true;
             flavor = "nordfox";
           };
+          # nord.enable = true;
+          # onedark.enable = true;
         };
       };
     };

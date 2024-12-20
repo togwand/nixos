@@ -33,17 +33,30 @@
           "\"<c-k>\"" = "cmd-history-prev";
         };
         commands = {
-          sel-info = "%echo \"MIME $(xdg-mime query filetype $f) | APP $(xdg-mime query default $(xdg-mime query filetype $f))\"";
-          open = "$$OPENER $f";
+          sel-info = "%echo \"MIME $(file --mime-type -Lb $f) | APP $(xdg-mime query default $(file --mime-type -Lb $f))\"";
+          open = # bash
+            ''
+              &{{
+              case $(file --mime-type -Lb $f) in
+              text/*) lf -remote "send $id \$$EDITOR \$fx";;
+              application/json) lf -remote "send $id \$$EDITOR \$fx";;
+              video/*) lf -remote "send $id \$$BROWSER \$fx";;
+              audio/*) lf -remote "send $id \$$BROWSER \$fx";;
+              image/*) lf -remote "send $id \$$BROWSER \$fx";;
+              *) lf -remote "send $id \$$OPENER \$fx";;
+              esac
+              }}
+            '';
         };
         previewer = {
           keybinding = "w";
           source = pkgs.writeShellScript "pv.sh" ''
             #!/bin/sh
+
             format_ext() {
             local formatter style
-            # formatter="16m"
-            formatter="terminal"
+            formatter="16m"
+            # formatter="terminal"
             style="nord"
             pygmentize -l $1 -f $formatter -O style=$style <"$2";exit
             }
@@ -158,7 +171,7 @@
           "\";\"" = null;
           "\":\"" = "read";
           "\"'\"" = null;
-          "\"&\"" = null;
+          "\"&\"" = "shell-async";
           "\"/\"" = "search";
           "\"?\"" = "search-back";
           "\"<space>\"" = "tag-toggle";

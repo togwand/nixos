@@ -14,24 +14,22 @@
     gaming.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    sddm-sugar-dark
-    libsForQt5.qt5.qtgraphicaleffects
-  ];
+  environment = {
+    variables = {
+      OPENER = "mimeo";
+    };
+    systemPackages = with pkgs; [
+      mimeo
+      sddm-sugar-dark
+      libsForQt5.qt5.qtgraphicaleffects
+    ];
+  };
 
   home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
     home.packages = with pkgs; [
       wl-clipboard
       pavucontrol
     ];
-    xdg.mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "text/markdown" = lib.mkIf config.apps.dev.nixvim.enable [ "nvim.desktop" ];
-        "text/x-todo-txt" = lib.mkIf config.apps.dev.nixvim.enable [ "nvim.desktop" ];
-        "application/toml" = lib.mkIf config.apps.dev.nixvim.enable [ "nvim.desktop" ];
-      };
-    };
   };
 
   services = {

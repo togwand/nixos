@@ -12,7 +12,7 @@
         server.enable = false;
         settings = {
           main = {
-            font = "monospace:size=18.5:weight=Regular";
+            font = "monospace:size=16.5:weight=Regular";
             font-size-adjustment = 0.5;
             box-drawings-uses-font-glyphs = false;
             dpi-aware = false;
@@ -47,17 +47,17 @@
           };
           colors =
             let
-              fg = "cccac2";
-              bg = "1f2430";
-              red = "F27983";
-              green = "87D96C";
-              lime = "D5FF80";
-              blue = "5CCFE6";
-              fuchsia = "DFBFFF";
-              turquoise = "73D0FF";
+              fg = "D8DEE9";
+              bg = "2E3440";
+              red = "FF8080";
+              green = "A3BE8C";
+              yellow = "EBCB8B";
+              blue = "81A1C1";
+              fuchsia = "B48EAD";
+              turquoise = "88C0D0";
               light-red = red;
               light-green = green;
-              cream = lime;
+              cream = yellow;
               sky-blue = blue;
               pink = fuchsia;
               cyan = turquoise;
@@ -76,7 +76,7 @@
               bright7 = white;
               regular1 = red;
               regular2 = green;
-              regular3 = lime;
+              regular3 = yellow;
               regular4 = blue;
               regular5 = fuchsia;
               regular6 = turquoise;
