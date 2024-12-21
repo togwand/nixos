@@ -8,15 +8,6 @@
 {
   config = lib.mkIf config.apps.tui.lf.enable {
     home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
-      home.packages = with pkgs; [
-        poppler_utils
-        file
-        tree
-        chafa
-        mediainfo
-        python312Packages.pygments
-        python312Packages.docx2txt
-      ];
       wayland.windowManager.hyprland.settings = lib.mkIf config.apps.desktop.hyprland.enable {
         exec-once = [
           (lib.mkIf config.apps.desktop.foot.enable "[workspace 1 silent] uwsm app -- foot lf")
@@ -26,71 +17,74 @@
           (lib.mkIf config.apps.desktop.foot.enable "$window, m, exec, uwsm app -- foot sudo lf")
         ];
       };
+      home.packages = with pkgs; [
+        ctpv
+        tree
+        atool
+        ffmpegthumbnailer
+        highlight
+        chafa
+        poppler_utils
+      ];
+      home.file.".config/ctpv/config".text = # bash
+        ''
+          set nosymlinkinfo
+          remove libreoffice
+          remove torrent
+          remove glow
+          remove mdcat
+          remove gpg
+          remove bat
+          remove cat
+          remove ls
+          remove delta
+          remove colordiff
+          remove elinks
+          remove lynx
+          remove w3m
+          remove source_highlight
+
+          preview tree inode/directory {{
+           tree -l -aCL 3 --filelimit=30 --dirsfirst --noreport "$f"
+          }}
+        '';
       programs.lf = {
         enable = true;
         cmdKeybindings = {
           "\"<c-j>\"" = "cmd-history-next";
           "\"<c-k>\"" = "cmd-history-prev";
         };
+        extraConfig = ''
+          &ctpv -s $id
+          &ctpvquit $id
+        '';
         commands = {
-          sel-info = "%echo \"MIME $(file --mime-type -Lb $f) | APP $(xdg-mime query default $(file --mime-type -Lb $f))\"";
+          ctpv-info = "%echo \"$(ctpv -m $f)\"";
           open = # bash
             ''
               &{{
-              case $(file --mime-type -Lb $f) in
-              text/*) lf -remote "send $id \$$EDITOR \$fx";;
-              application/json) lf -remote "send $id \$$EDITOR \$fx";;
-              video/*) lf -remote "send $id \$$BROWSER \$fx";;
-              audio/*) lf -remote "send $id \$$BROWSER \$fx";;
-              image/*) lf -remote "send $id \$$BROWSER \$fx";;
-              *) lf -remote "send $id \$$OPENER \$fx";;
+              case "$f" in
+              *.nix) lf -remote "send $id \$$EDITOR \$f";;
+              *.sh) lf -remote "send $id \$$EDITOR \$f";;
+              *.md) lf -remote "send $id \$$EDITOR \$f";;
+              *.toml) lf -remote "send $id \$$EDITOR \$f";;
+              *.lock) lf -remote "send $id \$$EDITOR \$f";;
+              *.txt) lf -remote "send $id \$$EDITOR \$f";;
+              *.png) lf -remote "send $id \$$BROWSER \$f";;
+              *.jpg) lf -remote "send $id \$$BROWSER \$f";;
+              *.jpeg) lf -remote "send $id \$$BROWSER \$f";;
+              *.mp4) lf -remote "send $id \$$BROWSER \$f";;
+              *.mp3) lf -remote "send $id \$$BROWSER \$f";;
+              *.pdf) lf -remote "send $id \$$BROWSER \$f";;
+              *) lf -remote "send $id \$xdg-open \$f";;
               esac
               }}
             '';
         };
-        previewer = {
-          keybinding = "w";
-          source = pkgs.writeShellScript "pv.sh" ''
-            #!/bin/sh
-
-            format_ext() {
-            local formatter style
-            formatter="16m"
-            # formatter="terminal"
-            style="nord"
-            pygmentize -l $1 -f $formatter -O style=$style <"$2";exit
-            }
-
-            case "$1" in
-            *.nix) format_ext nix "$1";;
-            *.sh) format_ext shell "$1";;
-            *.md) format_ext md "$1";;
-            *.lock) format_ext json "$1";;
-            *.txt) format_ext text "$1";;
-            *.toml) format_ext toml "$1";;
-            *.pdf)
-            file=$(basename $1 .pdf)
-            pdftocairo -jpeg -singlefile "$1" "/tmp/$file"
-            if [[ -n $2 ]]
-            then chafa -f sixels -s "$2x$3" "/tmp/$file.jpg";exit
-            fi;;
-            *.docx) docx2txt "$1";exit;;
-            esac
-
-            case "$(file -Lb --mime-type -- "$1")" in
-            inode/directory) tree -l -aCL 3 --filelimit=30 --dirsfirst --noreport "$1";exit;;
-            image/*)
-            if [[ -n $2 ]]
-            then chafa -f sixels -s "$2x$3" "$1";exit
-            fi;;
-            text/plain) cat "$1";exit;;
-            *) mediainfo "$1";exit;;
-            esac
-          '';
-        };
         settings = {
           anchorfind = false;
           autoquit = true;
+          cleaner = "ctpvclear";
           dircache = false;
           dircounts = false;
           dirfirst = true;
@@ -112,6 +106,7 @@
           mouse = false;
           number = false;
           preview = true;
+          previewer = "ctpv";
           ratios = [
             3
             4
@@ -148,7 +143,7 @@
           "k" = "up";
           "l" = "open";
           "q" = "quit";
-          "w" = null;
+          "w" = "$ctpv $f | less -R";
           "r" = "rename";
           "t" = null;
           "y" = "copy";
@@ -164,7 +159,7 @@
           "G" = "bottom";
           "H" = "set hidden!";
           "L" = null;
-          "I" = "sel-info";
+          "I" = "ctpv-info";
           "[" = null;
           "]" = null;
           "\",\"" = null;

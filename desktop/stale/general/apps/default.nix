@@ -15,11 +15,7 @@
   };
 
   environment = {
-    variables = {
-      OPENER = "mimeo";
-    };
     systemPackages = with pkgs; [
-      mimeo
       sddm-sugar-dark
       libsForQt5.qt5.qtgraphicaleffects
     ];
