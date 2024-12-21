@@ -49,36 +49,36 @@
             let
               fg = "A5B0C5";
               bg = "242B38";
+              black = "151820";
+              grey = "546178";
+              silver = "7d899f";
+              white = fg;
               mild-red = "EF5F6B";
               mild-green = "97CA72";
               mild-yellow = "EBC275";
               mild-blue = "5AB0F6";
-              mild-fuchsia = "CA72E4";
+              mild-purple = "CA72E4";
               mild-cyan = "4DBDCB";
               pastel-red = mild-red;
               pastel-green = mild-green;
               pastel-yellow = mild-yellow;
               pastel-blue = mild-blue;
-              pastel-pink = mild-fuchsia;
+              pastel-pink = mild-purple;
               pastel-cyan = mild-cyan;
-              white = "ffffff";
-              silver = "cfcfcf";
-              gray = "808080";
-              black = "000000";
             in
             {
               alpha = 1.0;
               foreground = fg;
               background = bg;
               regular0 = black;
-              bright0 = gray;
+              bright0 = grey;
               regular7 = silver;
               bright7 = white;
               regular1 = mild-red;
               regular2 = mild-green;
               regular3 = mild-yellow;
               regular4 = mild-blue;
-              regular5 = mild-fuchsia;
+              regular5 = mild-purple;
               regular6 = mild-cyan;
               bright1 = pastel-red;
               bright2 = pastel-green;
@@ -89,7 +89,7 @@
               scrollback-indicator = fg + " " + bg;
               search-box-no-match = mild-red + " " + bg;
               search-box-match = fg + " " + bg;
-              flash = gray;
+              flash = grey;
               flash-alpha = "0.05";
             };
           csd = {

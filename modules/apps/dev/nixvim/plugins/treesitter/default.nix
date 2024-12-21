@@ -10,14 +10,19 @@
     home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
       programs.nixvim.plugins.treesitter = {
         enable = true;
+        folding = false;
+        nixGrammars = true;
         grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-          bash
           nix
+          bash
+          json
+          toml
+          markdown
         ];
         settings = {
-          highlight = {
-            enable = true;
-          };
+          auto-install = false;
+          highlight.enable = true;
+          indent.enable = false;
         };
       };
     };
