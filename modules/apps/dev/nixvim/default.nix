@@ -23,6 +23,12 @@
       };
     };
     home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
+      programs.zsh = lib.mkIf config.apps.tui.zsh.enable {
+        initExtra = ''
+          # Nixvim Manpager
+          export MANPAGER='nvim +Man!'
+        '';
+      };
       programs.nixvim =
         let
           theme = "onedark";

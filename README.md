@@ -27,14 +27,12 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 * CPU: i5-9400f
 
 #### TODO
-1. Fix the zsh options including history and others (do temporary setopt commands for testing behaviours before rebuilds)
-2. Add highlights, hooks, plugins, better completion and prompt to zsh (finish the configuration)
-3. Add vim keys for the zsh menu (check Mental Outlaw's trying zsh video again)
-4. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
-5. Configure bash to be as close to (the finished) zsh as possible
-6. Add mpv to apps as a home-manager program and work on the default programs for mime types
-7. Make waybar prettier with a better style (need to learn more about css too)
-8. Fix theming of every part of the system, especially cursors and icons
+1. Revamp the highlight colors for zsh one last time
+2. Configure bash to be as close to (the finished) zsh as possible
+3. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+4. Add mpv to apps as a home-manager program and work on the default programs for mime types
+5. Make waybar prettier with a better style (need to learn more about css too)
+6. Fix theming of every part of the system, especially cursors and icons
 
 ## Live
 Non persistent NixOS ISO images for removable installation media
