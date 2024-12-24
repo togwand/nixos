@@ -27,12 +27,10 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 * CPU: i5-9400f
 
 #### TODO
-1. Revamp the highlight colors for zsh one last time
-2. Configure bash to be as close to (the finished) zsh as possible
-3. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
-4. Add mpv to apps as a home-manager program and work on the default programs for mime types
-5. Make waybar prettier with a better style (need to learn more about css too)
-6. Fix theming of every part of the system, especially cursors and icons
+1. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
+2. Add mpv to apps as a home-manager program and work on the default programs for mime types
+3. Make waybar prettier with a better style (need to learn more about css too)
+4. Fix theming of every part of the system, especially cursors and icons
 
 ## Live
 Non persistent NixOS ISO images for removable installation media
