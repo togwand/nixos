@@ -27,10 +27,9 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 * CPU: i5-9400f
 
 #### TODO
-1. Work on the nixvim config (line wrapping, autotabbing/formatting, and keybinds, macros, etc)
-2. Add mpv to apps as a home-manager program and work on the default programs for mime types
-3. Make waybar prettier with a better style (need to learn more about css too)
-4. Fix theming of every part of the system, especially cursors and icons
+1. Add mpv to apps as a home-manager program and work on the default programs for mime types
+2. Make waybar prettier with a better style (need to learn more about css too)
+3. Fix theming of every part of the system, especially cursors and icons
 
 ## Live
 Non persistent NixOS ISO images for removable installation media

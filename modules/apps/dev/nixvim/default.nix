@@ -35,8 +35,11 @@
         in
         {
           enable = true;
-          viAlias = true;
+          enableMan = false;
           vimAlias = true;
+          viAlias = true;
+          # diagnostics = { };
+          colorscheme = theme;
           colorschemes.${theme}.enable = true;
           globals = {
             mapleader = " ";
@@ -45,16 +48,57 @@
             register = "unnamedplus";
             providers.wl-copy.enable = true;
           };
+          keymaps = [
+            {
+              action = "q";
+              key = "m";
+            }
+            {
+              action = "<cmd>wq<CR>";
+              key = "q";
+            }
+            {
+              action = "<cmd>w<CR>";
+              key = "w";
+            }
+          ];
+          # globalOpts = { };
+          # localOpts = { };
           opts = {
-            number = true;
-            relativenumber = true;
-            ignorecase = true;
-            tabstop = 4;
-            shiftwidth = 4;
+            autochdir = false;
+            autoindent = true;
+            autoread = false;
+            background = "dark";
+            breakindent = true;
+            cedit = "^E";
+            cindent = false;
+            cmdheight = 0; # Experimental, might cause issues
+            cmdwinheight = 12;
+            confirm = true;
+            copyindent = true;
+            cursorcolumn = false;
+            cursorline = true;
+            cursorlineopt = "number";
+            errorbells = true;
             expandtab = false;
-            termguicolors = true;
-            updatetime = 300;
+            foldclose = "all";
+            helpheight = 12;
+            hlsearch = true;
+            ignorecase = true;
+            incsearch = true;
             mouse = "a";
+            number = true;
+            numberwidth = 4;
+            relativenumber = true;
+            shiftwidth = 4;
+            showmatch = false;
+            smartcase = false;
+            smartindent = true;
+            smarttab = false;
+            # tabstop = 4;
+            termguicolors = true;
+            updatetime = 1000;
+            wrap = false;
           };
         };
     };
