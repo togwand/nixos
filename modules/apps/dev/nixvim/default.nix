@@ -54,7 +54,7 @@
               key = "m";
             }
             {
-              action = "<cmd>wq<CR>";
+              action = "<cmd>q<CR>";
               key = "q";
             }
             {
