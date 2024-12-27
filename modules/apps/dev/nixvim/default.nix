@@ -72,7 +72,7 @@
             breakindent = true;
             cedit = "^E";
             cindent = false;
-            cmdheight = 0; # Experimental, might cause issues
+            cmdheight = 1;
             cmdwinheight = 12;
             confirm = true;
             copyindent = true;
@@ -92,6 +92,7 @@
             relativenumber = true;
             shiftwidth = 4;
             showmatch = false;
+            showmode = false;
             smartcase = false;
             smartindent = true;
             smarttab = false;
