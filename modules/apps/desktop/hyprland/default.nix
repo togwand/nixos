@@ -165,7 +165,7 @@
           };
 
           general = {
-            border_size = 1;
+            border_size = 2;
             no_border_on_floating = false;
             gaps_in = "3,3,3,3";
             gaps_out = "9,9,9,9";
