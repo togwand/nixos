@@ -16,6 +16,7 @@
         foot.enable = lib.mkEnableOption "";
         gtk.enable = lib.mkEnableOption "";
         hyprland.enable = lib.mkEnableOption "";
+        qt.enable = lib.mkEnableOption "";
         swaync.enable = lib.mkEnableOption "";
         tofi.enable = lib.mkEnableOption "";
         waybar.enable = lib.mkEnableOption "";
@@ -54,6 +55,7 @@
         foot.enable = lib.mkDefault true;
         gtk.enable = lib.mkDefault true;
         hyprland.enable = lib.mkDefault true;
+        qt.enable = lib.mkDefault true;
         swaync.enable = lib.mkDefault true;
         tofi.enable = lib.mkDefault true;
         waybar.enable = lib.mkDefault true;
