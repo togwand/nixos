@@ -331,11 +331,11 @@
     "tools": {
       "flake": false,
       "locked": {
-        "lastModified": 1735567134,
-        "narHash": "sha256-zxwsnAzjvTpvNM32vDpJYzqldw6v2j1WmySGlHoSFKc=",
+        "lastModified": 1735573706,
+        "narHash": "sha256-ZwZiXuaZ/+NCVu0rBMwho6dhRh0Syt5duuEDZJZacc4=",
         "owner": "togwand",
         "repo": "tools",
-        "rev": "f3a22d4d18e340ebc8b31745c913cdf491cf8d29",
+        "rev": "150c632c433d0cce56a8def556058af2fd09b161",
         "type": "github"
       },
       "original": {

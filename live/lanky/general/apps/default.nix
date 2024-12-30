@@ -29,7 +29,7 @@
     getty = {
       greetingLine = "Lanky NixOS configuration is now ready";
       helpLine = lib.mkForce ''
-        Install an operating system with goris
+        Install NixOS with goris
       '';
     };
   };
