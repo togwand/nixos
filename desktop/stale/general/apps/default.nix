@@ -19,7 +19,7 @@
   environment = {
     systemPackages = with pkgs; [
       libsForQt5.qt5.qtgraphicaleffects
-      (import "${self}/derivations/rice/zust-sddm" { inherit inputs pkgs; })
+      (import "${self}/derivations/rice/zust-sddm" { inherit inputs pkgs self; })
     ];
   };
 

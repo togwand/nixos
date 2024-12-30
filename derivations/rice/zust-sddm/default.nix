@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  self,
+  ...
+}:
 pkgs.stdenv.mkDerivation {
   pname = "zust-sddm";
   version = "default";

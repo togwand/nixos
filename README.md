@@ -27,9 +27,8 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 * CPU: i5-9400f
 
 #### TODO
-1. Add mpv to apps as a home-manager program and work on the default programs for mime types
-2. Make waybar prettier with a better style (need to learn more about css too)
-3. Fix theming of every part of the system, especially cursors and icons
+1. Work on the default programs for mime types (add mpv)
+2. Make a better waybar style (using css)
 
 ## Live
 Non persistent NixOS ISO images for removable installation media

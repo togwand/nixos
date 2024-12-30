@@ -290,11 +290,11 @@
     "rice": {
       "flake": false,
       "locked": {
-        "lastModified": 1735598313,
-        "narHash": "sha256-3P9UtRsHzOud6NCKjV6f967iHsePcgqQr0x8DOTqxpo=",
+        "lastModified": 1735600889,
+        "narHash": "sha256-koWzoB+kTABqwZ//Xnf/uWagGVqpNBR5gNcslHnrkRg=",
         "owner": "togwand",
         "repo": "rice",
-        "rev": "f7471282a24472f9f51b97c1dad4296ba3421b1e",
+        "rev": "d67e7f96b0f833ad0abf6a6ea069f1faff1eb591",
         "type": "github"
       },
       "original": {
