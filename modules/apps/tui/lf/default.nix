@@ -25,6 +25,9 @@
         highlight
         chafa
         poppler_utils
+        unzip
+        unrar-free
+        p7zip
       ];
       home.file.".config/ctpv/config".text = # bash
         ''
@@ -64,6 +67,12 @@
             ''
               &{{
               case "$f" in
+              *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar x -jvf $f;;
+              *.tar.gz|*.tgz) tar x -zvf $f;;
+              *.tar.xz|*.txz) tar x -Jvf $f;;
+              *.zip) unzip $f;;
+              *.rar) unrar-free -x $f;;
+              *.7z) 7z x $f;;
               *.nix) lf -remote "send $id \$$EDITOR \$f";;
               *.sh) lf -remote "send $id \$$EDITOR \$f";;
               *.md) lf -remote "send $id \$$EDITOR \$f";;

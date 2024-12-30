@@ -1,7 +1,9 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
+  self,
   user,
   ...
 }:
@@ -16,8 +18,8 @@
 
   environment = {
     systemPackages = with pkgs; [
-      sddm-sugar-dark
       libsForQt5.qt5.qtgraphicaleffects
+      (import "${self}/derivations/rice/zust-sddm" { inherit inputs pkgs; })
     ];
   };
 
@@ -43,7 +45,7 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-        theme = "sugar-dark";
+        theme = "zust";
       };
     };
     xserver = {
