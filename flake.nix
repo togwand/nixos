@@ -47,7 +47,7 @@
     {
       nixosConfigurations = {
         stale = use ./desktop/stale "stale" "togwand";
-        lanky = use ./live/lanky "lanky" "hacker";
+        lanky = use ./live/lanky "lanky" "nixos";
       };
     };
 }

@@ -37,9 +37,6 @@ Non persistent NixOS ISO images for removable installation media
 ### lanky
 For quick installation or recovery
 
-#### TODO
-1. Test it again sometime in the future when my current installation is too bloated
-
 ## Modules
 Always available to use NixOS options and optional configurations
 
