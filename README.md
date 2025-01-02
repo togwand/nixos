@@ -2,11 +2,10 @@
 My NixOS configurations and options
 
 #### TODO
-1. Learn more about nix (vimjoyer+official documentation)
-2. Replace "with pkgs;" or similar with "inherit ()"
-3. Test and add more nix options to all modules
-4. Make a comfy live config
-5. Make a server config type
+1. Replace "with pkgs;" or similar with "inherit ()"
+2. Test and add more nix options to all modules
+3. Make a comfy live config
+4. Make a server config type
 
 ## Derivations
 Nix derivations of git repositories
@@ -26,10 +25,6 @@ For gaming and dev (and of course, game dev) on a 2020 computer
 * GPU: GTX 1650 Super
 * CPU: i5-9400f
 
-#### TODO
-1. Work on the default programs for mime types (add mpv)
-2. Make a better waybar style (using css)
-
 ## Live
 Non persistent NixOS ISO images for removable installation media
 
@@ -38,6 +33,11 @@ For quick installation or recovery
 
 ## Modules
 Always available to use NixOS options and optional configurations
+
+#### TODO
+1. Add more plugins to nixvim
+2. Work on the default programs for mime types (add mpv)
+3. Make a better waybar style (using css)
 
 ### apps
 Ready to use programs and services

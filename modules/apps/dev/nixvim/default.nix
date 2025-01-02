@@ -94,9 +94,8 @@
             showmatch = false;
             showmode = false;
             smartcase = false;
-            smartindent = true;
+            smartindent = false;
             smarttab = false;
-            # tabstop = 4;
             termguicolors = true;
             updatetime = 1000;
             wrap = false;

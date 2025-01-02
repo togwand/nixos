@@ -14,6 +14,21 @@
           nixd.enable = true;
           bashls.enable = true;
         };
+        keymaps = {
+          lspBuf = {
+            "<leader>c" = "rename";
+            "<leader>a" = "code_action";
+            "<leader>d" = "definition";
+            "<leader>w" = "hover";
+            "<leader>r" = "references";
+            "<leader>t" = "type_definition";
+            "<leader>i" = "implementation";
+          };
+          diagnostic = {
+            "<leader>j" = "goto_next";
+            "<leader>k" = "goto_prev";
+          };
+        };
       };
     };
   };
