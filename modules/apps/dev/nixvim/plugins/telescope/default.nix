@@ -9,12 +9,33 @@
     home-manager.users.${user} = lib.mkIf config.generic.home-manager.enable {
       programs.nixvim.plugins.telescope = {
         enable = true;
-        settings.defaults = {
-          initial_mode = "normal";
-          sorting_strategy = "ascending";
-          mappings = {
-            n = {
-              "q" = "close";
+        settings = {
+          defaults = {
+            initial_mode = "normal";
+            sorting_strategy = "ascending";
+            layout_config = {
+              prompt_position = "top";
+            };
+            path_display = {
+              truncate = 2;
+              shorten = 20;
+              filename_first = true;
+              mappings = {
+                n = {
+                  "q" = "close";
+                };
+              };
+            };
+          };
+          pickers = {
+            oldfiles = {
+              previewer = false;
+            };
+            git_files = {
+              previewer = false;
+            };
+            find_files = {
+              previewer = false;
             };
           };
         };

@@ -93,12 +93,12 @@
           ];
 
           bind = [
-            ", Print, exec, uwsm app -- hyprshot -m region -t 1000"
+            ", Print, exec, uwsm app -- hyprshot -m region -t 3000"
             ", XF86AudioRaiseVolume, exec, uwsm app -- wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%+"
             ", XF86AudioLowerVolume, exec, uwsm app -- wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%-"
             ", XF86AudioMute, exec, uwsm app -- wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
-            "$workspace-easy, s, exec, uwsm app -- hyprshot -m output -m active -t 2000"
+            "$workspace-easy, s, exec, uwsm app -- hyprshot -m output -m active -t 6000"
             "$workspace-easy, e, exec, uwsm app -- hyprpicker -a -f rgb"
             "$workspace-easy, 1, workspace, 1"
             "$workspace-easy, 2, workspace, 2"
@@ -111,11 +111,11 @@
             "$workspace-easy, 9, workspace, 9"
             "$workspace-easy, 0, workspace, 10"
 
-            "$workspace, s, exec, uwsm app -- hyprshot -m region -t 1000"
+            "$workspace, s, exec, uwsm app -- hyprshot -m region -t 3000"
             "$workspace, e, exec, uwsm app -- hyprpicker -a -f hex"
             "$workspace, Delete, exec, uwsm stop"
 
-            "$window-easy, s, exec, uwsm app -- hyprshot -m window -m active -t 2000"
+            "$window-easy, s, exec, uwsm app -- hyprshot -m window -m active -t 6000"
             "$window-easy, f, fullscreen, 0"
             "$window-easy, h, layoutmsg, preselect l"
             "$window-easy, j, layoutmsg, preselect d"

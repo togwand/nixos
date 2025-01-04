@@ -14,9 +14,9 @@
           positionY = "top";
           layer = "overlay";
           cssPriority = "application";
-          timeout = 2;
-          timeout-low = 1;
-          timeout-critical = 4;
+          timeout = 6;
+          timeout-low = 3;
+          timeout-critical = 12;
           notification-window-width = 700;
           keyboard-shortcuts = false;
           image-visibility = "always";
