@@ -13,7 +13,7 @@
           always_show_path = true;
           global_bookmarks = false;
           hide_handbook = true;
-          leader_key = "|";
+          leader_key = "<Tab>";
           save_key = "git_root";
           separate_by_branch = true;
           show_icons = true;

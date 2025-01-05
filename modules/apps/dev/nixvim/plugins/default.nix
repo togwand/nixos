@@ -1,13 +1,14 @@
 {
   imports = [
     ./arrow
-    ./autoclose
     ./comment
     ./lsp
-    ./lsp-lines
     ./lualine
+    ./navbuddy
+    ./nvim-lightbulb
     ./telescope
     ./treesitter
+    ./trim
     ./web-devicons
   ];
 }
