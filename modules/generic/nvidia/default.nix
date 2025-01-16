@@ -2,15 +2,11 @@
 {
   config = lib.mkIf config.generic.nvidia.enable {
     hardware = {
-      graphics = {
-        enable = true;
-        enable32Bit = true;
-      };
       nvidia = {
         modesetting.enable = true;
         open = false;
         nvidiaSettings = false;
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
+        package = config.boot.kernelPackages.nvidiaPackages.beta;
       };
     };
     boot.initrd.availableKernelModules = [ "nvidia_drm" ];

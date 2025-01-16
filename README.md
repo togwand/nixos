@@ -35,9 +35,8 @@ For quick installation or recovery
 Always available to use NixOS options and optional configurations
 
 #### TODO
-1. Add more plugins to nixvim
+1. Replace waybar with other status bar program, or make it truly good
 2. Work on the default programs for mime types (add mpv)
-3. Make a better waybar style (using css)
 
 ### apps
 Ready to use programs and services
