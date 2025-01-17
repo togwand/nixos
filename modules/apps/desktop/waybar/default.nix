@@ -55,7 +55,7 @@
             ];
             "clock" = {
               interval = 60;
-              format = "  {:%H:%M}";
+              format = "   {:%H:%M}";
               tooltip-format = "{:%d-%m-%Y}";
             };
             "bluetooth" = {
@@ -72,15 +72,11 @@
               tooltip-format-enumerate-connected-battery = "{device_alias} ({device_battery_percentage}%)";
             };
             "wireplumber" = {
-              max-volume = 55.0;
-              scroll-step = 5.0;
+              max-volume = 100.0;
+              scroll-step = 1.0;
               on-click = "pavucontrol";
-              format = "{icon}  {volume}%";
-              format-icons = [
-                ""
-                ""
-                ""
-              ];
+              format = "   {volume}%  ";
+              format-muted = "";
             };
             "temperature" = {
               thermal-zone = 2;

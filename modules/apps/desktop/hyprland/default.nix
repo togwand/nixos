@@ -94,8 +94,8 @@
 
           bind = [
             ", Print, exec, uwsm app -- hyprshot -m region -t 3000"
-            ", XF86AudioRaiseVolume, exec, uwsm app -- wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%+"
-            ", XF86AudioLowerVolume, exec, uwsm app -- wpctl set-volume -l 0.5 @DEFAULT_AUDIO_SINK@ 2%-"
+            ", XF86AudioRaiseVolume, exec, uwsm app -- wpctl set-volume -l 0.6 @DEFAULT_AUDIO_SINK@ 5%+"
+            ", XF86AudioLowerVolume, exec, uwsm app -- wpctl set-volume -l 0.6 @DEFAULT_AUDIO_SINK@ 5%-"
             ", XF86AudioMute, exec, uwsm app -- wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
             "$workspace-easy, s, exec, uwsm app -- hyprshot -m output -m active -t 6000"
