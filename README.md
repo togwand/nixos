@@ -35,7 +35,7 @@ For quick installation or recovery
 Always available to use NixOS options and optional configurations
 
 #### TODO
-1. Work on the default programs for mime types (add mpv)
+1. Add program for opening images
 2. Make waybar style better
 
 ### apps

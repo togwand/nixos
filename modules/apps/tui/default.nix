@@ -3,6 +3,7 @@
   imports = [
     ./bash
     ./lf
+    ./mpv
     ./rclone
     ./zsh
   ];

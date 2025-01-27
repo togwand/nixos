@@ -41,6 +41,7 @@
         enable = lib.mkEnableOption "";
         bash.enable = lib.mkEnableOption "";
         lf.enable = lib.mkEnableOption "";
+        mpv.enable = lib.mkEnableOption "";
         rclone.enable = lib.mkEnableOption "";
         zsh.enable = lib.mkEnableOption "";
       };
@@ -77,6 +78,7 @@
       tui = lib.mkIf config.apps.tui.enable {
         bash.enable = lib.mkDefault true;
         lf.enable = lib.mkDefault true;
+        mpv.enable = lib.mkDefault true;
         rclone.enable = lib.mkDefault true;
         zsh.enable = lib.mkDefault true;
       };

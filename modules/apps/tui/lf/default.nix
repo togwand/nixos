@@ -82,8 +82,8 @@
               *.png) lf -remote "send $id \$$BROWSER \$f";;
               *.jpg) lf -remote "send $id \$$BROWSER \$f";;
               *.jpeg) lf -remote "send $id \$$BROWSER \$f";;
-              *.mp4) lf -remote "send $id \$$BROWSER \$f";;
-              *.mp3) lf -remote "send $id \$$BROWSER \$f";;
+              *.mp4) lf -remote "send $id \$$MEDIA \$f";;
+              *.mp3) lf -remote "send $id \$$MEDIA \$f";;
               *.pdf) lf -remote "send $id \$$BROWSER \$f";;
               *) lf -remote "send $id \$xdg-open \$f";;
               esac

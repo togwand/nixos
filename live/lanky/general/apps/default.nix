@@ -14,6 +14,7 @@
       treefmt.enable = false;
     };
     tui.rclone.enable = false;
+    tui.mpv.enable = false;
   };
 
   environment.systemPackages = with pkgs; [
