@@ -25,6 +25,7 @@
         enable = lib.mkEnableOption "";
         git.enable = lib.mkEnableOption "";
         nixvim.enable = lib.mkEnableOption "";
+        texlive.enable = lib.mkEnableOption "";
         treefmt = {
           enable = lib.mkEnableOption "";
           beautysh.enable = lib.mkEnableOption "";
@@ -64,6 +65,7 @@
       dev = lib.mkIf config.apps.dev.enable {
         git.enable = lib.mkDefault true;
         nixvim.enable = lib.mkDefault true;
+        texlive.enable = lib.mkDefault true;
         treefmt = {
           enable = lib.mkDefault true;
           beautysh.enable = lib.mkDefault config.apps.dev.treefmt.enable;
