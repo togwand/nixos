@@ -32,6 +32,7 @@
       home.file.".config/ctpv/config".text = # bash
         ''
           set nosymlinkinfo
+          set chafasixel
           remove libreoffice
           remove torrent
           remove glow

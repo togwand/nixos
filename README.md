@@ -34,12 +34,11 @@ For quick installation or recovery
 ## Modules
 Always available to use NixOS options and optional configurations
 
-#### TODO
-1. Add program for opening images
-2. Make waybar style better
-
 ### apps
 Ready to use programs and services
+
+#### TODO
+1. Separate option declaration for apps (too many currently)
 
 ### generic
 Generic configurations needed for hardware or other modules

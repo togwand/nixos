@@ -14,8 +14,11 @@
         discord.enable = lib.mkEnableOption "";
         firefox.enable = lib.mkEnableOption "";
         foot.enable = lib.mkEnableOption "";
+        gimp.enable = lib.mkEnableOption "";
         gtk.enable = lib.mkEnableOption "";
         hyprland.enable = lib.mkEnableOption "";
+        inkscape.enable = lib.mkEnableOption "";
+        krita.enable = lib.mkEnableOption "";
         qt.enable = lib.mkEnableOption "";
         swaync.enable = lib.mkEnableOption "";
         tofi.enable = lib.mkEnableOption "";
@@ -55,8 +58,11 @@
         discord.enable = lib.mkDefault true;
         firefox.enable = lib.mkDefault true;
         foot.enable = lib.mkDefault true;
+        gimp.enable = lib.mkDefault true;
         gtk.enable = lib.mkDefault true;
         hyprland.enable = lib.mkDefault true;
+        inkscape.enable = lib.mkDefault true;
+        krita.enable = lib.mkDefault true;
         qt.enable = lib.mkDefault true;
         swaync.enable = lib.mkDefault true;
         tofi.enable = lib.mkDefault true;
