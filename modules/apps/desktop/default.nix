@@ -10,7 +10,7 @@
     ./krita
     ./qt
     ./swaync
-    ./tofi
     ./waybar
+    ./wofi
   ];
 }

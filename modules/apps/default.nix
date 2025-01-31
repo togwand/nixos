@@ -21,8 +21,8 @@
         krita.enable = lib.mkEnableOption "";
         qt.enable = lib.mkEnableOption "";
         swaync.enable = lib.mkEnableOption "";
-        tofi.enable = lib.mkEnableOption "";
         waybar.enable = lib.mkEnableOption "";
+        wofi.enable = lib.mkEnableOption "";
       };
       dev = {
         enable = lib.mkEnableOption "";
@@ -65,8 +65,8 @@
         krita.enable = lib.mkDefault true;
         qt.enable = lib.mkDefault true;
         swaync.enable = lib.mkDefault true;
-        tofi.enable = lib.mkDefault true;
         waybar.enable = lib.mkDefault true;
+        wofi.enable = lib.mkDefault true;
       };
       dev = lib.mkIf config.apps.dev.enable {
         git.enable = lib.mkDefault true;
