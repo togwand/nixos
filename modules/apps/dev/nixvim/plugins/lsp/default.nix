@@ -13,6 +13,7 @@
         servers = {
           nixd.enable = true;
           bashls.enable = true;
+          texlab.enable = true;
         };
         keymaps = {
           lspBuf = {

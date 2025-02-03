@@ -18,6 +18,7 @@
           json
           toml
           markdown
+          latex
         ];
         settings = {
           auto-install = false;
